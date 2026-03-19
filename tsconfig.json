@@ -5,7 +5,9 @@
       "@/*": [
         "./src/*"
       ]
-    }
+    },
+    "jsx": "preserve",
+    "jsxImportSource": "react"
   },
   "include": [
     ".astro/types.d.ts",
