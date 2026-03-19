@@ -1,8 +1,21 @@
 ---
-import Welcome from '../components/Welcome.astro';
 import Layout from '../layouts/Layout.astro';
+import Header from '../components/Header.astro';
+import Hero from '../components/Hero.astro';
+import Features from '../components/Features.astro';
+import WhyChooseUs from '../components/WhyChooseUs.astro';
+import Courses from '../components/Courses.astro';
+import Gallery from '../components/Gallery.astro';
+import Trending from '../components/Trending.astro';
+import Footer from '../components/Footer.astro';
 ---
 
 <Layout>
-	<Welcome />
+		<Hero />
+		<Features />
+		<WhyChooseUs id="about" />
+		<Courses id="courses" />
+		<Gallery />
+		<Trending />
+	<Footer />
 </Layout>

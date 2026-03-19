@@ -1,15 +1,25 @@
+---
+import '../styles/globals.css';
+import Hero from "@/components/Hero.astro";
+import Features from "@/components/Features.astro";
+import Header from '@/components/Header.astro';
+---
 <!doctype html>
-<html lang="en">
+<html lang="en" class="scroll-smooth">
 	<head>
 		<meta charset="UTF-8" />
 		<meta name="viewport" content="width=device-width" />
 		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
 		<link rel="icon" href="/favicon.ico" />
 		<meta name="generator" content={Astro.generator} />
-		<title>Astro Basics</title>
+		<title>Takshashila School of Civil Services | Best UPSC & APSC Coaching in Guwahati</title>
+		<meta name="description" content="At Takshashila School of Civil Services, the best UPSC and APSC coaching in Guwahati, we are committed to helping you achieve your dream of becoming a civil servant." />
 	</head>
-	<body>
+	<body class="antialiased selection:bg-primary/20 selection:text-primary">
+	<Header />
+	<main class="flex flex-col gap-8 p-4 md:p-8">
 		<slot />
+	</main>
 	</body>
 </html>
 
