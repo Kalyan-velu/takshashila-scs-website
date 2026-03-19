@@ -1,0 +1,63 @@
+---
+import { Check, ArrowRight } from 'lucide-react';
+
+const courses = [
+  {
+    title: "ONE YEAR UPSC BATCH",
+    description: "“Enroll now to secure the Early Bird discount for this course at Takshashila, the best coaching institute for UPSC in Guwahati!”",
+    popular: true,
+  },
+  {
+    title: "ONE YEAR APSC BATCH",
+    description: "“Enroll now to secure the Early Bird discount for this course with Takshashila, the best APSC coaching centre in Guwahati!”",
+    popular: false,
+  },
+  {
+    title: "THREE YEARS BATCH",
+    description: "“Enroll now to secure the Early Bird discount for this course at Takshashila, the best IAS coaching institute in Guwahati!”",
+    popular: false,
+  }
+];
+
+const { id } = Astro.props;
+---
+
+<section id={id} class="py-24 bg-muted/20">
+  <div class="container mx-auto px-4 md:px-6">
+    <div class="text-center mb-16">
+      <h2 class="text-3xl md:text-5xl font-bold tracking-tight text-foreground mb-4">
+        Our Popular Courses
+      </h2>
+      <p class="text-muted-foreground text-lg max-w-2xl mx-auto">
+        Join the most comprehensive civil services coaching programs in Guwahati designed for your success.
+      </p>
+    </div>
+
+    <div class="grid md:grid-cols-3 gap-8 max-w-6xl mx-auto">
+      {courses.map((course) => (
+        <div class={`relative flex flex-col justify-between p-8 rounded-3xl border ${course.popular ? 'border-primary shadow-sm bg-primary/5' : 'border-border bg-card'}`}>
+          {course.popular && (
+            <div class="absolute -top-4 left-1/2 -translate-x-1/2 bg-primary text-primary-foreground px-4 py-1 rounded-full text-sm font-semibold tracking-wide">
+              Most Popular
+            </div>
+          )}
+          
+          <div>
+            <h3 class="text-2xl font-bold mb-4 mt-2">{course.title}</h3>
+            <div class="h-1 w-12 bg-primary/20 rounded-full mb-6">
+              <div class="h-1 w-6 bg-primary rounded-full"></div>
+            </div>
+            <p class="text-muted-foreground mb-8 italic text-sm md:text-base leading-relaxed">
+              {course.description}
+            </p>
+          </div>
+          
+          <a href="#enroll" class={`inline-flex h-12 items-center justify-center rounded-xl px-6 text-sm font-medium transition-all w-full gap-2 ${course.popular ? 'bg-primary text-primary-foreground hover:bg-primary/90' : 'border border-border bg-background hover:bg-muted/50 cursor-pointer'}`}>
+            Enroll Now
+            <ArrowRight className="w-4 h-4" />
+          </a>
+        </div>
+      ))}
+    </div>
+  </div>
+</section>
