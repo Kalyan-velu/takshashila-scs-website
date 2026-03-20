@@ -2,12 +2,8 @@
 import tailwindcss from "@tailwindcss/vite";
 import { defineConfig } from "astro/config";
 import tsconfigPaths from "vite-tsconfig-paths";
-
 import react from "@astrojs/react";
-
 import vue from "@astrojs/vue";
-
-import vercel from "@astrojs/vercel";
 
 // https://astro.build/config
 export default defineConfig({
@@ -23,6 +19,4 @@ export default defineConfig({
       { protocol: "https", hostname: "takshashilascs.com" },
     ],
   },
-
-  adapter: vercel(),
 });

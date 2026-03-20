@@ -6,7 +6,7 @@ import Features from '../components/Features.astro';
 import WhyChooseUs from '../components/WhyChooseUs.astro';
 import Courses from '../components/Courses.astro';
 import Gallery from '../components/Gallery.astro';
-import Trending from '../components/Trending.astro';
+import Trending from '../components/Trending.vue';
 import Footer from '../components/Footer.astro';
 ---
 
@@ -15,7 +15,7 @@ import Footer from '../components/Footer.astro';
 		<!--<Features />-->
 		<WhyChooseUs id="about" />
 		<Courses id="courses" />
-		<Trending client:load/>
+		<Trending client:only="vue" />
 		<Gallery />
 	<Footer />
 </Layout>
