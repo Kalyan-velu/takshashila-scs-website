@@ -3,14 +3,15 @@ import {Image} from "astro:assets"
 import { ArrowRight, BookOpen, Users, Award, GraduationCap, MapPin, Search } from 'lucide-react';
 ---
 
-<section class="relative overflow-hidden bg-background ">
-  <div class="container mx-auto relative z-10 ">
-    <div class="grid lg:grid-cols-2 gap-12 items-center lg:pl-24">
-
-        <div class="flex flex-col lg:mb-32 text-left">
-            <div class="inline-flex items-center shrink-0 max-w-fit rounded-full border border-border bg-muted px-3 py-1 text-sm font-medium text-muted-foreground mb-6">
+<section class="relative overflow-hidden bg-background">
+  <div class=" mx-auto relative z-10 ">
+    <div class="grid lg:grid-cols-2 gap-8 lg:gap-12 items-center lg:pl-24">
+        <div class="flex flex-col px-8 -mt-28 md:mt-0 md:px-0 lg:mb-32 text-left">
+            <div class="inline-flex items-center shrink-0 max-w-fit flex-nowrap rounded-full border border-border bg-muted px-3 py-1 text-sm font-medium text-muted-foreground mb-6">
                 <span class="flex h-2 w-2 rounded-full bg-primary mr-2"></span>
+                <span class="text-nowrap">
                 Best UPSC & APSC Coaching in Guwahati
+                </span>
             </div>
 
             <h1 class="text-4xl md:text-6xl lg:text-7xl font-light  tracking-tight text-foreground max-w-4xl mb-6">
@@ -22,14 +23,14 @@ import { ArrowRight, BookOpen, Users, Award, GraduationCap, MapPin, Search } fro
                 At Takshashila School of Civil Services, we are committed to helping you achieve your dream of becoming a civil servant. We provide the perfect environment for your preparation journey.
             </p>
 
-            <div class="flex flex-col sm:flex-row items-center gap-4">
+            <div class="flex flex-col sm:flex-row items-start sm:items-center gap-4">
                 <a href="#"
                    class="inline-flex relative group outline-none focus:outline-none text-sm font-medium text-primary-foreground "
                 >
                     <div class="bg-primary w-auto inline-flex items-center justify-center relative leading-tight shadow-none overflow-hidden rounded-full  py-3.5 px-7">
                         <div class="relative inline-flex top-px shrink-0">
                             <div>
-                                Free Demo Class
+                                Get in touch
                             </div>
                         </div>
                     </div>
@@ -38,69 +39,25 @@ import { ArrowRight, BookOpen, Users, Award, GraduationCap, MapPin, Search } fro
                     </div>
                 </a>
                 <a href="#about" class="inline-flex h-12 items-center justify-center rounded-full bg-background px-8 text-base font-medium text-foreground hover:bg-muted/50 transition-all ">
-                    Know More
+                    Download Brochure
                     <ArrowRight className="ml-2 w-4 h-4" />
                 </a>
             </div>
         </div>
-      <div class="relative  hidden lg:block">
-        <div class="relative z-10 w-full max-w-full ">
+        <div class="relative block order-first sm:hidden lg:block lg:order-last  mb-8 lg:mt-0 lg:mb-0">
+        <div class="relative z-10 w-full  max-w-full ">
           <div class=" clip-polygon overflow-hidden shadow-2xl bg-muted">
             <Image
               src="/Takshashila/students.jpg" 
               alt="Takshashila School of Civil Services Students" 
               class="aspect-square object-cover"
+              loading={"eager"}
               height={400}
               width={800}
             />
           </div>
-
-          <!-- Floating Cards -->
-          <!--<div class="absolute -right-12 top-10 bg-white/90 backdrop-blur-sm p-4 rounded-2xl shadow-xl border border-primary/10 max-w-50" >-->
-          <!--  <div class="flex items-center gap-3 mb-1">-->
-          <!--    <div class="bg-primary/10 p-2 rounded-lg text-primary">-->
-          <!--      <Award className="w-5 h-5" />-->
-          <!--    </div>-->
-          <!--    <p class="text-[10px] font-bold uppercase tracking-wider text-primary">Recognition</p>-->
-          <!--  </div>-->
-          <!--  <p class="text-sm font-medium leading-tight">No. 1 Civil Service Coaching center in Assam</p>-->
-          <!--</div>-->
-          
-          <!--<div class="absolute -left-8 top-1/4 bg-white/90 backdrop-blur-sm p-4 rounded-2xl shadow-xl border border-primary/10 max-w-45" >-->
-          <!--  <div class="flex items-center gap-3 mb-1">-->
-          <!--    <div class="bg-primary/10 p-2 rounded-lg text-primary">-->
-          <!--      <Users className="w-5 h-5" />-->
-          <!--    </div>-->
-          <!--    <p class="text-[10px] font-bold uppercase tracking-wider text-primary">Expertise</p>-->
-          <!--  </div>-->
-          <!--  <p class="text-sm font-medium leading-tight">Faculty with 5 to 20 years experience</p>-->
-          <!--</div>-->
-          
-          <!--<div class="absolute -right-16 bottom-1/4 bg-white/90 backdrop-blur-sm p-4 rounded-2xl shadow-xl border border-primary/10 max-w-60">-->
-          <!--  <div class="flex items-center gap-3 mb-1">-->
-          <!--    <div class="bg-primary/10 p-2 rounded-lg text-primary">-->
-          <!--      <GraduationCap className="w-5 h-5" />-->
-          <!--    </div>-->
-          <!--    <p class="text-[10px] font-bold uppercase tracking-wider text-primary">Leadership</p>-->
-          <!--  </div>-->
-          <!--  <p class="text-sm font-medium leading-tight">-->
-          <!--    Shri Ghana Kanta Pegu, ACS (Retd.) Former Member, APSC as a Academic Head & Advisor-->
-          <!--  </p>-->
-          <!--</div>-->
-          
-          <!--<div class="absolute -left-4 bottom-10 bg-white/90 backdrop-blur-sm p-4 rounded-2xl shadow-xl border border-primary/10 max-w-40 ">-->
-          <!--  <div class="flex items-center gap-3 mb-1">-->
-          <!--    <div class="bg-primary/10 p-2 rounded-lg text-primary">-->
-          <!--      <BookOpen className="w-5 h-5" />-->
-          <!--    </div>-->
-          <!--    <p class="text-[10px] font-bold uppercase tracking-wider text-primary">Results</p>-->
-          <!--  </div>-->
-          <!--  <p class="text-sm font-medium leading-tight">APSC CCE 2024, 11 Selected out of 40</p>-->
-          <!--</div>-->
         </div>
       </div>
-
-     
     </div>
   </div>
 </section>
@@ -108,7 +65,7 @@ import { ArrowRight, BookOpen, Users, Award, GraduationCap, MapPin, Search } fro
 <style>
     @reference "../styles/globals.css";
     
-    @layer components {
+    @layer utilities {
         .clip-polygon{
             clip-path: polygon(17% 0%, 100% 0%, 100% 100%, 2% 100%, 31.30% 33.79%);
             -webkit-mask-image: linear-gradient(to bottom,rgb(0, 0, 0) 50%,rgba(0,0,0,0) 99%);

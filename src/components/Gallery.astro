@@ -2,12 +2,12 @@
 import { Image } from 'astro:assets';
 
 const galleryItems = [
-  { title: "Special Events", image: "https://images.unsplash.com/photo-1540575467063-178a50c2df87" },
-  { title: "Group photo", image: "https://images.unsplash.com/photo-1529156069898-49953e39b3ac" },
-  { title: "Library", image: "https://images.unsplash.com/photo-1568667256549-094345857637" },
-  { title: "Class room 1", image: "https://images.unsplash.com/photo-1577896851231-70ef18881754" },
-  { title: "Students ready for class", image: "https://images.unsplash.com/photo-1523240795612-9a054b0db644" },
-  { title: "Online test", image: "https://images.unsplash.com/photo-1516321318423-f06f85e504b3" },
+  { title: "Special Events", image: "https://takshashilascs.com/storage/2024/04/1689672210_imresizer-1689598168606-scaled.jpg" },
+  { title: "Group photo", image: "https://takshashilascs.com/storage/2025/06/students-1.jpg" },
+  { title: "Library", image: "https://takshashilascs.com/storage/2024/04/IMG_20240408_110125-scaled.jpg" },
+  { title: "Class room 1", image: "https://takshashilascs.com/storage/2025/03/IMG_5529-scaled.webp" },
+  { title: "Students ready for class", image: "https://takshashilascs.com/storage/2025/06/students-2.jpg" },
+  { title: "Online test", image: "https://takshashilascs.com/storage/2025/06/students-3.jpg" },
 ];
 ---
 
@@ -22,13 +22,8 @@ const galleryItems = [
           Glimpses of life at Takshashila School of Civil Services.
         </p>
       </div>
-      
-      <div class="hidden md:block">
-        <span class="text-sm font-medium text-muted-foreground mr-2">Slide 6 of 14</span>
-      </div>
     </div>
     
-    <!-- Using a CSS Grid approach to mimic masonry or a nice gallery layout without external JS libs -->
     <div class="grid grid-cols-2 md:grid-cols-3 gap-4 auto-rows-[200px] md:auto-rows-[300px]">
       {galleryItems.map((item, index) => (
         <div class={`group relative overflow-hidden rounded-2xl bg-muted ${index === 0 ? 'md:col-span-2 md:row-span-2' : ''} ${index === 3 ? 'md:col-span-2' : ''}`}>
