@@ -3,9 +3,39 @@ import { Check, ArrowRight } from 'lucide-react';
 
 const courses = [
   {
+    title: "UPSC Foundation Online",
+    description: "Enroll now to secure the Early Bird discount for this course at Takshashila, the best coaching institute for UPSC in Guwahati.",
+    price: "Starts from ₹25,000",
+    popular: false,
+  },
+  {
+    title: "UPSC Foundation Offline",
+    description: "Comprehensive in-person training with expert mentors at our Guwahati center, providing the best environment for UPSC aspirants.",
+    price: "Starts from ₹62,500",
+    popular: true,
+  },
+  {
+    title: "APSC Foundation Online",
+    description: "Flexible online learning tailored for APSC syllabus, ensuring equal opportunities for success from the comfort of your home.",
+    price: "Starts from ₹22,000",
+    popular: false,
+  },
+  {
+    title: "APSC Foundation Offline",
+    description: "Dedicated offline coaching for APSC at Takshashila, the best APSC coaching centre in Guwahati.",
+    price: "₹42,500",
+    popular: false,
+  },
+  {
+    title: "ADRE Online (New)",
+    description: "New specialized online course for ADRE, designed to give you a competitive edge in state government exams.",
+    price: "Starts from ₹1,999",
+    popular: false,
+  },
+  {
     title: "ONE YEAR UPSC BATCH",
     description: "“Enroll now to secure the Early Bird discount for this course at Takshashila, the best coaching institute for UPSC in Guwahati!”",
-    popular: true,
+    popular: false,
   },
   {
     title: "ONE YEAR APSC BATCH",
@@ -23,7 +53,7 @@ const { id } = Astro.props;
 ---
 
 <section id={id} class="py-24 bg-muted/20">
-  <div class="container mx-auto px-4 md:px-6 max-w-7xl">
+  <div class="container mx-auto px-4 md:px-6">
     <div class="text-left mb-16">
       <h2 class="text-3xl md:text-5xl font-light tracking-tight text-foreground mb-4">
         Our Popular Courses
@@ -33,7 +63,7 @@ const { id } = Astro.props;
       </p>
     </div>
 
-    <div class="grid md:grid-cols-3 gap-8 max-w-6xl mx-auto">
+    <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8  mx-auto">
       {courses.map((course) => (
         <div class={`relative flex flex-col justify-between p-8 rounded-3xl border ${course.popular ? 'border-primary shadow-sm bg-primary/5' : 'border-border bg-card'}`}>
           {course.popular && (
@@ -47,6 +77,11 @@ const { id } = Astro.props;
             <div class="h-1 w-12 bg-primary/20 rounded-full mb-6">
               <div class="h-1 w-6 bg-primary rounded-full"></div>
             </div>
+            {course.price && (
+              <div class="mb-4">
+                <span class="text-xl font-bold text-primary">{course.price}</span>
+              </div>
+            )}
             <p class="text-muted-foreground mb-8 font-light italic text-sm md:text-base leading-relaxed">
               {course.description}
             </p>
