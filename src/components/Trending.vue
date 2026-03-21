@@ -21,7 +21,7 @@ const getCleanExcerpt = (post: WPPost) => {
 
 onMounted(async () => {
   try {
-    const fetchedPosts = await getLatestPosts(4);
+    const fetchedPosts = await getLatestPosts(1,4);
     if (fetchedPosts && fetchedPosts.length > 0) {
       posts.value = fetchedPosts;
     }

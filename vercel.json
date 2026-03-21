@@ -1,0 +1,6 @@
+{
+  "rewrites": [
+    { "source": "/storage/:path*", "destination": "https://takshashilascs.com/storage/:path*" },
+    { "source": "/wp-json/:path*", "destination": "https://takshashilascs.com/wp-json/:path*" }
+  ]
+}
