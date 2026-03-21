@@ -35,10 +35,10 @@ window.addEventListener("course-tab-change", (e) => {
 </script>
 
 <template>
-  <Carousel class="w-full" :opts="{ loop: true, align: 'start' }">
+  <Carousel class="w-full" :opts="{ align: 'start' }">
     <CarouselContent>
       <CarouselItem
-        class="sm:basis-1/2 md:basis-1/3 xl:basis-1/4 self-stretch"
+        class="basis-[90%] sm:basis-1/2 lg:basis-1/3 xl:basis-1/4 self-stretch"
         v-for="course in filteredCourses"
         :key="course.title"
       >
@@ -46,7 +46,7 @@ window.addEventListener("course-tab-change", (e) => {
           <div
             :class="
               cn(
-                'group/course-card course-card select-none cursor-grab active:cursor-grabbing h-full group relative flex flex-col  snap-center shrink-0 rounded-[2rem] border overflow-hidden transition-all duration-500 hover:shadow-2xl hover:shadow-primary/5 hover:border-primary/20',
+                'course-card  select-none cursor-grab active:cursor-grabbing h-full group relative flex flex-col  snap-center shrink-0 rounded-tl-[2rem] rounded-br-[2rem] border overflow-clip transition-all duration-500 hover:shadow-2xl hover:shadow-primary/5 hover:border-primary/20',
                 course.popular
                   ? 'border-primary/50 shadow-lg bg-primary/1'
                   : 'border-border bg-card',
@@ -60,7 +60,7 @@ window.addEventListener("course-tab-change", (e) => {
                 :alt="course.title"
                 width="800"
                 height="500"
-                class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
+                class="w-full h-full object-cover "
               />
               <div
                 class="absolute inset-0 bg-linear-to-t from-black/60 via-transparent to-transparent opacity-60 group-hover:opacity-40 transition-opacity"
@@ -103,12 +103,12 @@ window.addEventListener("course-tab-change", (e) => {
                 {{ course.description }}
               </p>
             </div>
-            <div class="flex   gap-0">
+            <div class="flex gap-0">
               <a
                   href="#enroll"
                   :class="
                     cn(
-                      'inline-flex h-14 items-center justify-center rounded-bl-2xl px-8 text-sm font-semibold transition-all flex-1 gap-2 group/btn',
+                      'inline-flex h-14 items-center justify-center  px-8 text-sm font-semibold transition-all flex-1 gap-2 group/btn',
                       course.popular
                         ? 'bg-primary text-primary-foreground hover:bg-primary/90 shadow-lg shadow-primary/20'
                         : 'border-t border-r border-border bg-background hover:bg-muted hover:border-primary/30 cursor-pointer',
@@ -142,7 +142,7 @@ window.addEventListener("course-tab-change", (e) => {
         </div>
       </CarouselItem>
     </CarouselContent>
-    <CarouselPrevious />
-    <CarouselNext />
+<!--    <CarouselPrevious />-->
+<!--    <CarouselNext />-->
   </Carousel>
 </template>
