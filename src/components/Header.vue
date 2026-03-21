@@ -1,5 +1,6 @@
-<script setup>
+<script setup language="ts">
 import { ref, onMounted, onUnmounted, computed } from "vue";
+import config from '../data/config.json';
 
 const menu = ref(false);
 const headerDirection = ref("up");
@@ -116,7 +117,6 @@ const scrollToTop = () => {
             href="/"
             class="transition-none dark:text-white"
             :class="{
-              'text-foreground/80': !headerSmall,
               'text-foreground/80': headerSmall || menu === 'mobileMenu',
             }"
           >
@@ -131,6 +131,16 @@ const scrollToTop = () => {
 
         <nav class="hidden lg:inline-flex">
           <ul class="flex space-x-7 xl:space-x-10">
+            <li class="relative flex items-center">
+              <a
+                :href="config.adreFormUrl"
+                target="_blank"
+                class="inline-flex items-center justify-center px-4 py-1.5 text-sm font-semibold text-primary-foreground bg-primary shadow-lg shadow-primary/30 rounded-full animate-pulse hover:opacity-90 transition-opacity"
+                @mouseenter="closeMenu"
+              >
+                ADRE Admissions Open
+              </a>
+            </li>
             <li
               class="relative"
               @mouseenter="openMenu(7)"
@@ -172,13 +182,13 @@ const scrollToTop = () => {
                   ></div>
                   <div class="inline-flex flex-col items-start w-7/12 pr-2">
                     <a
-                      href="#"
+                      href="/courses/upsc"
                       class="flex-1 flex-col items-start justify-center w-full rounded-2xl px-4 py-2.5 group bg-gray-50/0 dark:bg-gray-800/0 xl:hover:bg-muted transition-colors"
                     >
                       <div class="h-full flex justify-center flex-col">
                         <div class="flex justify-between items-center">
                           <div class="text-base font-medium">
-                            One Year UPSC Batch
+                            Comprehensive UPSC Package
                           </div>
                           <div
                             class="opacity-0 transition transform -translate-x-2 translate-y-2 xl:group-hover:translate-y-0 xl:group-hover:translate-x-0 xl:group-hover:opacity-100"
@@ -200,30 +210,42 @@ const scrollToTop = () => {
                       </div>
                     </a>
                     <a
-                      href="#"
+                      href="/courses/adre"
                       class="flex-1 flex-col items-start justify-center w-full rounded-2xl px-4 py-2.5 group bg-gray-50/0 dark:bg-gray-800/0 xl:hover:bg-muted transition-colors"
                     >
                       <div class="h-full flex justify-center flex-col">
                         <div class="flex justify-between items-center">
                           <div class="text-base font-medium">
-                            One Year APSC Batch
+                            ADRE 2026 Batch
                           </div>
                           <div
                             class="opacity-0 transition transform -translate-x-2 translate-y-2 xl:group-hover:translate-y-0 xl:group-hover:translate-x-0 xl:group-hover:opacity-100"
                           >
-                            <svg
-                              class="w-3.5 h-3.5 fill-current"
-                              xmlns="http://www.w3.org/2000/svg"
-                              viewBox="0 0 384 512"
-                            >
-                              <path
-                                d="M328 96h24v288h-48V177.9L81 401l-17 17-33.9-34 17-17 223-223H64V96h264z"
-                              ></path>
-                            </svg>
+                            <svg class="w-3.5 h-3.5 fill-current" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 384 512"><path d="M328 96h24v288h-48V177.9L81 401l-17 17-33.9-34 17-17 223-223H64V96h264z"></path></svg>
                           </div>
                         </div>
                         <div class="text-sm font-light text-muted-foreground">
-                          Dedicated courses for Assam Public Service Commission
+                          Dedicated courses for Assam Direct Recruitment Exams
+                        </div>
+                      </div>
+                    </a>
+                    <a
+                      href="/courses/apsc"
+                      class="flex-1 flex-col items-start justify-center w-full rounded-2xl px-4 py-2.5 group bg-gray-50/0 dark:bg-gray-800/0 xl:hover:bg-muted transition-colors"
+                    >
+                      <div class="h-full flex justify-center flex-col">
+                        <div class="flex justify-between items-center">
+                          <div class="text-base font-medium">
+                            APSC CCE Batch
+                          </div>
+                          <div
+                            class="opacity-0 transition transform -translate-x-2 translate-y-2 xl:group-hover:translate-y-0 xl:group-hover:translate-x-0 xl:group-hover:opacity-100"
+                          >
+                            <svg class="w-3.5 h-3.5 fill-current" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 384 512"><path d="M328 96h24v288h-48V177.9L81 401l-17 17-33.9-34 17-17 223-223H64V96h264z"></path></svg>
+                          </div>
+                        </div>
+                        <div class="text-sm font-light text-muted-foreground">
+                          Specialized prep for Assam Civil Services
                         </div>
                       </div>
                     </a>
@@ -492,6 +514,13 @@ const scrollToTop = () => {
         </nav>
 
         <div class="pr-4 inline-flex items-center relative z-10 lg:space-x-2">
+          <a
+            :href="config.adreFormUrl"
+            target="_blank"
+            class="inline-flex lg:hidden items-center justify-center px-3 py-1 md:py-1.5 mr-2 text-[10px] sm:text-xs font-bold text-primary-foreground bg-primary shadow-lg shadow-primary/30 rounded-full animate-pulse"
+          >
+            ADRE Admissions
+          </a>
           <button
             @click="toggleDarkMode"
             :class="{
@@ -600,7 +629,6 @@ const scrollToTop = () => {
           </div>
         </div>
 
-        <!-- Mobile Menu -->
         <div
           class="w-full relative z-10 pointer-events-none lg:hidden js-mobile-menu transition-all duration-300 overflow-hidden"
           :style="{
