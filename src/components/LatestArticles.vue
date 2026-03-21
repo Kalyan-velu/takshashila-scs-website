@@ -39,7 +39,7 @@ onMounted(async () => {
       <div class="flex flex-col md:flex-row md:items-end justify-between mb-12 gap-6">
         <div class="max-w-2xl">
           <h2 class="text-3xl md:text-5xl font-light tracking-tight text-foreground mb-4">
-            Trending now
+            Latest Blogs
           </h2>
           <p class="text-muted-foreground font-light text-lg">
             Insights, updates, and articles from Takshashila to fuel your preparation.
