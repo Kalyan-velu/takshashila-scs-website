@@ -1,7 +1,7 @@
 
 
 const isServer = typeof window === 'undefined';
-const base= import.meta.env.PUBLIC_WORDPRESS_URL;
+const base= import.meta.env.PUBLIC_WORDPRESS_URL??"";
 
 function wpUrl(path: string): string {
   // Normalize slashes
