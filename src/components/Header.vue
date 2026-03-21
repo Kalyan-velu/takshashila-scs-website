@@ -580,7 +580,7 @@ const scrollToTop = () => {
                 class="bg-primary w-auto inline-flex items-center justify-center relative leading-tight shadow-none overflow-hidden rounded-full py-2 px-5"
               >
                 <div class="relative inline-flex top-px shrink-0">
-                  <div>Enroll Now</div>
+                  <div>Get in touch</div>
                 </div>
               </div>
               <div
@@ -624,11 +624,6 @@ const scrollToTop = () => {
               </div>
               <ul class="flex flex-col items-start space-y-4">
                 <li class="relative">
-                  <div
-                    class="absolute -top-3 -right-4 pointer-events-none rounded-full z-20 bg-primary text-primary-foreground text-xs pt-px px-2 leading-tight tracking-tight"
-                  >
-                    13
-                  </div>
                   <a
                     href="/courses"
                     class="link text-4xl tracking-tight leading-none transition-none dark:text-white"
