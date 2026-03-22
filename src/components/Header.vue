@@ -438,7 +438,7 @@ const scrollToTop = () => {
                   </div>
                   <div class="w-5/12 pl-3 inline-flex">
                     <a
-                      href="#"
+                      href="/#gallery"
                       class="w-full inline-flex flex-col items-start justify-between bg-muted rounded-2xl p-5 group dark:bg-muted/50"
                     >
                       <div class="w-full flex flex-wrap">
@@ -475,9 +475,9 @@ const scrollToTop = () => {
                           class="relative overflow-hidden w-full rounded-2xl aspect-4/3"
                         >
                           <img
-                            src="https://images.unsplash.com/photo-1540575467063-178a50c2df87?w=400&h=300&fit=crop"
+                            src="/Takshashila/building%20(1).jpg"
                             alt="Culture"
-                            loading="lazy"
+                            loading="eager"
                             class="w-full h-full object-cover"
                           />
                         </div>
