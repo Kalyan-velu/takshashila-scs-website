@@ -1,16 +1,11 @@
 <!--suppress ALL -->
 <script setup lang="ts">
-import { ref, computed, onMounted, onUnmounted } from "vue";
-import {
-  Carousel,
-  CarouselContent,
-  CarouselItem,
-  CarouselNext,
-  CarouselPrevious,
-} from "@/components/ui/carousel";
-import { ArrowRight } from "lucide-vue-next";
-import { cn } from "@/lib/utils";
-import type { Course } from "@/components/courses/data.ts";
+import {computed, ref} from "vue";
+import {Carousel, CarouselContent, CarouselItem,} from "@/components/ui/carousel";
+import {ArrowRight} from "lucide-vue-next";
+import {cn} from "@/lib/utils";
+import type {Course} from "@/components/courses/data.ts";
+
 const props = defineProps<{
   courses: Course[];
   // selected: "All"|"UPSC"|"APSC"|"working-professional"|(string&{})
@@ -58,6 +53,7 @@ window.addEventListener("course-tab-change", (e) => {
               <img
                 :src="course.image"
                 :alt="course.title"
+                loading="lazy"
                 width="800"
                 height="500"
                 class="w-full h-full object-cover "

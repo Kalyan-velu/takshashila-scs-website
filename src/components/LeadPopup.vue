@@ -71,6 +71,7 @@ const submitForm = async () => {
         <img 
           src="/Takshashila/students-view-back.jpg"
           alt="Complimentary Demo" 
+          loading="lazy"
           class="absolute inset-0 w-full h-full object-cover"
         />
       </div>

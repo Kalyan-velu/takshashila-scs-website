@@ -5,7 +5,7 @@ export const courses = [
     price: "Online: ₹25,000 | Offline: ₹62,500",
     popular: true,
     category: ["UPSC"],
-    image: "https://images.unsplash.com/photo-1521737604893-d14cc237f11d"
+    image: "/Takshashila/admission-square.jpeg"
   },
   {
     title: "APSC Foundation Batch",
@@ -13,7 +13,7 @@ export const courses = [
     price: "Online: ₹22,000 | Offline: ₹42,500",
     popular: false,
     category: ["APSC"],
-    image: "https://images.unsplash.com/photo-1517245386807-bb43f82c33c4"
+    image: "/Takshashila/admission-square.jpeg"
   },
   {
     title: "Weekend Batch (Working Professionals)",
@@ -21,7 +21,7 @@ export const courses = [
     price: "Online: ₹22,000 | Offline: ₹42,500",
     popular: false,
     category: ["UPSC", "APSC","working-professionals"],
-    image: "https://images.unsplash.com/photo-1517245386807-bb43f82c33c4"
+    image: "/Takshashila/admission-square.jpeg"
   },
   {
     title: "ADRE Online (New)",
@@ -29,21 +29,21 @@ export const courses = [
     price: "Starts from ₹1,999",
     popular: false,
     category: ["ADRE"],
-    image: "https://images.unsplash.com/photo-1501504905252-473c47e087f8"
+    image: "/Takshashila/admission-square.jpeg"
   },
   {
     title: "ONE YEAR UPSC BATCH",
     description: "A intensive one-year program focused on building a strong foundation and covering the entire UPSC syllabus with precision and expert mentorship.",
     popular: false,
     category: ["UPSC"],
-    image: "https://images.unsplash.com/photo-1516321318423-f06f85e504b3"
+    image: "/Takshashila/admission-square.jpeg"
   },
   {
     title: "ONE YEAR APSC BATCH",
     description: "Dedicated one-year roadmap for APSC success. Get the best guidance, study materials, and regular evaluations at Takshashila, Guwahati.",
     popular: false,
     category: ["APSC"],
-    image: "https://images.unsplash.com/photo-1516321318423-f06f85e504b3"
+    image: "/Takshashila/admission-square.jpeg"
   },
   // {
   //   title: "THREE YEARS BATCH",

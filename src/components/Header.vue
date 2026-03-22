@@ -1,5 +1,5 @@
 <script setup language="ts">
-import { ref, onMounted, onUnmounted, computed } from "vue";
+import {onMounted, onUnmounted, ref} from "vue";
 import config from '../data/config.json';
 
 const menu = ref(false);
@@ -124,6 +124,9 @@ const scrollToTop = () => {
             <img
               src="/logo-full-black.webp"
               alt="Takshashila Logo"
+              fetchpriority="high"
+              width="1920"
+              height="1080"
               class="w-40 h-auto mt-0.5 lg:mt-0 lg:w-48"
             />
           </a>
@@ -315,11 +318,12 @@ const scrollToTop = () => {
                       </div>
                       <div class="w-full relative">
                         <div
-                          class="relative overflow-hidden w-full rounded-2xl aspect-[4/3]"
+                          class="relative overflow-hidden w-full rounded-2xl aspect-4/3"
                         >
                           <img
-                            src="https://images.unsplash.com/photo-1523240795612-9a054b0db644?w=400&h=300&fit=crop"
+                            src="/Takshashila/students-view-back.webp"
                             alt="Courses"
+                            loading="eager"
                             class="w-full h-full object-cover"
                           />
                         </div>
@@ -473,6 +477,7 @@ const scrollToTop = () => {
                           <img
                             src="https://images.unsplash.com/photo-1540575467063-178a50c2df87?w=400&h=300&fit=crop"
                             alt="Culture"
+                            loading="lazy"
                             class="w-full h-full object-cover"
                           />
                         </div>

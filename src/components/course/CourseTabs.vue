@@ -1,5 +1,5 @@
-<script setup>
-import { ref, onMounted } from 'vue';
+<script setup lang="ts">
+import {onMounted, ref} from 'vue';
 
 const tabs = [
   { id: 'about-course', label: 'About the Course' },

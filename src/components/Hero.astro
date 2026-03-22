@@ -43,15 +43,17 @@ import { ArrowRight, BookOpen, Users, Award, GraduationCap, MapPin, Search } fro
             </div>
         </div>
         
-        <div class="relative w-full order-first md:order-last mb-8 md:mb-0 lg:mt-0 lg:mb-0 relative z-10 w-full max-w-full">
+        <div class="relative w-full order-first md:order-last mb-8 md:mb-0 lg:mt-0 lg:mb-0 z-10 max-w-full">
             <div class="clip-polygon overflow-hidden bg-muted">
                 <Image
-                src="/Takshashila/students.jpg" 
+                src="/Takshashila/students.webp"
                 alt="Takshashila School of Civil Services Students" 
-                class="aspect-square object-cover w-full h-full md:aspect-[4/3] lg:aspect-square"
+                class="aspect-square object-cover w-full h-full md:aspect-4/3 lg:aspect-square"
                 loading={"eager"}
                 height={400}
                 width={800}
+                decoding="async"
+                fetchpriority="high"
                 />
             </div>
         </div>
