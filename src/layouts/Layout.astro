@@ -1,5 +1,6 @@
 ---
 import { SEO } from "astro-seo";
+import { Schema } from "astro-seo-schema";
 import '../styles/globals.css';
 import Hero from "@/components/Hero.astro";
 import Features from "@/components/Features.astro";
@@ -10,12 +11,18 @@ interface Props {
   title?: string;
   description?: string;
   image?: string;
+  canonical?: string;
+  keywords?: string;
 }
+
+const defaultKeywords = "apsc coaching in guwahati, apsc coaching, adre coaching, upsc, apsc full form, upsc full form, best apsc coaching in guwahati, adre syllabus, apsc syllabus, upsc syllabus, apsc cce full form, scs current affairs, upsc coaching in assam, apsc coaching in assam, upsc strategy, upsc 2026 exam date, adre exam date, guwahati apsc coaching centre, difference between apsc and upsc, apsc vs upsc, best coaching center in northeast india, guwahati upsc coaching centre, syllabus of upsc, civil service exam";
 
 const { 
   title = "Takshashila School of Civil Services | Best UPSC & APSC Coaching in Guwahati", 
-  description = "At Takshashila School of Civil Services, the best UPSC and APSC coaching in Guwahati, we are committed to helping you achieve your dream of becoming a civil servant.",
-  image = "/Takshashila/students-view-back.jpg"
+  description = "At Takshashila School of Civil Services, the best UPSC and APSC coaching in Guwahati, we are committed to helping you achieve your dream of becoming a civil servant. Prepare for ADRE, APSC, and UPSC.",
+  image = "/og/index.png",
+  canonical = Astro.url.href,
+  keywords = defaultKeywords
 } = Astro.props;
 ---
 <!doctype html>
@@ -27,18 +34,44 @@ const {
 		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
 		<link rel="icon" href="/favicon.ico" />
 		<meta name="generator" content={Astro.generator} />
+		<meta name="keywords" content={keywords} />
 		<SEO
           title={title}
           description={description}
+          canonical={canonical}
           openGraph={{
             basic: {
               title: title,
               type: "website",
-              image: image,
+              image: new URL(image, Astro.url).href,
+            },
+            optional: {
+              description: description,
+              siteName: "Takshashila School of Civil Services",
             }
           }}
           twitter={{
-            creator: "@takshashila"
+            creator: "@takshashila",
+            card: "summary_large_image",
+            title: title,
+            description: description,
+            image: new URL(image, Astro.url).href,
+          }}
+        />
+        <Schema
+          item={{
+            "@context": "https://schema.org",
+            "@type": "EducationalOrganization",
+            name: "Takshashila School of Civil Services",
+            description: description,
+            url: Astro.site ? Astro.site.href : "https://takshashilascs.com",
+            logo: "https://takshashilascs.com/favicon.svg",
+            address: {
+              "@type": "PostalAddress",
+              addressLocality: "Guwahati",
+              addressRegion: "Assam",
+              addressCountry: "IN"
+            }
           }}
         />
 	</head>
