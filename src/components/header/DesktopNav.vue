@@ -1,13 +1,8 @@
 <script setup lang="ts">
 import config from '../../data/config.json';
 import MegaMenu from './MegaMenu.vue';
-import { defineEmits, defineProps } from 'vue';
-import {
-  aboutFeatured,
-  aboutItems,
-  coursesFeatured,
-  coursesItems,
-} from '../../data/navigation';
+import {defineEmits, defineProps} from 'vue';
+import {aboutFeatured, aboutItems, coursesFeatured, coursesItems,} from '../../data/navigation';
 
 defineProps<{
   menu: number | string | boolean;
@@ -55,7 +50,7 @@ const emit = defineEmits(['openMenu', 'closeMenu']);
 
       <li class="relative">
         <a
-          href="/work"
+          href="/team"
           class="link font-light leading-tight transition-none dark:text-white"
           :class="{
             'text-foreground/80': headerSmall,
@@ -91,7 +86,8 @@ const emit = defineEmits(['openMenu', 'closeMenu']);
 
       <li class="relative">
         <a
-          href="/blog"
+          href="https://currentaffairs.takshashilascs.com"
+          target="_blank"
           class="link font-light leading-tight transition-none dark:text-white"
           :class="{
             'text-foreground/80': headerSmall,

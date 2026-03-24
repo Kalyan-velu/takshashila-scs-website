@@ -53,7 +53,7 @@ const toggleAccordion = (item: string) => {
           </li>
           
           <li class="relative w-full border-b border-border/40 pb-4">
-            <a href="/work" @click="emit('closeMenu')" class="block w-full link text-4xl tracking-tight leading-none transition-none dark:text-white">Team</a>
+            <a href="/team" @click="emit('closeMenu')" class="block w-full link text-4xl tracking-tight leading-none transition-none dark:text-white">Team</a>
           </li>
           
           <li class="relative w-full border-b border-border/40 pb-2">
@@ -73,7 +73,7 @@ const toggleAccordion = (item: string) => {
           </li>
           
           <li class="relative w-full border-b border-border/40 pb-4">
-            <a href="/blog" @click="emit('closeMenu')" class="block w-full link text-4xl tracking-tight leading-none transition-none dark:text-white">Current Affairs</a>
+            <a target="_blank" href="https://currentaffairs.takshashilascs.com" @click="emit('closeMenu')" class="block w-full link text-4xl tracking-tight leading-none transition-none dark:text-white">Current Affairs</a>
           </li>
           
           <li class="relative w-full border-b border-border/40 pb-4">

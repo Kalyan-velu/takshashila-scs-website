@@ -1,7 +1,7 @@
 
 <script setup lang="ts">
-import { ref, onMounted, computed } from 'vue';
-import { getLatestPosts, type WPPost } from '../lib/wordpress';
+import {computed, onMounted, ref} from 'vue';
+import {getLatestPosts, type WPPost} from '../lib/wordpress';
 
 const posts = ref<WPPost[]>([]);
 const isLoading = ref(true);
@@ -46,7 +46,7 @@ onMounted(async () => {
           </p>
         </div>
 
-        <a href="/blog" class="inline-flex items-center text-primary font-medium hover:underline w-fit">
+        <a target="_blank" href="https://currentaffairs.takshashilascs.com" class="inline-flex items-center text-primary font-medium hover:underline w-fit">
           View all articles
           <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="ml-1 w-4 h-4"><line x1="7" y1="17" x2="17" y2="7"></line><polyline points="7 7 17 7 17 17"></polyline></svg>
         </a>

@@ -23,18 +23,20 @@ const seoDescription = 'Meet the expert faculties and mentoring guiding our stud
   </div>
 
   <div class='container mx-auto px-4 lg:px-24 py-16 md:py-24'>
-    <div class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-8">
+    <div class="grid grid-cols-2 md:grid-cols-3 xl:grid-cols-4 gap-8">
       {teamData.faculty.map((member) => (
         <div class="group flex flex-col bg-card/40 backdrop-blur-sm border border-border/50 rounded-3xl overflow-hidden hover:shadow-2xl hover:-translate-y-2 transition-all duration-500">
           <div class="relative w-full aspect-square overflow-hidden bg-muted flex items-center justify-center">
             <img 
               src={member.image} 
-              alt={member.name} 
-              class="w-full h-full object-cover object-top transform group-hover:scale-105 transition-transform duration-700 ease-in-out"
+              alt={member.name}
+              height="200"
+              width="200"
+              class="w-full rounded-full h-full object-cover object-top "
               loading="lazy"
             />
             {/* Gradient Overlay */}
-            <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-black/10 to-transparent opacity-70 group-hover:opacity-90 transition-opacity duration-300"></div>
+            <div class="absolute inset-0 bg-linear-to-t from-black/80 via-black/10 to-transparent opacity-70 group-hover:opacity-90 transition-opacity duration-300"></div>
             
             <div class="absolute bottom-4 left-4 right-4 flex flex-col items-start gap-1">
               <span class="px-2.5 py-1 backdrop-blur-md bg-white/20 text-white text-[10px] rounded border border-white/10 uppercase tracking-wider font-semibold">
@@ -45,7 +47,7 @@ const seoDescription = 'Meet the expert faculties and mentoring guiding our stud
           </div>
           
           <div class="p-6 flex flex-col flex-1 bg-background/50">
-            <p class="text-muted-foreground text-sm font-light leading-relaxed flex-grow text-pretty whitespace-pre-wrap">
+            <p class="text-muted-foreground text-sm font-light leading-relaxed grow  text-pretty whitespace-pre-wrap">
               {member.description}
             </p>
           </div>

@@ -198,9 +198,9 @@ const submitForm = async () => {
       </form>
 
       <div class="relative flex items-center py-6 pb-4">
-        <div class="flex-grow border-t border-border"></div>
-        <span class="flex-shrink-0 mx-4 text-muted-foreground text-xs uppercase font-medium tracking-wider">Or</span>
-        <div class="flex-grow border-t border-border"></div>
+        <div class="grow border-t border-border"></div>
+        <span class="shrink-0 mx-4 text-muted-foreground text-xs uppercase font-medium tracking-wider">Or</span>
+        <div class="grow border-t border-border"></div>
       </div>
 
       <a href="tel:+916001657575" class="w-full flex items-center justify-center gap-2 bg-background border border-border hover:bg-muted text-foreground font-medium py-3 px-4 rounded-lg transition-all">
