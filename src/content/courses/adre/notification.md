@@ -1,3 +1,8 @@
+---
+courseSlug: adre
+type: notification
+---
+
 ## ADRE Exam Notifications
 
 Stay tuned here for the latest updates and employment news notifications regarding the SLRC Assam Direct Recruitment Examination (ADRE).

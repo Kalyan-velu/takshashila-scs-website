@@ -1,3 +1,8 @@
+---
+courseSlug: adre
+type: about-exam
+---
+
 ## ADRE Syllabus 2026
 
 The State Level Recruitment Commission (SLRC), Assam has released the official Assam Direct Recruitment (ADRE) Syllabus for Class III and Class IV posts. Candidates preparing for the upcoming ADRE exams can check the complete syllabus, exam pattern, and subject-wise distribution below.

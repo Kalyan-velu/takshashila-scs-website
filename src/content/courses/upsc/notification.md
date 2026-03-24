@@ -1,3 +1,8 @@
+---
+courseSlug: upsc
+type: notification
+---
+
 ## Trending Now & Important Reads
 
 As part of your preparation ecosystem, we regularly publish high-yield strategies and articles to keep you on the right track. Explore our trending resources:

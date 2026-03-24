@@ -1,3 +1,8 @@
+---
+courseSlug: apsc
+type: about-exam
+---
+
 ## About the APSC (CCE) Examination
 
 The Assam Public Service Commission Combined Competitive Examination (APSC CCE) is the highest-level state exam conducted to recruit Class-I and Class-II officers for the Government of Assam.

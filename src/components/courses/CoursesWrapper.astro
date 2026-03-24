@@ -1,10 +1,18 @@
 ---
 import CoursesCarousel from "@/components/courses/CoursesCarousel.vue"
-import { courses } from "@/components/courses/data"
+import {CATEGORIES, CATEGORY_MAP} from "@/data/category.ts"
+import {getCollection} from "astro:content"
+
 const { id } = Astro.props;
+
+const allEntries = await getCollection('courses');
+const aboutCourseEntries = allEntries.filter(e => e.data.type === 'about-course' && e.data.courses);
+const courses = aboutCourseEntries.flatMap(e =>
+  (e.data.courses ?? []).map(c => ({ ...c, url: `/courses/${e.data.courseSlug}` }))
+);
 ---
 
-<section id={id} class="pb-12 lg:pb-32">
+<section id={id} class="pb-12 scroll-pt-4 lg:pb-32">
   <div class=" px-4 md:px-6">
       <div class="flex-col lg:flex-row flex lg:items-center lg:justify-between">
       
@@ -18,12 +26,12 @@ const { id } = Astro.props;
     </div>
     
     <div class="flex items-center gap-3 mb-10 overflow-x-auto hide-scrollbar pb-2">
-      {['All', 'UPSC', 'APSC', 'ADRE','working-professionals'].map((tab, i) => (
+      {CATEGORIES.map((tab, i)=> (
         <button
           class={`course-tab whitespace-nowrap shrink-0 px-6 py-2.5 rounded-full border text-sm md:text-base font-medium transition-colors ${i === 0 ? 'bg-primary text-primary-foreground border-primary' : 'bg-background border-border text-muted-foreground hover:border-primary/50'}`}
-          data-target={tab}
+          data-target={CATEGORY_MAP[tab]}
         >
-          {tab.replace(/-/g, ' ').split(' ').map(word => word.charAt(0).toUpperCase() + word.slice(1)).join(' ')} 
+          {CATEGORY_MAP[tab].replace(/-/g, ' ').split(' ').map(word => word.charAt(0).toUpperCase() + word.slice(1)).join(' ')}
         </button>
       ))}
     </div>
