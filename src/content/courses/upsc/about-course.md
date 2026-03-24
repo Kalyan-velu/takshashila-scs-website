@@ -1,4 +1,44 @@
-## UPSC Comprehensive Package
+---
+courseSlug: upsc
+type: about-course
+title: "Comprehensive UPSC Package"
+badge: "UPSC Target Batch"
+description: "An all-encompassing guidance program for Prelims, Mains, and the Interview stage. Secure your path to becoming an IAS, IPS, or rigorous civil servant with our proven strategies."
+seoTitle: "UPSC 2026 Comprehensive Coaching | Takshashila School of Civil Services"
+seoDescription: "Combined Package for Prelims, Mains and Interview Guidance. Join our 9-10 month UPSC program in Guwahati. Available in both Online & Offline modes."
+highlightWord: "UPSC"
+heroHeading: "Comprehensive <highlight>UPSC</highlight> Package"
+price: "Installments"
+pricePeriod: "Available"
+features:
+  - "Duration: 9-10 months"
+  - "Offline & Online Classes"
+  - "Prelims, Mains & Interview Guidance"
+  - "Personal Mentorship"
+courses:
+  - id: "upsc-foundation-batch"
+    title: "UPSC Foundation Batch"
+    description: "Enroll now for the most comprehensive UPSC coaching in Guwahati. Available in both online and offline modes with expert mentors from Delhi and across India."
+    prices:
+      online:
+        original: 31250
+        discount: 6250
+      offline:
+        original: 75000
+        discount: 12500
+    popular: false
+    categories:
+      - "UPSC Courses"
+    image: "/Takshashila/admission-square.jpeg"
+    duration: "12 months"
+    highlights:
+      - "Expert mentors from Delhi and across India"
+      - "Comprehensive syllabus coverage"
+      - "Regular mock tests for practice"
+    modes:
+      - "online"
+      - "offline"
+---
 
 Our **Combined Package for Prelims, Mains, and Interview Guidance** is a meticulously structured program designed to help you conquer the Civil Services Examination (CSE).
 

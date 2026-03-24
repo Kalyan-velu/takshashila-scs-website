@@ -1,3 +1,8 @@
+---
+courseSlug: apsc
+type: notification
+---
+
 ## APSC Target News & Notifications
 
 Stay updated with all Assam Public Service Commission declarations and notifications, neatly tracked for your convenience.

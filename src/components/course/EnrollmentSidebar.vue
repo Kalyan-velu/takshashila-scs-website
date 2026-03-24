@@ -1,5 +1,27 @@
 <script setup lang="ts">
-import {ref} from 'vue';
+import {computed, onMounted, onUnmounted, ref} from 'vue';
+
+interface CoursePrice {
+  original: number;
+  discount: number;
+}
+
+interface CourseItem {
+  id: string;
+  title: string;
+  description: string;
+  prices?: {
+    online?: CoursePrice;
+    offline?: CoursePrice;
+  };
+  popular: boolean;
+  categories: string[];
+  image: string;
+  url?: string;
+  duration: string;
+  highlights: string[];
+  modes: string[];
+}
 
 const props = defineProps({
   price: {
@@ -11,13 +33,73 @@ const props = defineProps({
     default: '/ starting price'
   },
   features: {
-    type: Array,
+    type: Array as () => string[],
     default: () => [
       'Batch starts from April',
       '100% Online Course',
       'Comprehensive Syllabus'
     ]
+  },
+  courseItems: {
+    type: Array as () => CourseItem[],
+    default: () => []
+  },
+  hasModes: {
+    type: Boolean,
+    default: false
   }
+});
+
+const selectedMode = ref<string>('offline');
+const selectedCourseIndex = ref(0);
+
+const onModeChange = (e: Event) => {
+  const customEvent = e as CustomEvent;
+  if (customEvent.detail?.mode) {
+    selectedMode.value = customEvent.detail.mode;
+  }
+};
+
+onMounted(() => {
+  window.addEventListener('course-mode-change', onModeChange);
+});
+
+onUnmounted(() => {
+  window.removeEventListener('course-mode-change', onModeChange);
+});
+
+const activeCourse = computed(() => {
+  if (props.courseItems.length === 0) return null;
+  return props.courseItems[selectedCourseIndex.value] ?? props.courseItems[0];
+});
+
+const currentPrice = computed(() => {
+  const course = activeCourse.value;
+  if (!course?.prices) return null;
+  const modePrice = selectedMode.value === 'online' ? course.prices.online : course.prices.offline;
+  return modePrice ?? null;
+});
+
+const displayPrice = computed(() => {
+  if (currentPrice.value) {
+    const discounted = currentPrice.value.original - currentPrice.value.discount;
+    return `₹${discounted.toLocaleString('en-IN')}`;
+  }
+  return props.price;
+});
+
+const displayOriginalPrice = computed(() => {
+  if (currentPrice.value) {
+    return `₹${currentPrice.value.original.toLocaleString('en-IN')}`;
+  }
+  return null;
+});
+
+const displayPeriod = computed(() => {
+  if (currentPrice.value) {
+    return `/ ${selectedMode.value} mode`;
+  }
+  return props.period;
 });
 
 const isSubmitting = ref(false);
@@ -45,10 +127,30 @@ const submitForm = async () => {
   <div class="bg-card text-card-foreground rounded-2xl border border-border overflow-hidden shadow-xl shadow-primary/5 mt-6">
     <div class="p-6 md:p-8">
       <h3 class="text-2xl font-light tracking-tight mb-2">Enroll Now</h3>
-      <div class="flex items-baseline gap-2 mb-6">
-        <span class="text-3xl font-semibold text-primary">{{ price }}</span>
-        <span class="text-muted-foreground text-sm">{{ period }}</span>
+
+      <!-- Course selector when multiple courses -->
+      <div v-if="courseItems.length > 1" class="mb-4">
+        <select
+          v-model="selectedCourseIndex"
+          class="w-full px-4 py-2.5 border border-border rounded-lg bg-background text-foreground text-sm focus:outline-none focus:ring-2 focus:ring-primary/50"
+        >
+          <option v-for="(course, index) in courseItems" :key="course.id" :value="index">
+            {{ course.title }}
+          </option>
+        </select>
       </div>
+
+      <div class="flex items-baseline gap-2 mb-1">
+        <span class="text-3xl font-semibold text-primary">{{ displayPrice }}</span>
+        <span class="text-muted-foreground text-sm">{{ displayPeriod }}</span>
+      </div>
+      <div v-if="displayOriginalPrice && currentPrice" class="flex items-center gap-2 mb-6">
+        <span class="text-muted-foreground text-sm line-through">{{ displayOriginalPrice }}</span>
+        <span class="text-xs font-medium text-green-600 bg-green-50 dark:bg-green-900/20 dark:text-green-400 px-2 py-0.5 rounded-full">
+          Save ₹{{ currentPrice.discount.toLocaleString('en-IN') }}
+        </span>
+      </div>
+      <div v-else class="mb-6"></div>
 
       <ul class="space-y-4 mb-8">
         <li v-for="(feature, index) in features" :key="index" class="flex items-center gap-3 text-sm text-muted-foreground">

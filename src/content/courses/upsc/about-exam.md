@@ -1,3 +1,8 @@
+---
+courseSlug: upsc
+type: about-exam
+---
+
 ## About the UPSC Civil Services Examination (CSE)
 
 The UPSC Civil Services Exam is widely considered one of the most prestigious and challenging examinations in India. It serves as the gateway to premier services like the IAS, IPS, and IFS.

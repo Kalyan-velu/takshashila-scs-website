@@ -4,7 +4,7 @@ import {computed, ref} from "vue";
 import {Carousel, CarouselContent, CarouselItem,} from "@/components/ui/carousel";
 import {ArrowRight} from "lucide-vue-next";
 import {cn} from "@/lib/utils";
-import type {Course} from "@/components/courses/data.ts";
+import type {Course} from "@/content.config.ts";
 
 const props = defineProps<{
   courses: Course[];
@@ -16,7 +16,7 @@ const activeTab = ref("All");
 const filteredCourses = computed(() => {
   if (activeTab.value === "All") return props.courses;
   return props.courses.filter((course) =>
-    course.category.includes(activeTab.value),
+          course.categories.map((category) => category.toLowerCase()).includes(activeTab.value.toLowerCase()),
   );
 });
 
@@ -47,7 +47,7 @@ window.addEventListener("course-tab-change", (e) => {
                   : 'border-border bg-card',
               )
             "
-            :data-category="course.category.join(',')"
+            :data-category="course.categories.join(',')"
           >
             <div class="relative aspect-16/10 overflow-hidden">
               <img
@@ -72,7 +72,7 @@ window.addEventListener("course-tab-change", (e) => {
 
             </div>
 
-            <div class="flex flex-col flex-1 p-6 md:p-8">
+            <a :href="`${course.url}`" class="flex flex-col flex-1 p-6 md:p-8">
               <h3
                 class="text-lg md:text-xl font-medium tracking-tight mb-3 group-hover:text-primary transition-colors leading-tight"
               >
@@ -98,7 +98,7 @@ window.addEventListener("course-tab-change", (e) => {
               >
                 {{ course.description }}
               </p>
-            </div>
+            </a>
             <div class="flex gap-0">
               <a
                   href="#enroll"

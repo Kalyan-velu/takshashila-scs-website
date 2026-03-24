@@ -6,6 +6,7 @@ import Hero from "@/components/Hero.astro";
 import Features from "@/components/Features.astro";
 import Header from '@/components/Header.astro';
 import LeadPopup from '@/components/LeadPopup.vue';
+import Footer from "@/components/Footer.astro";
 
 interface Props {
   title?: string;
@@ -35,8 +36,8 @@ const {
 		<link rel="icon" href="/favicon.ico" />
 		<meta name="generator" content={Astro.generator} />
 		<meta name="keywords" content={keywords} />
-		<SEO
-          title={title}
+      <title>{title}</title>
+      <SEO
           description={description}
           canonical={canonical}
           openGraph={{
@@ -74,14 +75,15 @@ const {
             }
           }}
         />
-	</head>
+  </head>
 	<body class="antialiased overflow-x-hidden selection:bg-primary/20 selection:text-primary">
 	<Header />
 	<main class="flex flex-col gap-8 ">
 		<slot />
 	</main>
 	<LeadPopup client:only="vue" />
-	</body>
+  <Footer />
+  </body>
 </html>
 
 <style>
