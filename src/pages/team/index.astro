@@ -1,0 +1,56 @@
+---
+import Layout from '@/layouts/Layout.astro';
+import teamData from '@/data/team.json';
+
+const seoTitle = 'Our Team | Takshashila School of Civil Services';
+const seoDescription = 'Meet the expert faculties and mentoring guiding our students to success in UPSC and APSC examinations.';
+---
+
+<Layout title={seoTitle} description={seoDescription}>
+  <div class='bg-primary/5 py-12 md:py-20 border-b border-border'>
+    <div class='container mx-auto px-4 lg:px-24'>
+      <div class='inline-flex items-center shrink-0 max-w-fit flex-nowrap rounded-full border border-border bg-background px-3 py-1 text-sm font-medium text-muted-foreground mb-6 shadow-sm'>
+        <span class='flex h-2 w-2 rounded-full bg-primary mr-2 animate-pulse'></span>
+        Our Faculties
+      </div>
+      <h1 class='text-4xl md:text-5xl lg:text-7xl font-light tracking-tight text-foreground max-w-4xl mb-6 leading-tight'>
+        Meet The <span class='text-primary font-medium'>Team</span>
+      </h1>
+      <p class='text-lg md:text-xl text-muted-foreground max-w-2xl font-light mb-8 leading-relaxed'>
+        Our highly experienced and dedicated team of experts bring decades of knowledge to guide your journey in cracking the toughest civil service exams.
+      </p>
+    </div>
+  </div>
+
+  <div class='container mx-auto px-4 lg:px-24 py-16 md:py-24'>
+    <div class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-8">
+      {teamData.faculty.map((member) => (
+        <div class="group flex flex-col bg-card/40 backdrop-blur-sm border border-border/50 rounded-3xl overflow-hidden hover:shadow-2xl hover:-translate-y-2 transition-all duration-500">
+          <div class="relative w-full aspect-square overflow-hidden bg-muted flex items-center justify-center">
+            <img 
+              src={member.image} 
+              alt={member.name} 
+              class="w-full h-full object-cover object-top transform group-hover:scale-105 transition-transform duration-700 ease-in-out"
+              loading="lazy"
+            />
+            {/* Gradient Overlay */}
+            <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-black/10 to-transparent opacity-70 group-hover:opacity-90 transition-opacity duration-300"></div>
+            
+            <div class="absolute bottom-4 left-4 right-4 flex flex-col items-start gap-1">
+              <span class="px-2.5 py-1 backdrop-blur-md bg-white/20 text-white text-[10px] rounded border border-white/10 uppercase tracking-wider font-semibold">
+                {member.designation}
+              </span>
+              <h3 class="text-white font-bold text-2xl leading-tight">{member.name}</h3>
+            </div>
+          </div>
+          
+          <div class="p-6 flex flex-col flex-1 bg-background/50">
+            <p class="text-muted-foreground text-sm font-light leading-relaxed flex-grow text-pretty whitespace-pre-wrap">
+              {member.description}
+            </p>
+          </div>
+        </div>
+      ))}
+    </div>
+  </div>
+</Layout>
