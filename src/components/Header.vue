@@ -83,7 +83,7 @@ const scrollToTop = () => {
     >
       <TopBar />
       <header
-        class="flex flex-wrap items-center justify-between relative z-30 pl-2 rounded-3xl transition-borderRadius lg:rounded-none js-header mx-auto bg-background/80 backdrop-blur-md"
+        class="flex flex-nowrap items-center justify-between relative z-30  rounded-3xl transition-borderRadius lg:rounded-none js-header mx-auto bg-background/80 backdrop-blur-md"
         :class="{
           'rounded-3xl': menu !== 'mobileMenu',
           'rounded-2xl': menu === 'mobileMenu',
@@ -131,10 +131,11 @@ const scrollToTop = () => {
           @toggle-dark-mode="toggleDarkMode"
           @toggle-mobile-menu="toggleMobileMenu"
         />
-
+      </header>
+      <header>
         <MobileMenu
-          :menu="menu"
-          @close-menu="closeMenu"
+            :menu="menu"
+            @close-menu="closeMenu"
         />
       </header>
     </div>

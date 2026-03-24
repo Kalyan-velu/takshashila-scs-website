@@ -12,7 +12,7 @@ const emit = defineEmits(['toggleDarkMode', 'toggleMobileMenu']);
 </script>
 
 <template>
-  <div class="pr-4 inline-flex items-center relative z-10 lg:space-x-2">
+  <div class="pr-4 inline-flex  items-center relative z-10 lg:space-x-2">
     <a
       :href="config.adreFormUrl"
       target="_blank"
@@ -54,7 +54,7 @@ const emit = defineEmits(['toggleDarkMode', 'toggleMobileMenu']);
               'rotate-0': menu !== 'mobileMenu',
             }"
           >
-            <span class="w-full h-0.5 bg-foreground/80 dark:bg-white"></span>
+            <span class="w-full block h-0.5 bg-foreground/80 dark:bg-white"></span>
           </span>
           <span
             class="w-full h-0.5 transition-opacity duration-300"
@@ -63,7 +63,7 @@ const emit = defineEmits(['toggleDarkMode', 'toggleMobileMenu']);
               'opacity-100': menu !== 'mobileMenu',
             }"
           >
-            <span class="w-full h-0.5 bg-foreground/80 dark:bg-white"></span>
+            <span class="w-full block h-0.5 bg-foreground/80 dark:bg-white"></span>
           </span>
           <span
             class="w-full h-0.5 transition-transform duration-500 transform"
@@ -72,7 +72,7 @@ const emit = defineEmits(['toggleDarkMode', 'toggleMobileMenu']);
               'rotate-0': menu !== 'mobileMenu',
             }"
           >
-            <span class="w-full h-0.5 bg-foreground/80 dark:bg-white"></span>
+            <span class="w-full block h-0.5 bg-foreground/80 dark:bg-white"></span>
           </span>
         </span>
       </button>
@@ -97,3 +97,6 @@ const emit = defineEmits(['toggleDarkMode', 'toggleMobileMenu']);
     </div>
   </div>
 </template>
+<style scoped>
+@reference "../../styles/globals.css";
+</style>
