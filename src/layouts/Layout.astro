@@ -7,6 +7,8 @@ import Features from "@/components/Features.astro";
 import Header from '@/components/Header.astro';
 import LeadPopup from '@/components/LeadPopup.vue';
 import Footer from "@/components/Footer.astro";
+import GoogleTagManager from "@/lib/GTag/GoogleTagManager.astro";
+import GoogleTagManagerNoscript from "@/lib/GTag/GoogleTagManagerNoscript.astro";
 
 interface Props {
   title?: string;
@@ -29,6 +31,7 @@ const {
 <!doctype html>
 <html lang="en" class="scroll-smooth">
 	<head>
+    <GoogleTagManager />
 		<meta charset="UTF-8" />
 		<meta name="viewport" content="width=device-width" />
 		<link rel="preconnect" href="https://takshashilascs.com" />
@@ -77,6 +80,7 @@ const {
         />
   </head>
 	<body class="antialiased overflow-x-hidden selection:bg-primary/20 selection:text-primary">
+	<GoogleTagManagerNoscript />
 	<Header />
 	<main class="flex flex-col gap-8 ">
 		<slot />
