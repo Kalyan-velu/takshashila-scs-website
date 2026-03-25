@@ -1,17 +1,28 @@
 // @ts-check
 import tailwindcss from "@tailwindcss/vite";
-import {defineConfig} from "astro/config";
+import { defineConfig } from "astro/config";
 import tsconfigPaths from "vite-tsconfig-paths";
 import react from "@astrojs/react";
 import vue from "@astrojs/vue";
 import vercel from "@astrojs/vercel";
 import sitemap from "@astrojs/sitemap";
+import partytown from "@astrojs/partytown";
 import robotsTxt from "astro-robots-txt";
 // https://astro.build/config
 export default defineConfig({
   site: "https://takshashilascs.com",
   trailingSlash: "ignore",
-  integrations: [react(), vue(), sitemap(), robotsTxt()],
+  integrations: [
+    react(),
+    vue(),
+    sitemap(),
+    partytown({
+      config: {
+        forward: ["dataLayer.push"],
+      },
+    }),
+    robotsTxt(),
+  ],
   image: {
     remotePatterns: [
       { protocol: "https", hostname: "images.unsplash.com" },
