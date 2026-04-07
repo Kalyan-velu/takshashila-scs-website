@@ -128,7 +128,6 @@ const submitForm = async () => {
     <div class="p-6 md:p-8">
       <h3 class="text-2xl font-light tracking-tight mb-2">Enroll Now</h3>
 
-      <!-- Course selector when multiple courses -->
       <div v-if="courseItems.length > 1" class="mb-4">
         <select
           v-model="selectedCourseIndex"
