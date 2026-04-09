@@ -85,7 +85,7 @@ onMounted(async () => {
           <!-- Image Skeleton -->
           <div class="w-full aspect-video bg-muted animate-pulse"></div>
 
-          <div class="p-6 flex flex-col flex-grow w-full">
+          <div class="p-6 flex flex-col grow w-full">
             <!-- Tag Skeleton -->
             <div class="flex items-center gap-2 mb-3">
               <div class="h-5 w-16 rounded-full bg-muted animate-pulse"></div>
@@ -135,7 +135,7 @@ onMounted(async () => {
               loading="lazy"
             />
           </div>
-          <div class="p-6 flex flex-col flex-grow">
+          <div class="p-6 flex flex-col grow">
             <div class="flex items-center gap-2 mb-3">
               <span
                 class="px-2.5 py-0.5 rounded-full text-xs font-medium bg-primary/10 text-primary"
@@ -148,7 +148,7 @@ onMounted(async () => {
               v-html="post.title.rendered"
             ></h3>
             <p
-              class="text-muted-foreground font-light text-sm line-clamp-3 mb-4 flex-grow"
+              class="text-muted-foreground font-light text-sm line-clamp-3 mb-4 grow"
               v-html="getCleanExcerpt(post)"
             ></p>
 
