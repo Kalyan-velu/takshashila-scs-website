@@ -19,7 +19,7 @@ const emit = defineEmits(["openMenu", "closeMenu"]);
 
 <template>
   <nav class="hidden lg:inline-flex">
-    <ul class="flex space-x-7 xl:space-x-10">
+    <ul class="flex items-center space-x-7 xl:space-x-10">
       <li class="relative flex items-center">
         <a
           :href="config.adreFormUrl"
