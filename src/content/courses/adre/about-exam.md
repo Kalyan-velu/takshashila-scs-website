@@ -9,21 +9,22 @@ The State Level Recruitment Commission (SLRC), Assam has released the official A
 
 ### ADRE Syllabus 2026 — Overview Table
 
-| Particulars | Class III | Class IV |
-| --- | --- | --- |
-| **Recruiting Body** | SLRC, Govt. of Assam | SLRC, Govt. of Assam |
-| **Educational Levels** | HSLC / HSSLC / Graduate | Class 8 / HSLC / HSLC+ITI |
-| **Exam Type** | Written Examination | Written Examination |
-| **Mode of Exam** | Offline | Offline |
-| **Type of Questions** | MCQ | MCQ |
-| **Total Questions** | 150 | 135 |
-| **Total Marks** | 150 (HSLC/HSSLC) / 175 (Graduate) | 135 |
-| **Exam Duration** | 3 Hours | 2 Hours 30 Minutes |
-| **Syllabus Sections** | Social Studies, GK, Reasoning, English, Maths | English, Social Studies, Maths, GK, Reasoning |
+| Particulars            | Class III                                     | Class IV                                      |
+| ---------------------- | --------------------------------------------- | --------------------------------------------- |
+| **Recruiting Body**    | SLRC, Govt. of Assam                          | SLRC, Govt. of Assam                          |
+| **Educational Levels** | HSLC / HSSLC / Graduate                       | Class 8 / HSLC / HSLC+ITI                     |
+| **Exam Type**          | Written Examination                           | Written Examination                           |
+| **Mode of Exam**       | Offline                                       | Offline                                       |
+| **Type of Questions**  | MCQ                                           | MCQ                                           |
+| **Total Questions**    | 150                                           | 135                                           |
+| **Total Marks**        | 150 (HSLC/HSSLC) / 175 (Graduate)             | 135                                           |
+| **Exam Duration**      | 3 Hours                                       | 2 Hours 30 Minutes                            |
+| **Syllabus Sections**  | Social Studies, GK, Reasoning, English, Maths | English, Social Studies, Maths, GK, Reasoning |
 
 ### ADRE Class III Syllabus 2026
 
 SLRC has released separate syllabi for:
+
 - HSLC-Level Posts (Driver & Similar)
 - HSSLC-Level Posts
 - Graduate-Level Posts
@@ -31,6 +32,7 @@ SLRC has released separate syllabi for:
 #### ADRE Class III (HSLC Level) Syllabus
 
 **Exam Pattern**
+
 - **No. of Questions**: 150
 - **Total Marks**: 150
 - **Duration**: 3 Hours
@@ -48,6 +50,7 @@ SLRC has released separate syllabi for:
 #### ADRE Class III (HSSLC Level) Syllabus
 
 **Exam Pattern**
+
 - **No. of Questions**: 150
 - **Total Marks**: 150
 - **Duration**: 3 Hours
@@ -64,6 +67,7 @@ SLRC has released separate syllabi for:
 #### ADRE Class III (Bachelor Degree Level) Syllabus
 
 **Exam Pattern**
+
 - **No. of Questions**: 150
 - **Total Marks**: 175
 - **Duration**: 3 Hours
@@ -83,11 +87,13 @@ SLRC has released separate syllabi for:
 ### ADRE Class IV Syllabus 2026
 
 Assam Direct Recruitment Class IV posts include:
+
 - **Class 8 Pass** → 1,950 Posts
 - **HSLC Pass** → 1,060 Posts
 - **HSLC + ITI** → 1,990 Posts
 
 **Class IV Exam Pattern 2026**
+
 - **No. of Questions**: 135
 - **Total Marks**: 135
 - **Duration**: 2.5 Hours
@@ -105,6 +111,7 @@ Assam Direct Recruitment Class IV posts include:
 ---
 
 ### Final Tips for ADRE Aspirants
+
 - Focus on General Knowledge & Mathematics — major scoring areas.
 - For Class III Graduate posts, English Comprehension (50 marks) is crucial.
 - Practice previous papers to manage time effectively.

@@ -9,7 +9,8 @@
     "dev": "astro dev --port 3000 --host ",
     "build": "astro build",
     "preview": "astro preview",
-    "astro": "astro"
+    "astro": "astro",
+    "format": "prettier --write 'src/**/*.{astro,css,html,js,jsx,json,md,mdx,svelte,ts,tsx,vue}'"
   },
   "dependencies": {
     "@astrojs/partytown": "^2.1.5",
@@ -63,6 +64,8 @@
     "@vitejs/plugin-vue": "^6.0.5",
     "@vue/test-utils": "^2.4.6",
     "jsdom": "^29.0.1",
+    "prettier": "^3.8.1",
+    "prettier-plugin-astro": "^0.14.1",
     "vite-tsconfig-paths": "^6.1.1",
     "vitest": "^4.1.0"
   }

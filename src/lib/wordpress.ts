@@ -1,11 +1,9 @@
-
-
-const isServer = typeof window === 'undefined';
-const base= import.meta.env.PUBLIC_WORDPRESS_URL??"";
+const isServer = typeof window === "undefined";
+const base = import.meta.env.PUBLIC_WORDPRESS_URL ?? "";
 
 function wpUrl(path: string): string {
   // Normalize slashes
-  return `${base.replace(/\/$/, '')}/${path.replace(/^\//, '')}`;
+  return `${base.replace(/\/$/, "")}/${path.replace(/^\//, "")}`;
 }
 
 // ---- Types ----
@@ -21,7 +19,7 @@ export interface WPPost {
   modified: string;
   featured_media: number;
   _embedded?: {
-    'wp:featuredmedia'?: Array<{
+    "wp:featuredmedia"?: Array<{
       source_url: string;
       alt_text: string;
       media_details: { width: number; height: number };
@@ -44,19 +42,25 @@ export interface WPMedia {
   media_details: {
     width: number;
     height: number;
-    sizes: Record<string, { source_url: string; width: number; height: number }>;
+    sizes: Record<
+      string,
+      { source_url: string; width: number; height: number }
+    >;
   };
 }
 
 // ---- Fetch helpers ----
 
-async function wpFetch<T>(endpoint: string, params?: Record<string, string>): Promise<T> {
+async function wpFetch<T>(
+  endpoint: string,
+  params?: Record<string, string>,
+): Promise<T> {
   const url = new URL(wpUrl(`wp-json/wp/v2/${endpoint}`));
-  console.log("Url:",url.toString())
+  console.log("Url:", url.toString());
   if (params) {
     Object.entries(params).forEach(([k, v]) => url.searchParams.set(k, v));
   }
-  
+
   const res = await fetch(url.toString());
   if (!res.ok) {
     throw new Error(`WP API error [${res.status}] for: ${url.toString()}`);
@@ -70,30 +74,30 @@ async function wpFetch<T>(endpoint: string, params?: Record<string, string>): Pr
 export async function getLatestPosts(
   page = 1,
   perPage = 10,
-  extra?: Record<string, string>
+  extra?: Record<string, string>,
 ): Promise<WPPost[]> {
-  return wpFetch<WPPost[]>('posts', {
+  return wpFetch<WPPost[]>("posts", {
     page: String(page),
     per_page: String(perPage),
-    _embed: '1',
+    _embed: "1",
     ...extra,
   });
 }
 
 /** Fetch a single post by slug */
 export async function getPostBySlug(slug: string): Promise<WPPost | null> {
-  const posts = await wpFetch<WPPost[]>('posts', { slug, _embed: '1' });
+  const posts = await wpFetch<WPPost[]>("posts", { slug, _embed: "1" });
   return posts[0] ?? null;
 }
 
 /** Fetch all pages */
 export async function getPages(): Promise<WPPage[]> {
-  return wpFetch<WPPage[]>('pages');
+  return wpFetch<WPPage[]>("pages");
 }
 
 /** Fetch a single page by slug */
 export async function getPageBySlug(slug: string): Promise<WPPage | null> {
-  const pages = await wpFetch<WPPage[]>('pages', { slug });
+  const pages = await wpFetch<WPPage[]>("pages", { slug });
   return pages[0] ?? null;
 }
 
@@ -108,5 +112,5 @@ export async function getMedia(id: number): Promise<WPMedia> {
  */
 export function rewriteMediaUrls(html: string, wpBase: string): string {
   // Replace absolute WP URLs with proxied paths
-  return html.replaceAll(wpBase.replace(/\/$/, ''), '/api/wp');
+  return html.replaceAll(wpBase.replace(/\/$/, ""), "/api/wp");
 }

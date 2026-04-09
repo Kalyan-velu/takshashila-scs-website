@@ -1,42 +1,59 @@
 ---
-import CoursesCarousel from "@/components/courses/CoursesCarousel.vue"
-import {CATEGORIES, CATEGORY_MAP} from "@/data/category.ts"
-import {getCollection} from "astro:content"
+import CoursesCarousel from "@/components/courses/CoursesCarousel.vue";
+import { CATEGORIES, CATEGORY_MAP } from "@/data/category.ts";
+import { getCollection } from "astro:content";
 
 const { id } = Astro.props;
 
-const allEntries = await getCollection('courses');
-const aboutCourseEntries = allEntries.filter(e => e.data.type === 'about-course' && e.data.courses);
-const courses = aboutCourseEntries.flatMap(e =>
-  (e.data.courses ?? []).map(c => ({ ...c, url: `/courses/${e.data.courseSlug}` }))
+const allEntries = await getCollection("courses");
+const aboutCourseEntries = allEntries.filter(
+  (e) => e.data.type === "about-course" && e.data.courses,
+);
+const courses = aboutCourseEntries.flatMap((e) =>
+  (e.data.courses ?? []).map((c) => ({
+    ...c,
+    url: `/courses/${e.data.courseSlug}`,
+  })),
 );
 ---
 
 <section id={id} class="pb-12 scroll-pt-4 lg:pb-32">
-  <div class=" px-4 md:px-6">
-      <div class="flex-col lg:flex-row flex lg:items-center lg:justify-between">
-      
-    <div class="text-left mb-10">
-      <h2 class="text-3xl md:text-5xl font-light tracking-tight text-foreground mb-4">
-        Our Popular Courses
-      </h2>
-      <p class="text-muted-foreground font-light text-lg max-w-2xl leading-relaxed">
-        Join the most comprehensive civil services coaching programs in Guwahati designed for your success.
-      </p>
-    </div>
-    
-    <div class="flex items-center gap-3 mb-10 overflow-x-auto hide-scrollbar pb-2">
-      {CATEGORIES.map((tab, i)=> (
-        <button
-          class={`course-tab whitespace-nowrap shrink-0 px-6 py-2.5 rounded-full border text-sm md:text-base font-medium transition-colors ${i === 0 ? 'bg-primary text-primary-foreground border-primary' : 'bg-background border-border text-muted-foreground hover:border-primary/50'}`}
-          data-target={CATEGORY_MAP[tab]}
+  <div class="px-4 md:px-6">
+    <div class="flex-col lg:flex-row flex lg:items-center lg:justify-between">
+      <div class="text-left mb-10">
+        <h2
+          class="text-3xl md:text-5xl font-light tracking-tight text-foreground mb-4"
         >
-          {CATEGORY_MAP[tab].replace(/-/g, ' ').split(' ').map(word => word.charAt(0).toUpperCase() + word.slice(1)).join(' ')}
-        </button>
-      ))}
-    </div>
+          Our Popular Courses
+        </h2>
+        <p
+          class="text-muted-foreground font-light text-lg max-w-2xl leading-relaxed"
+        >
+          Join the most comprehensive civil services coaching programs in
+          Guwahati designed for your success.
+        </p>
       </div>
-    <CoursesCarousel courses={courses} client:only="vue"/>
+
+      <div
+        class="flex items-center gap-3 mb-10 overflow-x-auto hide-scrollbar pb-2"
+      >
+        {
+          CATEGORIES.map((tab, i) => (
+            <button
+              class={`course-tab whitespace-nowrap shrink-0 px-6 py-2.5 rounded-full border text-sm md:text-base font-medium transition-colors ${i === 0 ? "bg-primary text-primary-foreground border-primary" : "bg-background border-border text-muted-foreground hover:border-primary/50"}`}
+              data-target={CATEGORY_MAP[tab]}
+            >
+              {CATEGORY_MAP[tab]
+                .replace(/-/g, " ")
+                .split(" ")
+                .map((word) => word.charAt(0).toUpperCase() + word.slice(1))
+                .join(" ")}
+            </button>
+          ))
+        }
+      </div>
+    </div>
+    <CoursesCarousel courses={courses} client:only="vue" />
   </div>
 </section>
 
@@ -46,33 +63,53 @@ const courses = aboutCourseEntries.flatMap(e =>
   }
   .hide-scrollbar {
     -ms-overflow-style: none; /* IE and Edge */
-    scrollbar-width: none;    /* Firefox */
+    scrollbar-width: none; /* Firefox */
   }
 </style>
 
 <script>
   function setupCourseTabs() {
-    const tabs = document.querySelectorAll('.course-tab') as NodeListOf<HTMLButtonElement>;
+    const tabs = document.querySelectorAll(
+      ".course-tab",
+    ) as NodeListOf<HTMLButtonElement>;
 
     if (!tabs.length) return;
 
-    tabs.forEach(tab => {
-      tab.addEventListener('click', () => {
+    tabs.forEach((tab) => {
+      tab.addEventListener("click", () => {
         // Active tab styling
-        tabs.forEach(t => {
-          t.classList.remove('bg-primary', 'text-primary-foreground', 'border-primary');
-          t.classList.add('bg-background', 'border-border', 'text-muted-foreground');
+        tabs.forEach((t) => {
+          t.classList.remove(
+            "bg-primary",
+            "text-primary-foreground",
+            "border-primary",
+          );
+          t.classList.add(
+            "bg-background",
+            "border-border",
+            "text-muted-foreground",
+          );
         });
-        tab.classList.remove('bg-background', 'border-border', 'text-muted-foreground');
-        tab.classList.add('bg-primary', 'text-primary-foreground', 'border-primary');
+        tab.classList.remove(
+          "bg-background",
+          "border-border",
+          "text-muted-foreground",
+        );
+        tab.classList.add(
+          "bg-primary",
+          "text-primary-foreground",
+          "border-primary",
+        );
 
-        const target = tab.getAttribute('data-target')
-          window.dispatchEvent(new CustomEvent('course-tab-change', { detail: { tab: target } }))
+        const target = tab.getAttribute("data-target");
+        window.dispatchEvent(
+          new CustomEvent("course-tab-change", { detail: { tab: target } }),
+        );
       });
     });
   }
 
   // Run on initial load and view transitions
   setupCourseTabs();
-  document.addEventListener('astro:page-load', setupCourseTabs);
+  document.addEventListener("astro:page-load", setupCourseTabs);
 </script>

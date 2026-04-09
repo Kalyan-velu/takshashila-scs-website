@@ -1,31 +1,28 @@
 <script setup lang="ts">
-import type { WithClassAsProps } from "./interface"
-import { cn } from "@/lib/utils"
-import { useCarousel } from "./useCarousel"
+import type { WithClassAsProps } from "./interface";
+import { cn } from "@/lib/utils";
+import { useCarousel } from "./useCarousel";
 
 defineOptions({
   inheritAttrs: false,
-})
+});
 
-const props = defineProps<WithClassAsProps>()
+const props = defineProps<WithClassAsProps>();
 
-const { carouselRef, orientation } = useCarousel()
+const { carouselRef, orientation } = useCarousel();
 </script>
 
 <template>
-  <div
-      ref="carouselRef"
-      data-slot="carousel-content"
-      class="overflow-hidden"
-  >
+  <div ref="carouselRef" data-slot="carousel-content" class="overflow-hidden">
     <div
-        :class="
+      :class="
         cn(
           'flex scroll-smooth',
           orientation === 'horizontal' ? '-ml-4' : '-mt-4 flex-col',
           props.class,
-        )"
-        v-bind="$attrs"
+        )
+      "
+      v-bind="$attrs"
     >
       <slot />
     </div>

@@ -1,11 +1,11 @@
 ---
 import { SEO } from "astro-seo";
 import { Schema } from "astro-seo-schema";
-import '../styles/globals.css';
+import "../styles/globals.css";
 import Hero from "@/components/Hero.astro";
 import Features from "@/components/Features.astro";
-import Header from '@/components/Header.astro';
-import LeadPopup from '@/components/LeadPopup.vue';
+import Header from "@/components/Header.astro";
+import LeadPopup from "@/components/LeadPopup.vue";
 import Footer from "@/components/Footer.astro";
 import GoogleTagManager from "@/lib/GTag/GoogleTagManager.astro";
 import GoogleTagManagerNoscript from "@/lib/GTag/GoogleTagManagerNoscript.astro";
@@ -18,83 +18,87 @@ interface Props {
   keywords?: string;
 }
 
-const defaultKeywords = "apsc coaching in guwahati, apsc coaching, adre coaching, upsc, apsc full form, upsc full form, best apsc coaching in guwahati, adre syllabus, apsc syllabus, upsc syllabus, apsc cce full form, scs current affairs, upsc coaching in assam, apsc coaching in assam, upsc strategy, upsc 2026 exam date, adre exam date, guwahati apsc coaching centre, difference between apsc and upsc, apsc vs upsc, best coaching center in northeast india, guwahati upsc coaching centre, syllabus of upsc, civil service exam";
+const defaultKeywords =
+  "apsc coaching in guwahati, apsc coaching, adre coaching, upsc, apsc full form, upsc full form, best apsc coaching in guwahati, adre syllabus, apsc syllabus, upsc syllabus, apsc cce full form, scs current affairs, upsc coaching in assam, apsc coaching in assam, upsc strategy, upsc 2026 exam date, adre exam date, guwahati apsc coaching centre, difference between apsc and upsc, apsc vs upsc, best coaching center in northeast india, guwahati upsc coaching centre, syllabus of upsc, civil service exam";
 
-const { 
-  title = "Takshashila School of Civil Services | Best UPSC & APSC Coaching in Guwahati", 
+const {
+  title = "Takshashila School of Civil Services | Best UPSC & APSC Coaching in Guwahati",
   description = "At Takshashila School of Civil Services, the best UPSC and APSC coaching in Guwahati, we are committed to helping you achieve your dream of becoming a civil servant. Prepare for ADRE, APSC, and UPSC.",
   image = "/og/index.png",
   canonical = Astro.url.href,
-  keywords = defaultKeywords
+  keywords = defaultKeywords,
 } = Astro.props;
 ---
+
 <!doctype html>
 <html lang="en" class="scroll-smooth">
-	<head>
+  <head>
     <GoogleTagManager />
-		<meta charset="UTF-8" />
-		<meta name="viewport" content="width=device-width" />
-		<link rel="preconnect" href="https://takshashilascs.com" />
-		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-		<link rel="icon" href="/favicon.ico" />
-		<meta name="generator" content={Astro.generator} />
-		<meta name="keywords" content={keywords} />
-      <title>{title}</title>
-      <SEO
-          description={description}
-          canonical={canonical}
-          openGraph={{
-            basic: {
-              title: title,
-              type: "website",
-              image: new URL(image, Astro.url).href,
-            },
-            optional: {
-              description: description,
-              siteName: "Takshashila School of Civil Services",
-            }
-          }}
-          twitter={{
-            creator: "@takshashila",
-            card: "summary_large_image",
-            title: title,
-            description: description,
-            image: new URL(image, Astro.url).href,
-          }}
-        />
-        <Schema
-          item={{
-            "@context": "https://schema.org",
-            "@type": "EducationalOrganization",
-            name: "Takshashila School of Civil Services",
-            description: description,
-            url: Astro.site ? Astro.site.href : "https://takshashilascs.com",
-            logo: "https://takshashilascs.com/favicon.svg",
-            address: {
-              "@type": "PostalAddress",
-              addressLocality: "Guwahati",
-              addressRegion: "Assam",
-              addressCountry: "IN"
-            }
-          }}
-        />
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width" />
+    <link rel="preconnect" href="https://takshashilascs.com" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="icon" href="/favicon.ico" />
+    <meta name="generator" content={Astro.generator} />
+    <meta name="keywords" content={keywords} />
+    <title>{title}</title>
+    <SEO
+      description={description}
+      canonical={canonical}
+      openGraph={{
+        basic: {
+          title: title,
+          type: "website",
+          image: new URL(image, Astro.url).href,
+        },
+        optional: {
+          description: description,
+          siteName: "Takshashila School of Civil Services",
+        },
+      }}
+      twitter={{
+        creator: "@takshashila",
+        card: "summary_large_image",
+        title: title,
+        description: description,
+        image: new URL(image, Astro.url).href,
+      }}
+    />
+    <Schema
+      item={{
+        "@context": "https://schema.org",
+        "@type": "EducationalOrganization",
+        name: "Takshashila School of Civil Services",
+        description: description,
+        url: Astro.site ? Astro.site.href : "https://takshashilascs.com",
+        logo: "https://takshashilascs.com/favicon.svg",
+        address: {
+          "@type": "PostalAddress",
+          addressLocality: "Guwahati",
+          addressRegion: "Assam",
+          addressCountry: "IN",
+        },
+      }}
+    />
   </head>
-	<body class="antialiased overflow-x-hidden selection:bg-primary/20 selection:text-primary">
-	<GoogleTagManagerNoscript />
-	<Header />
-	<main class="flex flex-col gap-8 ">
-		<slot />
-	</main>
-	<LeadPopup client:only="vue" />
-  <Footer />
+  <body
+    class="antialiased overflow-x-hidden selection:bg-primary/20 selection:text-primary"
+  >
+    <GoogleTagManagerNoscript />
+    <Header />
+    <main class="flex flex-col gap-8">
+      <slot />
+    </main>
+    <LeadPopup client:only="vue" />
+    <Footer />
   </body>
 </html>
 
 <style>
-	html,
-	body {
-		margin: 0;
-		width: 100%;
-		height: 100%;
-	}
+  html,
+  body {
+    margin: 0;
+    width: 100%;
+    height: 100%;
+  }
 </style>

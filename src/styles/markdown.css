@@ -1,97 +1,97 @@
 .markdown-content {
-    font-size: 1.05rem;
-    line-height: 1.7;
-    color: var(--color-foreground, #333);
+  font-size: 1.05rem;
+  line-height: 1.7;
+  color: var(--color-foreground, #333);
 }
 
 .dark .markdown-content {
-    color: var(--color-foreground, #ccc);
+  color: var(--color-foreground, #ccc);
 }
 
 .markdown-content h1,
 .markdown-content h2,
 .markdown-content h3,
 .markdown-content h4 {
-    color: var(--color-primary, #6b21a8);
-    font-weight: 400;
-    letter-spacing: -0.025em;
-    margin-top: 2rem;
-    margin-bottom: 1rem;
+  color: var(--color-primary, #6b21a8);
+  font-weight: 400;
+  letter-spacing: -0.025em;
+  margin-top: 2rem;
+  margin-bottom: 1rem;
 }
 
 .markdown-content h2 {
-    font-size: 1.875rem;
-    border-bottom: 1px solid var(--color-border);
-    padding-bottom: 0.5rem;
+  font-size: 1.875rem;
+  border-bottom: 1px solid var(--color-border);
+  padding-bottom: 0.5rem;
 }
 
 .markdown-content h3 {
-    font-size: 1.5rem;
-    color: var(--color-foreground);
-    font-weight: 500;
+  font-size: 1.5rem;
+  color: var(--color-foreground);
+  font-weight: 500;
 }
 
 .markdown-content p {
-    margin-bottom: 1.25rem;
+  margin-bottom: 1.25rem;
 }
 
 .markdown-content a {
-    color: var(--color-primary);
-    text-decoration: underline;
-    text-underline-offset: 4px;
+  color: var(--color-primary);
+  text-decoration: underline;
+  text-underline-offset: 4px;
 }
 
 .markdown-content ul,
 .markdown-content ol {
-    margin-top: 1rem;
-    margin-bottom: 1.5rem;
-    padding-left: 1.5rem;
+  margin-top: 1rem;
+  margin-bottom: 1.5rem;
+  padding-left: 1.5rem;
 }
 
 .markdown-content li {
-    margin-bottom: 0.5rem;
+  margin-bottom: 0.5rem;
 }
 
 .markdown-content ul {
-    list-style-type: disc;
+  list-style-type: disc;
 }
 
 .markdown-content table {
-    width: 100%;
-    border-collapse: collapse;
-    margin-top: 1.5rem;
-    margin-bottom: 2rem;
-    font-size: 0.95rem;
-    overflow-x: auto;
-    display: block;
-    white-space: nowrap;
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 1.5rem;
+  margin-bottom: 2rem;
+  font-size: 0.95rem;
+  overflow-x: auto;
+  display: block;
+  white-space: nowrap;
 }
 
 @media (min-width: 768px) {
-    .markdown-content table {
-        display: table;
-        white-space: normal;
-    }
+  .markdown-content table {
+    display: table;
+    white-space: normal;
+  }
 }
 
 .markdown-content th,
 .markdown-content td {
-    padding: 0.75rem 1rem;
-    border: 1px solid var(--color-border);
-    text-align: left;
+  padding: 0.75rem 1rem;
+  border: 1px solid var(--color-border);
+  text-align: left;
 }
 
 .markdown-content th {
-    background-color: var(--color-muted);
-    font-weight: 600;
-    color: var(--color-foreground);
+  background-color: var(--color-muted);
+  font-weight: 600;
+  color: var(--color-foreground);
 }
 
 .markdown-content strong {
-    font-weight: 600;
-    color: var(--color-foreground);
+  font-weight: 600;
+  color: var(--color-foreground);
 }
 .markdown-content hr {
-    border-color: var(--color-border);
-    margin: 2rem 0;
+  border-color: var(--color-border);
+  margin: 2rem 0;
 }

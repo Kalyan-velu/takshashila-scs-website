@@ -1,9 +1,7 @@
-import { Button as ButtonPrimitive } from "@base-ui/react/button"
+import { Button as ButtonPrimitive } from "@base-ui/react/button";
 
-import { cn } from "@/lib/utils"
-import {buttonVariants,type ButtonVariants} from "@/components/ui/button";
-
-
+import { cn } from "@/lib/utils";
+import { buttonVariants, type ButtonVariants } from "@/components/ui/button";
 
 function Button({
   className,
@@ -17,7 +15,7 @@ function Button({
       className={cn(buttonVariants({ variant, size, className }))}
       {...props}
     />
-  )
+  );
 }
 
-export { Button, buttonVariants }
+export { Button, buttonVariants };

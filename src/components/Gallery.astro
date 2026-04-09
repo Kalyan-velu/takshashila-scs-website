@@ -1,22 +1,32 @@
 ---
-import { Image } from 'astro:assets';
-
+import { Image } from "astro:assets";
 
 const galleryItems = [
-  { title: "Special Events", image: "/storage/2024/04/1689672210_imresizer-1689598168606-scaled.jpg" },
+  {
+    title: "Special Events",
+    image: "/storage/2024/04/1689672210_imresizer-1689598168606-scaled.jpg",
+  },
   { title: "Group photo", image: "/storage/2025/06/students-1.jpg" },
-  { title: "Library", image: "/storage/2024/04/IMG_20240408_110125-scaled.jpg" },
+  {
+    title: "Library",
+    image: "/storage/2024/04/IMG_20240408_110125-scaled.jpg",
+  },
   { title: "Class room 1", image: "/storage/2025/03/IMG_5529-scaled.webp" },
-  { title: "Students ready for class", image: "/storage/2025/06/students-2.jpg" },
+  {
+    title: "Students ready for class",
+    image: "/storage/2025/06/students-2.jpg",
+  },
   { title: "Online test", image: "/storage/2025/06/students-3.jpg" },
 ];
 ---
 
 <section class="pb-12 bg-background">
-  <div class=" px-4 md:px-6">
+  <div class="px-4 md:px-6">
     <div class="mb-12 flex items-end justify-between">
       <div>
-        <h2 class="text-3xl md:text-5xl font-light tracking-tight text-foreground mb-4">
+        <h2
+          class="text-3xl md:text-5xl font-light tracking-tight text-foreground mb-4"
+        >
           Our Gallery
         </h2>
         <p class="text-muted-foreground font-light text-lg">
@@ -24,23 +34,31 @@ const galleryItems = [
         </p>
       </div>
     </div>
-    
-    <div class="grid grid-cols-2 md:grid-cols-3 gap-4 auto-rows-[200px] md:auto-rows-[300px]">
-      {galleryItems.map((item, index) => (
-        <div class={`group relative overflow-hidden rounded-2xl bg-muted ${index === 0 ? 'md:col-span-2 md:row-span-2' : ''} ${index === 3 ? 'md:col-span-2' : ''}`}>
-          <Image 
-            src={item.image} 
-            alt={item.title} 
-            width={800}
-            height={600}
-            loading="lazy"
-            class="h-full w-full object-cover transition-transform duration-500 group-hover:scale-110"
-          />
-          <div class="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col justify-end p-6">
-            <h3 class="text-white font-medium tracking-tight text-lg md:text-xl translate-y-4 group-hover:translate-y-0 transition-transform duration-300">{item.title}</h3>
+
+    <div
+      class="grid grid-cols-2 md:grid-cols-3 gap-4 auto-rows-[200px] md:auto-rows-[300px]"
+    >
+      {
+        galleryItems.map((item, index) => (
+          <div
+            class={`group relative overflow-hidden rounded-2xl bg-muted ${index === 0 ? "md:col-span-2 md:row-span-2" : ""} ${index === 3 ? "md:col-span-2" : ""}`}
+          >
+            <Image
+              src={item.image}
+              alt={item.title}
+              width={800}
+              height={600}
+              loading="lazy"
+              class="h-full w-full object-cover transition-transform duration-500 group-hover:scale-110"
+            />
+            <div class="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col justify-end p-6">
+              <h3 class="text-white font-medium tracking-tight text-lg md:text-xl translate-y-4 group-hover:translate-y-0 transition-transform duration-300">
+                {item.title}
+              </h3>
+            </div>
           </div>
-        </div>
-      ))}
+        ))
+      }
     </div>
   </div>
 </section>

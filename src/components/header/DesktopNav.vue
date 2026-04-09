@@ -1,15 +1,20 @@
 <script setup lang="ts">
-import config from '../../data/config.json';
-import MegaMenu from './MegaMenu.vue';
-import {defineEmits, defineProps} from 'vue';
-import {aboutFeatured, aboutItems, coursesFeatured, coursesItems,} from '../../data/navigation';
+import config from "../../data/config.json";
+import MegaMenu from "./MegaMenu.vue";
+import { defineEmits, defineProps } from "vue";
+import {
+  aboutFeatured,
+  aboutItems,
+  coursesFeatured,
+  coursesItems,
+} from "../../data/navigation";
 
 defineProps<{
   menu: number | string | boolean;
   headerSmall: boolean;
 }>();
 
-const emit = defineEmits(['openMenu', 'closeMenu']);
+const emit = defineEmits(["openMenu", "closeMenu"]);
 </script>
 
 <template>

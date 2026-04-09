@@ -1,36 +1,54 @@
 ---
-import { Facebook, Twitter, Instagram, MapPin, Phone, Mail } from 'lucide-react';
-import { Picture } from 'astro:assets';
+import {
+  Facebook,
+  Twitter,
+  Instagram,
+  MapPin,
+  Phone,
+  Mail,
+} from "lucide-react";
+import { Picture } from "astro:assets";
 ---
 
 <footer class="bg-background pt-20 pb-10 border-t border-border">
-  <div class=" px-4 md:px-6">
+  <div class="px-4 md:px-6">
     <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12 mb-16">
-      
       {/* Brand & About */}
       <div class="flex flex-col gap-6 lg:col-span-1">
         <a href="/" class="flex items-center gap-2">
-          <Picture 
-            src="/logo.webp" 
-            formats={['avif', 'webp']}
-            alt="Takshashila Logo" 
-            class="h-10 object-contain w-auto" 
+          <Picture
+            src="/logo.webp"
+            formats={["avif", "webp"]}
+            alt="Takshashila Logo"
+            class="h-10 object-contain w-auto"
             width={160}
             height={40}
           />
           <span class="font-semibold tracking-tight text-xl">Takshashila</span>
         </a>
         <p class="text-muted-foreground font-light text-sm leading-relaxed">
-          Takshashila School of Civil Services is a dedicated institute to educate, train and guide young aspirants for Civil Services in India. It is equipped with quality faculties and facilities in Assam with a national outlook and standards.
+          Takshashila School of Civil Services is a dedicated institute to
+          educate, train and guide young aspirants for Civil Services in India.
+          It is equipped with quality faculties and facilities in Assam with a
+          national outlook and standards.
         </p>
         <div class="flex gap-4">
-          <a href="#" class="h-10 w-10 flex items-center justify-center rounded-full bg-muted text-muted-foreground hover:bg-primary hover:text-primary-foreground transition-colors">
+          <a
+            href="#"
+            class="h-10 w-10 flex items-center justify-center rounded-full bg-muted text-muted-foreground hover:bg-primary hover:text-primary-foreground transition-colors"
+          >
             <Facebook className="w-5 h-5" />
           </a>
-          <a href="#" class="h-10 w-10 flex items-center justify-center rounded-full bg-muted text-muted-foreground hover:bg-primary hover:text-primary-foreground transition-colors">
+          <a
+            href="#"
+            class="h-10 w-10 flex items-center justify-center rounded-full bg-muted text-muted-foreground hover:bg-primary hover:text-primary-foreground transition-colors"
+          >
             <Twitter className="w-5 h-5" />
           </a>
-          <a href="#" class="h-10 w-10 flex items-center justify-center rounded-full bg-muted text-muted-foreground hover:bg-primary hover:text-primary-foreground transition-colors">
+          <a
+            href="#"
+            class="h-10 w-10 flex items-center justify-center rounded-full bg-muted text-muted-foreground hover:bg-primary hover:text-primary-foreground transition-colors"
+          >
             <Instagram className="w-5 h-5" />
           </a>
         </div>
@@ -40,11 +58,27 @@ import { Picture } from 'astro:assets';
       <div>
         <h4 class="font-medium tracking-tight text-lg mb-6">Quick Links</h4>
         <ul class="space-y-3">
-          {['Home', 'Team', 'About us', 'Current Affairs', 'UPSC- APSC'].map(link => (
-            <li>
-              <a href="#" class="text-muted-foreground hover:text-primary text-sm transition-colors">{link}</a>
-            </li>
-          ))}
+          {
+            [
+              { label: "Home", href: "/" },
+              { label: "Team", href: "/team" },
+              { label: "About us", href: "/about" },
+              {
+                label: "Current Affairs",
+                href: "https://currentaffairs.takshashilascs.com",
+              },
+              { label: "UPSC- APSC", href: "/courses" },
+            ].map((link) => (
+              <li>
+                <a
+                  href={link.href}
+                  class="text-muted-foreground hover:text-primary text-sm transition-colors"
+                >
+                  {link.label}
+                </a>
+              </li>
+            ))
+          }
         </ul>
       </div>
 
@@ -52,11 +86,23 @@ import { Picture } from 'astro:assets';
       <div>
         <h4 class="font-medium tracking-tight text-lg mb-6">Legal</h4>
         <ul class="space-y-3">
-          {['Privacy Policy', 'Payment Terms', 'Refund & Cancellation', 'Disclaimer'].map(link => (
-            <li>
-              <a href="#" class="text-muted-foreground hover:text-primary text-sm transition-colors">{link}</a>
-            </li>
-          ))}
+          {
+            [
+              "Privacy Policy",
+              "Payment Terms",
+              "Refund & Cancellation",
+              "Disclaimer",
+            ].map((link) => (
+              <li>
+                <a
+                  href="#"
+                  class="text-muted-foreground hover:text-primary text-sm transition-colors"
+                >
+                  {link}
+                </a>
+              </li>
+            ))
+          }
         </ul>
       </div>
 
@@ -67,35 +113,56 @@ import { Picture } from 'astro:assets';
           <li class="flex items-start gap-3">
             <Phone className="w-5 h-5 text-primary shrink-0 mt-0.5" />
             <div>
-              <span class="block text-sm font-medium text-foreground">Phone:</span>
-              <a href="tel:+916001657575" class="text-muted-foreground hover:text-primary text-sm transition-colors">+91 60016-57575</a>
+              <span class="block text-sm font-medium text-foreground"
+                >Phone:</span
+              >
+              <a
+                href="tel:+916001657575"
+                class="text-muted-foreground hover:text-primary text-sm transition-colors"
+                >+91 60016-57575</a
+              >
             </div>
           </li>
           <li class="flex items-start gap-3">
             <MapPin className="w-5 h-5 text-primary shrink-0 mt-0.5" />
             <div>
-              <span class="block text-sm font-medium text-foreground">Address:</span>
-              <span class="text-muted-foreground text-sm">6th Floor, Unique Avenue Building, near Super Market, Guwahati, Assam 781006</span>
+              <span class="block text-sm font-medium text-foreground"
+                >Address:</span
+              >
+              <span class="text-muted-foreground text-sm"
+                >6th Floor, Unique Avenue Building, near Super Market, Guwahati,
+                Assam 781006</span
+              >
             </div>
           </li>
           <li class="flex items-start gap-3">
             <Mail className="w-5 h-5 text-primary shrink-0 mt-0.5" />
             <div>
-              <span class="block text-sm font-medium text-foreground">Email address:</span>
-              <a href="mailto:info@takshashilascs.com" class="text-muted-foreground hover:text-primary text-sm transition-colors">info@takshashilascs.com</a>
+              <span class="block text-sm font-medium text-foreground"
+                >Email address:</span
+              >
+              <a
+                href="mailto:info@takshashilascs.com"
+                class="text-muted-foreground hover:text-primary text-sm transition-colors"
+                >info@takshashilascs.com</a
+              >
             </div>
           </li>
         </ul>
       </div>
     </div>
 
-    <div class="flex flex-col md:flex-row items-center justify-between border-t border-border pt-8 mt-8">
+    <div
+      class="flex flex-col md:flex-row items-center justify-between border-t border-border pt-8 mt-8"
+    >
       <p class="text-sm font-light text-muted-foreground mb-4 md:mb-0">
         Copyright © {new Date().getFullYear()} - Takshashila School of Civil Services
       </p>
-      
+
       {/* Floating Chat CTA (placeholder representation inline) */}
-      <button class="inline-flex items-center justify-center rounded-full bg-foreground px-6 py-2.5 text-sm font-medium text-background hover:bg-foreground/90 transition-all shadow-lg hover:scale-105">
+      <button
+        class="inline-flex items-center justify-center rounded-full bg-foreground px-6 py-2.5 text-sm font-medium text-background hover:bg-foreground/90 transition-all shadow-lg hover:scale-105"
+      >
         Open chat
       </button>
     </div>

@@ -1,7 +1,7 @@
 <script setup lang="ts">
-import {computed, ref} from "vue";
-import type {Course} from "@/content.config.ts";
-import {toINR} from "@/lib/utils.ts";
+import { computed, ref } from "vue";
+import type { Course } from "@/content.config.ts";
+import { toINR } from "@/lib/utils.ts";
 
 const props = defineProps<{
   courses: Course[];
@@ -14,11 +14,13 @@ const filteredCourses = computed(() => {
   if (activeTab.value.toLowerCase() === "all") {
     return props.courses;
   }
-  return props.courses.filter((course) =>{
-    return course.categories.map((category) => {
-      return category.toLowerCase().split(" ")?.[0];
-    }).includes(activeTab.value.toLowerCase())},
-  );
+  return props.courses.filter((course) => {
+    return course.categories
+      .map((category) => {
+        return category.toLowerCase().split(" ")?.[0];
+      })
+      .includes(activeTab.value.toLowerCase());
+  });
 });
 </script>
 

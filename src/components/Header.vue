@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import {onMounted, onUnmounted, ref} from "vue";
+import { onMounted, onUnmounted, ref } from "vue";
 import TopBar from "./header/TopBar.vue";
 import DesktopNav from "./header/DesktopNav.vue";
 import HeaderActions from "./header/HeaderActions.vue";
@@ -83,7 +83,7 @@ const scrollToTop = () => {
     >
       <TopBar />
       <header
-        class="flex flex-nowrap items-center justify-between relative z-30  rounded-3xl transition-borderRadius lg:rounded-none js-header mx-auto bg-background/80 backdrop-blur-md"
+        class="flex flex-nowrap items-center justify-between relative z-30 rounded-3xl transition-borderRadius lg:rounded-none js-header mx-auto bg-background/80 backdrop-blur-md"
         :class="{
           'rounded-3xl': menu !== 'mobileMenu',
           'rounded-2xl': menu === 'mobileMenu',
@@ -133,10 +133,7 @@ const scrollToTop = () => {
         />
       </header>
       <header>
-        <MobileMenu
-            :menu="menu"
-            @close-menu="closeMenu"
-        />
+        <MobileMenu :menu="menu" @close-menu="closeMenu" />
       </header>
     </div>
   </div>

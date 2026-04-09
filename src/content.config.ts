@@ -1,6 +1,6 @@
-import {defineCollection} from 'astro:content';
-import {glob} from 'astro/loaders';
-import {z} from "astro/zod"
+import { defineCollection } from "astro:content";
+import { glob } from "astro/loaders";
+import { z } from "astro/zod";
 
 const priceSchema = z.object({
   original: z.number(),
@@ -11,10 +11,12 @@ const courseItemSchema = z.object({
   id: z.string(),
   title: z.string(),
   description: z.string(),
-  prices: z.object({
-    online: priceSchema.optional(),
-    offline: priceSchema.optional(),
-  }).optional(),
+  prices: z
+    .object({
+      online: priceSchema.optional(),
+      offline: priceSchema.optional(),
+    })
+    .optional(),
   popular: z.boolean(),
   categories: z.array(z.string()),
   image: z.string(),
