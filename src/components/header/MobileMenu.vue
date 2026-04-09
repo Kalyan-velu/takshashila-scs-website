@@ -77,7 +77,7 @@ const toggleAccordion = (item: string) => {
           </li>
           
           <li class="relative w-full border-b border-border/40 pb-4">
-            <a href="#contact" @click="emit('closeMenu')" class="block w-full link text-4xl tracking-tight leading-none transition-none dark:text-white">Contact</a>
+            <a href="/contact" @click="emit('closeMenu')" class="block w-full link text-4xl tracking-tight leading-none transition-none dark:text-white">Contact</a>
           </li>
         </ul>
       </div>

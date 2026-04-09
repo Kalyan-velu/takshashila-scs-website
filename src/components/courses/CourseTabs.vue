@@ -1,21 +1,23 @@
 <script setup lang="ts">
-import { computed, ref } from "vue";
-import type { Course } from "@/content.config.ts";
-import { toINR } from "@/lib/utils.ts";
+import {computed, ref} from "vue";
+import type {Course} from "@/content.config.ts";
+import {toINR} from "@/lib/utils.ts";
 
 const props = defineProps<{
   courses: Course[];
   categories: (string & {})[];
 }>();
 
-const activeTab = ref("All");
+const activeTab = ref("ALL");
 
 const filteredCourses = computed(() => {
-  if (activeTab.value === "All") {
+  if (activeTab.value.toLowerCase() === "all") {
     return props.courses;
   }
-  return props.courses.filter((course) =>
-    course.categories.includes(activeTab.value),
+  return props.courses.filter((course) =>{
+    return course.categories.map((category) => {
+      return category.toLowerCase().split(" ")?.[0];
+    }).includes(activeTab.value.toLowerCase())},
   );
 });
 </script>

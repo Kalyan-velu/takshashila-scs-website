@@ -100,7 +100,7 @@ const emit = defineEmits(['openMenu', 'closeMenu']);
 
       <li class="relative">
         <a
-          href="/#contact"
+          href="/contact"
           class="link font-light leading-tight transition-none dark:text-white"
           :class="{
             'text-foreground/80': headerSmall,
