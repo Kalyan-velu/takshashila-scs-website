@@ -1,7 +1,7 @@
 import { createClient } from "@supabase/supabase-js";
+import variables from "@/config/variables.ts";
 
 export const supabase = createClient(
-  import.meta.env.SUPABASE_URL || import.meta.env.PUBLIC_SUPABASE_URL,
-  import.meta.env.SUPABASE_SECRET_KEY ||
-    import.meta.env.PUBLIC_SUPABASE_SECRET_KEY,
+  variables.SUPABASE_URL,
+  variables.SUPABASE_KEY,
 );
