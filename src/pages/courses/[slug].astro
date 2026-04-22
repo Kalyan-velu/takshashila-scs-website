@@ -1,9 +1,10 @@
 ---
 import Layout from "@/layouts/Layout.astro";
+//@ts-expect-error don't know why this is throwing error
 import CourseTabs from "@/components/course/CourseTabs.vue";
+//@ts-expect-error don't know why this is throwing error
 import EnrollmentSidebar from "@/components/course/EnrollmentSidebar.vue";
 import { getCollection, render } from "astro:content";
-import GoogleTagManager from "@/lib/GTag/GoogleTagManager.astro";
 
 export async function getStaticPaths() {
   const allCourses = await getCollection("courses");

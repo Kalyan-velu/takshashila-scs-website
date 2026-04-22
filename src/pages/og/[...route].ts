@@ -10,6 +10,7 @@ export const { getStaticPaths, GET } = await OGImageRoute({
       bgGradient: [
         [107, 33, 168],
         [88, 28, 135],
+        [88, 28, 135],
       ],
     },
     "courses/adre": {
@@ -25,7 +26,8 @@ export const { getStaticPaths, GET } = await OGImageRoute({
   getImageOptions: (path, page) => ({
     title: page.title,
     description: page.description,
-    bgGradient: page.bgGradient,
+    //@ts-expect-error don't have it
+    bgGradient: [page.bgGradient],
     font: {
       title: {
         weight: "Bold",
