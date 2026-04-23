@@ -1,13 +1,12 @@
 <script setup lang="ts">
 import config from "../../data/config.json";
 import MegaMenu from "./MegaMenu.vue";
-import { defineEmits, defineProps } from "vue";
 import {
   aboutFeatured,
   aboutItems,
   coursesFeatured,
   coursesItems,
-} from "../../data/navigation";
+} from "@/data/navigation.ts";
 
 defineProps<{
   menu: number | string | boolean;

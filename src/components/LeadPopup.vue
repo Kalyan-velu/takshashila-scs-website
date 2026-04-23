@@ -1,25 +1,67 @@
 <script setup lang="ts">
-import { onMounted, ref } from "vue";
+import { computed, onBeforeUnmount, onMounted, ref } from "vue";
 import { supabase } from "@/lib/db/supabase.ts";
+import variables from "@/config/variables.ts";
 
+const cloudflare_site_key = variables.CLOUDFLARE_SITE_KEY;
+
+const form = ref({ name: "", phone: "", email: "" });
 const isVisible = ref(true);
 const isSubmitting = ref(false);
+const isCaptchaVerified = ref(false);
+const turnstileContainer = ref<HTMLElement | null>(null);
+let widgetId: string | null = null;
 
-const form = ref({
-  name: "",
-  phone: "",
-  email: "",
-});
+const isSubmitEnabled = computed(
+  () =>
+    form.value.name.trim() !== "" &&
+    form.value.email.trim() !== "" &&
+    form.value.phone.trim() !== "" &&
+    isCaptchaVerified.value &&
+    !isSubmitting.value,
+);
 
 onMounted(() => {
-  const hasSeenPopup = sessionStorage.getItem("leadPopupShown");
-  if (!hasSeenPopup) {
-    // Show after a short delay
-    setTimeout(() => {
-      isVisible.value = true;
-      sessionStorage.setItem("leadPopupShown", "true");
-    }, 1000);
+  if (!turnstileContainer.value) return;
+
+  const renderWidget = () => {
+    widgetId = window.turnstile.render(turnstileContainer.value!, {
+      sitekey: cloudflare_site_key,
+      callback: () => {
+        isCaptchaVerified.value = true;
+      },
+      "expired-callback": () => {
+        isCaptchaVerified.value = false;
+      },
+      "error-callback": () => {
+        isCaptchaVerified.value = false;
+      },
+    });
+  };
+
+  if (window.turnstile) {
+    // Already loaded (e.g. hot reload / navigating back)
+    renderWidget();
+    return;
   }
+
+  // Inject the script fresh, with onload callback
+  const existing = document.querySelector('script[src*="turnstile"]');
+  if (existing) {
+    // Script tag exists but hasn't finished — wait for it
+    existing.addEventListener("load", renderWidget);
+    return;
+  }
+
+  const script = document.createElement("script");
+  script.src = "https://challenges.cloudflare.com/turnstile/v0/api.js";
+  script.async = true;
+  script.defer = true;
+  script.onload = renderWidget;
+  document.head.appendChild(script);
+});
+onBeforeUnmount(() => {
+  if (widgetId) window.turnstile.remove(widgetId);
 });
 
 const closePopup = () => {
@@ -36,11 +78,13 @@ const submitForm = async () => {
       address: null,
       source: "lead-popup",
     });
-
     closePopup();
   } catch (error) {
     console.error("Error submitting form:", error);
     alert("Failed to submit. Please try again later.");
+    // Reset captcha on failure so user can retry
+    if (widgetId) window.turnstile.reset(widgetId);
+    isCaptchaVerified.value = false;
   } finally {
     isSubmitting.value = false;
   }
@@ -145,11 +189,13 @@ const submitForm = async () => {
               placeholder="+91 98765 43210"
             />
           </div>
+          <!-- Turnstile widget -->
+          <div ref="turnstileContainer" />
 
           <button
             type="submit"
-            :disabled="isSubmitting"
-            class="w-full bg-primary text-primary-foreground hover:opacity-90 font-medium py-3 px-4 rounded-lg transition-all disabled:opacity-50 mt-4 flex justify-center items-center cursor-pointer"
+            :disabled="!isSubmitEnabled"
+            class="w-full bg-primary disabled:bg-primary/90 text-primary-foreground hover:opacity-90 font-medium py-3 px-4 rounded-lg transition-all disabled:opacity-50 mt-4 flex justify-center items-center cursor-pointer"
           >
             <span v-if="isSubmitting" class="flex items-center gap-2">
               <svg

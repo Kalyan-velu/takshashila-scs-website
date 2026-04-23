@@ -1,7 +1,8 @@
 ---
 import Layout from "../layouts/Layout.astro";
 import { Phone, Mail, MapPin, Send } from "lucide-react";
-
+import variables from "@/config/variables.ts";
+const cloudflare_site_key = variables.CLOUDFLARE_SITE_KEY;
 const title = "Contact Us | Takshashila School of Civil Services";
 const description =
   "At Takshashila School of Civil     Services, the best coaching institute for UPSC and APSC in Guwahati, we value open communication and are committed to supporting you every step of the way.";
@@ -320,9 +321,18 @@ const description =
                     placeholder="Your full address"></textarea>
                 </div>
 
+                <!-- Turnstile widget -->
+                <div
+                  class="cf-turnstile"
+                  data-sitekey={cloudflare_site_key}
+                  data-callback="enableSubmit"
+                >
+                </div>
                 <button
+                  id="submit-button"
                   type="submit"
-                  class="w-full relative overflow-hidden bg-primary text-primary-foreground font-medium py-5 px-8 rounded-2xl transition-all duration-300 flex items-center justify-center gap-2 group shadow-[0_5px_40px_-10px_rgba(var(--primary),0.6)] hover:shadow-[0_5px_40px_-5px_rgba(var(--primary),0.8)] cursor-pointer"
+                  disabled
+                  class="w-full relative overflow-hidden bg-primary disabled:bg-primary/80 text-primary-foreground font-medium py-5 px-8 rounded-2xl transition-all duration-300 flex items-center justify-center gap-2 group shadow-[0_5px_40px_-10px_rgba(var(--primary),0.6)] hover:shadow-[0_5px_40px_-5px_rgba(var(--primary),0.8)] cursor-pointer"
                 >
                   <span
                     class="absolute inset-0 bg-white/20 translate-y-full group-hover:translate-y-0 transition-transform duration-300 ease-out"
@@ -348,7 +358,7 @@ const description =
   const form = document.getElementById(
     "contact-form",
   ) as HTMLFormElement | null;
-  console.log("Form:", form);
+
   if (form) {
     form.addEventListener("submit", async (e) => {
       e.preventDefault();
@@ -403,4 +413,15 @@ const description =
       }
     });
   }
+
+  //@ts-expect-error sa
+  window.enableSubmit = function () {
+    console.log("Enable Submit");
+    const submit = document.getElementById(
+      "submit-button",
+    ) as HTMLButtonElement | null;
+    if (submit) {
+      submit.disabled = false;
+    }
+  };
 </script>
