@@ -36,7 +36,7 @@
     </div>
     <div class="flex items-center space-x-4">
       <a
-        href="#"
+        href="https://www.facebook.com/takshashilascs"
         class="hover:text-primary transition-colors"
         target="_blank"
         aria-label="Facebook"
@@ -50,10 +50,10 @@
           /></svg
       ></a>
       <a
-        href="#"
+        href="https://twitter.com/takshashilascs"
         class="hover:text-primary transition-colors"
         target="_blank"
-        aria-label="Twitter"
+        aria-label="Twitter/X"
         ><svg
           class="w-3.5 h-3.5 fill-current"
           viewBox="0 0 512 512"
@@ -64,7 +64,7 @@
           /></svg
       ></a>
       <a
-        href="#"
+        href="https://www.instagram.com/takshashilascs/"
         class="hover:text-primary transition-colors"
         target="_blank"
         aria-label="Instagram"

@@ -1,6 +1,5 @@
 <script setup lang="ts">
 import config from "@/data/config.json";
-import { defineEmits, defineProps } from "vue";
 
 defineProps<{
   darkMode: boolean;
