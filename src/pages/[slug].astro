@@ -7,21 +7,21 @@ export async function getStaticPaths() {
   let allPosts: WPPost[] = [];
   let page = 1;
 
-  while (true) {
-    try {
-      const posts = await getLatestPosts(page, 100, {
-        _fields: "slug,title,content,date,excerpt,yoast_head_json",
-      });
+  // while (true) {
+  try {
+    console.log("Fetching WP posts");
+    const posts = await getLatestPosts(page, 100, {
+      _fields: "slug,title,content,date,excerpt,yoast_head_json",
+    });
 
-      if (!posts || posts.length === 0) break;
+    if (!posts || posts.length === 0) return;
 
-      allPosts = [...allPosts, ...posts];
-      page++;
-    } catch (error) {
-      console.error("Error fetching WP posts:", error);
-      break;
-    }
+    allPosts = [...allPosts, ...posts];
+  } catch (error) {
+    console.error("Error fetching WP posts:", error);
+    // break;
   }
+  // }
 
   return allPosts.map((post) => ({
     params: { slug: (post as { slug: string }).slug },

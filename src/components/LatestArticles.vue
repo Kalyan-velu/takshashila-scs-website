@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import { computed, onMounted, ref } from "vue";
-import { getLatestPosts, type WPPost } from "../lib/wordpress";
+import { getLatestPosts } from "../lib/wordpress";
+import type { WPPost } from "@/types";
 
 const posts = ref<WPPost[]>([]);
 const isLoading = ref(true);
@@ -144,7 +145,7 @@ onMounted(async () => {
               </span>
             </div>
             <h3
-              class="text-xl font-medium tracking-tight mb-3 line-clamp-2 group-hover:text-primary transition-colors h-[3.5rem]"
+              class="text-xl font-medium tracking-tight mb-3 line-clamp-2 group-hover:text-primary transition-colors h-14"
               v-html="post.title.rendered"
             ></h3>
             <p

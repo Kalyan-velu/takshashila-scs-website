@@ -1,4 +1,5 @@
 interface ImportMetaEnv {
+  readonly CRM_URL: string;
   readonly SUPABASE_URL: string;
   readonly SUPABASE_KEY: string;
   readonly SUPABASE_SECRET_KEY: string;
@@ -8,6 +9,7 @@ interface ImportMetaEnv {
   readonly PUBLIC_SUPABASE_URL: string;
   readonly PUBLIC_SUPABASE_KEY: string;
   readonly PUBLIC_CLOUDFLARE_SITE_KEY: string;
+  readonly PUBLIC_CRM_URL: string;
 }
 
 interface ImportMeta {

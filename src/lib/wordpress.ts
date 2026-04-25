@@ -1,7 +1,8 @@
-import type { WPPost } from "@/types";
+import type { WPMedia, WPPage, WPPost } from "@/types";
+import variables from "@/config/variables.ts";
 
 const isServer = typeof window === "undefined";
-const base = import.meta.env.PUBLIC_WORDPRESS_URL ?? "";
+const base = variables.CRM_URL;
 
 function wpUrl(path: string): string {
   // Normalize slashes
@@ -24,8 +25,6 @@ async function wpFetch<T>(
   }
   return res.json() as Promise<T>;
 }
-
-// ---- API methods ----
 
 /** Fetch paginated posts. Uses _embed to get featured images in one request. */
 export async function getLatestPosts(
