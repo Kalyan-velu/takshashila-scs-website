@@ -1,3 +1,5 @@
+import type { WPPost } from "@/types";
+
 const isServer = typeof window === "undefined";
 const base = import.meta.env.PUBLIC_WORDPRESS_URL ?? "";
 
@@ -5,51 +7,6 @@ function wpUrl(path: string): string {
   // Normalize slashes
   return `${base.replace(/\/$/, "")}/${path.replace(/^\//, "")}`;
 }
-
-// ---- Types ----
-
-export interface WPPost {
-  id: number;
-  slug: string;
-  status: string;
-  title: { rendered: string };
-  content: { rendered: string };
-  excerpt: { rendered: string };
-  date: string;
-  modified: string;
-  featured_media: number;
-  _embedded?: {
-    "wp:featuredmedia"?: Array<{
-      source_url: string;
-      alt_text: string;
-      media_details: { width: number; height: number };
-    }>;
-    author?: Array<{ name: string; avatar_urls: Record<string, string> }>;
-  };
-}
-
-export interface WPPage {
-  id: number;
-  slug: string;
-  title: { rendered: string };
-  content: { rendered: string };
-}
-
-export interface WPMedia {
-  id: number;
-  source_url: string;
-  alt_text: string;
-  media_details: {
-    width: number;
-    height: number;
-    sizes: Record<
-      string,
-      { source_url: string; width: number; height: number }
-    >;
-  };
-}
-
-// ---- Fetch helpers ----
 
 async function wpFetch<T>(
   endpoint: string,
