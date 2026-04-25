@@ -3,7 +3,7 @@ export const isServer = typeof window === "undefined";
 export default ((isServer: boolean | undefined = false) => {
   if (!isServer) {
     return {
-      CRM_URL: import.meta.env.CRM_URL || "",
+      CRM_URL: import.meta.env.PUBLIC_CRM_URL || "",
       GTM_CONTAINER: import.meta.env.PUBLIC_GTM_CONTAINER || "",
       SUPABASE_URL: import.meta.env.PUBLIC_SUPABASE_URL || "",
       SUPABASE_KEY: import.meta.env.PUBLIC_SUPABASE_KEY || "",
@@ -12,7 +12,7 @@ export default ((isServer: boolean | undefined = false) => {
     };
   }
   return {
-    CRM_URL: import.meta.env.PUBLIC_CRM_URL || "",
+    CRM_URL: import.meta.env.CRM_URL || "",
     SUPABASE_URL: import.meta.env.SUPABASE_URL || "",
     SUPABASE_KEY: import.meta.env.SUPABASE_SECRET_KEY || "",
     CLOUDFLARE_SITE_KEY: import.meta.env.CLOUDFLARE_SITE_KEY || "",

@@ -2,6 +2,7 @@
 import Layout from "@/layouts/Layout.astro";
 import type { WPPost } from "@/types";
 import { getLatestPosts, rewriteMediaUrls } from "@/lib/wordpress";
+import { isServer } from "@/config/variables.ts";
 
 export async function getStaticPaths() {
   let allPosts: WPPost[] = [];
@@ -9,7 +10,7 @@ export async function getStaticPaths() {
 
   // while (true) {
   try {
-    console.log("Fetching WP posts");
+    console.log("Fetching WP posts", "in", isServer ? "server" : "client");
     const posts = await getLatestPosts(page, 100, {
       _fields: "slug,title,content,date,excerpt,yoast_head_json",
     });
