@@ -104,10 +104,41 @@ export interface WPYoastHeadJson {
 }
 
 export interface WPPost {
+  id: string;
+  link: string;
   date: string; // "2025-12-03T11:36:46"
   slug: string;
   title: WPRendered;
   content: WPRendered;
   excerpt: WPRendered;
   yoast_head_json: WPYoastHeadJson;
+  _embedded?: {
+    "wp:featuredmedia"?: Array<{
+      source_url: string;
+      alt_text: string;
+      media_details: { width: number; height: number };
+    }>;
+    author?: Array<{ name: string; avatar_urls: Record<string, string> }>;
+  };
+}
+
+export interface WPPage {
+  id: number;
+  slug: string;
+  title: { rendered: string };
+  content: { rendered: string };
+}
+
+export interface WPMedia {
+  id: number;
+  source_url: string;
+  alt_text: string;
+  media_details: {
+    width: number;
+    height: number;
+    sizes: Record<
+      string,
+      { source_url: string; width: number; height: number }
+    >;
+  };
 }
