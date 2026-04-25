@@ -1,8 +1,7 @@
 import type { WPMedia, WPPage, WPPost } from "@/types";
 
 const isServer = typeof window === "undefined";
-const base =
-  import.meta.env.PUBLIC_WORDPRESS_URL ?? "https://crm.takshashilascs.com";
+const base = isServer ? "" : import.meta.env.PUBLIC_WORDPRESS_URL;
 
 function wpUrl(path: string): string {
   // Normalize slashes
