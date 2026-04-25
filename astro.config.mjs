@@ -27,6 +27,7 @@ export default defineConfig({
     remotePatterns: [
       { protocol: "https", hostname: "images.unsplash.com" },
       { protocol: "https", hostname: "takshashilascs.com" },
+      { protocol: "https", hostname: "takshashilascs.com" },
     ],
   },
   adapter: vercel(),
@@ -35,11 +36,11 @@ export default defineConfig({
     server: {
       proxy: {
         "/storage": {
-          target: "https://takshashilascs.com",
+          target: "https://crm.takshashilascs.com",
           changeOrigin: true,
         },
         "/wp-json": {
-          target: "https://takshashilascs.com",
+          target: "https://crm.takshashilascs.com",
           changeOrigin: true,
         },
       },
