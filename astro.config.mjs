@@ -10,12 +10,14 @@ import partytown from "@astrojs/partytown";
 import robotsTxt from "astro-robots-txt";
 // https://astro.build/config
 export default defineConfig({
-  site: "https://takshashilascs.com",
+  site: "https://www.takshashilascs.com",
   trailingSlash: "ignore",
   integrations: [
     react(),
     vue(),
-    sitemap(),
+    sitemap({
+      xslURL: "/sitemap.xsl",
+    }),
     partytown({
       config: {
         forward: ["dataLayer.push"],
