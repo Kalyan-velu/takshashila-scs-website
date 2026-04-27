@@ -2,12 +2,10 @@
 import Layout from "../layouts/Layout.astro";
 import Header from "../components/Header.astro";
 import Hero from "../components/Hero.astro";
-import Features from "../components/Features.astro";
 import WhyChooseUs from "../components/WhyChooseUs.astro";
 import Courses from "../components/courses/CoursesWrapper.astro";
 import Gallery from "../components/Gallery.astro";
 import LatestArticles from "../components/LatestArticles.vue";
-import Footer from "../components/Footer.astro";
 import { supabase } from "@/lib/db/supabase.ts";
 
 const { data, error } = await supabase.from("todos").select("*");
@@ -19,7 +17,7 @@ const { data, error } = await supabase.from("todos").select("*");
   <Courses id="courses" />
   <LatestArticles client:only="vue" />
   <Gallery />
-
+  `
   {
     data && data.length > 0 && (
       <ul class="px-4 md:px-6 py-8">
