@@ -21,7 +21,15 @@ const isSubmitEnabled = computed(
     !isSubmitting.value,
 );
 
+function handleClose(e: KeyboardEvent) {
+  if (e.key === "Escape") {
+    e.preventDefault();
+    closePopup();
+  }
+}
+
 onMounted(() => {
+  window.addEventListener("keydown", handleClose);
   if (!turnstileContainer.value) return;
 
   const renderWidget = () => {
@@ -62,6 +70,7 @@ onMounted(() => {
 });
 onBeforeUnmount(() => {
   if (widgetId) window.turnstile.remove(widgetId);
+  window.removeEventListener("keydown", handleClose);
 });
 
 const closePopup = () => {
