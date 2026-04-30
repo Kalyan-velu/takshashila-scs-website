@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import { ref } from "vue";
 import { aboutItems, coursesItems } from "@/data/navigation.ts";
+import { EMAIL, MOBILE_NO } from "@/config/CONSTANTS.ts";
 
 defineProps<{
   menu: number | string | boolean;
@@ -168,7 +169,7 @@ const toggleAccordion = (item: string) => {
       <div class="w-full mt-8 pt-2">
         <div class="flex flex-col space-y-4 mb-6">
           <a
-            href="tel:+916001657575"
+            :href="`tel:${MOBILE_NO}`"
             class="flex items-center gap-3 text-foreground/80 dark:text-gray-300"
           >
             <div
@@ -185,11 +186,11 @@ const toggleAccordion = (item: string) => {
               </svg>
             </div>
             <span class="text-sm font-light tracking-tight"
-              >+91 60016-57575</span
+              >+91 {{ MOBILE_NO }}</span
             >
           </a>
           <a
-            href="mailto:info@takshashilascs.com"
+            href="mailto:{{EMAIL}}"
             class="flex items-center gap-3 text-foreground/80 dark:text-gray-300"
           >
             <div
@@ -205,9 +206,7 @@ const toggleAccordion = (item: string) => {
                 />
               </svg>
             </div>
-            <span class="text-sm font-light tracking-tight"
-              >info@takshashilascs.com</span
-            >
+            <span class="text-sm font-light tracking-tight">{{ EMAIL }}</span>
           </a>
         </div>
         <div class="flex items-center space-x-4 mb-8 px-2">
@@ -249,7 +248,7 @@ const toggleAccordion = (item: string) => {
           ></a>
         </div>
         <a
-          href="#contact"
+          href="/contact"
           @click="emit('closeMenu')"
           class="inline-flex w-full items-center justify-center rounded-full bg-primary py-4 text-lg font-medium text-primary-foreground"
         >

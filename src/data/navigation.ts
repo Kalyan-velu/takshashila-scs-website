@@ -17,7 +17,7 @@ export const coursesItems = [
   {
     title: "Current Affairs",
     description: "Daily updates and monthly analysis",
-    url: "#",
+    url: "https://currentaffairs.takshashila.com/",
   },
 ];
 

@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import config from "@/data/config.json";
+import { MOBILE_NO } from "@/config/CONSTANTS.ts";
 
 defineProps<{
   darkMode: boolean;
@@ -99,7 +100,7 @@ const emit = defineEmits(["toggleDarkMode", "toggleMobileMenu"]);
 
     <div class="hidden lg:inline-flex">
       <a
-        href="#"
+        :href="`tel:${MOBILE_NO}`"
         class="inline-flex relative group outline-none focus:outline-none text-sm font-medium text-primary-foreground"
       >
         <div
