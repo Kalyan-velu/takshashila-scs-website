@@ -47,11 +47,13 @@ const content = rewriteMediaUrls(
 ---
 
 <Layout>
-  <!-- SEO Meta Tags from Yoast -->
   <Fragment slot="head">
     <title>{yoast?.title ?? post.title.rendered}</title>
     <meta name="description" content={yoast?.og_description} />
-    <link rel="canonical" href={`https://takshashilascs.com/${post.slug}/`} />
+    <link
+      rel="canonical"
+      href={`https://www.takshashilascs.com/${post.slug}/`}
+    />
 
     <!-- Open Graph -->
     <meta property="og:title" content={yoast?.og_title} />
@@ -59,7 +61,7 @@ const content = rewriteMediaUrls(
     <meta property="og:type" content="article" />
     <meta
       property="og:url"
-      content={`https://takshashilascs.com/${post.slug}/`}
+      content={`https://www.takshashilascs.com/${post.slug}/`}
     />
     {ogImage && <meta property="og:image" content={ogImage.url} />}
     {
