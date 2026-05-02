@@ -82,7 +82,6 @@ const content = rewriteMediaUrls(
     {ogImage && <meta name="twitter:image" content={ogImage.url} />}
   </Fragment>
 
-  <!-- Post Layout -->
   <article class="post">
     {
       ogImage && (
@@ -110,7 +109,8 @@ const content = rewriteMediaUrls(
 
   /* ─── Wrapper ─────────────────────────────────────────── */
   .post__content {
-    font-family: var(--font-sans, system-ui, -apple-system, sans-serif);
+    font-family:
+      var(--font-sans, system-ui, -apple-system, sans-serif), sans-serif;
     font-size: 1.125rem;
     line-height: 1.85;
     color: var(--color-foreground, #000);
@@ -132,7 +132,8 @@ const content = rewriteMediaUrls(
   .post__content h4,
   .post__content h5,
   .post__content h6 {
-    font-family: var(--font-sans, system-ui, -apple-system, sans-serif);
+    font-family:
+      var(--font-sans, system-ui, -apple-system, sans-serif), sans-serif;
     font-weight: 700;
     line-height: 1.3;
     color: var(--color-foreground, #000);
@@ -296,7 +297,8 @@ const content = rewriteMediaUrls(
     color: var(--color-primary-foreground, #fff);
     padding: 0.75rem 1rem;
     text-align: left;
-    font-family: var(--font-sans, system-ui, -apple-system, sans-serif);
+    font-family:
+      var(--font-sans, system-ui, -apple-system, sans-serif), sans-serif;
   }
 
   .post__content td {
@@ -330,7 +332,8 @@ const content = rewriteMediaUrls(
   }
 
   .post__header h1 {
-    font-family: var(--font-sans, system-ui, -apple-system, sans-serif);
+    font-family:
+      var(--font-sans, system-ui, -apple-system, sans-serif), sans-serif;
     font-size: 2.25rem;
     font-weight: 800;
     line-height: 1.2;

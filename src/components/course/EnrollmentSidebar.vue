@@ -1,5 +1,7 @@
 <script setup lang="ts">
 import { computed, onMounted, onUnmounted, ref } from "vue";
+import { supabase } from "@/lib/db/supabase.ts";
+import { coursesItems } from "@/data/navigation.ts";
 
 interface CoursePrice {
   original: number;
@@ -107,18 +109,28 @@ const displayPeriod = computed(() => {
 });
 
 const isSubmitting = ref(false);
-const form = ref({ name: "", phone: "" });
+const form = ref({ name: "", phone: "", email: "" });
 
 const submitForm = async () => {
   isSubmitting.value = true;
   try {
-    await fetch("https://example.com/lead", {
-      method: "POST",
-      body: JSON.stringify(form.value),
+    const { error } = await supabase.from("Leads").insert({
+      name: form.value.name,
+      phone: form.value.phone,
+      email: form.value.email,
+      source:
+        coursesItems[selectedCourseIndex.value].title
+          .toLowerCase()
+          .replace(/\s+/g, "-") +
+        "-" +
+        selectedMode.value.toLowerCase().replace(/\s+/g, "-"),
     });
-    alert("Enrollment requested! We will call you back.");
     form.value.name = "";
     form.value.phone = "";
+    form.value.email = "";
+    if (error) {
+      throw error;
+    }
   } catch (error) {
     console.error(error);
   } finally {
@@ -201,6 +213,7 @@ const submitForm = async () => {
             v-model="form.name"
             type="text"
             required
+            name="name"
             class="w-full px-4 py-3 border border-border rounded-lg bg-background text-foreground focus:outline-none focus:ring-2 focus:ring-primary/50"
             placeholder="Full Name"
           />
@@ -210,8 +223,18 @@ const submitForm = async () => {
             v-model="form.phone"
             type="tel"
             required
+            name="phone"
             class="w-full px-4 py-3 border border-border rounded-lg bg-background text-foreground focus:outline-none focus:ring-2 focus:ring-primary/50"
             placeholder="Phone Number"
+          />
+        </div>
+        <div>
+          <input
+            v-model="form.email"
+            type="email"
+            required
+            class="w-full px-4 py-3 border border-border rounded-lg bg-background text-foreground focus:outline-none focus:ring-2 focus:ring-primary/50"
+            placeholder="Enter email"
           />
         </div>
 

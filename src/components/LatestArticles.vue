@@ -83,35 +83,29 @@ onMounted(async () => {
           :key="n"
           class="flex flex-col items-start bg-card rounded-2xl border border-border overflow-hidden h-full"
         >
-          <!-- Image Skeleton -->
           <div class="w-full aspect-video bg-muted animate-pulse"></div>
 
           <div class="p-6 flex flex-col grow w-full">
-            <!-- Tag Skeleton -->
             <div class="flex items-center gap-2 mb-3">
               <div class="h-5 w-16 rounded-full bg-muted animate-pulse"></div>
             </div>
 
-            <!-- Title Skeleton -->
             <div class="space-y-2 mb-3 h-14">
               <div class="h-5 w-full rounded bg-muted animate-pulse"></div>
               <div class="h-5 w-3/4 rounded bg-muted animate-pulse"></div>
             </div>
 
-            <!-- Excerpt Skeleton -->
             <div class="space-y-2 mb-4 grow">
               <div class="h-4 w-full rounded bg-muted animate-pulse"></div>
               <div class="h-4 w-full rounded bg-muted animate-pulse"></div>
               <div class="h-4 w-2/3 rounded bg-muted animate-pulse"></div>
             </div>
 
-            <!-- Read More Skeleton -->
             <div class="mt-auto h-4 w-24 rounded bg-muted animate-pulse"></div>
           </div>
         </div>
       </div>
 
-      <!-- Empty State -->
       <div v-else-if="renderPosts.length === 0" class="text-center py-12">
         <p class="text-muted-foreground">
           No articles available at the moment.
@@ -123,7 +117,7 @@ onMounted(async () => {
         <a
           v-for="post in renderPosts"
           :key="post.id"
-          :href="post.link"
+          :href="`${post.link.replace('crm.', '')}`"
           class="group flex flex-col items-start bg-card rounded-2xl border border-border overflow-hidden hover:shadow-md transition-all hover:-translate-y-1 h-full"
         >
           <div class="w-full aspect-video overflow-hidden bg-muted">
