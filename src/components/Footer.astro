@@ -88,17 +88,17 @@ import { Picture } from "astro:assets";
         <ul class="space-y-3">
           {
             [
-              "Privacy Policy",
-              "Payment Terms",
-              "Refund & Cancellation",
-              "Disclaimer",
+              { label: "Privacy Policy", href: "/privacy-policy" },
+              { label: "Payment Terms", href: "/payment-terms" },
+              { label: "Refund & Cancellation", href: "/refunds-policy" },
+              { label: "Disclaimer", href: "/disclaimer" },
             ].map((link) => (
               <li>
                 <a
-                  href="#"
+                  href={link.href}
                   class="text-muted-foreground hover:text-primary text-sm transition-colors"
                 >
-                  {link}
+                  {link.label}
                 </a>
               </li>
             ))
