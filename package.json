@@ -28,7 +28,7 @@
     "@types/react": "^19.2.14",
     "@types/react-dom": "^19.2.3",
     "@vueuse/core": "^14.2.1",
-    "astro": "6.1.6",
+    "astro": "6.1.10",
     "astro-canonical": "^1.0.0",
     "astro-og-canvas": "^0.10.1",
     "astro-robots-txt": "^1.0.0",
