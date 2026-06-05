@@ -13,10 +13,10 @@
     "format": "prettier --write 'src/**/*.{astro,css,html,js,jsx,json,md,mdx,svelte,ts,tsx,vue}'"
   },
   "dependencies": {
-    "@astrojs/partytown": "^2.1.5",
-    "@astrojs/react": "^5.0.1",
-    "@astrojs/sitemap": "^3.7.1",
-    "@astrojs/vercel": "^10.0.2",
+    "@astrojs/partytown": "^2.1.7",
+    "@astrojs/react": "^5.0.7",
+    "@astrojs/sitemap": "^3.7.3",
+    "@astrojs/vercel": "^10.0.8",
     "@astrojs/vue": "^6.0.1",
     "@base-ui/react": "^1.3.0",
     "@fontsource-variable/geist": "^5.2.8",
@@ -28,7 +28,7 @@
     "@types/react": "^19.2.14",
     "@types/react-dom": "^19.2.3",
     "@vueuse/core": "^14.2.1",
-    "astro": "6.1.6",
+    "astro": "6.4.4",
     "astro-canonical": "^1.0.0",
     "astro-og-canvas": "^0.10.1",
     "astro-robots-txt": "^1.0.0",
@@ -49,13 +49,6 @@
     "tailwindcss": "^4.2.2",
     "tw-animate-css": "^1.4.0",
     "vue": "^3.5.30"
-  },
-  "pnpm": {
-    "onlyBuiltDependencies": [
-      "esbuild",
-      "sharp",
-      "vue-demi"
-    ]
   },
   "devDependencies": {
     "@testing-library/dom": "^10.4.1",

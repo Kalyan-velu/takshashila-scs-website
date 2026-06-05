@@ -16,7 +16,6 @@ const { data, error } = await supabase.from("todos").select("*");
   <Courses id="courses" />
   <LatestArticles client:only="vue" />
   <Gallery />
-  `
   {
     data && data.length > 0 && (
       <ul class="px-4 md:px-6 py-8">
