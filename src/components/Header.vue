@@ -107,7 +107,7 @@ const scrollToTop = () => {
           >
             <div class="sr-only">Takshashila Logo link to home page</div>
             <img
-              src="/logo-full-black.webp"
+              :src="darkMode ? '/logo-full-white.png' : '/logo-full-black.png'"
               alt="Takshashila Logo"
               fetchpriority="high"
               width="1920"

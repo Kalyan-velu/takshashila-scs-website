@@ -104,6 +104,19 @@ const emit = defineEmits(["openMenu", "closeMenu"]);
 
       <li class="relative">
         <a
+          href="/magazine"
+          class="link font-light leading-tight transition-none dark:text-white"
+          :class="{
+            'text-foreground/80': headerSmall,
+          }"
+          @mouseenter="emit('closeMenu')"
+        >
+          Magazine
+        </a>
+      </li>
+
+      <li class="relative">
+        <a
           href="/contact"
           class="link font-light leading-tight transition-none dark:text-white"
           :class="{

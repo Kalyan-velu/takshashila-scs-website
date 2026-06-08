@@ -158,6 +158,15 @@ const toggleAccordion = (item: string) => {
 
           <li class="relative w-full border-b border-border/40 pb-4">
             <a
+              href="/magazine"
+              @click="emit('closeMenu')"
+              class="block w-full link text-4xl tracking-tight leading-none transition-none dark:text-white"
+              >Magazine</a
+            >
+          </li>
+
+          <li class="relative w-full border-b border-border/40 pb-4">
+            <a
               href="/contact"
               @click="emit('closeMenu')"
               class="block w-full link text-4xl tracking-tight leading-none transition-none dark:text-white"
