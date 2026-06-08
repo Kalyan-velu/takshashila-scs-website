@@ -59,7 +59,7 @@ const content = rewriteMediaUrls(
     <meta property="og:title" content={yoast?.og_title} />
     <meta property="og:description" content={yoast?.og_description} />
     <meta property="og:type" content="article" />
-    <meta
+    <meta>
       property="og:url"
       content={`https://www.takshashilascs.com/${post.slug}/`}
     />
@@ -76,7 +76,7 @@ const content = rewriteMediaUrls(
     }
 
     <!-- Twitter Card -->
-    <meta name="twitter:card" content={yoast?.twitter_card} />
+    <meta name="twitter:card "content={yoast?.twitter_card} />
     <meta name="twitter:title" content={yoast?.og_title} />
     <meta name="twitter:description" content={yoast?.og_description} />
     {ogImage && <meta name="twitter:image" content={ogImage.url} />}
@@ -84,15 +84,13 @@ const content = rewriteMediaUrls(
 
   <article class="post">
     {
-      ogImage && (
-        <img
+      ogImage && (<img
           src={ogImage.url}
           width={ogImage.width}
           height={ogImage.height}
           alt={post.title.rendered}
           class="post__hero"
-        />
-      )
+        />)
     }
 
     <header class="post__header">

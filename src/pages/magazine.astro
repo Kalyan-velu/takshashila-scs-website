@@ -1,0 +1,99 @@
+---
+import Layout from "@/layouts/Layout.astro";
+import { getMagazines } from "@/lib/wordpress.ts";
+import { Download, FileX, BookOpen } from "lucide-react";
+
+const magazines = await getMagazines();
+console.log(magazines)
+---
+
+<Layout
+  title="Monthly Magazines | Takshashila School of Civil Services"
+  description="Stay updated with our curated monthly current affairs magazines, specifically compiled by experts to boost your UPSC and APSC preparation."
+>
+  <div
+    class="bg-primary/5 py-16 flex flex-col items-center justify-center text-center px-4 border-b border-border"
+  >
+    <h1
+      class="text-4xl md:text-5xl lg:text-7xl font-light tracking-tight text-foreground max-w-4xl mb-4 leading-tight"
+    >
+      Monthly <span class="text-primary font-medium">Magazines</span>
+    </h1>
+    <p class="text-muted-foreground font-light text-lg max-w-2xl leading-relaxed">
+      Stay updated with our curated monthly current affairs magazines, specifically compiled by experts to boost your UPSC and APSC preparation.
+    </p>
+  </div>
+
+  <div class="px-4 py-16 md:px-6 max-w-7xl mx-auto w-full">
+    {
+      magazines.length === 0 ? (
+        <div class="text-center py-20 bg-muted/20 border border-dashed border-border rounded-3xl max-w-md mx-auto px-6">
+          <BookOpen className="w-12 h-12 mx-auto mb-4 text-muted-foreground opacity-60" />
+          <h3 class="text-xl font-medium mb-2">No Magazines Available</h3>
+          <p class="text-muted-foreground font-light text-sm">
+            We are currently updating our repository. Please check back soon for our latest current affairs magazines.
+          </p>
+        </div>
+      ) : (
+        <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-8">
+          {magazines.map((magazine) => (
+            <div class="group relative flex flex-col h-full bg-card rounded-3xl border border-border overflow-hidden shadow-sm hover:shadow-2xl hover:shadow-primary/5 hover:border-primary/20 transition-all duration-500">
+              {/* Cover Image */}
+              <div class="relative aspect-[3/4] overflow-hidden bg-muted/30 border-b border-border flex items-center justify-center">
+                <img
+                  src={magazine.imageUrl}
+                  alt={magazine.title}
+                  loading="lazy"
+                  decoding="async"
+                  class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                />
+                <div class="absolute inset-0 bg-linear-to-t from-black/60 via-transparent to-transparent opacity-0 group-hover:opacity-60 transition-opacity duration-300" />
+                {magazine.downloadUrl && (
+                  <a
+                    href={magazine.downloadUrl}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    class="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300 z-10"
+                  >
+                    <span class="inline-flex h-12 px-6 items-center justify-center rounded-full bg-background/90 text-foreground backdrop-blur-xs font-medium text-sm gap-2 shadow-lg hover:bg-background transition-colors">
+                      <Download className="w-4 h-4" /> Quick Download
+                    </span>
+                  </a>
+                )}
+              </div>
+
+              {/* Card Body */}
+              <div class="flex flex-col flex-grow p-6 justify-between gap-4">
+                <h3 class="font-medium text-foreground tracking-tight leading-snug line-clamp-2 text-base md:text-lg">
+                  {magazine.title}
+                </h3>
+
+                <div class="pt-2">
+                  {magazine.downloadUrl ? (
+                    <a
+                      href={magazine.downloadUrl}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      class="inline-flex w-full h-11 items-center justify-center rounded-2xl bg-primary text-primary-foreground hover:bg-primary/95 transition-all font-semibold text-sm gap-2 group/btn shadow-md hover:shadow-lg shadow-primary/10"
+                    >
+                      <span>Download PDF</span>
+                      <Download className="w-4 h-4 transition-transform group-hover/btn:translate-y-0.5" />
+                    </a>
+                  ) : (
+                    <button
+                      disabled
+                      class="inline-flex w-full h-11 items-center justify-center rounded-2xl bg-muted text-muted-foreground border border-border font-semibold text-sm gap-2 cursor-not-allowed"
+                    >
+                      <span>Coming Soon</span>
+                      <FileX className="w-4 h-4 opacity-60" />
+                    </button>
+                  )}
+                </div>
+              </div>
+            </div>
+          ))}
+        </div>
+      )
+    }
+  </div>
+</Layout>
