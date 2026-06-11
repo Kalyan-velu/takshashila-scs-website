@@ -82,9 +82,9 @@ export interface Magazine {
  * @returns {Array} An array of magazine objects containing title, imageUrl, and downloadUrl.
  */
 export async function getMagazines(): Promise<Magazine[]> {
-  const response = await fetch(
-    "https://crm.takshashilascs.com/wp-json/wp/v2/pages?slug=magazine",
-  );
+  const response = await getPageBySlug("magazines");
+
+  if (!response) return [];
 
   const pages = await response.json();
 

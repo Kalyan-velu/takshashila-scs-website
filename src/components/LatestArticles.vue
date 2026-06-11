@@ -35,7 +35,7 @@ onMounted(async () => {
 </script>
 
 <template>
-  <section class="pb-12 lg:pb-32 bg-muted/30">
+  <section class="py-12 lg:pb-32 bg-muted/30">
     <div class="px-4 md:px-6">
       <div
         class="flex flex-col md:flex-row md:items-end justify-between mb-12 gap-6"
