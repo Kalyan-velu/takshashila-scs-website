@@ -13,10 +13,10 @@ async function wpFetch<T>(
   params?: Record<string, string>,
 ): Promise<T> {
   const url = new URL(wpUrl(`wp-json/wp/v2/${endpoint}`));
-  console.log("Url:", url.toString());
   if (params) {
     Object.entries(params).forEach(([k, v]) => url.searchParams.set(k, v));
   }
+  console.log("Url:", url.toString());
 
   const res = await fetch(url.toString());
   if (!res.ok) {
@@ -82,13 +82,10 @@ export interface Magazine {
  * @returns {Array} An array of magazine objects containing title, imageUrl, and downloadUrl.
  */
 export async function getMagazines(): Promise<Magazine[]> {
-  const response = await getPageBySlug("magazines");
+  const page = await getPageBySlug("magazine");
 
-  if (!response) return [];
-
-  const pages = await response.json();
-
-  const html = (pages[0]?.content?.rendered ?? "").replaceAll(
+  if (!page) return [];
+  const html = (page?.content?.rendered ?? "").replaceAll(
     "https://takshashilascs.com".replace(/\/$/, ""),
     "https://crm.takshashilascs.com",
   );
