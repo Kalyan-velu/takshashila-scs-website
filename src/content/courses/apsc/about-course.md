@@ -4,7 +4,7 @@ type: about-course
 title: "Comprehensive APSC Package"
 badge: "APSC CCE Batch"
 description: "Expert guidance for the Assam Public Service Commission (APSC) Combined Competitive Examination. Master the Assam-specific syllabus with our curated curriculum."
-seoTitle: "APSC (CCE) 2026 Coaching | Takshashila School of Civil Services"
+seoTitle: "APSC (CCE) 2026 Coaching | Takshasheela School of Civil Services"
 seoDescription: "Join our specialized APSC Combined Competitive Examination (CCE) coaching. Comprehensive Prelims & Mains strategy. Enroll today for top-tier guidance."
 highlightWord: "APSC"
 heroHeading: "Comprehensive <highlight>APSC</highlight> Package"
@@ -29,7 +29,7 @@ courses:
     popular: false
     categories:
       - "APSC Courses"
-    image: "/Takshashila/admission-square.jpeg"
+    image: "/Takshasheela/admission-square.jpeg"
     duration: "12 months"
     highlights:
       - "Expert mentors from Delhi and across India"
@@ -52,7 +52,7 @@ courses:
     categories:
       - "APSC Courses"
       - "Working-Professionals"
-    image: "/Takshashila/admission-square.jpeg"
+    image: "/Takshasheela/admission-square.jpeg"
     duration: "12 months"
     highlights:
       - "Expert mentors from Delhi and across India"

@@ -47,7 +47,7 @@ onMounted(async () => {
             Latest Blogs
           </h2>
           <p class="text-muted-foreground font-light text-lg">
-            Insights, updates, and articles from Takshashila to fuel your
+            Insights, updates, and articles from Takshasheela to fuel your
             preparation.
           </p>
         </div>

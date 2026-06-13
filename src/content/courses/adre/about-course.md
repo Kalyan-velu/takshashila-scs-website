@@ -4,7 +4,7 @@ type: about-course
 title: "Comprehensive ADRE 2026 Course"
 badge: "ADRE 2026 Batch"
 description: "Prepare for the Assam Direct Recruitment Examination (ADRE) Class III and Class IV posts with expert guidance, updated syllabus material, and daily practice."
-seoTitle: "ADRE 2026 Online Coaching | Takshashila School of Civil Services"
+seoTitle: "ADRE 2026 Online Coaching | Takshasheela School of Civil Services"
 seoDescription: "Join our comprehensive ADRE online course starting this April. Complete syllabus coverage for Class III & IV. Fees start at ₹999."
 seoKeywords: "adre coaching, adre syllabus, adre exam date, best adre coaching in guwahati, assam direct recruitment exam, adre online coaching"
 ogImage: "/og/courses/adre.png"
@@ -23,7 +23,7 @@ courses:
     popular: true
     categories:
       - "ADRE Courses"
-    image: "/Takshashila/admission-square.jpeg"
+    image: "/Takshasheela/admission-square.jpeg"
     duration: "3 to 6 months"
     highlights:
       - "Expert mentors from Delhi and across India"

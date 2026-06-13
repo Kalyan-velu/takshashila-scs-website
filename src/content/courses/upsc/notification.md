@@ -16,7 +16,7 @@ As part of your preparation ecosystem, we regularly publish high-yield strategie
   A deep dive into tackling the vast syllabus of History optional, with a focus on map pointing and historiography.
 
 - [**Why Personality Development Programmes Matters**](#)
-  _A Takshashila School of Civil Services Perspective._
+  _A Takshasheela School of Civil Services Perspective._
   The interview stage isn't a test of knowledge, but a test of personality. Learn why starting personality development early is critical to crossing the final hurdle.
 
 _(Links to full articles will be updated shortly)_

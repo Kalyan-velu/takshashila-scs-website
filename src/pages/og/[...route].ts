@@ -4,7 +4,7 @@ export const { getStaticPaths, GET } = await OGImageRoute({
   param: "route",
   pages: {
     index: {
-      title: "Takshashila School of Civil Services",
+      title: "Takshasheela School of Civil Services",
       description:
         "Best UPSC & APSC Coaching in Guwahati. Prepare for ADRE, APSC, and UPSC.",
       bgGradient: [

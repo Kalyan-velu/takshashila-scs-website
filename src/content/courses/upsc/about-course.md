@@ -4,7 +4,7 @@ type: about-course
 title: "Comprehensive UPSC Package"
 badge: "UPSC Target Batch"
 description: "An all-encompassing guidance program for Prelims, Mains, and the Interview stage. Secure your path to becoming an IAS, IPS, or rigorous civil servant with our proven strategies."
-seoTitle: "UPSC 2026 Comprehensive Coaching | Takshashila School of Civil Services"
+seoTitle: "UPSC 2026 Comprehensive Coaching | Takshasheela School of Civil Services"
 seoDescription: "Combined Package for Prelims, Mains and Interview Guidance. Join our 9-10 month UPSC program in Guwahati. Available in both Online & Offline modes."
 highlightWord: "UPSC"
 heroHeading: "Comprehensive <highlight>UPSC</highlight> Package"
@@ -29,7 +29,7 @@ courses:
     popular: false
     categories:
       - "UPSC Courses"
-    image: "/Takshashila/admission-square.jpeg"
+    image: "/Takshasheela/admission-square.jpeg"
     duration: "12 months"
     highlights:
       - "Expert mentors from Delhi and across India"

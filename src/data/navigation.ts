@@ -26,7 +26,7 @@ export const coursesFeatured = {
   description:
     "Discover our comprehensive civil services coaching programs in Guwahati.",
   url: "/courses",
-  image: "/Takshashila/students-view-back.webp",
+  image: "/Takshasheela/students-view-back.webp",
 };
 
 export const aboutItems = [
@@ -37,14 +37,14 @@ export const aboutItems = [
   },
   {
     title: "Why Choose Us",
-    description: "What makes Takshashila stand out",
+    description: "What makes Takshasheela stand out",
     url: "/#about",
   },
 ];
 
 export const aboutFeatured = {
   title: "Gallery",
-  description: "Glimpses of life at Takshashila School.",
+  description: "Glimpses of life at Takshasheela School.",
   url: "/#gallery",
-  image: "/Takshashila/building%20(1).jpg",
+  image: "/Takshasheela/building%20(1).jpg",
 };

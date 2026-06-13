@@ -105,10 +105,10 @@ const scrollToTop = () => {
               'text-foreground/80': headerSmall || menu === 'mobileMenu',
             }"
           >
-            <div class="sr-only">Takshashila Logo link to home page</div>
+            <div class="sr-only">Takshasheela Logo link to home page</div>
             <img
               :src="darkMode ? '/logo-full-white.png' : '/logo-full-black.png'"
-              alt="Takshashila Logo"
+              alt="Takshasheela Logo"
               fetchpriority="high"
               width="1920"
               height="1080"
