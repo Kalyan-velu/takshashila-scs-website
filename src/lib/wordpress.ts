@@ -144,3 +144,16 @@ export async function getMagazines(): Promise<Magazine[]> {
   });
   return magazines;
 }
+/**
+ * Create a table of content to link the tags
+ * */
+export async function getBlogTOC(content: string) {
+  let subHeadings: { id: string; text: string }[] = [];
+
+  const $ = cheerio.load(content);
+  $("h2").each((_, el) => {
+    const id = el.attribs?.id;
+    subHeadings.push({ id: `#${id}`, text: $(el).text() });
+  });
+  return subHeadings;
+}

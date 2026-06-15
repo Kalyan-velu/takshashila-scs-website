@@ -6,7 +6,7 @@ import variables from "@/config/variables.ts";
 const cloudflare_site_key = variables.CLOUDFLARE_SITE_KEY;
 
 const form = ref({ name: "", phone: "", email: "" });
-const isVisible = ref(true);
+const isVisible = ref(false);
 const isSubmitting = ref(false);
 const isCaptchaVerified = ref(false);
 const turnstileContainer = ref<HTMLElement | null>(null);
@@ -25,10 +25,19 @@ function handleClose(e: KeyboardEvent) {
   if (e.key === "Escape") {
     e.preventDefault();
     closePopup();
+    sessionStorage.setItem("leadPopupClosed", "true");
   }
 }
 
 onMounted(() => {
+  if (
+    sessionStorage.getItem("leadPopupClosed") === "true" ||
+    localStorage.getItem("leadPopupSubmitted") === "true"
+  ) {
+    return;
+  } else {
+    isVisible.value = true;
+  }
   window.addEventListener("keydown", handleClose);
   if (!turnstileContainer.value) return;
 
@@ -75,6 +84,7 @@ onBeforeUnmount(() => {
 
 const closePopup = () => {
   isVisible.value = false;
+  sessionStorage.setItem("leadPopupClosed", "true");
 };
 
 const submitForm = async () => {
@@ -88,6 +98,7 @@ const submitForm = async () => {
       source: "lead-popup",
     });
     closePopup();
+    localStorage.setItem("leadPopupSubmitted", "true");
   } catch (error) {
     console.error("Error submitting form:", error);
     alert("Failed to submit. Please try again later.");

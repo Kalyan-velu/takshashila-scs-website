@@ -42,9 +42,8 @@ const {
     <link rel="icon" href="/favicon.ico" />
     <meta name="generator" content={Astro.generator} />
     <meta name="keywords" content={keywords} />
-    <slot name="head">
-      <title>{title}</title>
-    </slot>
+    <title>{title}</title>
+    <slot name="head_data" />
     <SEO
       description={description}
       canonical={canonical}
