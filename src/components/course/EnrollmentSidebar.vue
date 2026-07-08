@@ -1,7 +1,10 @@
 <script setup lang="ts">
-import { computed, onMounted, onUnmounted, ref } from "vue";
-import { supabase } from "@/lib/db/supabase.ts";
-import { coursesItems } from "@/data/navigation.ts";
+import { computed, nextTick, onMounted, onUnmounted, ref } from "vue";
+import variables from "@/config/variables.ts";
+import { PHONE_HREF } from "@/config/CONSTANTS.ts";
+import { coursesItems } from "@/data/navigation";
+import { useTurnstile } from "@/lib/useTurnstile";
+import { submitLead } from "@/lib/submitLead";
 
 interface CoursePrice {
   original: number;
@@ -62,8 +65,17 @@ const onModeChange = (e: Event) => {
   }
 };
 
-onMounted(() => {
+const {
+  token: turnstileToken,
+  container: turnstileContainer,
+  mount: mountTurnstile,
+  reset: resetTurnstile,
+} = useTurnstile({ siteKey: variables.CLOUDFLARE_SITE_KEY });
+
+onMounted(async () => {
   window.addEventListener("course-mode-change", onModeChange);
+  await nextTick();
+  mountTurnstile();
 });
 
 onUnmounted(() => {
@@ -111,10 +123,15 @@ const displayPeriod = computed(() => {
 const isSubmitting = ref(false);
 const form = ref({ name: "", phone: "", email: "" });
 
+const isSubmitEnabled = computed(
+  () => !!turnstileToken.value && !isSubmitting.value,
+);
+
 const submitForm = async () => {
+  if (!turnstileToken.value) return;
   isSubmitting.value = true;
   try {
-    const { error } = await supabase.from("Leads").insert({
+    await submitLead({
       name: form.value.name,
       phone: form.value.phone,
       email: form.value.email,
@@ -124,15 +141,15 @@ const submitForm = async () => {
           .replace(/\s+/g, "-") +
         "-" +
         selectedMode.value.toLowerCase().replace(/\s+/g, "-"),
+      cfTurnstileResponse: turnstileToken.value,
     });
     form.value.name = "";
     form.value.phone = "";
     form.value.email = "";
-    if (error) {
-      throw error;
-    }
+    resetTurnstile();
   } catch (error) {
     console.error(error);
+    resetTurnstile();
   } finally {
     isSubmitting.value = false;
   }
@@ -238,10 +255,13 @@ const submitForm = async () => {
           />
         </div>
 
+        <!-- Turnstile widget -->
+        <div ref="turnstileContainer" />
+
         <button
           type="submit"
-          :disabled="isSubmitting"
-          class="w-full bg-primary text-primary-foreground hover:opacity-90 font-medium py-3 px-4 rounded-lg transition-all shadow-md mt-2 flex justify-center items-center cursor-pointer"
+          :disabled="!isSubmitEnabled"
+          class="w-full bg-primary disabled:opacity-50 text-primary-foreground hover:opacity-90 font-medium py-3 px-4 rounded-lg transition-all shadow-md mt-2 flex justify-center items-center cursor-pointer"
         >
           <span v-if="isSubmitting" class="flex gap-2">
             <svg
@@ -280,7 +300,7 @@ const submitForm = async () => {
       </div>
 
       <a
-        href="tel:+916001657575"
+        :href="PHONE_HREF"
         class="w-full flex items-center justify-center gap-2 bg-background border border-border hover:bg-muted text-foreground font-medium py-3 px-4 rounded-lg transition-all"
       >
         <svg

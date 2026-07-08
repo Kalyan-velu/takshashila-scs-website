@@ -1,23 +1,30 @@
 <script setup lang="ts">
-import { computed, onBeforeUnmount, onMounted, ref } from "vue";
-import { supabase } from "@/lib/db/supabase.ts";
+import { computed, nextTick, onBeforeUnmount, onMounted, ref } from "vue";
 import variables from "@/config/variables.ts";
+import { useTurnstile } from "@/lib/useTurnstile";
+import { submitLead } from "@/lib/submitLead";
 
 const cloudflare_site_key = variables.CLOUDFLARE_SITE_KEY;
 
 const form = ref({ name: "", phone: "", email: "" });
 const isVisible = ref(false);
 const isSubmitting = ref(false);
-const isCaptchaVerified = ref(false);
-const turnstileContainer = ref<HTMLElement | null>(null);
-let widgetId: string | null = null;
+const fieldErrors = ref<Record<string, string>>({});
+const formError = ref<string | null>(null);
+
+const {
+  token: turnstileToken,
+  container: turnstileContainer,
+  mount: mountTurnstile,
+  reset: resetTurnstile,
+} = useTurnstile({ siteKey: cloudflare_site_key });
 
 const isSubmitEnabled = computed(
   () =>
     form.value.name.trim() !== "" &&
     form.value.email.trim() !== "" &&
     form.value.phone.trim() !== "" &&
-    isCaptchaVerified.value &&
+    !!turnstileToken.value &&
     !isSubmitting.value,
 );
 
@@ -29,7 +36,7 @@ function handleClose(e: KeyboardEvent) {
   }
 }
 
-onMounted(() => {
+onMounted(async () => {
   if (
     sessionStorage.getItem("leadPopupClosed") === "true" ||
     localStorage.getItem("leadPopupSubmitted") === "true"
@@ -39,46 +46,13 @@ onMounted(() => {
     isVisible.value = true;
   }
   window.addEventListener("keydown", handleClose);
-  if (!turnstileContainer.value) return;
-
-  const renderWidget = () => {
-    widgetId = window.turnstile.render(turnstileContainer.value!, {
-      sitekey: cloudflare_site_key,
-      callback: () => {
-        isCaptchaVerified.value = true;
-      },
-      "expired-callback": () => {
-        isCaptchaVerified.value = false;
-      },
-      "error-callback": () => {
-        isCaptchaVerified.value = false;
-      },
-    });
-  };
-
-  if (window.turnstile) {
-    // Already loaded (e.g. hot reload / navigating back)
-    renderWidget();
-    return;
-  }
-
-  // Inject the script fresh, with onload callback
-  const existing = document.querySelector('script[src*="turnstile"]');
-  if (existing) {
-    // Script tag exists but hasn't finished — wait for it
-    existing.addEventListener("load", renderWidget);
-    return;
-  }
-
-  const script = document.createElement("script");
-  script.src = "https://challenges.cloudflare.com/turnstile/v0/api.js";
-  script.async = true;
-  script.defer = true;
-  script.onload = renderWidget;
-  document.head.appendChild(script);
+  // Wait for the v-if to actually mount the container element before
+  // trying to render the widget into it.
+  await nextTick();
+  console.log(turnstileContainer.value);
+  mountTurnstile();
 });
 onBeforeUnmount(() => {
-  if (widgetId) window.turnstile.remove(widgetId);
   window.removeEventListener("keydown", handleClose);
 });
 
@@ -88,23 +62,43 @@ const closePopup = () => {
 };
 
 const submitForm = async () => {
+  if (!turnstileToken.value) return;
   isSubmitting.value = true;
+  fieldErrors.value = {};
+  formError.value = null;
   try {
-    await supabase.from("Leads").insert({
+    const result = await submitLead({
       name: form.value.name,
       phone: form.value.phone,
       email: form.value.email,
-      address: null,
       source: "lead-popup",
+      cfTurnstileResponse: turnstileToken.value,
     });
-    closePopup();
-    localStorage.setItem("leadPopupSubmitted", "true");
-  } catch (error) {
-    console.error("Error submitting form:", error);
-    alert("Failed to submit. Please try again later.");
-    // Reset captcha on failure so user can retry
-    if (widgetId) window.turnstile.reset(widgetId);
-    isCaptchaVerified.value = false;
+
+    if (result.success) {
+      closePopup();
+      localStorage.setItem("leadPopupSubmitted", "true");
+      return;
+    }
+
+    if (result.code === "VALIDATION_ERROR") {
+      fieldErrors.value = Object.fromEntries(
+        Object.entries(result.fieldErrors).map(([field, messages]) => [
+          field,
+          messages?.[0] ?? "",
+        ]),
+      );
+      // A validation error on the captcha token itself isn't shown next to
+      // a field, since there's no input for it — surface it as a banner
+      // and force the user to re-verify.
+      if (fieldErrors.value.cfTurnstileResponse) {
+        formError.value = "Please complete the captcha again.";
+        resetTurnstile();
+      }
+    } else {
+      formError.value = result.message;
+      resetTurnstile();
+    }
   } finally {
     isSubmitting.value = false;
   }
@@ -178,9 +172,17 @@ const submitForm = async () => {
               v-model="form.name"
               type="text"
               required
-              class="w-full px-4 py-2.5 border border-border rounded-lg bg-background text-foreground focus:outline-none focus:ring-2 focus:ring-primary/50 focus:border-primary transition-all"
+              :class="[
+                'w-full px-4 py-2.5 border rounded-lg bg-background text-foreground focus:outline-none focus:ring-2 focus:ring-primary/50 transition-all',
+                fieldErrors.name
+                  ? 'border-destructive focus:border-destructive'
+                  : 'border-border focus:border-primary',
+              ]"
               placeholder="Your full name"
             />
+            <p v-if="fieldErrors.name" class="mt-1 text-sm text-destructive">
+              {{ fieldErrors.name }}
+            </p>
           </div>
           <div>
             <label for="lead-email" class="block text-sm font-medium mb-1"
@@ -191,9 +193,17 @@ const submitForm = async () => {
               v-model="form.email"
               type="email"
               required
-              class="w-full px-4 py-2.5 border border-border rounded-lg bg-background text-foreground focus:outline-none focus:ring-2 focus:ring-primary/50 focus:border-primary transition-all"
+              :class="[
+                'w-full px-4 py-2.5 border rounded-lg bg-background text-foreground focus:outline-none focus:ring-2 focus:ring-primary/50 transition-all',
+                fieldErrors.email
+                  ? 'border-destructive focus:border-destructive'
+                  : 'border-border focus:border-primary',
+              ]"
               placeholder="Enter your email"
             />
+            <p v-if="fieldErrors.email" class="mt-1 text-sm text-destructive">
+              {{ fieldErrors.email }}
+            </p>
           </div>
 
           <div>
@@ -205,12 +215,24 @@ const submitForm = async () => {
               v-model="form.phone"
               type="tel"
               required
-              class="w-full px-4 py-2.5 border border-border rounded-lg bg-background text-foreground focus:outline-none focus:ring-2 focus:ring-primary/50 focus:border-primary transition-all"
+              :class="[
+                'w-full px-4 py-2.5 border rounded-lg bg-background text-foreground focus:outline-none focus:ring-2 focus:ring-primary/50 transition-all',
+                fieldErrors.phone
+                  ? 'border-destructive focus:border-destructive'
+                  : 'border-border focus:border-primary',
+              ]"
               placeholder="+91 98765 43210"
             />
+            <p v-if="fieldErrors.phone" class="mt-1 text-sm text-destructive">
+              {{ fieldErrors.phone }}
+            </p>
           </div>
           <!-- Turnstile widget -->
           <div ref="turnstileContainer" />
+
+          <p v-if="formError" class="text-sm text-destructive">
+            {{ formError }}
+          </p>
 
           <button
             type="submit"

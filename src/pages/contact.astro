@@ -2,6 +2,7 @@
 import Layout from "../layouts/Layout.astro";
 import { Phone, Mail, MapPin, Send } from "lucide-react";
 import variables from "@/config/variables.ts";
+import { EMAIL, PHONE_DISPLAY, PHONE_HREF } from "@/config/CONSTANTS.ts";
 const cloudflare_site_key = variables.CLOUDFLARE_SITE_KEY;
 const title = "Contact Us | Takshasheela School of Civil Services";
 const description =
@@ -76,11 +77,11 @@ const description =
                 class="space-y-4 text-muted-foreground font-light leading-relaxed text-lg"
               >
                 <p>
-                  At Takshasheela, the best APSC coaching centre in Guwahati, our
-                  goal is to ensure every aspirant has access to the resources
-                  and mentorship required to succeed. We provide personalized
-                  advice tailored to your unique needs, helping you navigate
-                  your preparation journey effectively.
+                  At Takshasheela, the best APSC coaching centre in Guwahati,
+                  our goal is to ensure every aspirant has access to the
+                  resources and mentorship required to succeed. We provide
+                  personalized advice tailored to your unique needs, helping you
+                  navigate your preparation journey effectively.
                 </p>
               </div>
             </div>
@@ -155,9 +156,9 @@ const description =
                   Give Us A Call
                 </p>
                 <a
-                  href="tel:+916001657575"
+                  href={PHONE_HREF}
                   class="block text-xl font-medium text-foreground hover:text-primary transition-colors truncate"
-                  >+91-60016-57575</a
+                  >{PHONE_DISPLAY}</a
                 >
               </div>
             </div>
@@ -181,9 +182,9 @@ const description =
                   Send An Email
                 </p>
                 <a
-                  href="mailto:info@takshashilascs.com"
+                  href={`mailto:${EMAIL}`}
                   class="block text-xl font-medium text-foreground hover:text-primary transition-colors truncate"
-                  >info@takshashilascs.com</a
+                  >{EMAIL}</a
                 >
               </div>
             </div>
@@ -293,6 +294,11 @@ const description =
                       class="w-full px-5 py-4 border border-border/50 rounded-2xl bg-background/50 backdrop-blur-md text-foreground focus:outline-none focus:ring-2 focus:ring-primary/30 focus:border-primary/50 transition-all placeholder:text-muted-foreground/40 shadow-inner"
                       placeholder="+91-00000-00000"
                     />
+                    <p
+                      id="phone-error"
+                      class="hidden text-sm text-destructive px-2"
+                    >
+                    </p>
                   </div>
                   <div class="space-y-3">
                     <label
@@ -306,19 +312,24 @@ const description =
                         placeholder="example@mail.com"
                       />
                     </label>
+                    <p
+                      id="email-error"
+                      class="hidden text-sm text-destructive px-2"
+                    >
+                    </p>
                   </div>
                 </div>
 
                 <div class="space-y-3">
                   <label
                     class="text-sm font-medium text-foreground tracking-wide"
-                    >Address</label
-                  >
-                  <textarea
-                    rows="3"
-                    name="address"
-                    class="w-full px-5 py-4 border border-border/50 rounded-2xl bg-background/50 backdrop-blur-md text-foreground focus:outline-none focus:ring-2 focus:ring-primary/30 focus:border-primary/50 transition-all placeholder:text-muted-foreground/40 resize-none shadow-inner"
-                    placeholder="Your full address"></textarea>
+                    >Address
+                    <textarea
+                      rows="3"
+                      name="address"
+                      class="w-full px-5 py-4 border border-border/50 rounded-2xl bg-background/50 backdrop-blur-md text-foreground focus:outline-none focus:ring-2 focus:ring-primary/30 focus:border-primary/50 transition-all placeholder:text-muted-foreground/40 resize-none shadow-inner"
+                      placeholder="Your full address"></textarea>
+                  </label>
                 </div>
 
                 <!-- Turnstile widget -->
@@ -326,8 +337,11 @@ const description =
                   class="cf-turnstile"
                   data-sitekey={cloudflare_site_key}
                   data-callback="enableSubmit"
+                  data-expired-callback="resetSubmit"
+                  data-error-callback="resetSubmit"
                 >
                 </div>
+                <p id="form-error" class="hidden text-sm text-destructive"></p>
                 <button
                   id="submit-button"
                   type="submit"
@@ -354,15 +368,35 @@ const description =
 </Layout>
 
 <script>
-  import { supabase } from "@/lib/db/supabase.ts";
+  import { submitLead } from "@/lib/submitLead";
+
+  let turnstileToken: string | null = null;
+
   const form = document.getElementById(
     "contact-form",
   ) as HTMLFormElement | null;
 
+  function setFieldError(id: string, message: string | undefined) {
+    const el = document.getElementById(id);
+    if (!el) return;
+    el.textContent = message ?? "";
+    el.classList.toggle("hidden", !message);
+  }
+
+  function clearErrors() {
+    setFieldError("phone-error", undefined);
+    setFieldError("email-error", undefined);
+    setFieldError("form-error", undefined);
+  }
+
   if (form) {
     form.addEventListener("submit", async (e) => {
       e.preventDefault();
-      console.log("Form submitted");
+
+      if (!turnstileToken) {
+        alert("Please complete the captcha before submitting.");
+        return;
+      }
 
       const submitBtn = form.querySelector(
         'button[type="submit"]',
@@ -377,6 +411,8 @@ const description =
         if (submitIcon) submitIcon.classList.add("hidden");
       }
 
+      clearErrors();
+
       const formData = new FormData(form);
       const firstName = formData.get("firstName") as string;
       const lastName = formData.get("lastName") as string;
@@ -384,44 +420,64 @@ const description =
       const email = formData.get("email") as string;
       const address = formData.get("address") as string;
 
-      try {
-        const { error } = await supabase.from("Leads").insert([
-          {
-            name: `${firstName} ${lastName}`.trim(),
-            phone,
-            email,
-            address,
-            source: "contact-page",
-          },
-        ]);
+      const result = await submitLead({
+        name: `${firstName} ${lastName}`.trim(),
+        phone,
+        email,
+        address,
+        source: "contact-page",
+        cfTurnstileResponse: turnstileToken,
+      });
 
-        if (error) throw error;
-
+      if (result.success) {
         alert("Thank you! Your message has been sent successfully.");
         form.reset();
-      } catch (err) {
-        console.error("Error submitting form:", err);
-        alert(
-          "There was an error sending your message. Please try again later.",
-        );
-      } finally {
-        if (submitBtn && submitText) {
-          submitBtn.disabled = false;
-          submitText.textContent = originalText;
-          if (submitIcon) submitIcon.classList.remove("hidden");
-        }
+      } else if (result.code === "VALIDATION_ERROR") {
+        setFieldError("phone-error", result.fieldErrors.phone?.[0]);
+        setFieldError("email-error", result.fieldErrors.email?.[0]);
+        // name/address/captcha issues don't have a dedicated slot in this
+        // form, so fall back to the general banner for those.
+        const otherMessage = [
+          ...(result.fieldErrors.name ?? []),
+          ...(result.fieldErrors.address ?? []),
+          ...(result.fieldErrors.cfTurnstileResponse ?? []),
+        ][0];
+        setFieldError("form-error", otherMessage ?? result.message);
+      } else {
+        setFieldError("form-error", result.message);
+      }
+
+      // Turnstile tokens are single-use, so require a fresh one for the
+      // next attempt regardless of whether this one succeeded.
+      window.turnstile?.reset();
+      turnstileToken = null;
+      if (submitBtn && submitText) {
+        submitBtn.disabled = true;
+        submitText.textContent = originalText;
+        if (submitIcon) submitIcon.classList.remove("hidden");
       }
     });
   }
 
-  //@ts-expect-error sa
-  window.enableSubmit = function () {
-    console.log("Enable Submit");
+  //@ts-expect-error attached to window for the Turnstile implicit-render callback
+  window.enableSubmit = function (token: string) {
+    turnstileToken = token;
     const submit = document.getElementById(
       "submit-button",
     ) as HTMLButtonElement | null;
     if (submit) {
       submit.disabled = false;
+    }
+  };
+
+  //@ts-expect-error attached to window for the Turnstile implicit-render callback
+  window.resetSubmit = function () {
+    turnstileToken = null;
+    const submit = document.getElementById(
+      "submit-button",
+    ) as HTMLButtonElement | null;
+    if (submit) {
+      submit.disabled = true;
     }
   };
 </script>

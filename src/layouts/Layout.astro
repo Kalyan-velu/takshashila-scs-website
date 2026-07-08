@@ -2,13 +2,16 @@
 import { SEO } from "astro-seo";
 import { Schema } from "astro-seo-schema";
 import "../styles/globals.css";
-import Hero from "@/components/Hero.astro";
-import Features from "@/components/Features.astro";
-import Header from "@/components/Header.astro";
+import Navbar from "@/components/Header.vue";
 import LeadPopup from "@/components/LeadPopup.vue";
 import Footer from "@/components/Footer.astro";
 import GoogleTagManager from "@/lib/GTag/GoogleTagManager.astro";
 import GoogleTagManagerNoscript from "@/lib/GTag/GoogleTagManagerNoscript.astro";
+import { SITE_URL } from "@/config/CONSTANTS.ts";
+
+// variables.CRM_URL always resolves to the private server value in frontmatter; this needs the public origin.
+const crmOrigin =
+  import.meta.env.PUBLIC_CRM_URL || "https://crm.takshashilascs.com";
 
 interface Props {
   title?: string;
@@ -36,8 +39,8 @@ const {
     <GoogleTagManager />
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width" />
-    <link rel="preconnect" href="https://crm.takshashilascs.com" />
-    <link rel="preconnect" href="https://www.takshashilascs.com" />
+    <link rel="preconnect" href={crmOrigin} />
+    <link rel="preconnect" href={SITE_URL} />
     <link rel="sitemap" href="/sitemap-index.xml" />
     <link rel="icon" href="/favicon.ico" />
     <meta name="generator" content={Astro.generator} />
@@ -72,8 +75,8 @@ const {
         "@type": "EducationalOrganization",
         name: "Takshasheela School of Civil Services",
         description: description,
-        url: Astro.site ? Astro.site.href : "https://www.takshashilascs.com",
-        logo: "https://www.takshashilascs.com/favicon.svg",
+        url: Astro.site ? Astro.site.href : SITE_URL,
+        logo: `${SITE_URL}/favicon.svg`,
         address: {
           "@type": "PostalAddress",
           addressLocality: "Guwahati",
@@ -92,7 +95,7 @@ const {
     class="antialiased overflow-x-hidden selection:bg-primary/20 selection:text-primary"
   >
     <GoogleTagManagerNoscript />
-    <Header />
+    <Navbar client:load />
     <main class="flex flex-col gap-8">
       <slot />
     </main>

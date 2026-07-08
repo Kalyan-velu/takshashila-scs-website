@@ -1,7 +1,12 @@
 <script setup lang="ts">
 import { ref } from "vue";
 import { aboutItems, coursesItems } from "@/data/navigation.ts";
-import { EMAIL, MOBILE_NO } from "@/config/CONSTANTS.ts";
+import {
+  CURRENT_AFFAIRS_URL,
+  EMAIL,
+  PHONE_DISPLAY,
+  PHONE_HREF,
+} from "@/config/CONSTANTS.ts";
 
 defineProps<{
   menu: number | string | boolean;
@@ -149,7 +154,7 @@ const toggleAccordion = (item: string) => {
           <li class="relative w-full border-b border-border/40 pb-4">
             <a
               target="_blank"
-              href="https://currentaffairs.takshashilascs.com"
+              :href="CURRENT_AFFAIRS_URL"
               @click="emit('closeMenu')"
               class="block w-full link text-4xl tracking-tight leading-none transition-none dark:text-white"
               >Current Affairs</a
@@ -178,7 +183,7 @@ const toggleAccordion = (item: string) => {
       <div class="w-full mt-8 pt-2">
         <div class="flex flex-col space-y-4 mb-6">
           <a
-            :href="`tel:${MOBILE_NO}`"
+            :href="PHONE_HREF"
             class="flex items-center gap-3 text-foreground/80 dark:text-gray-300"
           >
             <div
@@ -194,12 +199,12 @@ const toggleAccordion = (item: string) => {
                 />
               </svg>
             </div>
-            <span class="text-sm font-light tracking-tight"
-              >+91 {{ MOBILE_NO }}</span
-            >
+            <span class="text-sm font-light tracking-tight">{{
+              PHONE_DISPLAY
+            }}</span>
           </a>
           <a
-            href="mailto:{{EMAIL}}"
+            :href="`mailto:${EMAIL}`"
             class="flex items-center gap-3 text-foreground/80 dark:text-gray-300"
           >
             <div

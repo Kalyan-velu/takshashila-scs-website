@@ -7,6 +7,7 @@ import {
   coursesFeatured,
   coursesItems,
 } from "@/data/navigation.ts";
+import { CURRENT_AFFAIRS_URL } from "@/config/CONSTANTS.ts";
 
 defineProps<{
   menu: number | string | boolean;
@@ -90,7 +91,7 @@ const emit = defineEmits(["openMenu", "closeMenu"]);
 
       <li class="relative">
         <a
-          href="https://currentaffairs.takshashilascs.com"
+          :href="CURRENT_AFFAIRS_URL"
           target="_blank"
           class="link font-light leading-tight transition-none dark:text-white"
           :class="{

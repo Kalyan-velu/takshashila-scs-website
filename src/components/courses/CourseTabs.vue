@@ -25,10 +25,14 @@ const viewMode = ref("grid"); // 'grid' | 'list'
 const getLowestPrice = (course: EnrichedCourse): number => {
   const pricesList: number[] = [];
   if (course.prices?.online) {
-    pricesList.push(course.prices.online.original - course.prices.online.discount);
+    pricesList.push(
+      course.prices.online.original - course.prices.online.discount,
+    );
   }
   if (course.prices?.offline) {
-    pricesList.push(course.prices.offline.original - course.prices.offline.discount);
+    pricesList.push(
+      course.prices.offline.original - course.prices.offline.discount,
+    );
   }
   if (pricesList.length > 0) {
     return Math.min(...pricesList);
@@ -62,10 +66,12 @@ const filteredAndSortedCourses = computed(() => {
     const matchesSearch =
       !searchQuery.value ||
       course.title.toLowerCase().includes(searchQuery.value.toLowerCase()) ||
-      course.description.toLowerCase().includes(searchQuery.value.toLowerCase()) ||
+      course.description
+        .toLowerCase()
+        .includes(searchQuery.value.toLowerCase()) ||
       (course.highlights &&
         course.highlights.some((h) =>
-          h.toLowerCase().includes(searchQuery.value.toLowerCase())
+          h.toLowerCase().includes(searchQuery.value.toLowerCase()),
         ));
 
     // Learning Mode filter
@@ -129,13 +135,26 @@ const resetFilters = () => {
     <div
       class="bg-card/45 backdrop-blur-md border border-border/50 rounded-3xl p-5 md:p-6 mb-10 shadow-xl shadow-primary/5"
     >
-      <div class="flex flex-col lg:flex-row lg:items-center justify-between gap-5">
-        
+      <div
+        class="flex flex-col lg:flex-row lg:items-center justify-between gap-5"
+      >
         <!-- Search input -->
         <div class="relative w-full lg:max-w-md">
-          <div class="absolute inset-y-0 left-0 pl-3.5 flex items-center pointer-events-none">
-            <svg class="w-4 h-4 text-muted-foreground" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path>
+          <div
+            class="absolute inset-y-0 left-0 pl-3.5 flex items-center pointer-events-none"
+          >
+            <svg
+              class="w-4 h-4 text-muted-foreground"
+              fill="none"
+              stroke="currentColor"
+              viewBox="0 0 24 24"
+            >
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="2"
+                d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"
+              ></path>
             </svg>
           </div>
           <input
@@ -149,35 +168,58 @@ const resetFilters = () => {
             @click="clearSearch"
             class="absolute inset-y-0 right-0 pr-3.5 flex items-center text-muted-foreground hover:text-foreground cursor-pointer"
           >
-            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+            <svg
+              class="w-4 h-4"
+              fill="none"
+              stroke="currentColor"
+              viewBox="0 0 24 24"
+            >
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="2"
+                d="M6 18L18 6M6 6l12 12"
+              ></path>
             </svg>
           </button>
         </div>
 
         <!-- Filters controls -->
         <div class="flex flex-wrap items-center gap-4">
-          
           <!-- Mode filter -->
-          <div class="flex items-center bg-muted/50 p-1 border border-border/40 rounded-xl">
+          <div
+            class="flex items-center bg-muted/50 p-1 border border-border/40 rounded-xl"
+          >
             <button
               @click="selectedMode = 'all'"
               class="px-3.5 py-1.5 text-xs font-medium rounded-lg transition-all cursor-pointer"
-              :class="selectedMode === 'all' ? 'bg-background text-foreground shadow-sm' : 'text-muted-foreground hover:text-foreground'"
+              :class="
+                selectedMode === 'all'
+                  ? 'bg-background text-foreground shadow-sm'
+                  : 'text-muted-foreground hover:text-foreground'
+              "
             >
               All Modes
             </button>
             <button
               @click="selectedMode = 'online'"
               class="px-3.5 py-1.5 text-xs font-medium rounded-lg transition-all cursor-pointer"
-              :class="selectedMode === 'online' ? 'bg-background text-foreground shadow-sm' : 'text-muted-foreground hover:text-foreground'"
+              :class="
+                selectedMode === 'online'
+                  ? 'bg-background text-foreground shadow-sm'
+                  : 'text-muted-foreground hover:text-foreground'
+              "
             >
               Online
             </button>
             <button
               @click="selectedMode = 'offline'"
               class="px-3.5 py-1.5 text-xs font-medium rounded-lg transition-all cursor-pointer"
-              :class="selectedMode === 'offline' ? 'bg-background text-foreground shadow-sm' : 'text-muted-foreground hover:text-foreground'"
+              :class="
+                selectedMode === 'offline'
+                  ? 'bg-background text-foreground shadow-sm'
+                  : 'text-muted-foreground hover:text-foreground'
+              "
             >
               Offline
             </button>
@@ -195,22 +237,48 @@ const resetFilters = () => {
               <option value="duration-asc">Duration: Shortest</option>
               <option value="alphabetical">Name: A to Z</option>
             </select>
-            <div class="absolute inset-y-0 right-0 pr-3.5 flex items-center pointer-events-none text-muted-foreground">
-              <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M19 9l-7 7-7-7"></path>
+            <div
+              class="absolute inset-y-0 right-0 pr-3.5 flex items-center pointer-events-none text-muted-foreground"
+            >
+              <svg
+                class="w-3.5 h-3.5"
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="2.5"
+                  d="M19 9l-7 7-7-7"
+                ></path>
               </svg>
             </div>
           </div>
 
           <!-- Grid/List Switcher -->
-          <div class="flex items-center bg-muted/50 p-1 border border-border/40 rounded-xl">
+          <div
+            class="flex items-center bg-muted/50 p-1 border border-border/40 rounded-xl"
+          >
             <button
               @click="viewMode = 'grid'"
               aria-label="Grid view"
               class="p-1.5 rounded-lg transition-all cursor-pointer"
-              :class="viewMode === 'grid' ? 'bg-background text-primary shadow-sm' : 'text-muted-foreground hover:text-foreground'"
+              :class="
+                viewMode === 'grid'
+                  ? 'bg-background text-primary shadow-sm'
+                  : 'text-muted-foreground hover:text-foreground'
+              "
             >
-              <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <svg
+                class="w-4 h-4"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              >
                 <rect x="3" y="3" width="7" height="7"></rect>
                 <rect x="14" y="3" width="7" height="7"></rect>
                 <rect x="14" y="14" width="7" height="7"></rect>
@@ -221,9 +289,21 @@ const resetFilters = () => {
               @click="viewMode = 'list'"
               aria-label="List view"
               class="p-1.5 rounded-lg transition-all cursor-pointer"
-              :class="viewMode === 'list' ? 'bg-background text-primary shadow-sm' : 'text-muted-foreground hover:text-foreground'"
+              :class="
+                viewMode === 'list'
+                  ? 'bg-background text-primary shadow-sm'
+                  : 'text-muted-foreground hover:text-foreground'
+              "
             >
-              <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <svg
+                class="w-4 h-4"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              >
                 <line x1="8" y1="6" x2="21" y2="6"></line>
                 <line x1="8" y1="12" x2="21" y2="12"></line>
                 <line x1="8" y1="18" x2="21" y2="18"></line>
@@ -233,7 +313,6 @@ const resetFilters = () => {
               </svg>
             </button>
           </div>
-
         </div>
       </div>
     </div>
@@ -243,15 +322,31 @@ const resetFilters = () => {
       v-if="searchQuery || selectedCategory !== 'ALL' || selectedMode !== 'all'"
       class="flex flex-wrap items-center gap-2 mb-6 text-sm"
     >
-      <span class="text-muted-foreground text-xs uppercase tracking-wider font-semibold">Active filters:</span>
+      <span
+        class="text-muted-foreground text-xs uppercase tracking-wider font-semibold"
+        >Active filters:</span
+      >
       <span
         v-if="selectedCategory !== 'ALL'"
         class="inline-flex items-center gap-1 px-3 py-1 bg-primary/10 text-primary text-xs rounded-full border border-primary/20 font-medium"
       >
         Category: {{ selectedCategory }}
-        <button @click="selectedCategory = 'ALL'" class="hover:text-foreground cursor-pointer">
-          <svg class="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M6 18L18 6M6 6l12 12"></path>
+        <button
+          @click="selectedCategory = 'ALL'"
+          class="hover:text-foreground cursor-pointer"
+        >
+          <svg
+            class="w-3 h-3"
+            fill="none"
+            stroke="currentColor"
+            viewBox="0 0 24 24"
+          >
+            <path
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              stroke-width="2.5"
+              d="M6 18L18 6M6 6l12 12"
+            ></path>
           </svg>
         </button>
       </span>
@@ -260,9 +355,22 @@ const resetFilters = () => {
         class="inline-flex items-center gap-1 px-3 py-1 bg-primary/10 text-primary text-xs rounded-full border border-primary/20 font-medium"
       >
         Search: "{{ searchQuery }}"
-        <button @click="clearSearch" class="hover:text-foreground cursor-pointer">
-          <svg class="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M6 18L18 6M6 6l12 12"></path>
+        <button
+          @click="clearSearch"
+          class="hover:text-foreground cursor-pointer"
+        >
+          <svg
+            class="w-3 h-3"
+            fill="none"
+            stroke="currentColor"
+            viewBox="0 0 24 24"
+          >
+            <path
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              stroke-width="2.5"
+              d="M6 18L18 6M6 6l12 12"
+            ></path>
           </svg>
         </button>
       </span>
@@ -270,10 +378,23 @@ const resetFilters = () => {
         v-if="selectedMode !== 'all'"
         class="inline-flex items-center gap-1 px-3 py-1 bg-primary/10 text-primary text-xs rounded-full border border-primary/20 font-medium"
       >
-        Mode: {{ selectedMode === 'online' ? 'Online Only' : 'Offline Only' }}
-        <button @click="selectedMode = 'all'" class="hover:text-foreground cursor-pointer">
-          <svg class="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M6 18L18 6M6 6l12 12"></path>
+        Mode: {{ selectedMode === "online" ? "Online Only" : "Offline Only" }}
+        <button
+          @click="selectedMode = 'all'"
+          class="hover:text-foreground cursor-pointer"
+        >
+          <svg
+            class="w-3 h-3"
+            fill="none"
+            stroke="currentColor"
+            viewBox="0 0 24 24"
+          >
+            <path
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              stroke-width="2.5"
+              d="M6 18L18 6M6 6l12 12"
+            ></path>
           </svg>
         </button>
       </span>
@@ -287,9 +408,11 @@ const resetFilters = () => {
 
     <!-- Courses Grid/List Views -->
     <div v-if="filteredAndSortedCourses.length > 0">
-      
       <!-- Grid View Layout -->
-      <div v-if="viewMode === 'grid'" class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-8">
+      <div
+        v-if="viewMode === 'grid'"
+        class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-8"
+      >
         <a
           v-for="course in filteredAndSortedCourses"
           :key="course.id"
@@ -325,14 +448,18 @@ const resetFilters = () => {
             </div>
 
             <!-- Bottom Left overlay on Image -->
-            <div class="absolute bottom-4 left-4 right-4 flex justify-between items-end">
+            <div
+              class="absolute bottom-4 left-4 right-4 flex justify-between items-end"
+            >
               <div class="flex flex-col">
                 <span
                   class="px-2.5 py-1 backdrop-blur-md bg-white/20 text-white text-xs rounded-full font-medium mb-2 w-max shadow-sm border border-white/10"
                 >
                   {{ course.duration }}
                 </span>
-                <h3 class="text-white font-semibold text-lg leading-tight line-clamp-2">
+                <h3
+                  class="text-white font-semibold text-lg leading-tight line-clamp-2"
+                >
                   {{ course.title }}
                 </h3>
               </div>
@@ -341,7 +468,9 @@ const resetFilters = () => {
 
           <!-- Card Body Section -->
           <div class="p-6 flex flex-col flex-1 bg-background/50">
-            <p class="text-muted-foreground text-sm font-light mb-5 line-clamp-2">
+            <p
+              class="text-muted-foreground text-sm font-light mb-5 line-clamp-2"
+            >
               {{ course.description }}
             </p>
 
@@ -352,51 +481,110 @@ const resetFilters = () => {
                 :key="highlight"
                 class="flex items-start gap-2.5 text-xs text-muted-foreground"
               >
-                <div class="rounded-full bg-primary/10 text-primary p-0.5 mt-0.5 shrink-0">
-                  <svg class="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M5 13l4 4L19 7"></path>
+                <div
+                  class="rounded-full bg-primary/10 text-primary p-0.5 mt-0.5 shrink-0"
+                >
+                  <svg
+                    class="w-3 h-3"
+                    fill="none"
+                    stroke="currentColor"
+                    viewBox="0 0 24 24"
+                  >
+                    <path
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      stroke-width="2.5"
+                      d="M5 13l4 4L19 7"
+                    ></path>
                   </svg>
                 </div>
-                <span class="line-clamp-2 text-foreground/80 leading-normal">{{ highlight }}</span>
+                <span class="line-clamp-2 text-foreground/80 leading-normal">{{
+                  highlight
+                }}</span>
               </li>
             </ul>
 
             <!-- Mode & Price Footer -->
-            <div class="pt-4 border-t border-border/50 flex items-center justify-between mt-auto">
-              
+            <div
+              class="pt-4 border-t border-border/50 flex items-center justify-between mt-auto"
+            >
               <!-- Pricing info -->
               <div class="flex flex-col gap-1 grow">
                 <template v-if="course.prices">
                   <!-- Active Mode Pricing -->
-                  <div v-if="selectedMode === 'online' && course.prices.online" class="flex flex-col">
-                    <span class="text-xs text-muted-foreground line-through opacity-70">{{ toINR(course.prices.online.original) }}</span>
-                    <span class="text-xl font-bold text-foreground">{{ toINR(course.prices.online.original - course.prices.online.discount) }}</span>
+                  <div
+                    v-if="selectedMode === 'online' && course.prices.online"
+                    class="flex flex-col"
+                  >
+                    <span
+                      class="text-xs text-muted-foreground line-through opacity-70"
+                      >{{ toINR(course.prices.online.original) }}</span
+                    >
+                    <span class="text-xl font-bold text-foreground">{{
+                      toINR(
+                        course.prices.online.original -
+                          course.prices.online.discount,
+                      )
+                    }}</span>
                   </div>
-                  <div v-else-if="selectedMode === 'offline' && course.prices.offline" class="flex flex-col">
-                    <span class="text-xs text-muted-foreground line-through opacity-70">{{ toINR(course.prices.offline.original) }}</span>
-                    <span class="text-xl font-bold text-foreground">{{ toINR(course.prices.offline.original - course.prices.offline.discount) }}</span>
+                  <div
+                    v-else-if="
+                      selectedMode === 'offline' && course.prices.offline
+                    "
+                    class="flex flex-col"
+                  >
+                    <span
+                      class="text-xs text-muted-foreground line-through opacity-70"
+                      >{{ toINR(course.prices.offline.original) }}</span
+                    >
+                    <span class="text-xl font-bold text-foreground">{{
+                      toINR(
+                        course.prices.offline.original -
+                          course.prices.offline.discount,
+                      )
+                    }}</span>
                   </div>
                   <div v-else class="flex flex-col gap-0.5">
                     <!-- Standard Starting Price -->
-                    <span class="text-[10px] text-muted-foreground uppercase font-semibold tracking-wider">Starting from</span>
+                    <span
+                      class="text-[10px] text-muted-foreground uppercase font-semibold tracking-wider"
+                      >Starting from</span
+                    >
                     <div class="flex items-baseline gap-1.5">
                       <span class="text-xl font-bold text-foreground">
-                        {{ toINR(Math.min(
-                          course.prices.online ? (course.prices.online.original - course.prices.online.discount) : Infinity,
-                          course.prices.offline ? (course.prices.offline.original - course.prices.offline.discount) : Infinity
-                        )) }}
+                        {{
+                          toINR(
+                            Math.min(
+                              course.prices.online
+                                ? course.prices.online.original -
+                                    course.prices.online.discount
+                                : Infinity,
+                              course.prices.offline
+                                ? course.prices.offline.original -
+                                    course.prices.offline.discount
+                                : Infinity,
+                            ),
+                          )
+                        }}
                       </span>
                     </div>
                   </div>
                 </template>
                 <template v-else-if="course.parentPrice">
                   <div class="flex flex-col gap-0.5">
-                    <span class="text-[10px] text-muted-foreground uppercase font-semibold tracking-wider">{{ course.parentPricePeriod }}</span>
-                    <span class="text-xl font-bold text-foreground">{{ course.parentPrice }}</span>
+                    <span
+                      class="text-[10px] text-muted-foreground uppercase font-semibold tracking-wider"
+                      >{{ course.parentPricePeriod }}</span
+                    >
+                    <span class="text-xl font-bold text-foreground">{{
+                      course.parentPrice
+                    }}</span>
                   </div>
                 </template>
                 <template v-else>
-                  <span class="text-sm font-medium text-muted-foreground">Contact for Price</span>
+                  <span class="text-sm font-medium text-muted-foreground"
+                    >Contact for Price</span
+                  >
                 </template>
               </div>
 
@@ -404,11 +592,16 @@ const resetFilters = () => {
               <div
                 class="flex items-center justify-center w-10 h-10 rounded-full bg-primary/10 text-primary group-hover:bg-primary group-hover:text-primary-foreground transform group-hover:rotate-45 transition-all duration-300 shrink-0 ml-2"
               >
-                <svg class="w-4 h-4 fill-current" viewBox="0 0 384 512" xmlns="http://www.w3.org/2000/svg">
-                  <path d="M328 96h24v288h-48V177.9L81 401l-17 17-33.9-34 17-17 223-223H64V96h264z" />
+                <svg
+                  class="w-4 h-4 fill-current"
+                  viewBox="0 0 384 512"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <path
+                    d="M328 96h24v288h-48V177.9L81 401l-17 17-33.9-34 17-17 223-223H64V96h264z"
+                  />
                 </svg>
               </div>
-
             </div>
           </div>
         </a>
@@ -423,7 +616,9 @@ const resetFilters = () => {
           class="group flex flex-col md:flex-row bg-card/40 backdrop-blur-sm border border-border/50 rounded-3xl overflow-hidden hover:shadow-xl hover:-translate-y-1 transition-all duration-400"
         >
           <!-- Image Section -->
-          <div class="relative w-full md:w-72 lg:w-80 aspect-video md:aspect-auto overflow-hidden shrink-0">
+          <div
+            class="relative w-full md:w-72 lg:w-80 aspect-video md:aspect-auto overflow-hidden shrink-0"
+          >
             <img
               :src="course.image"
               :alt="course.title"
@@ -455,8 +650,9 @@ const resetFilters = () => {
           </div>
 
           <!-- Main Info and Pricing Container -->
-          <div class="p-6 md:p-8 flex flex-col md:flex-row justify-between gap-6 grow">
-            
+          <div
+            class="p-6 md:p-8 flex flex-col md:flex-row justify-between gap-6 grow"
+          >
             <!-- Details Column -->
             <div class="flex flex-col gap-2 max-w-xl">
               <div class="flex items-center flex-wrap gap-2 mb-1">
@@ -468,13 +664,17 @@ const resetFilters = () => {
                   {{ mode }}
                 </span>
               </div>
-              <h3 class="text-xl font-semibold text-foreground group-hover:text-primary transition-colors">
+              <h3
+                class="text-xl font-semibold text-foreground group-hover:text-primary transition-colors"
+              >
                 {{ course.title }}
               </h3>
-              <p class="text-muted-foreground text-sm font-light leading-relaxed mb-4">
+              <p
+                class="text-muted-foreground text-sm font-light leading-relaxed mb-4"
+              >
                 {{ course.description }}
               </p>
-              
+
               <!-- Highlights -->
               <div class="flex flex-wrap gap-x-4 gap-y-2 mt-auto">
                 <div
@@ -482,9 +682,21 @@ const resetFilters = () => {
                   :key="highlight"
                   class="flex items-center gap-1.5 text-xs text-muted-foreground"
                 >
-                  <div class="rounded-full bg-primary/10 text-primary p-0.5 shrink-0">
-                    <svg class="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M5 13l4 4L19 7"></path>
+                  <div
+                    class="rounded-full bg-primary/10 text-primary p-0.5 shrink-0"
+                  >
+                    <svg
+                      class="w-3 h-3"
+                      fill="none"
+                      stroke="currentColor"
+                      viewBox="0 0 24 24"
+                    >
+                      <path
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                        stroke-width="2.5"
+                        d="M5 13l4 4L19 7"
+                      ></path>
                     </svg>
                   </div>
                   <span class="text-foreground/80">{{ highlight }}</span>
@@ -496,45 +708,114 @@ const resetFilters = () => {
             <div
               class="flex flex-col justify-between items-start md:items-end border-t md:border-t-0 md:border-l border-border/50 pt-4 md:pt-0 md:pl-6 shrink-0 min-w-[200px]"
             >
-              
               <!-- Price display -->
-              <div class="flex flex-col gap-1 w-full md:text-right mb-4 md:mb-0">
+              <div
+                class="flex flex-col gap-1 w-full md:text-right mb-4 md:mb-0"
+              >
                 <template v-if="course.prices">
-                  <div v-if="selectedMode === 'online' && course.prices.online" class="flex flex-col">
-                    <span class="text-xs text-muted-foreground line-through opacity-70">{{ toINR(course.prices.online.original) }}</span>
-                    <span class="text-2xl font-bold text-foreground">{{ toINR(course.prices.online.original - course.prices.online.discount) }}</span>
-                    <span class="text-[10px] text-muted-foreground font-medium uppercase tracking-wider mt-0.5">Online mode</span>
+                  <div
+                    v-if="selectedMode === 'online' && course.prices.online"
+                    class="flex flex-col"
+                  >
+                    <span
+                      class="text-xs text-muted-foreground line-through opacity-70"
+                      >{{ toINR(course.prices.online.original) }}</span
+                    >
+                    <span class="text-2xl font-bold text-foreground">{{
+                      toINR(
+                        course.prices.online.original -
+                          course.prices.online.discount,
+                      )
+                    }}</span>
+                    <span
+                      class="text-[10px] text-muted-foreground font-medium uppercase tracking-wider mt-0.5"
+                      >Online mode</span
+                    >
                   </div>
-                  <div v-else-if="selectedMode === 'offline' && course.prices.offline" class="flex flex-col">
-                    <span class="text-xs text-muted-foreground line-through opacity-70">{{ toINR(course.prices.offline.original) }}</span>
-                    <span class="text-2xl font-bold text-foreground">{{ toINR(course.prices.offline.original - course.prices.offline.discount) }}</span>
-                    <span class="text-[10px] text-muted-foreground font-medium uppercase tracking-wider mt-0.5">Offline mode</span>
+                  <div
+                    v-else-if="
+                      selectedMode === 'offline' && course.prices.offline
+                    "
+                    class="flex flex-col"
+                  >
+                    <span
+                      class="text-xs text-muted-foreground line-through opacity-70"
+                      >{{ toINR(course.prices.offline.original) }}</span
+                    >
+                    <span class="text-2xl font-bold text-foreground">{{
+                      toINR(
+                        course.prices.offline.original -
+                          course.prices.offline.discount,
+                      )
+                    }}</span>
+                    <span
+                      class="text-[10px] text-muted-foreground font-medium uppercase tracking-wider mt-0.5"
+                      >Offline mode</span
+                    >
                   </div>
                   <div v-else class="flex flex-col gap-1 w-full">
                     <!-- Standard Starting Price range -->
-                    <span class="text-[10px] text-muted-foreground uppercase font-semibold tracking-wider">Starting from</span>
+                    <span
+                      class="text-[10px] text-muted-foreground uppercase font-semibold tracking-wider"
+                      >Starting from</span
+                    >
                     <span class="text-2xl font-bold text-foreground">
-                      {{ toINR(Math.min(
-                        course.prices.online ? (course.prices.online.original - course.prices.online.discount) : Infinity,
-                        course.prices.offline ? (course.prices.offline.original - course.prices.offline.discount) : Infinity
-                      )) }}
+                      {{
+                        toINR(
+                          Math.min(
+                            course.prices.online
+                              ? course.prices.online.original -
+                                  course.prices.online.discount
+                              : Infinity,
+                            course.prices.offline
+                              ? course.prices.offline.original -
+                                  course.prices.offline.discount
+                              : Infinity,
+                          ),
+                        )
+                      }}
                     </span>
-                    
+
                     <!-- Breakdowns in tiny text -->
-                    <div class="flex flex-col gap-0.5 mt-1.5 text-xs text-muted-foreground">
-                      <span v-if="course.prices.online">Online: <strong class="text-foreground font-medium">{{ toINR(course.prices.online.original - course.prices.online.discount) }}</strong></span>
-                      <span v-if="course.prices.offline">Offline: <strong class="text-foreground font-medium">{{ toINR(course.prices.offline.original - course.prices.offline.discount) }}</strong></span>
+                    <div
+                      class="flex flex-col gap-0.5 mt-1.5 text-xs text-muted-foreground"
+                    >
+                      <span v-if="course.prices.online"
+                        >Online:
+                        <strong class="text-foreground font-medium">{{
+                          toINR(
+                            course.prices.online.original -
+                              course.prices.online.discount,
+                          )
+                        }}</strong></span
+                      >
+                      <span v-if="course.prices.offline"
+                        >Offline:
+                        <strong class="text-foreground font-medium">{{
+                          toINR(
+                            course.prices.offline.original -
+                              course.prices.offline.discount,
+                          )
+                        }}</strong></span
+                      >
                     </div>
                   </div>
                 </template>
                 <template v-else-if="course.parentPrice">
                   <div class="flex flex-col">
-                    <span class="text-2xl font-bold text-foreground">{{ course.parentPrice }}</span>
-                    <span class="text-[10px] text-muted-foreground uppercase font-semibold tracking-wider mt-0.5">{{ course.parentPricePeriod }}</span>
+                    <span class="text-2xl font-bold text-foreground">{{
+                      course.parentPrice
+                    }}</span>
+                    <span
+                      class="text-[10px] text-muted-foreground uppercase font-semibold tracking-wider mt-0.5"
+                      >{{ course.parentPricePeriod }}</span
+                    >
                   </div>
                 </template>
                 <template v-else>
-                  <span class="text-sm font-medium text-muted-foreground">Contact for Price</span>
+                  <span class="text-sm font-medium text-muted-foreground"
+                    >Contact for Price</span
+                  >
                 </template>
               </div>
 
@@ -550,15 +831,17 @@ const resetFilters = () => {
                   stroke-width="2.5"
                   viewBox="0 0 24 24"
                 >
-                  <path stroke-linecap="round" stroke-linejoin="round" d="M13.5 4.5L21 12m0 0l-7.5 7.5M21 12H3"></path>
+                  <path
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    d="M13.5 4.5L21 12m0 0l-7.5 7.5M21 12H3"
+                  ></path>
                 </svg>
               </div>
-
             </div>
           </div>
         </a>
       </div>
-
     </div>
 
     <!-- Empty State -->
@@ -569,13 +852,26 @@ const resetFilters = () => {
       <div
         class="w-16 h-16 rounded-full bg-muted flex items-center justify-center text-muted-foreground mb-5"
       >
-        <svg class="w-8 h-8 opacity-40" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M9.172 16.172a4 4 0 015.656 0M9 10h.01M15 10h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+        <svg
+          class="w-8 h-8 opacity-40"
+          fill="none"
+          stroke="currentColor"
+          viewBox="0 0 24 24"
+        >
+          <path
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            stroke-width="1.5"
+            d="M9.172 16.172a4 4 0 015.656 0M9 10h.01M15 10h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"
+          ></path>
         </svg>
       </div>
-      <h3 class="text-xl font-medium text-foreground mb-2">No courses match your filters</h3>
+      <h3 class="text-xl font-medium text-foreground mb-2">
+        No courses match your filters
+      </h3>
       <p class="text-muted-foreground font-light max-w-sm mb-6 text-sm">
-        We couldn't find any courses matching your search query or learning mode criteria. Try adjusting your selections.
+        We couldn't find any courses matching your search query or learning mode
+        criteria. Try adjusting your selections.
       </p>
       <button
         @click="resetFilters"
@@ -584,7 +880,6 @@ const resetFilters = () => {
         Reset All Filters
       </button>
     </div>
-
   </div>
 </template>
 

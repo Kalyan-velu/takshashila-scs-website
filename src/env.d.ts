@@ -22,7 +22,7 @@ interface Window {
       container: HTMLElement,
       options: Record<string, unknown>,
     ) => string;
-    reset: (widgetId: string) => void;
+    reset: (widgetId?: string) => void;
     remove: (widgetId: string) => void;
   };
 }

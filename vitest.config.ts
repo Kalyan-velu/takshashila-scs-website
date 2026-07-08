@@ -1,12 +1,10 @@
-/// <reference types="vitest" />
-import {getViteConfig} from 'astro/config';
-import vue from '@vitejs/plugin-vue';
+/// <reference types="vitest/config" />
+import { getViteConfig } from "astro/config";
 
 export default getViteConfig({
-  plugins: [vue()],
-  // test: {
-  //   environment: 'jsdom',
-  //   globals: true,
-  //   include: ['src/**/*.{test,spec}.{js,ts,jsx,tsx}'],
-  // },
+  test: {
+    environment: "jsdom",
+    globals: true,
+    include: ["src/**/*.{test,spec}.{js,ts,jsx,tsx}"],
+  },
 });

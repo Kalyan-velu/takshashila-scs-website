@@ -8,6 +8,7 @@ import {
 } from "@/components/ui/carousel";
 import { ArrowRight } from "lucide-vue-next";
 import { cn } from "@/lib/utils";
+import { whatsappUrl } from "@/config/CONSTANTS.ts";
 import type { Course } from "@/content.config.ts";
 
 const props = defineProps<{
@@ -122,7 +123,11 @@ window.addEventListener("course-tab-change", (e) => {
                 />
               </a>
               <a
-                :href="`https://wa.me/916001657575?text=Hi, I'm interested in the ${course.title} course.`"
+                :href="
+                  whatsappUrl(
+                    `Hi, I'm interested in the ${course.title} course.`,
+                  )
+                "
                 target="_blank"
                 rel="noopener noreferrer"
                 class="inline-flex h-14 w-14 items-center justify-center rounded-br-2xl border-t border-l border-border bg-background hover:bg-muted hover:border-[#25D366] hover:text-[#25D366] transition-all group/wa"

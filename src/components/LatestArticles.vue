@@ -2,6 +2,7 @@
 import { computed, onMounted, ref } from "vue";
 import { getLatestPosts } from "../lib/wordpress";
 import type { WPPost } from "@/types";
+import { CURRENT_AFFAIRS_URL } from "@/config/CONSTANTS.ts";
 
 const posts = ref<WPPost[]>([]);
 const isLoading = ref(true);
@@ -54,7 +55,7 @@ onMounted(async () => {
 
         <a
           target="_blank"
-          href="https://currentaffairs.takshashilascs.com"
+          :href="CURRENT_AFFAIRS_URL"
           class="inline-flex items-center text-primary font-medium hover:underline w-fit"
         >
           View all articles

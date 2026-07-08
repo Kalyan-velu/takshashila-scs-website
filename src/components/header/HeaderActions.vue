@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import config from "@/data/config.json";
-import { MOBILE_NO } from "@/config/CONSTANTS.ts";
+import { PHONE_HREF } from "@/config/CONSTANTS.ts";
 
 defineProps<{
   darkMode: boolean;
@@ -100,7 +100,7 @@ const emit = defineEmits(["toggleDarkMode", "toggleMobileMenu"]);
 
     <div class="hidden lg:inline-flex">
       <a
-        :href="`tel:${MOBILE_NO}`"
+        :href="PHONE_HREF"
         class="inline-flex relative group outline-none focus:outline-none text-sm font-medium text-primary-foreground"
       >
         <div
@@ -118,9 +118,7 @@ const emit = defineEmits(["toggleDarkMode", "toggleMobileMenu"]);
             xmlns="http://www.w3.org/2000/svg"
             viewBox="0 0 384 512"
           >
-            <path
-              d="M328 96h24v288h-48V177.9L81 401l-17 17-33.9-34 17-17 223-223H64V96h264z"
-            ></path>
+            <use href="/icons.svg#arrow"></use>
           </svg>
         </div>
       </a>

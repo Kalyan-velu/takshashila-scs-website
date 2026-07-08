@@ -1,5 +1,6 @@
 ---
 import Layout from "@/layouts/Layout.astro";
+import { EMAIL } from "@/config/CONSTANTS.ts";
 ---
 
 <Layout>
@@ -107,9 +108,9 @@ import Layout from "@/layouts/Layout.astro";
       </h2>
       <p class="mb-4">
         To request a refund or cancel your enrollment, please contact us at <a
-          href="mailto:info@takshashilascs.com"
+          href={`mailto:${EMAIL}`}
           class="text-primary hover:underline font-medium transition-colors"
-          >info@takshashilascs.com</a
+          >{EMAIL}</a
         > or call <a
           href="tel:6913203751"
           class="text-primary hover:underline font-medium transition-colors"

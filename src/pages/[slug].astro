@@ -3,13 +3,13 @@ import Layout from "@/layouts/Layout.astro";
 import type { WPPost } from "@/types";
 import { getBlogTOC, getLatestPosts, rewriteMediaUrls } from "@/lib/wordpress";
 import { isServer } from "@/config/variables.ts";
+import { SITE_URL } from "@/config/CONSTANTS.ts";
 import { Image } from "astro:assets";
 export async function getStaticPaths() {
   let allPosts: WPPost[] = [];
   let page = 1;
 
   try {
-    console.log("Fetching WP posts", "in", isServer ? "server" : "client");
     const posts = await getLatestPosts(page, 100, {
       _fields: "slug,title,content,date,excerpt,yoast_head_json",
     });
@@ -47,19 +47,13 @@ const headings = await getBlogTOC(content);
 <Layout title={yoast?.title ?? post.title.rendered}>
   <Fragment slot="head_data">
     <meta name="description" content={yoast?.og_description} />
-    <link
-      rel="canonical"
-      href={`https://www.takshashilascs.com/${post.slug}/`}
-    />
+    <link rel="canonical" href={`${SITE_URL}/${post.slug}/`} />
 
     <!-- Open Graph -->
     <meta property="og:title" content={yoast?.og_title} />
     <meta property="og:description" content={yoast?.og_description} />
     <meta property="og:type" content="article" />
-    <meta
-      property="og:url"
-      content={`https://www.takshashilascs.com/${post.slug}/`}
-    />
+    <meta property="og:url" content={`${SITE_URL}/${post.slug}/`} />
     {ogImage && <meta property="og:image" content={ogImage.url} />}
     {
       ogImage && (

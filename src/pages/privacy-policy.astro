@@ -1,5 +1,6 @@
 ---
 import Layout from "@/layouts/Layout.astro";
+import { EMAIL, SITE_DOMAIN } from "@/config/CONSTANTS.ts";
 ---
 
 <Layout>
@@ -113,9 +114,9 @@ import Layout from "@/layouts/Layout.astro";
         <li>
           <strong class="text-foreground font-medium">Website</strong> refers to Takshasheela
           School of Civil Services, accessible from <a
-            href="https://takshashilascs.com/"
+            href={`${SITE_DOMAIN}/`}
             class="text-primary hover:underline font-medium transition-colors"
-            >https://takshashilascs.com/</a
+            >{`${SITE_DOMAIN}/`}</a
           >
         </li>
         <li>
@@ -583,9 +584,9 @@ import Layout from "@/layouts/Layout.astro";
         <li>
           <strong class="text-foreground font-medium">By email:</strong>
           <a
-            href="mailto:info@takshashilascs.com"
+            href={`mailto:${EMAIL}`}
             class="text-primary hover:underline font-medium transition-colors"
-            >info@takshashilascs.com</a
+            >{EMAIL}</a
           >
         </li>
         <li>
@@ -593,9 +594,9 @@ import Layout from "@/layouts/Layout.astro";
             >By visiting this page on our website:</strong
           >
           <a
-            href="https://takshashilascs.com/"
+            href={`${SITE_DOMAIN}/`}
             class="text-primary hover:underline font-medium transition-colors"
-            >https://takshashilascs.com/</a
+            >{`${SITE_DOMAIN}/`}</a
           >
         </li>
         <li>

@@ -1,5 +1,6 @@
 import type { WPMedia, WPPage, WPPost } from "@/types";
 import variables from "@/config/variables.ts";
+import { SITE_DOMAIN } from "@/config/CONSTANTS.ts";
 import * as cheerio from "cheerio";
 
 const base = variables.CRM_URL;
@@ -86,11 +87,10 @@ export async function getMagazines(): Promise<Magazine[]> {
 
   if (!page) return [];
   const html = (page?.content?.rendered ?? "").replaceAll(
-    "https://takshashilascs.com".replace(/\/$/, ""),
-    "https://crm.takshashilascs.com",
+    SITE_DOMAIN,
+    base.replace(/\/$/, ""),
   );
 
-  console.log(html);
   const $ = cheerio.load(html);
   const magazines: Magazine[] = [];
 
