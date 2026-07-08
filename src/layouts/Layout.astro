@@ -1,6 +1,7 @@
 ---
 import { SEO } from "astro-seo";
 import { Schema } from "astro-seo-schema";
+import { Font } from "astro:assets";
 import "../styles/globals.css";
 import Navbar from "@/components/Header.vue";
 import LeadPopup from "@/components/LeadPopup.vue";
@@ -86,6 +87,7 @@ const {
       }}
     />
     <link rel="preconnect" href="https://challenges.cloudflare.com" />
+    <Font cssVariable="--geist-sans" preload />
     <script
       src="https://challenges.cloudflare.com/turnstile/v0/api.js"
       async

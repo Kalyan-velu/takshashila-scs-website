@@ -1,6 +1,6 @@
 // @ts-check
 import tailwindcss from "@tailwindcss/vite";
-import { defineConfig } from "astro/config";
+import { defineConfig, fontProviders } from "astro/config";
 import react from "@astrojs/react";
 import vue from "@astrojs/vue";
 import vercel from "@astrojs/vercel";
@@ -11,6 +11,14 @@ import robotsTxt from "astro-robots-txt";
 export default defineConfig({
   site: "https://www.takshashilascs.com",
   trailingSlash: "ignore",
+  fonts: [
+    {
+      provider: fontProviders.fontsource(),
+      name: "Geist",
+      cssVariable: "--geist-sans",
+      weights: [100, 200, 300, 400, 500, 700, 800],
+    },
+  ],
   integrations: [
     react(),
     vue(),
