@@ -15,7 +15,7 @@ const aboutCourseEntries = allEntries.filter(
 const courses = aboutCourseEntries.flatMap((e) =>
   (e.data.courses ?? []).map((c) => ({
     ...c,
-    url: `/courses/${e.data.courseSlug}`,
+    url: `/courses/${e.data.courseSlug}/`,
     parentPrice: e.data.price,
     parentPricePeriod: e.data.pricePeriod,
     parentBadge: e.data.badge,

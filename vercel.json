@@ -1,4 +1,13 @@
 {
+  "trailingSlash": true,
+  "redirects": [
+    {
+      "source": "/:path*",
+      "has": [{ "type": "host", "value": "takshashilascs.com" }],
+      "destination": "https://www.takshashilascs.com/:path*",
+      "permanent": true
+    }
+  ],
   "rewrites": [
     {
       "source": "/storage/:path*",
@@ -7,6 +16,27 @@
     {
       "source": "/wp-json/:path*",
       "destination": "https://crm.takshashilascs.com/wp-json/:path*"
+    }
+  ],
+  "headers": [
+    {
+      "source": "/storage/(.*).pdf",
+      "headers": [
+        { "key": "X-Robots-Tag", "value": "noindex, follow" }
+      ]
+    },
+    {
+      "source": "/(.*)",
+      "headers": [
+        {
+          "key": "Content-Security-Policy",
+          "value": "default-src 'self'; script-src 'self' https://www.googletagmanager.com https://challenges.cloudflare.com 'sha256-CwE73mHgjHl9gx+NuCkwlfYVxvGb2QUkJmmla/DrUQA=' 'sha256-anPEp5vmO3yJ6Kv+KeD2W81svxAHBmUUslmzStOktsE=' 'sha256-QzWFZi+FLIx23tnm9SBU4aEgx4x8DsuASP07mfqol/c=' 'sha256-SaCkFfPruIdTXT8/97JArQmGxiJAL2o4bBDvSgJ5y3Q=' 'sha256-eIXWvAmxkr251LJZkjniEK5LcPF3NkapbJepohwYRIc=' 'sha256-ogI1UV/iCee8Sm25OtUifn6Le4ZXy6Nm0D4ehQF0z34='; style-src 'self' 'unsafe-inline'; img-src 'self' https: data: blob:; font-src 'self' data:; connect-src 'self' https://www.googletagmanager.com https://challenges.cloudflare.com https://www.google-analytics.com https://analytics.google.com https://stats.g.doubleclick.net; frame-src https://www.googletagmanager.com https://challenges.cloudflare.com; worker-src 'self' blob:; object-src 'none'; base-uri 'self'; form-action 'self'; frame-ancestors 'self'; upgrade-insecure-requests"
+        },
+        { "key": "X-Content-Type-Options", "value": "nosniff" },
+        { "key": "X-Frame-Options", "value": "SAMEORIGIN" },
+        { "key": "Referrer-Policy", "value": "strict-origin-when-cross-origin" },
+        { "key": "Permissions-Policy", "value": "geolocation=(), camera=(), microphone=()" }
+      ]
     }
   ]
 }

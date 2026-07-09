@@ -12,7 +12,7 @@ const aboutCourseEntries = allEntries.filter(
 const courses = aboutCourseEntries.flatMap((e) =>
   (e.data.courses ?? []).map((c) => ({
     ...c,
-    url: `/courses/${e.data.courseSlug}`,
+    url: `/courses/${e.data.courseSlug}/`,
   })),
 );
 ---

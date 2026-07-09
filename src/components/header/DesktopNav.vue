@@ -36,7 +36,7 @@ const emit = defineEmits(["openMenu", "closeMenu"]);
         @mouseleave="emit('closeMenu')"
       >
         <a
-          href="/courses"
+          href="/courses/"
           class="link font-light leading-tight transition-none dark:text-white"
           :class="{
             'text-foreground/80': headerSmall,
@@ -55,7 +55,7 @@ const emit = defineEmits(["openMenu", "closeMenu"]);
 
       <li class="relative">
         <a
-          href="/team"
+          href="/team/"
           class="link font-light leading-tight transition-none dark:text-white"
           :class="{
             'text-foreground/80': headerSmall,
@@ -72,7 +72,7 @@ const emit = defineEmits(["openMenu", "closeMenu"]);
         @mouseleave="emit('closeMenu')"
       >
         <a
-          href="/about"
+          href="/about/"
           class="link font-light leading-tight transition-none dark:text-white"
           :class="{
             'text-foreground/80': headerSmall,
@@ -105,7 +105,7 @@ const emit = defineEmits(["openMenu", "closeMenu"]);
 
       <li class="relative">
         <a
-          href="/magazine"
+          href="/magazine/"
           class="link font-light leading-tight transition-none dark:text-white"
           :class="{
             'text-foreground/80': headerSmall,
@@ -118,7 +118,7 @@ const emit = defineEmits(["openMenu", "closeMenu"]);
 
       <li class="relative">
         <a
-          href="/contact"
+          href="/contact/"
           class="link font-light leading-tight transition-none dark:text-white"
           :class="{
             'text-foreground/80': headerSmall,

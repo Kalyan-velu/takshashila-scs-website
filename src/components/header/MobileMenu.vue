@@ -83,7 +83,7 @@ const toggleAccordion = (item: string) => {
                   >{{ item.title }}</a
                 >
                 <a
-                  href="/courses"
+                  href="/courses/"
                   @click="emit('closeMenu')"
                   class="text-lg font-medium text-primary mt-2"
                   >View all Programs &rarr;</a
@@ -94,7 +94,7 @@ const toggleAccordion = (item: string) => {
 
           <li class="relative w-full border-b border-border/40 pb-4">
             <a
-              href="/team"
+              href="/team/"
               @click="emit('closeMenu')"
               class="block w-full link text-4xl tracking-tight leading-none transition-none dark:text-white"
               >Team</a
@@ -163,7 +163,7 @@ const toggleAccordion = (item: string) => {
 
           <li class="relative w-full border-b border-border/40 pb-4">
             <a
-              href="/magazine"
+              href="/magazine/"
               @click="emit('closeMenu')"
               class="block w-full link text-4xl tracking-tight leading-none transition-none dark:text-white"
               >Magazine</a
@@ -172,7 +172,7 @@ const toggleAccordion = (item: string) => {
 
           <li class="relative w-full border-b border-border/40 pb-4">
             <a
-              href="/contact"
+              href="/contact/"
               @click="emit('closeMenu')"
               class="block w-full link text-4xl tracking-tight leading-none transition-none dark:text-white"
               >Contact</a
@@ -262,7 +262,7 @@ const toggleAccordion = (item: string) => {
           ></a>
         </div>
         <a
-          href="/contact"
+          href="/contact/"
           @click="emit('closeMenu')"
           class="inline-flex w-full items-center justify-center rounded-full bg-primary py-4 text-lg font-medium text-primary-foreground"
         >

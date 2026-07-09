@@ -10,7 +10,7 @@ import robotsTxt from "astro-robots-txt";
 // https://astro.build/config
 export default defineConfig({
   site: "https://www.takshashilascs.com",
-  trailingSlash: "ignore",
+  trailingSlash: "always",
   fonts: [
     {
       provider: fontProviders.fontsource(),
@@ -30,7 +30,15 @@ export default defineConfig({
         forward: ["dataLayer.push"],
       },
     }),
-    robotsTxt(),
+    robotsTxt({
+      policy: [
+        {
+          userAgent: "*",
+          allow: "/",
+          disallow: ["/admin/", "/api/", "/storage/"],
+        },
+      ],
+    }),
   ],
   image: {
     remotePatterns: [

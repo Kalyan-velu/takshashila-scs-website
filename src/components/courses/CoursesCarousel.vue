@@ -1,11 +1,7 @@
 <!--suppress ALL -->
 <script setup lang="ts">
 import { computed, ref } from "vue";
-import {
-  Carousel,
-  CarouselContent,
-  CarouselItem,
-} from "@/components/ui/carousel";
+import { Carousel, CarouselContent, CarouselItem } from "@/components/ui/carousel";
 import { ArrowRight } from "lucide-vue-next";
 import { cn } from "@/lib/utils";
 import { whatsappUrl } from "@/config/CONSTANTS.ts";
@@ -149,7 +145,5 @@ window.addEventListener("course-tab-change", (e) => {
         </div>
       </CarouselItem>
     </CarouselContent>
-    <!--    <CarouselPrevious />-->
-    <!--    <CarouselNext />-->
   </Carousel>
 </template>
