@@ -1,0 +1,55 @@
+---
+import AnnouncementTicker from "./AnnouncementTicker.astro";
+import TopBar from "./TopBar.astro";
+import DesktopNav from "./DesktopNav.astro";
+import HeaderActions from "./HeaderActions.astro";
+import MegaMenu from "./MegaMenu.astro";
+import SearchDropdown from "./SearchDropdown.astro";
+import MobileMenu from "./MobileMenu.astro";
+import { Picture } from "astro:assets";
+import Logo from "@/assets/logo-full-black.png";
+---
+
+<div
+  class="inline-flex flex-col items-center z-50 js-header-container w-full sticky top-0"
+>
+  <AnnouncementTicker />
+  <TopBar />
+  <div
+    class="w-full transition-transform transform duration-500 translate-y-0 js-header-wrapper shadow-sm"
+  >
+    <header
+      class="flex flex-nowrap items-center justify-between relative z-30 transition-all duration-300 py-3.5 md:py-5 js-header bg-white/95 backdrop-blur-md border-b border-gray-100 w-full"
+    >
+      <div
+        class="absolute top-0 left-0 w-full h-full lg:hidden js-logo-scroll-overlay pointer-events-none"
+      >
+      </div>
+
+      <div class="ml-4 relative z-10 lg:ml-8 lg:mr-8 shrink-0">
+        <a href="/" class="transition-opacity hover:opacity-90 block">
+          <div class="sr-only">Takshasheela Logo link to home page</div>
+          <Picture
+            src={Logo}
+            formats={["avif", "webp"]}
+            alt="Takshasheela Logo"
+            fetchpriority="high"
+            width="1920"
+            height="1080"
+            class="h-auto transition-all duration-300 w-44 md:w-56 js-header-logo"
+          />
+        </a>
+      </div>
+      <DesktopNav />
+      <HeaderActions />
+    </header>
+    <SearchDropdown />
+    <MegaMenu menuId={7} />
+    <MegaMenu menuId={5} />
+    <MobileMenu />
+  </div>
+</div>
+
+<script>
+  import "./header.ts";
+</script>

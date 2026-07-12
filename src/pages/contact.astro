@@ -1,6 +1,6 @@
 ---
 import Layout from "../layouts/Layout.astro";
-import { Phone, Mail, MapPin, Send } from "lucide-react";
+// import { Phone, Mail, MapPin, Send } from "lucide-react";
 import variables from "@/config/variables.ts";
 import { EMAIL, PHONE_DISPLAY, PHONE_HREF } from "@/config/CONSTANTS.ts";
 const cloudflare_site_key = variables.CLOUDFLARE_SITE_KEY;
@@ -15,11 +15,11 @@ const description =
       class="absolute top-0 left-1/2 -translate-x-1/2 w-full h-full -z-10 pointer-events-none"
     >
       <div
-        class="absolute top-[-10%] left-[-10%] w-125 h-125 rounded-full bg-primary/10 blur-[140px] animate-pulse duration-10000"
+        class="absolute top-[-10%] left-[-10%] w-125 h-125 rounded-full bg-primary-500/10 blur-[140px] animate-pulse duration-10000"
       >
       </div>
       <div
-        class="absolute bottom-[20%] right-[-5%] w-150 h-150 rounded-full bg-primary/5 blur-[150px]"
+        class="absolute bottom-[20%] right-[-5%] w-150 h-150 rounded-full bg-primary-500/5 blur-[150px]"
       >
       </div>
       <div
@@ -33,12 +33,12 @@ const description =
         <div class="flex flex-col gap-10">
           <div class="space-y-6">
             <h1
-              class="text-5xl md:text-6xl lg:text-7xl font-light tracking-tight text-foreground leading-[1.1]"
+              class="text-5xl md:text-6xl lg:text-7xl font-light tracking-tight text-gray-900 leading-[1.1]"
             >
-              Contact <span class="text-primary italic font-serif">Us</span>
+              Contact <span class="text-primary-500 italic font-serif">Us</span>
             </h1>
             <div
-              class="space-y-5 text-lg text-muted-foreground font-light leading-relaxed"
+              class="space-y-5 text-lg text-gray-600 font-light leading-relaxed"
             >
               <p>
                 At Takshasheela School of Civil Services, the best coaching
@@ -55,7 +55,7 @@ const description =
 
           <div class="space-y-10">
             <div
-              class="space-y-4 text-muted-foreground font-light leading-relaxed text-lg"
+              class="space-y-4 text-gray-600 font-light leading-relaxed text-lg"
             >
               <p>
                 Preparing for competitive exams like UPSC and APSC can be a
@@ -69,12 +69,12 @@ const description =
 
             <div class="space-y-5">
               <h2
-                class="text-3xl md:text-4xl font-light text-foreground tracking-tight"
+                class="text-3xl md:text-4xl font-light text-gray-900 tracking-tight"
               >
                 How We Support You
               </h2>
               <div
-                class="space-y-4 text-muted-foreground font-light leading-relaxed text-lg"
+                class="space-y-4 text-gray-600 font-light leading-relaxed text-lg"
               >
                 <p>
                   At Takshasheela, the best APSC coaching centre in Guwahati,
@@ -88,7 +88,7 @@ const description =
 
             <div class="space-y-6">
               <h2
-                class="text-3xl md:text-4xl font-light text-foreground tracking-tight"
+                class="text-3xl md:text-4xl font-light text-gray-900 tracking-tight"
               >
                 Why Contact Us?
               </h2>
@@ -100,8 +100,8 @@ const description =
                     "Learn about eligibility criteria, class schedules, and faculty support.",
                     "Explore additional services and resources designed to enhance your preparation.",
                   ].map((item) => (
-                    <li class="flex items-start gap-4 text-muted-foreground font-light text-lg group">
-                      <span class="mt-2.5 w-2 h-2 rounded-full bg-primary/70 shrink-0 transition-all duration-300 group-hover:scale-150 group-hover:bg-primary shadow-[0_0_10px_rgba(var(--primary),0.5)]" />
+                    <li class="flex items-start gap-4 text-gray-600 font-light text-lg group">
+                      <span class="mt-2.5 w-2 h-2 rounded-full bg-primary-500/70 shrink-0 transition-all duration-300 group-hover:scale-150 group-hover:bg-primary-500 shadow-[0_0_10px_rgba(var(--primary),0.5)]" />
                       <span>{item}</span>
                     </li>
                   ))
@@ -110,25 +110,23 @@ const description =
             </div>
 
             <div
-              class="relative p-8 rounded-3xl bg-card/60 backdrop-blur-xl border border-border/50 shadow-xl overflow-hidden group hover:border-primary/30 transition-colors duration-500"
+              class="relative p-8 rounded-3xl bg-white/60 backdrop-blur-xl border border-gray-200/50 shadow-xl overflow-hidden group hover:border-primary-500/30 transition-colors duration-500"
             >
               <div
                 class="absolute inset-0 bg-linear-to-br from-primary/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500"
               >
               </div>
               <div class="relative z-10">
-                <p
-                  class="text-muted-foreground font-light leading-relaxed text-lg"
-                >
+                <p class="text-gray-600 font-light leading-relaxed text-lg">
                   Your success is important to us, and we are dedicated to
                   helping you make your vision a reality. Explore <a
                     href="/courses/"
-                    class="text-primary hover:text-primary/80 font-medium hover:underline underline-offset-4 transition-colors"
+                    class="text-primary-500 hover:text-primary-500/80 font-medium hover:underline underline-offset-4 transition-colors"
                     >Our UPSC & APSC Preparation Courses</a
                   > today and take the first step toward a bright future in public
                   service.
                 </p>
-                <p class="mt-4 text-foreground font-medium text-lg">
+                <p class="mt-4 text-gray-900 font-medium text-lg">
                   Reach out to Takshasheela School of Civil Services, the best
                   coaching institute for IAS in Guwahati.
                 </p>
@@ -138,76 +136,76 @@ const description =
 
           <div class="grid sm:grid-cols-2 gap-6 mt-4">
             <div
-              class="relative p-8 rounded-[2rem] bg-card/50 backdrop-blur-md border border-border/50 shadow-lg flex flex-col items-start gap-6 hover:shadow-xl hover:border-primary/40 transition-all duration-500 group overflow-hidden"
+              class="relative p-8 rounded-4xl bg-white/50 backdrop-blur-md border border-gray-200/50 shadow-lg flex flex-col items-start gap-6 hover:shadow-xl hover:border-primary-500/40 transition-all duration-500 group overflow-hidden"
             >
               <div
-                class="absolute top-0 right-0 w-32 h-32 bg-primary/5 rounded-full -mr-16 -mt-16 blur-2xl transition-transform duration-500 group-hover:scale-150 group-hover:bg-primary/10"
+                class="absolute top-0 right-0 w-32 h-32 bg-primary-500/5 rounded-full -mr-16 -mt-16 blur-2xl transition-transform duration-500 group-hover:scale-150 group-hover:bg-primary-500/10"
               >
               </div>
               <div
-                class="w-14 h-14 rounded-2xl bg-primary/10 flex items-center justify-center text-primary shrink-0 transition-transform duration-500 group-hover:scale-110 group-hover:shadow-[0_0_20px_-5px_rgba(var(--primary),0.5)] relative z-10"
+                class="w-14 h-14 rounded-2xl bg-primary-500/10 flex items-center justify-center text-primary-500 shrink-0 transition-transform duration-500 group-hover:scale-110 group-hover:shadow-[0_0_20px_-5px_rgba(var(--primary),0.5)] relative z-10"
               >
-                <Phone className="w-6 h-6" />
+                <!--<Phone className="w-6 h-6" />-->
               </div>
               <div class="space-y-2 relative z-10 w-full">
                 <p
-                  class="text-xs font-medium uppercase tracking-widest text-muted-foreground"
+                  class="text-xs font-medium uppercase tracking-widest text-gray-600"
                 >
                   Give Us A Call
                 </p>
                 <a
                   href={PHONE_HREF}
-                  class="block text-xl font-medium text-foreground hover:text-primary transition-colors truncate"
+                  class="block text-xl font-medium text-gray-900 hover:text-primary-500 transition-colors truncate"
                   >{PHONE_DISPLAY}</a
                 >
               </div>
             </div>
 
             <div
-              class="relative p-8 rounded-[2rem] bg-card/50 backdrop-blur-md border border-border/50 shadow-lg flex flex-col items-start gap-6 hover:shadow-xl hover:border-primary/40 transition-all duration-500 group overflow-hidden"
+              class="relative p-8 rounded-[2rem] bg-white/50 backdrop-blur-md border border-gray-200/50 shadow-lg flex flex-col items-start gap-6 hover:shadow-xl hover:border-primary-500/40 transition-all duration-500 group overflow-hidden"
             >
               <div
-                class="absolute top-0 right-0 w-32 h-32 bg-primary/5 rounded-full -mr-16 -mt-16 blur-2xl transition-transform duration-500 group-hover:scale-150 group-hover:bg-primary/10"
+                class="absolute top-0 right-0 w-32 h-32 bg-primary-500/5 rounded-full -mr-16 -mt-16 blur-2xl transition-transform duration-500 group-hover:scale-150 group-hover:bg-primary-500/10"
               >
               </div>
               <div
-                class="w-14 h-14 rounded-2xl bg-primary/10 flex items-center justify-center text-primary shrink-0 transition-transform duration-500 group-hover:scale-110 group-hover:shadow-[0_0_20px_-5px_rgba(var(--primary),0.5)] relative z-10"
+                class="w-14 h-14 rounded-2xl bg-primary-500/10 flex items-center justify-center text-primary-500 shrink-0 transition-transform duration-500 group-hover:scale-110 group-hover:shadow-[0_0_20px_-5px_rgba(var(--primary),0.5)] relative z-10"
               >
-                <Mail className="w-6 h-6" />
+                <!--<Mail className="w-6 h-6" />-->
               </div>
               <div class="space-y-2 relative z-10 w-full">
                 <p
-                  class="text-xs font-medium uppercase tracking-widest text-muted-foreground"
+                  class="text-xs font-medium uppercase tracking-widest text-gray-600"
                 >
                   Send An Email
                 </p>
                 <a
                   href={`mailto:${EMAIL}`}
-                  class="block text-xl font-medium text-foreground hover:text-primary transition-colors truncate"
+                  class="block text-xl font-medium text-gray-900 hover:text-primary-500 transition-colors truncate"
                   >{EMAIL}</a
                 >
               </div>
             </div>
 
             <div
-              class="relative sm:col-span-2 p-8 rounded-[2rem] bg-card/50 backdrop-blur-md border border-border/50 shadow-lg flex flex-col sm:flex-row items-start sm:items-center gap-6 hover:shadow-xl hover:border-primary/40 transition-all duration-500 group overflow-hidden"
+              class="relative sm:col-span-2 p-8 rounded-[2rem] bg-white/50 backdrop-blur-md border border-gray-200/50 shadow-lg flex flex-col sm:flex-row items-start sm:items-center gap-6 hover:shadow-xl hover:border-primary-500/40 transition-all duration-500 group overflow-hidden"
             >
               <div
-                class="absolute top-0 right-0 w-48 h-48 bg-primary/5 rounded-full -mr-24 -mt-24 blur-3xl transition-transform duration-500 group-hover:scale-150 group-hover:bg-primary/10"
+                class="absolute top-0 right-0 w-48 h-48 bg-primary-500/5 rounded-full -mr-24 -mt-24 blur-3xl transition-transform duration-500 group-hover:scale-150 group-hover:bg-primary-500/10"
               >
               </div>
               <div
-                class="w-14 h-14 rounded-2xl bg-primary/10 flex items-center justify-center text-primary shrink-0 transition-transform duration-500 group-hover:scale-110 group-hover:shadow-[0_0_20px_-5px_rgba(var(--primary),0.5)] relative z-10"
+                class="w-14 h-14 rounded-2xl bg-primary-500/10 flex items-center justify-center text-primary-500 shrink-0 transition-transform duration-500 group-hover:scale-110 group-hover:shadow-[0_0_20px_-5px_rgba(var(--primary),0.5)] relative z-10"
               >
-                <MapPin className="w-6 h-6" />
+                <!--<MapPin className="w-6 h-6" />-->
               </div>
               <div class="space-y-2 relative z-10">
                 <p
-                  class="text-xs font-medium uppercase tracking-widest text-muted-foreground"
+                  class="text-xs font-medium uppercase tracking-widest text-gray-600"
                 >
                   Visit Our Office
                 </p>
-                <p class="text-xl font-medium text-foreground">
+                <p class="text-xl font-medium text-gray-900">
                   Guwahati, Assam, India
                 </p>
               </div>
@@ -217,11 +215,11 @@ const description =
 
         <div class="lg:sticky lg:top-8 mt-8 lg:mt-0">
           <div
-            class="bg-card/40 backdrop-blur-2xl border border-white/10 dark:border-white/5 p-8 sm:p-12 rounded-[2.5rem] shadow-2xl relative overflow-hidden group"
+            class="bg-white/40 backdrop-blur-2xl border border-white/10 dark:border-white/5 p-8 sm:p-12 rounded-[2.5rem] shadow-2xl relative overflow-hidden group"
           >
             {/* Form Inner Glow Effect */}
             <div
-              class="absolute top-0 right-0 w-100 h-100 bg-primary/10 rounded-full -mr-48 -mt-48 blur-[80px] transition-opacity duration-700 opacity-50 group-hover:opacity-100 pointer-events-none"
+              class="absolute top-0 right-0 w-100 h-100 bg-primary-500/10 rounded-full -mr-48 -mt-48 blur-[80px] transition-opacity duration-700 opacity-50 group-hover:opacity-100 pointer-events-none"
             >
             </div>
             <div
@@ -231,21 +229,20 @@ const description =
 
             <div class="relative z-10 space-y-10">
               <div class="space-y-3">
-                <h3 class="text-4xl font-light tracking-tight text-foreground">
-                  Send a <span class="text-primary italic font-serif"
+                <h3 class="text-4xl font-light tracking-tight text-gray-900">
+                  Send a <span class="text-primary-500 italic font-serif"
                     >Message</span
                   >
                 </h3>
-                <p class="text-muted-foreground font-light text-lg">
+                <p class="text-gray-600 font-light text-lg">
                   Fill out the form below and we'll get back to you shortly.
                 </p>
               </div>
 
               <form id="contact-form" class="space-y-7">
                 <div class="space-y-5">
-                  <label
-                    class="text-sm font-medium text-foreground tracking-wide"
-                    >Name <span class="text-primary">*</span></label
+                  <label class="text-sm font-medium text-gray-900 tracking-wide"
+                    >Name <span class="text-primary-500">*</span></label
                   >
                   <div class="grid sm:grid-cols-2 gap-5">
                     <div class="space-y-2">
@@ -254,12 +251,12 @@ const description =
                           type="text"
                           name="firstName"
                           required
-                          class="w-full px-5 py-4 border border-border/50 rounded-2xl bg-background/50 backdrop-blur-md text-foreground focus:outline-none focus:ring-2 focus:ring-primary/30 focus:border-primary/50 transition-all placeholder:text-muted-foreground/40 shadow-inner"
+                          class="w-full px-5 py-4 border border-gray-200/50 rounded-2xl bg-white/50 backdrop-blur-md text-gray-900 focus:outline-none focus:ring-2 focus:ring-primary-500/30 focus:border-primary-500/50 transition-all placeholder:text-gray-600/40 shadow-inner"
                           placeholder="First Name"
                         />
                       </label>
                       <span
-                        class="text-[10px] text-muted-foreground uppercase tracking-widest px-2"
+                        class="text-[10px] text-gray-600 uppercase tracking-widest px-2"
                         >First</span
                       >
                     </div>
@@ -269,12 +266,12 @@ const description =
                           type="text"
                           name="lastName"
                           required
-                          class="w-full px-5 py-4 border border-border/50 rounded-2xl bg-background/50 backdrop-blur-md text-foreground focus:outline-none focus:ring-2 focus:ring-primary/30 focus:border-primary/50 transition-all placeholder:text-muted-foreground/40 shadow-inner"
+                          class="w-full px-5 py-4 border border-gray-200/50 rounded-2xl bg-white/50 backdrop-blur-md text-gray-900 focus:outline-none focus:ring-2 focus:ring-primary-500/30 focus:border-primary-500/50 transition-all placeholder:text-gray-600/40 shadow-inner"
                           placeholder="Last Name"
                         />
                       </label>
                       <span
-                        class="text-[10px] text-muted-foreground uppercase tracking-widest px-2"
+                        class="text-[10px] text-gray-600 uppercase tracking-widest px-2"
                         >Last</span
                       >
                     </div>
@@ -284,13 +281,13 @@ const description =
                 <div class="grid sm:grid-cols-2 gap-6">
                   <div class="space-y-3">
                     <label
-                      class="text-sm font-medium text-foreground tracking-wide"
-                      >Phone <span class="text-primary">*</span>
+                      class="text-sm font-medium text-gray-900 tracking-wide"
+                      >Phone <span class="text-primary-500">*</span>
                       <input
                         type="tel"
                         name="phone"
                         required
-                        class="w-full px-5 py-4 border border-border/50 rounded-2xl bg-background/50 backdrop-blur-md text-foreground focus:outline-none focus:ring-2 focus:ring-primary/30 focus:border-primary/50 transition-all placeholder:text-muted-foreground/40 shadow-inner"
+                        class="w-full px-5 py-4 border border-gray-200/50 rounded-2xl bg-white/50 backdrop-blur-md text-gray-900 focus:outline-none focus:ring-2 focus:ring-primary-500/30 focus:border-primary-500/50 transition-all placeholder:text-gray-600/40 shadow-inner"
                         placeholder="+91-00000-00000"
                       /></label
                     >
@@ -302,13 +299,13 @@ const description =
                   </div>
                   <div class="space-y-3">
                     <label
-                      class="text-sm font-medium text-foreground tracking-wide"
-                      >Email <span class="text-primary">*</span>
+                      class="text-sm font-medium text-gray-900 tracking-wide"
+                      >Email <span class="text-primary-500">*</span>
                       <input
                         type="email"
                         name="email"
                         required
-                        class="w-full px-5 py-4 border border-border/50 rounded-2xl bg-background/50 backdrop-blur-md text-foreground focus:outline-none focus:ring-2 focus:ring-primary/30 focus:border-primary/50 transition-all placeholder:text-muted-foreground/40 shadow-inner"
+                        class="w-full px-5 py-4 border border-gray-200/50 rounded-2xl bg-white/50 backdrop-blur-md text-gray-900 focus:outline-none focus:ring-2 focus:ring-primary-500/30 focus:border-primary-500/50 transition-all placeholder:text-gray-600/40 shadow-inner"
                         placeholder="example@mail.com"
                       />
                     </label>
@@ -321,13 +318,12 @@ const description =
                 </div>
 
                 <div class="space-y-3">
-                  <label
-                    class="text-sm font-medium text-foreground tracking-wide"
+                  <label class="text-sm font-medium text-gray-900 tracking-wide"
                     >Address
                     <textarea
                       rows="3"
                       name="address"
-                      class="w-full px-5 py-4 border border-border/50 rounded-2xl bg-background/50 backdrop-blur-md text-foreground focus:outline-none focus:ring-2 focus:ring-primary/30 focus:border-primary/50 transition-all placeholder:text-muted-foreground/40 resize-none shadow-inner"
+                      class="w-full px-5 py-4 border border-gray-200/50 rounded-2xl bg-white/50 backdrop-blur-md text-gray-900 focus:outline-none focus:ring-2 focus:ring-primary-500/30 focus:border-primary-500/50 transition-all placeholder:text-gray-600/40 resize-none shadow-inner"
                       placeholder="Your full address"></textarea>
                   </label>
                 </div>
@@ -346,7 +342,7 @@ const description =
                   id="submit-button"
                   type="submit"
                   disabled
-                  class="w-full relative overflow-hidden bg-primary disabled:bg-primary/80 text-primary-foreground font-medium py-5 px-8 rounded-2xl transition-all duration-300 flex items-center justify-center gap-2 group shadow-[0_5px_40px_-10px_rgba(var(--primary),0.6)] hover:shadow-[0_5px_40px_-5px_rgba(var(--primary),0.8)] cursor-pointer"
+                  class="w-full relative overflow-hidden bg-primary-500 disabled:bg-primary-500/80 text-white font-medium py-5 px-8 rounded-2xl transition-all duration-300 flex items-center justify-center gap-2 group shadow-[0_5px_40px_-10px_rgba(var(--primary),0.6)] hover:shadow-[0_5px_40px_-5px_rgba(var(--primary),0.8)] cursor-pointer"
                 >
                   <span
                     class="absolute inset-0 bg-white/20 translate-y-full group-hover:translate-y-0 transition-transform duration-300 ease-out"
@@ -354,9 +350,9 @@ const description =
                   <span class="relative z-10 text-lg submit-text"
                     >Send Message</span
                   >
-                  <Send
-                    className="w-5 h-5 relative z-10 transition-transform duration-300 group-hover:-translate-y-1 group-hover:translate-x-1 group-hover:scale-110 submit-icon"
-                  />
+                  <!--<Send-->
+                  <!--  className="w-5 h-5 relative z-10 transition-transform duration-300 group-hover:-translate-y-1 group-hover:translate-x-1 group-hover:scale-110 submit-icon"-->
+                  <!--/>-->
                 </button>
               </form>
             </div>

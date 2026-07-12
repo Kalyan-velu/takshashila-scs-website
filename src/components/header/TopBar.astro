@@ -1,0 +1,27 @@
+---
+import { EMAIL, PHONE_DISPLAY, PHONE_HREF, socials } from "@/config/CONSTANTS.ts";
+---
+
+<div class="hidden lg:flex items-center justify-between px-6 py-1.5 w-full text-xs font-light text-gray-600 bg-white/80 dark:bg-slate-950/80 border-b border-gray-100 dark:border-slate-900 backdrop-blur-md rounded-none js-top-bar-wrapper">
+  <div class="flex items-center space-x-6">
+    <a href={PHONE_HREF} class="flex items-center gap-1.5 hover:text-primary-500 transition-colors">
+      <iconify-icon icon="lucide:phone" class="text-[13px]"></iconify-icon>
+      {PHONE_DISPLAY}
+    </a>
+    <a href={`mailto:${EMAIL}`} class="flex items-center gap-1.5 hover:text-primary-500 transition-colors">
+      <iconify-icon icon="lucide:mail" class="text-[13px]"></iconify-icon>
+      {EMAIL}
+    </a>
+  </div>
+  <div class="flex items-center space-x-4">
+    <a href={socials.FACEBOOK} class="hover:text-primary-500 transition-colors" target="_blank" aria-label="Facebook">
+      <iconify-icon icon="lucide:facebook" class="text-[14px]"></iconify-icon>
+    </a>
+    <a href={socials.TWITTER} class="hover:text-primary-500 transition-colors" target="_blank" aria-label="Twitter/X">
+      <iconify-icon icon="ri:twitter-x-fill" class="text-[14px]"></iconify-icon>
+    </a>
+    <a href={socials.INSTAGRAM} class="hover:text-primary-500 transition-colors" target="_blank" aria-label="Instagram">
+      <iconify-icon icon="lucide:instagram" class="text-[14px]"></iconify-icon>
+    </a>
+  </div>
+</div>

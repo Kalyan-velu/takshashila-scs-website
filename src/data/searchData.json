@@ -1,0 +1,62 @@
+[
+  {
+    "title": "Comprehensive UPSC Package",
+    "description": "Comprehensive guidance for Civil Services Examination",
+    "url": "/courses/upsc/",
+    "category": "Courses"
+  },
+  {
+    "title": "ADRE 2026 Batch",
+    "description": "Dedicated courses for Assam Direct Recruitment Exams",
+    "url": "/courses/adre/",
+    "category": "Courses"
+  },
+  {
+    "title": "APSC CCE Batch",
+    "description": "Specialized prep for Assam Civil Services",
+    "url": "/courses/apsc/",
+    "category": "Courses"
+  },
+  {
+    "title": "Current Affairs",
+    "description": "Daily updates and monthly analysis",
+    "url": "https://currentaffairs.takshashila.com/",
+    "category": "Courses"
+  },
+  {
+    "title": "About Takshasheela",
+    "description": "Learn about the best civil services coaching institute in Guwahati",
+    "url": "/about/",
+    "category": "Pages"
+  },
+  {
+    "title": "Our Expert Faculty & Team",
+    "description": "Meet our mentors and educators",
+    "url": "/team/",
+    "category": "Pages"
+  },
+  {
+    "title": "Daily Current Affairs",
+    "description": "Daily news analysis and UPSC/APSC preparation materials",
+    "url": "https://currentaffairs.takshashila.com/",
+    "category": "Pages"
+  },
+  {
+    "title": "Takshasheela Magazine",
+    "description": "Monthly current affairs and study magazines",
+    "url": "/magazine/",
+    "category": "Pages"
+  },
+  {
+    "title": "Contact Admissions & Location",
+    "description": "Get in touch with our Guwahati campus",
+    "url": "/contact/",
+    "category": "Pages"
+  },
+  {
+    "title": "Photo Gallery",
+    "description": "Glimpses of classrooms and campus life",
+    "url": "/#gallery",
+    "category": "Pages"
+  }
+]

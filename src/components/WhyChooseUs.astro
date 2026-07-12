@@ -1,84 +1,48 @@
 ---
-import {
-  GraduationCap,
-  AppWindow,
-  PlaySquare,
-  Building,
-  BookMarked,
-  Newspaper,
-} from "lucide-react";
+// import {
+//   GraduationCap,
+//   AppWindow,
+//   PlaySquare,
+//   Building,
+//   BookMarked,
+//   Newspaper,
+// } from "lucide-react";
+import contentData from "@/data/content.json";
 
-const reasons = [
-  {
-    icon: GraduationCap,
-    title: "Best Faculty",
-    description:
-      "Experienced faculty from Delhi and other states, with 5-20 years' experience, mentor aspirants at Takshasheela School of Civil Services, the best coaching institute for UPSC in Guwahati.",
-    color: "from-blue-500/10 to-transparent",
-    iconColor: "text-blue-500",
-  },
-  {
-    icon: AppWindow,
-    title: "Accessibility",
-    description:
-      "We prioritize accessibility through online courses and accommodations for all, ensuring equal opportunities for success.",
-    color: "from-purple-500/10 to-transparent",
-    iconColor: "text-purple-500",
-  },
-  {
-    icon: PlaySquare,
-    title: "Recorded Classes",
-    description:
-      "Access recorded classes for flexible learning, enhancing understanding at your own pace at Takshasheela, the best online UPSC coaching in Guwahati.",
-    color: "from-green-500/10 to-transparent",
-    iconColor: "text-green-500",
-  },
-  {
-    icon: Building,
-    title: "Infrastructure",
-    description:
-      "Cutting-edge infrastructure with smart classrooms, fostering a dynamic and interactive learning atmosphere for students at Takshasheela, the best IAS coaching institute in Guwahati.",
-    color: "from-amber-500/10 to-transparent",
-    iconColor: "text-amber-500",
-  },
-  {
-    icon: BookMarked,
-    title: "Advanced Library",
-    description:
-      "Our advanced library offers a vast collection of resources, supporting comprehensive learning and research for civil service aspirants.",
-    color: "from-rose-500/10 to-transparent",
-    iconColor: "text-rose-500",
-  },
-  {
-    icon: Newspaper,
-    title: "Monthly Magazine",
-    description:
-      "Stay informed with our monthly magazine, packed with crucial updates and insightful articles for civil service aspirants.",
-    color: "from-indigo-500/10 to-transparent",
-    iconColor: "text-indigo-500",
-  },
-];
+// const iconMap = {
+//   GraduationCap,
+//   AppWindow,
+//   PlaySquare,
+//   Building,
+//   BookMarked,
+//   Newspaper,
+// };
 
+const reasons = contentData.whyChooseUs.reasons.map(r => ({
+  ...r,
+  // icon: iconMap[r.icon] || GraduationCap
+}));
+
+const { whyChooseUs } = contentData;
 const { id } = Astro.props;
 ---
 
 <section
   id={id}
-  class="pb-12 lg:pb-32 lg:max-w-7xl mx-auto bg-background relative z-10"
+  class="pb-12 lg:pb-32 lg:max-w-7xl mx-auto bg-white relative z-10"
 >
   <div class="px-4 md:px-6">
     <div class="grid lg:grid-cols-12 gap-12 lg:gap-8 items-start">
       <div class="lg:col-span-5 sticky lg:top-40 flex flex-col gap-6 text-left">
         <h2
-          class="text-3xl md:text-4xl lg:text-5xl font-light tracking-tight text-foreground leading-tight"
+          class="text-3xl md:text-4xl lg:text-5xl font-light tracking-tight text-gray-900 leading-tight"
         >
-          Why We Are the <span class="text-primary italic"
-            >Best Coaching Center</span
-          > in Guwahati
+          {whyChooseUs.title_part1}<span class="text-primary-500 italic"
+            >{whyChooseUs.title_highlight}</span
+          >{whyChooseUs.title_part2}
         </h2>
-        <p class="text-base text-muted-foreground font-light leading-relaxed">
-          We provide unparalleled learning experiences tailored to help you
-          succeed in UPSC and APSC examinations.
+        <p class="text-base text-gray-600 font-light leading-relaxed">
+          {whyChooseUs.description}
         </p>
       </div>
 
@@ -86,34 +50,25 @@ const { id } = Astro.props;
         {
           reasons.map((item, i) => (
             <div
-              class="sticky w-full flex flex-col sm:flex-row items-start sm:items-center gap-6 md:gap-8 p-8 md:p-10 rounded-[2.5rem] bg-card border border-border overflow-hidden  dark:shadow-[0_-15px_30px_-10px_rgba(0,0,0,0.4)] transition-all duration-300"
+              class="sticky w-full flex flex-col sm:flex-row items-start sm:items-center gap-6 md:gap-8 p-8 md:p-10 bg-white border border-gray-200 overflow-hidden transition-all duration-300"
               style={`bottom: calc(15vh - ${i * 24}px); z-index: ${1 - i};`}
             >
               <div
-                class={`absolute -top-32 -left-32 w-80 h-80 rounded-full bg-linear-to-br ${item.color} blur-3xl pointer-events-none`}
-              />
-              <div
-                class={`absolute inset-0 bg-linear-to-br ${item.color} opacity-30 pointer-events-none`}
-              />
-
-              <div class="absolute top-0 inset-x-0 h-px bg-linear-to-r from-transparent via-border to-transparent opacity-50" />
-
-              <div
-                class={`shrink-0 w-16 h-16 md:w-20 md:h-20 rounded-2xl bg-background border border-border shadow-sm flex items-center justify-center relative z-10 ${item.iconColor}`}
+                class={`shrink-0 w-16 h-16 md:w-20 md:h-20 bg-white border border-gray-200 flex items-center justify-center relative z-10 text-primary-500`}
               >
-                <item.icon className="w-8 h-8 md:w-10 md:h-10" />
+                <!--<item.icon className="w-8 h-8 md:w-10 md:h-10" />-->
               </div>
 
               <div class="flex flex-col gap-2 md:gap-3 relative z-10 flex-1">
-                <h3 class="text-xl md:text-2xl font-medium text-foreground tracking-tight">
+                <h3 class="text-xl md:text-2xl font-medium text-gray-900 tracking-tight">
                   {item.title}
                 </h3>
-                <p class="text-base text-muted-foreground font-light leading-relaxed pr-6 md:pr-10">
+                <p class="text-base text-gray-600 font-light leading-relaxed pr-6 md:pr-10">
                   {item.description}
                 </p>
               </div>
 
-              <div class="absolute top-6 right-8 text-5xl md:text-7xl font-black italic tracking-tighter text-muted-foreground/10 pointer-events-none select-none">
+              <div class="absolute top-6 right-8 text-5xl md:text-7xl font-black italic tracking-tighter text-gray-600/10 pointer-events-none select-none">
                 0{i + 1}
               </div>
             </div>

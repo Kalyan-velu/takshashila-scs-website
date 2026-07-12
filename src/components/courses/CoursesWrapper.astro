@@ -1,5 +1,5 @@
 ---
-import CoursesCarousel from "@/components/courses/CoursesCarousel.vue";
+// import CoursesCarousel from "@/components/courses/CoursesCarousel.vue";
 import { CATEGORIES, CATEGORY_MAP } from "@/data/category.ts";
 import { getCollection } from "astro:content";
 
@@ -22,13 +22,11 @@ const courses = aboutCourseEntries.flatMap((e) =>
     <div class="flex-col lg:flex-row flex lg:items-center lg:justify-between">
       <div class="text-left mb-10">
         <h2
-          class="text-3xl md:text-5xl font-light tracking-tight text-foreground mb-4"
+          class="text-3xl md:text-5xl font-light tracking-tight text-gray-900 mb-4"
         >
           Our Popular Courses
         </h2>
-        <p
-          class="text-muted-foreground font-light text-lg max-w-2xl leading-relaxed"
-        >
+        <p class="text-gray-600 font-light text-lg max-w-2xl leading-relaxed">
           Join the most comprehensive civil services coaching programs in
           Guwahati designed for your success.
         </p>
@@ -40,7 +38,7 @@ const courses = aboutCourseEntries.flatMap((e) =>
         {
           CATEGORIES.map((tab, i) => (
             <button
-              class={`course-tab whitespace-nowrap shrink-0 px-6 py-2.5 rounded-full border text-sm md:text-base font-medium transition-colors ${i === 0 ? "bg-primary text-primary-foreground border-primary" : "bg-background border-border text-muted-foreground hover:border-primary/50"}`}
+              class={`course-tab whitespace-nowrap shrink-0 px-6 py-2.5 rounded-full border text-sm md:text-base font-medium transition-colors ${i === 0 ? "bg-primary-500 text-white border-primary-500" : "bg-white border-gray-200 text-gray-600 hover:border-primary-500/50"}`}
               data-target={CATEGORY_MAP[tab]}
             >
               {CATEGORY_MAP[tab]
@@ -53,7 +51,7 @@ const courses = aboutCourseEntries.flatMap((e) =>
         }
       </div>
     </div>
-    <CoursesCarousel courses={courses} client:only="vue" />
+    <!--<CoursesCarousel courses={courses} client:only="vue" />-->
   </div>
 </section>
 
@@ -80,26 +78,14 @@ const courses = aboutCourseEntries.flatMap((e) =>
         // Active tab styling
         tabs.forEach((t) => {
           t.classList.remove(
-            "bg-primary",
-            "text-primary-foreground",
-            "border-primary",
+            "bg-primary-500",
+            "text-white",
+            "border-primary-500",
           );
-          t.classList.add(
-            "bg-background",
-            "border-border",
-            "text-muted-foreground",
-          );
+          t.classList.add("bg-white", "border-gray-200", "text-gray-600");
         });
-        tab.classList.remove(
-          "bg-background",
-          "border-border",
-          "text-muted-foreground",
-        );
-        tab.classList.add(
-          "bg-primary",
-          "text-primary-foreground",
-          "border-primary",
-        );
+        tab.classList.remove("bg-white", "border-gray-200", "text-gray-600");
+        tab.classList.add("bg-primary-500", "text-white", "border-primary-500");
 
         const target = tab.getAttribute("data-target");
         window.dispatchEvent(

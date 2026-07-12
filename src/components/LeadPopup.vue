@@ -116,11 +116,11 @@ const submitForm = async () => {
     ></div>
 
     <div
-      class="relative bg-background text-foreground rounded-2xl overflow-hidden max-w-4xl w-[90%] md:flex shadow-2xl animate-in fade-in zoom-in-95 duration-300"
+      class="relative bg-white text-gray-900 rounded-2xl overflow-hidden max-w-4xl w-[90%] md:flex shadow-2xl animate-in fade-in zoom-in-95 duration-300"
     >
       <button
         @click="closePopup"
-        class="absolute top-4 right-4 z-10 bg-black/30 hover:bg-black/50 text-white rounded-full p-2 transition-colors md:text-foreground md:bg-transparent md:hover:bg-muted"
+        class="absolute top-4 right-4 z-10 bg-black/30 hover:bg-black/50 text-white rounded-full p-2 transition-colors md:text-gray-900 md:bg-transparent md:hover:bg-gray-100"
         aria-label="Close dialog"
       >
         <svg
@@ -139,7 +139,7 @@ const submitForm = async () => {
         </svg>
       </button>
 
-      <div class="md:w-1/2 h-56 md:h-auto relative bg-muted">
+      <div class="md:w-1/2 h-56 md:h-auto relative bg-gray-100">
         <img
           src="/Takshasheela/students-view-back.jpg"
           alt="Complimentary Demo"
@@ -150,14 +150,14 @@ const submitForm = async () => {
 
       <div class="md:w-1/2 p-6 sm:p-10 flex flex-col justify-center">
         <h2
-          class="text-3xl md:text-4xl font-light tracking-tight text-primary mb-4 leading-tight"
+          class="text-3xl md:text-4xl font-light tracking-tight text-primary-500 mb-4 leading-tight"
         >
           Experience Our Class
-          <span class="block text-foreground text-2xl font-normal mt-1"
+          <span class="block text-gray-900 text-2xl font-normal mt-1"
             >with a Complimentary Demo!</span
           >
         </h2>
-        <p class="text-muted-foreground mb-8">
+        <p class="text-gray-600 mb-8">
           Register now and take the first step towards your civil services
           dream.
         </p>
@@ -173,10 +173,10 @@ const submitForm = async () => {
               type="text"
               required
               :class="[
-                'w-full px-4 py-2.5 border rounded-lg bg-background text-foreground focus:outline-none focus:ring-2 focus:ring-primary/50 transition-all',
+                'w-full px-4 py-2.5 border rounded-lg bg-white text-gray-900 focus:outline-none focus:ring-2 focus:ring-primary-500/50 transition-all',
                 fieldErrors.name
                   ? 'border-destructive focus:border-destructive'
-                  : 'border-border focus:border-primary',
+                  : 'border-gray-200 focus:border-primary-500',
               ]"
               placeholder="Your full name"
             />
@@ -194,10 +194,10 @@ const submitForm = async () => {
               type="email"
               required
               :class="[
-                'w-full px-4 py-2.5 border rounded-lg bg-background text-foreground focus:outline-none focus:ring-2 focus:ring-primary/50 transition-all',
+                'w-full px-4 py-2.5 border rounded-lg bg-white text-gray-900 focus:outline-none focus:ring-2 focus:ring-primary-500/50 transition-all',
                 fieldErrors.email
                   ? 'border-destructive focus:border-destructive'
-                  : 'border-border focus:border-primary',
+                  : 'border-gray-200 focus:border-primary-500',
               ]"
               placeholder="Enter your email"
             />
@@ -216,10 +216,10 @@ const submitForm = async () => {
               type="tel"
               required
               :class="[
-                'w-full px-4 py-2.5 border rounded-lg bg-background text-foreground focus:outline-none focus:ring-2 focus:ring-primary/50 transition-all',
+                'w-full px-4 py-2.5 border rounded-lg bg-white text-gray-900 focus:outline-none focus:ring-2 focus:ring-primary-500/50 transition-all',
                 fieldErrors.phone
                   ? 'border-destructive focus:border-destructive'
-                  : 'border-border focus:border-primary',
+                  : 'border-gray-200 focus:border-primary-500',
               ]"
               placeholder="+91 98765 43210"
             />
@@ -237,7 +237,7 @@ const submitForm = async () => {
           <button
             type="submit"
             :disabled="!isSubmitEnabled"
-            class="w-full bg-primary disabled:bg-primary/90 text-primary-foreground hover:opacity-90 font-medium py-3 px-4 rounded-lg transition-all disabled:opacity-50 mt-4 flex justify-center items-center cursor-pointer"
+            class="w-full bg-primary-500 disabled:bg-primary-500/90 text-white hover:opacity-90 font-medium py-3 px-4 rounded-lg transition-all disabled:opacity-50 mt-4 flex justify-center items-center cursor-pointer"
           >
             <span v-if="isSubmitting" class="flex items-center gap-2">
               <svg

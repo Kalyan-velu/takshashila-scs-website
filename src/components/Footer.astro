@@ -1,5 +1,4 @@
 ---
-import { MapPin, Phone, Mail } from "lucide-react";
 import { Picture } from "astro:assets";
 import {
   EMAIL,
@@ -7,9 +6,12 @@ import {
   PHONE_HREF,
   CURRENT_AFFAIRS_URL,
 } from "@/config/CONSTANTS.ts";
+import contentData from "@/data/content.json";
+
+const { footer } = contentData;
 ---
 
-<footer class="bg-background pt-20 pb-10 border-t border-border">
+<footer class="bg-white pt-20 pb-10 border-t border-gray-200">
   <div class="px-4 md:px-6">
     <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12 mb-16">
       <div class="flex flex-col gap-6 lg:col-span-1">
@@ -24,16 +26,13 @@ import {
           />
           <span class="font-semibold tracking-tight text-xl">Takshasheela</span>
         </a>
-        <p class="text-muted-foreground font-light text-sm leading-relaxed">
-          Takshasheela School of Civil Services is a dedicated institute to
-          educate, train and guide young aspirants for Civil Services in India.
-          It is equipped with quality faculties and facilities in Assam with a
-          national outlook and standards.
+        <p class="text-gray-600 font-light text-sm leading-relaxed">
+          {footer.description}
         </p>
         <div class="flex gap-4">
           <a
             href="#"
-            class="h-10 w-10 flex items-center justify-center rounded-full bg-muted text-muted-foreground hover:bg-primary hover:text-primary-foreground transition-colors"
+            class="h-10 w-10 flex items-center justify-center rounded-full bg-gray-100 text-gray-600 hover:bg-primary-500 hover:text-white transition-colors"
           >
             <svg
               xmlns="http://www.w3.org/2000/svg"
@@ -50,7 +49,7 @@ import {
           </a>
           <a
             href="#"
-            class="h-10 w-10 flex items-center justify-center rounded-full bg-muted text-muted-foreground hover:bg-primary hover:text-primary-foreground transition-colors"
+            class="h-10 w-10 flex items-center justify-center rounded-full bg-gray-100 text-gray-600 hover:bg-primary-500 hover:text-white transition-colors"
           >
             <svg
               xmlns="http://www.w3.org/2000/svg"
@@ -67,7 +66,7 @@ import {
           </a>
           <a
             href="#"
-            class="h-10 w-10 flex items-center justify-center rounded-full bg-muted text-muted-foreground hover:bg-primary hover:text-primary-foreground transition-colors"
+            class="h-10 w-10 flex items-center justify-center rounded-full bg-gray-100 text-gray-600 hover:bg-primary-500 hover:text-white transition-colors"
           >
             <svg
               xmlns="http://www.w3.org/2000/svg"
@@ -103,7 +102,7 @@ import {
               <li>
                 <a
                   href={link.href}
-                  class="text-muted-foreground hover:text-primary text-sm transition-colors"
+                  class="text-gray-600 hover:text-primary-500 text-sm transition-colors"
                 >
                   {link.label}
                 </a>
@@ -127,7 +126,7 @@ import {
               <li>
                 <a
                   href={link.href}
-                  class="text-muted-foreground hover:text-primary text-sm transition-colors"
+                  class="text-gray-600 hover:text-primary-500 text-sm transition-colors"
                 >
                   {link.label}
                 </a>
@@ -142,39 +141,35 @@ import {
         <h4 class="font-medium tracking-tight text-lg mb-6">Contact us</h4>
         <ul class="space-y-4">
           <li class="flex items-start gap-3">
-            <Phone className="w-5 h-5 text-primary shrink-0 mt-0.5" />
+            <!--<Phone className="w-5 h-5 text-primary-500 shrink-0 mt-0.5" />-->
             <div>
-              <span class="block text-sm font-medium text-foreground"
-                >Phone:</span
+              <span class="block text-sm font-medium text-gray-900">Phone:</span
               >
               <a
                 href={PHONE_HREF}
-                class="text-muted-foreground hover:text-primary text-sm transition-colors"
+                class="text-gray-600 hover:text-primary-500 text-sm transition-colors"
                 >{PHONE_DISPLAY}</a
               >
             </div>
           </li>
           <li class="flex items-start gap-3">
-            <MapPin className="w-5 h-5 text-primary shrink-0 mt-0.5" />
+            <!--<MapPin className="w-5 h-5 text-primary-500 shrink-0 mt-0.5" />-->
             <div>
-              <span class="block text-sm font-medium text-foreground"
+              <span class="block text-sm font-medium text-gray-900"
                 >Address:</span
               >
-              <span class="text-muted-foreground text-sm"
-                >6th Floor, Unique Avenue Building, near Super Market, Guwahati,
-                Assam 781006</span
-              >
+              <span class="text-gray-600 text-sm">{footer.address}</span>
             </div>
           </li>
           <li class="flex items-start gap-3">
-            <Mail className="w-5 h-5 text-primary shrink-0 mt-0.5" />
+            <!--<Mail className="w-5 h-5 text-primary-500 shrink-0 mt-0.5" />-->
             <div>
-              <span class="block text-sm font-medium text-foreground"
+              <span class="block text-sm font-medium text-gray-900"
                 >Email address:</span
               >
               <a
                 href={`mailto:${EMAIL}`}
-                class="text-muted-foreground hover:text-primary text-sm transition-colors"
+                class="text-gray-600 hover:text-primary-500 text-sm transition-colors"
                 >{EMAIL}
               </a>
             </div>
@@ -184,9 +179,9 @@ import {
     </div>
 
     <div
-      class="flex flex-col md:flex-row items-center justify-between border-t border-border pt-8 mt-8"
+      class="flex flex-col md:flex-row items-center justify-between border-t border-gray-200 pt-8 mt-8"
     >
-      <p class="text-sm font-light text-muted-foreground mb-4 md:mb-0">
+      <p class="text-sm font-light text-gray-600 mb-4 md:mb-0">
         Copyright © {new Date().getFullYear()} - Takshasheela School of Civil Services
       </p>
     </div>

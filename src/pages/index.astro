@@ -1,6 +1,6 @@
 ---
 import Layout from "../layouts/Layout.astro";
-import Hero from "../components/Hero.astro";
+import Hero from "../components/hero/index.astro";
 import WhyChooseUs from "../components/WhyChooseUs.astro";
 import Courses from "../components/courses/CoursesWrapper.astro";
 import Gallery from "../components/Gallery.astro";
@@ -9,8 +9,8 @@ import LatestArticles from "../components/LatestArticles.vue";
 
 <Layout>
   <Hero />
-  <WhyChooseUs id="about" />
-  <Courses id="courses" />
+  <!--<WhyChooseUs id="about" />-->
+  <!--<Courses id="courses" />-->
   <LatestArticles client:only="vue" />
-  <Gallery />
+  <!--<Gallery />-->
 </Layout>

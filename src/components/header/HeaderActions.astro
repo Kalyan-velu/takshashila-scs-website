@@ -1,0 +1,120 @@
+---
+import { PHONE_HREF } from "@/config/CONSTANTS.ts";
+
+const iconActions = [
+  {
+    title: "Toggle Dark Mode",
+    label: "Toggle dark mode",
+    buttonClass:
+      "hover:bg-gray-100 dark:hover:bg-slate-800 text-gray-700 dark:text-gray-300 js-dark-mode-toggle",
+    icons: [
+      {
+        icon: "lucide:moon",
+        class: "block dark:hidden js-icon-moon",
+      },
+      {
+        icon: "lucide:sun",
+        class: "hidden dark:block js-icon-sun",
+      },
+    ],
+  },
+  {
+    title: "Search Site",
+    label: "Toggle search",
+    buttonClass:
+      "transition-all duration-300 transform active:scale-95 shadow-sm hover:scale-105 bg-slate-900 text-white dark:bg-white dark:text-slate-900 js-search-toggle md:w-10 md:h-10",
+    icons: [
+      {
+        icon: "lucide:search",
+        class: "block js-search-icon-search",
+      },
+      {
+        icon: "lucide:x",
+        class: "hidden js-search-icon-close",
+      },
+    ],
+  },
+];
+
+const actionButtonBaseClass =
+  "inline-flex w-9 h-9 items-center justify-center rounded-full transition-colors cursor-pointer";
+
+const actionIconBaseClass = "text-[17px]";
+---
+
+<div class="pr-4 inline-flex items-center relative z-10 space-x-2 md:space-x-3">
+  {
+    iconActions.map((action) => (
+      <button
+        class={`${actionButtonBaseClass} ${action.buttonClass}`}
+        title={action.title}
+      >
+        <span class="sr-only">{action.label}</span>
+        {action.icons.map((icon) => (
+          <iconify-icon
+            icon={icon.icon}
+            class={`${actionIconBaseClass} ${icon.class}`}
+          />
+        ))}
+      </button>
+    ))
+  }
+
+  <div class="inline-flex lg:hidden">
+    <button
+      class="inline-flex items-center justify-center w-9 h-9 rounded-full bg-gray-100 dark:bg-slate-900 text-gray-900/80 dark:text-white transition-colors cursor-pointer js-mobile-menu-toggle"
+    >
+      <span class="sr-only">Toggle mobile menu</span>
+      <span
+        class="flex w-4.5 h-3 flex-col items-start justify-between js-mobile-menu-hamburger-icon"
+      >
+        {
+          [1, 2, 3].map((index) => (
+            <span
+              class={`w-full h-0.5 bg-current transition-transform duration-300 transform origin-left js-hamburger-line-${index}`}
+            />
+          ))
+        }
+      </span>
+    </button>
+  </div>
+
+  <!-- Get in Touch CTA (Desktop only) -->
+  <div class="hidden lg:inline-flex shrink-0">
+    <a
+      href={PHONE_HREF}
+      class="inline-flex relative group outline-none focus:outline-none text-xs md:text-sm font-medium text-white transition-transform active:scale-98"
+    >
+      <div
+        class="bg-primary-500 hover:bg-primary-600 transition-colors w-auto inline-flex items-center justify-center relative leading-tight shadow-md overflow-hidden rounded-full py-2 px-5 md:py-2.5 md:px-6"
+      >
+        <span
+          class="relative top-px inline-flex shrink-0 font-semibold tracking-wide"
+          >Get in touch</span
+        >
+      </div>
+    </a>
+  </div>
+</div>
+
+<script>
+  const toggle  = document.querySelector(".js-dark-mode-toggle") as HTMLElement;
+  const iconMoon = document.querySelector(".js-icon-moon") as HTMLElement;
+  const iconSun  = document.querySelector(".js-icon-sun")  as HTMLElement;
+
+  function applyTheme(dark: boolean) {
+    document.documentElement.classList.toggle("dark", dark);
+    localStorage.setItem("darkMode", String(dark));
+    iconMoon?.classList.toggle("hidden", dark);
+    iconMoon?.classList.toggle("block", !dark);
+    iconSun?.classList.toggle("hidden", !dark);
+    iconSun?.classList.toggle("block", dark);
+  }
+
+  // Sync icon to current DOM state on load
+  applyTheme(document.documentElement.classList.contains("dark"));
+
+  toggle?.addEventListener("click", () =>
+    applyTheme(!document.documentElement.classList.contains("dark"))
+  );
+</script>

@@ -1,0 +1,69 @@
+{
+  "hero": {
+    "badge": "Best UPSC & APSC Coaching in Guwahati",
+    "title_part1": "Master the UPSC & APSC ",
+    "title_highlight": "with Guwahati's top mentors.",
+    "description": "Precision coaching for UPSC & APSC in Guwahati. We deliver the definitive strategy to turn your aspirations into an administrative career.",
+    "cta_primary": "Join a Course",
+    "cta_secondary": "Download Brochure"
+  },
+  "features": [
+    {
+      "icon": "Users",
+      "title": "Expert Faculty",
+      "description": "Top-tier faculties and mentors from Delhi and across India. Rich resources, expert guidance, and flexible recorded classes — all under one roof. That’s what makes Takshasheela the best online UPSC coaching in Guwahati."
+    },
+    {
+      "icon": "BookOpenCheck",
+      "title": "Study Materials",
+      "description": "Our course includes features to ensure success in your exams at Takshasheela, which is renowned as the best UPSC coaching in Guwahati. If you are looking for the best UPSC and APSC coaching in Guwahati, Takshasheela is the place for you."
+    },
+    {
+      "icon": "GraduationCap",
+      "title": "Scholarships",
+      "description": "Merit basis Scholarship is available up to 100% at Takshasheela, the best APSC coaching centre in Guwahati, for deserving students."
+    }
+  ],
+  "whyChooseUs": {
+    "title_part1": "Why We Are the ",
+    "title_highlight": "Best Coaching Center",
+    "title_part2": " in Guwahati",
+    "description": "We provide unparalleled learning experiences tailored to help you succeed in UPSC and APSC examinations.",
+    "reasons": [
+      {
+        "icon": "GraduationCap",
+        "title": "Best Faculty",
+        "description": "Experienced faculty from Delhi and other states, with 5-20 years' experience, mentor aspirants at Takshasheela School of Civil Services, the best coaching institute for UPSC in Guwahati."
+      },
+      {
+        "icon": "AppWindow",
+        "title": "Accessibility",
+        "description": "We prioritize accessibility through online courses and accommodations for all, ensuring equal opportunities for success."
+      },
+      {
+        "icon": "PlaySquare",
+        "title": "Recorded Classes",
+        "description": "Access recorded classes for flexible learning, enhancing understanding at your own pace at Takshasheela, the best online UPSC coaching in Guwahati."
+      },
+      {
+        "icon": "Building",
+        "title": "Infrastructure",
+        "description": "Cutting-edge infrastructure with smart classrooms, fostering a dynamic and interactive learning atmosphere for students at Takshasheela, the best IAS coaching institute in Guwahati."
+      },
+      {
+        "icon": "BookMarked",
+        "title": "Advanced Library",
+        "description": "Our advanced library offers a vast collection of resources, supporting comprehensive learning and research for civil service aspirants."
+      },
+      {
+        "icon": "Newspaper",
+        "title": "Monthly Magazine",
+        "description": "Stay informed with our monthly magazine, packed with crucial updates and insightful articles for civil service aspirants."
+      }
+    ]
+  },
+  "footer": {
+    "description": "Takshasheela School of Civil Services is a dedicated institute to educate, train and guide young aspirants for Civil Services in India. It is equipped with quality faculties and facilities in Assam with a national outlook and standards.",
+    "address": "6th Floor, Unique Avenue Building, near Super Market, Guwahati, Assam 781006"
+  }
+}
