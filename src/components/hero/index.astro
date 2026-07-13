@@ -39,35 +39,6 @@ const { hero } = contentData;
     <p class="hero__description">
       {hero.description}
     </p>
-
-    <!--<div class="hero__actions">-->
-    <!--  <a href="/courses/" class="group hero__primary-link">-->
-    <!--    <div class="hero__primary-label">-->
-    <!--      <div class="hero__primary-label-inner">-->
-    <!--        <div>{hero.cta_primary}</div>-->
-    <!--      </div>-->
-    <!--    </div>-->
-    <!--    <div class="hero__primary-icon">-->
-    <!--      <svg-->
-    <!--        class="hero__primary-icon-svg"-->
-    <!--        xmlns="http://www.w3.org/2000/svg"-->
-    <!--        viewBox="0 0 384 512"-->
-    <!--        ><path-->
-    <!--          d="M328 96h24v288h-48V177.9L81 401l-17 17-33.9-34 17-17 223-223H64V96h264z"-->
-    <!--        ></path></svg-->
-    <!--      >-->
-    <!--    </div>-->
-    <!--  </a>-->
-
-    <!--  <a-->
-    <!--    target="_blank"-->
-    <!--    download="https://pub-4ee2c1b01a3c40788c1b264235b20a97.r2.dev/brand_site/pdfs/TSCS-Brochure-2026-new_compressed.pdf"-->
-    <!--    href="https://pub-4ee2c1b01a3c40788c1b264235b20a97.r2.dev/brand_site/pdfs/TSCS-Brochure-2026-new_compressed.pdf"-->
-    <!--    class="hero__secondary-link"-->
-    <!--  >-->
-    <!--    {hero.cta_secondary}-->
-    <!--  </a>-->
-    <!--</div>-->
   </div>
 </section>
 <Form />
@@ -76,12 +47,12 @@ const { hero } = contentData;
   @reference "@/styles/globals.css";
 
   .hero {
-    @apply flex items-center  lg:min-h-[calc(100dvh-8ch)] justify-center;
+    @apply flex items-center py-52  lg:min-h-[calc(100dvh-8ch)] justify-center;
 
     .hero__content {
-      @apply z-20  flex flex-col pb-32 items-center justify-center text-center;
+      @apply z-20  flex flex-col pb-16 md:pb-32 items-center justify-center text-center;
       .hero__badge {
-        @apply mb-2 inline-flex max-w-fit shrink-0 flex-nowrap items-center border border-gray-800 bg-gray-900/60 px-3 py-1 text-sm font-medium text-gray-300 md:text-base;
+        @apply mb-2 inline-flex max-w-fit shrink-0 flex-nowrap rounded-full bg-transparent items-center border border-gray-300  px-3 py-1 text-sm font-medium text-gray-300 md:text-base;
         .hero__badge-dot {
           @apply mr-2 flex h-2 w-2 bg-primary-500 md:mr-3;
         }
@@ -168,14 +139,6 @@ const { hero } = contentData;
     opacity: 0,
     duration: 0.8,
     delay: 0.4,
-    ease: "power3.out",
-  });
-
-  gsap.from(".hero__actions", {
-    y: 20,
-    opacity: 0,
-    duration: 0.8,
-    delay: 0.6,
     ease: "power3.out",
   });
 </script>

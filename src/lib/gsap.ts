@@ -8,6 +8,7 @@ import { ScrollSmoother } from "gsap/ScrollSmoother";
 import { ScrollToPlugin } from "gsap/ScrollToPlugin";
 import { SplitText } from "gsap/SplitText";
 import { TextPlugin } from "gsap/TextPlugin";
+import { GSDevTools } from "gsap/GSDevTools";
 
 gsap.registerPlugin(
   Flip,
@@ -17,6 +18,7 @@ gsap.registerPlugin(
   ScrollToPlugin,
   SplitText,
   TextPlugin,
+  GSDevTools,
 );
 
-export { gsap };
+export { gsap, GSDevTools };

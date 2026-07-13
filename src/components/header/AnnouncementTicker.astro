@@ -1,92 +1,86 @@
 ---
 import { CURRENT_AFFAIRS_URL } from "@/config/CONSTANTS.ts";
+
+const NOTIFICATIONS = [
+  {
+    title:
+      "ADRE 2026 Batch Admissions Open! Enroll now for Civil Services preparation",
+    icon: "📢",
+    link: "/courses/adre/",
+  },
+  {
+    title: "Takshasheela APSC & UPSC success rates hit record highs this year!",
+    icon: "🏆",
+    link: "/about/",
+  },
+  {
+    title:
+      "Daily Free Mock Tests & Comprehensive Current Affairs updated daily",
+    icon: "✍️",
+    link: CURRENT_AFFAIRS_URL,
+    target: "_blank",
+  },
+  {
+    title: "Download free syllabus and prep guidelines for UPSC and APSC CCE",
+    icon: "📚",
+    link: "/courses/",
+  },
+];
 ---
 
-<div class="relative w-full overflow-hidden bg-primary-500 text-white text-[11px] sm:text-xs py-2 flex items-center z-45 border-b border-primary-600/20 js-ticker-wrapper">
-  <div class="ticker-wrapper flex whitespace-nowrap">
-    <div class="ticker-track flex">
-      <div class="ticker-item inline-flex items-center mx-6 sm:mx-10 hover:underline">
-        <a href="/courses/adre/" class="inline-flex items-center gap-2">
-          <span>📢</span>
-          <span class="font-light tracking-wide text-white/95">ADRE 2026 Batch Admissions Open! Enroll now for Civil Services preparation</span>
-          <iconify-icon icon="lucide:chevron-right" class="text-[10px] text-white/70"></iconify-icon>
-        </a>
-      </div>
-      <div class="ticker-item inline-flex items-center mx-6 sm:mx-10 hover:underline">
-        <a href="/about/" class="inline-flex items-center gap-2">
-          <span>🏆</span>
-          <span class="font-light tracking-wide text-white/95">Takshasheela APSC & UPSC success rates hit record highs this year!</span>
-          <iconify-icon icon="lucide:chevron-right" class="text-[10px] text-white/70"></iconify-icon>
-        </a>
-      </div>
-      <div class="ticker-item inline-flex items-center mx-6 sm:mx-10 hover:underline">
-        <a href={CURRENT_AFFAIRS_URL} target="_blank" class="inline-flex items-center gap-2">
-          <span>✍️</span>
-          <span class="font-light tracking-wide text-white/95">Daily Free Mock Tests & Comprehensive Current Affairs updated daily</span>
-          <iconify-icon icon="lucide:chevron-right" class="text-[10px] text-white/70"></iconify-icon>
-        </a>
-      </div>
-      <div class="ticker-item inline-flex items-center mx-6 sm:mx-10 hover:underline">
-        <a href="/courses/" class="inline-flex items-center gap-2">
-          <span>📚</span>
-          <span class="font-light tracking-wide text-white/95">Download free syllabus and prep guidelines for UPSC and APSC CCE</span>
-          <iconify-icon icon="lucide:chevron-right" class="text-[10px] text-white/70"></iconify-icon>
-        </a>
-      </div>
-    </div>
-    <!-- Duplicate for seamless loop -->
-    <div class="ticker-track flex" aria-hidden="true">
-      <div class="ticker-item inline-flex items-center mx-6 sm:mx-10 hover:underline">
-        <a href="/courses/adre/" class="inline-flex items-center gap-2">
-          <span>📢</span>
-          <span class="font-light tracking-wide text-white/95">ADRE 2026 Batch Admissions Open! Enroll now for Civil Services preparation</span>
-          <iconify-icon icon="lucide:chevron-right" class="text-[10px] text-white/70"></iconify-icon>
-        </a>
-      </div>
-      <div class="ticker-item inline-flex items-center mx-6 sm:mx-10 hover:underline">
-        <a href="/about/" class="inline-flex items-center gap-2">
-          <span>🏆</span>
-          <span class="font-light tracking-wide text-white/95">Takshasheela APSC & UPSC success rates hit record highs this year!</span>
-          <iconify-icon icon="lucide:chevron-right" class="text-[10px] text-white/70"></iconify-icon>
-        </a>
-      </div>
-      <div class="ticker-item inline-flex items-center mx-6 sm:mx-10 hover:underline">
-        <a href={CURRENT_AFFAIRS_URL} target="_blank" class="inline-flex items-center gap-2">
-          <span>✍️</span>
-          <span class="font-light tracking-wide text-white/95">Daily Free Mock Tests & Comprehensive Current Affairs updated daily</span>
-          <iconify-icon icon="lucide:chevron-right" class="text-[10px] text-white/70"></iconify-icon>
-        </a>
-      </div>
-      <div class="ticker-item inline-flex items-center mx-6 sm:mx-10 hover:underline">
-        <a href="/courses/" class="inline-flex items-center gap-2">
-          <span>📚</span>
-          <span class="font-light tracking-wide text-white/95">Download free syllabus and prep guidelines for UPSC and APSC CCE</span>
-          <iconify-icon icon="lucide:chevron-right" class="text-[10px] text-white/70"></iconify-icon>
-        </a>
-      </div>
-    </div>
+<div
+  class="relative w-full overflow-hidden text-[11px] sm:text-xs py-1.5 flex items-center js-ticker-wrapper h-full bg-transparent"
+>
+  <div class="ticker-wrapper flex whitespace-nowrap w-full">
+    {
+      [false, true].map((isDuplicate) => (
+        <div
+          class="ticker-track flex"
+          aria-hidden={isDuplicate ? "true" : undefined}
+        >
+          {NOTIFICATIONS.map((notification) => (
+            <div class="ticker-item inline-flex items-center mx-6 sm:mx-10 hover:underline">
+              <a
+                href={notification.link}
+                target={notification.target}
+                class="inline-flex items-center gap-2"
+              >
+                <span>{notification.icon}</span>
+                <span class="font-light tracking-wide text-gray-800 dark:text-gray-200">
+                  {notification.title}
+                </span>
+                <iconify-icon
+                  icon="lucide:chevron-right"
+                  class="text-[10px] text-gray-500"
+                />
+              </a>
+            </div>
+          ))}
+        </div>
+      ))
+    }
   </div>
 </div>
 
 <style>
-.ticker-wrapper {
-  overflow: hidden;
-  width: 100%;
-}
-.ticker-track {
-  display: flex;
-  width: max-content;
-  animation: marquee 30s linear infinite;
-}
-.ticker-track:hover {
-  animation-play-state: paused;
-}
-@keyframes marquee {
-  0% {
-    transform: translateX(0%);
+  .ticker-wrapper {
+    overflow: hidden;
+    width: 100%;
   }
-  100% {
-    transform: translateX(-50%);
+  .ticker-track {
+    display: flex;
+    width: max-content;
+    animation: marquee 30s linear infinite;
   }
-}
+  .ticker-track:hover {
+    animation-play-state: paused;
+  }
+  @keyframes marquee {
+    0% {
+      transform: translateX(0%);
+    }
+    100% {
+      transform: translateX(-50%);
+    }
+  }
 </style>

@@ -3,6 +3,9 @@
 
 @custom-variant dark (&:is(.dark *));
 
+:root {
+    color-scheme: light;
+}
 
 @theme inline {
     --font-sans: var(--geist-sans);

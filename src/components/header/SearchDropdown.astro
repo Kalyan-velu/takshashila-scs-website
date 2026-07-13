@@ -37,11 +37,14 @@ const popularSearchLinkClass =
     </div>
 
     <div class="relative w-full mb-6">
-      <input
-        type="text"
-        placeholder="Please enter a search term, e.g. 'UPSC' or 'Admissions'"
-        class="w-full bg-gray-50 dark:bg-slate-800 text-gray-900 dark:text-white placeholder-gray-500 dark:placeholder-gray-400 text-lg md:text-xl px-6 py-4 rounded-full border border-gray-200 dark:border-slate-700 focus:outline-none focus:border-primary-500 focus:ring-1 focus:ring-primary-500 transition-all pr-16 js-search-input"
-      />
+      <label>
+        <span class="sr-only">Search</span>
+        <input
+          type="text"
+          placeholder="Please enter a search term, e.g. 'UPSC' or 'Admissions'"
+          class="w-full bg-gray-50 dark:bg-slate-800 text-gray-900 dark:text-white placeholder-gray-500 dark:placeholder-gray-400 text-lg md:text-xl px-6 py-4 rounded-full border border-gray-200 dark:border-slate-700 focus:outline-none focus:border-primary-500 focus:ring-1 focus:ring-primary-500 transition-all pr-16 js-search-input"
+        />
+      </label>
       <div
         class="absolute right-6 top-1/2 -translate-y-1/2 text-gray-400 dark:text-gray-500 pointer-events-none flex items-center justify-center"
       >
@@ -91,12 +94,20 @@ const popularSearchLinkClass =
 <script>
   import searchData from "@/data/searchData.json";
 
-  const searchInput       = document.querySelector(".js-search-input")      as HTMLInputElement;
-  const popularArea       = document.querySelector(".js-popular-searches")   as HTMLElement;
-  const filteredArea      = document.querySelector(".js-filtered-searches")  as HTMLElement;
-  const matchCount        = document.querySelector(".js-match-count")        as HTMLElement;
-  const resultsGrid       = document.querySelector(".js-search-results")     as HTMLElement;
-  const popLinks          = document.querySelectorAll(".js-popular-link");
+  const searchInput = document.querySelector(
+    ".js-search-input",
+  ) as HTMLInputElement;
+  const popularArea = document.querySelector(
+    ".js-popular-searches",
+  ) as HTMLElement;
+  const filteredArea = document.querySelector(
+    ".js-filtered-searches",
+  ) as HTMLElement;
+  const matchCount = document.querySelector(".js-match-count") as HTMLElement;
+  const resultsGrid = document.querySelector(
+    ".js-search-results",
+  ) as HTMLElement;
+  const popLinks = document.querySelectorAll(".js-popular-link");
 
   function resetSearch() {
     if (searchInput) searchInput.value = "";
@@ -105,18 +116,22 @@ const popularSearchLinkClass =
   }
 
   function renderResults(val: string) {
-    const matches = searchData.filter(item =>
-      item.title.toLowerCase().includes(val) ||
-      item.description.toLowerCase().includes(val) ||
-      item.category.toLowerCase().includes(val)
+    const matches = searchData.filter(
+      (item) =>
+        item.title.toLowerCase().includes(val) ||
+        item.description.toLowerCase().includes(val) ||
+        item.category.toLowerCase().includes(val),
     );
 
     popularArea?.classList.add("hidden");
     filteredArea?.classList.remove("hidden");
-    if (matchCount) matchCount.textContent = `Found ${matches.length} matching results`;
+    if (matchCount)
+      matchCount.textContent = `Found ${matches.length} matching results`;
 
     if (matches.length > 0) {
-      resultsGrid.innerHTML = matches.map(r => `
+      resultsGrid.innerHTML = matches
+        .map(
+          (r) => `
         <a href="${r.url}" class="js-result-link group block p-4 rounded-2xl bg-gray-50 dark:bg-slate-800/50 hover:bg-primary-500/5 dark:hover:bg-primary-500/10 border border-gray-100 dark:border-slate-800/85 hover:border-primary-500/20 transition-all duration-200">
           <div class="flex justify-between items-start">
             <div>
@@ -127,13 +142,15 @@ const popularSearchLinkClass =
             <span class="text-gray-400 dark:text-gray-500 group-hover:translate-x-1 transition-transform pl-2 mt-1 select-none">&rarr;</span>
           </div>
         </a>
-      `).join("");
+      `,
+        )
+        .join("");
       // Close panel when a result is clicked
-      resultsGrid.querySelectorAll(".js-result-link").forEach(link =>
+      resultsGrid.querySelectorAll(".js-result-link").forEach((link) =>
         link.addEventListener("click", () => {
           resetSearch();
           document.dispatchEvent(new CustomEvent("header:close-search"));
-        })
+        }),
       );
     } else {
       resultsGrid.innerHTML = `
@@ -155,8 +172,9 @@ const popularSearchLinkClass =
   document.addEventListener("header:search-close", resetSearch);
 
   // ESC key → ask header.ts to close search
-  searchInput?.addEventListener("keydown", e => {
-    if (e.key === "Escape") document.dispatchEvent(new CustomEvent("header:close-search"));
+  searchInput?.addEventListener("keydown", (e) => {
+    if (e.key === "Escape")
+      document.dispatchEvent(new CustomEvent("header:close-search"));
   });
 
   // Real-time filtering
@@ -166,10 +184,10 @@ const popularSearchLinkClass =
   });
 
   // Popular link clicks
-  popLinks.forEach(link =>
+  popLinks.forEach((link) =>
     link.addEventListener("click", () => {
       resetSearch();
       document.dispatchEvent(new CustomEvent("header:close-search"));
-    })
+    }),
   );
 </script>

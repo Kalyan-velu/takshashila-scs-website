@@ -2,27 +2,27 @@
 import { PHONE_HREF } from "@/config/CONSTANTS.ts";
 
 const iconActions = [
-  {
-    title: "Toggle Dark Mode",
-    label: "Toggle dark mode",
-    buttonClass:
-      "hover:bg-gray-100 dark:hover:bg-slate-800 text-gray-700 dark:text-gray-300 js-dark-mode-toggle",
-    icons: [
-      {
-        icon: "lucide:moon",
-        class: "block dark:hidden js-icon-moon",
-      },
-      {
-        icon: "lucide:sun",
-        class: "hidden dark:block js-icon-sun",
-      },
-    ],
-  },
+  // {
+  //   title: "Toggle Dark Mode",
+  //   label: "Toggle dark mode",
+  //   buttonClass:
+  //     "text-white hover:bg-white/20 group-[.is-scrolled]:text-gray-700 group-[.is-scrolled]:hover:bg-gray-100 group-[.is-scrolled]:dark:text-gray-300 group-[.is-scrolled]:dark:hover:bg-slate-800 js-dark-mode-toggle",
+  //   icons: [
+  //     {
+  //       icon: "lucide:moon",
+  //       class: "block dark:hidden js-icon-moon",
+  //     },
+  //     {
+  //       icon: "lucide:sun",
+  //       class: "hidden dark:block js-icon-sun",
+  //     },
+  //   ],
+  // },
   {
     title: "Search Site",
     label: "Toggle search",
     buttonClass:
-      "transition-all duration-300 transform active:scale-95 shadow-sm hover:scale-105 bg-slate-900 text-white dark:bg-white dark:text-slate-900 js-search-toggle md:w-10 md:h-10",
+      "transition-all duration-300 transform active:scale-95 shadow-sm hover:scale-105 bg-white text-slate-900 group-[.is-scrolled]:bg-slate-900 group-[.is-scrolled]:text-white group-[.is-scrolled]:dark:bg-white group-[.is-scrolled]:dark:text-slate-900 js-search-toggle md:w-10 md:h-10",
     icons: [
       {
         icon: "lucide:search",
@@ -62,7 +62,7 @@ const actionIconBaseClass = "text-[17px]";
 
   <div class="inline-flex lg:hidden">
     <button
-      class="inline-flex items-center justify-center w-9 h-9 rounded-full bg-gray-100 dark:bg-slate-900 text-gray-900/80 dark:text-white transition-colors cursor-pointer js-mobile-menu-toggle"
+      class="inline-flex items-center justify-center w-9 h-9 rounded-full bg-white/20 group-[.is-scrolled]:bg-gray-100 group-[.is-scrolled]:dark:bg-slate-900 text-white group-[.is-scrolled]:text-gray-900/80 group-[.is-scrolled]:dark:text-white transition-colors cursor-pointer js-mobile-menu-toggle"
     >
       <span class="sr-only">Toggle mobile menu</span>
       <span
@@ -98,9 +98,9 @@ const actionIconBaseClass = "text-[17px]";
 </div>
 
 <script>
-  const toggle  = document.querySelector(".js-dark-mode-toggle") as HTMLElement;
+  const toggle = document.querySelector(".js-dark-mode-toggle") as HTMLElement;
   const iconMoon = document.querySelector(".js-icon-moon") as HTMLElement;
-  const iconSun  = document.querySelector(".js-icon-sun")  as HTMLElement;
+  const iconSun = document.querySelector(".js-icon-sun") as HTMLElement;
 
   function applyTheme(dark: boolean) {
     document.documentElement.classList.toggle("dark", dark);
@@ -115,6 +115,6 @@ const actionIconBaseClass = "text-[17px]";
   applyTheme(document.documentElement.classList.contains("dark"));
 
   toggle?.addEventListener("click", () =>
-    applyTheme(!document.documentElement.classList.contains("dark"))
+    applyTheme(!document.documentElement.classList.contains("dark")),
   );
 </script>
