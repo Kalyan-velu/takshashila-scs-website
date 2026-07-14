@@ -4,24 +4,39 @@ import { Image } from "astro:assets";
 const galleryItems = [
   {
     title: "Special Events",
+    alt: "UPSC and APSC students and faculty at a special event at Takshasheela School of Civil Services, Guwahati",
     image: "/storage/2024/04/1689672210_imresizer-1689598168606-scaled.jpg",
   },
-  { title: "Group photo", image: "/storage/2025/06/students-1.jpg" },
+  {
+    title: "Group photo",
+    alt: "Group photo of UPSC and APSC aspirants at Takshasheela coaching institute in Guwahati",
+    image: "/storage/2025/06/students-1.jpg",
+  },
   {
     title: "Library",
+    alt: "Advanced library with UPSC and APSC study material at Takshasheela School of Civil Services, Guwahati",
     image: "/storage/2024/04/IMG_20240408_110125-scaled.jpg",
   },
-  { title: "Class room 1", image: "/storage/2025/03/IMG_5529-scaled.webp" },
+  {
+    title: "Class room 1",
+    alt: "UPSC students in a smart classroom at Takshasheela Guwahati",
+    image: "/storage/2025/03/IMG_5529-scaled.webp",
+  },
   {
     title: "Students ready for class",
+    alt: "APSC and UPSC aspirants attending a coaching class at Takshasheela Guwahati",
     image: "/storage/2025/06/students-2.jpg",
   },
-  { title: "Online test", image: "/storage/2025/06/students-3.jpg" },
+  {
+    title: "Online test",
+    alt: "Students taking an online APSC and UPSC mock test at Takshasheela Guwahati",
+    image: "/storage/2025/06/students-3.jpg",
+  },
 ];
 ---
 
 <section id="gallery" class="pb-12 bg-background">
-  <div class="px-4 md:px-6">
+  <div class="px-4 md:px-6 max-w-7xl mx-auto">
     <div class="mb-12 flex items-end justify-between">
       <div>
         <h2
@@ -45,7 +60,7 @@ const galleryItems = [
           >
             <Image
               src={item.image}
-              alt={item.title}
+              alt={item.alt}
               width={800}
               height={600}
               loading="lazy"

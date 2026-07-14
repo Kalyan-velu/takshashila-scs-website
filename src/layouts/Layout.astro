@@ -8,7 +8,7 @@ import LeadPopup from "@/components/LeadPopup.vue";
 import Footer from "@/components/Footer.astro";
 import GoogleTagManager from "@/lib/GTag/GoogleTagManager.astro";
 import GoogleTagManagerNoscript from "@/lib/GTag/GoogleTagManagerNoscript.astro";
-import { SITE_URL } from "@/config/CONSTANTS.ts";
+import { SITE_URL, PHONE_TEL, EMAIL, socials } from "@/config/CONSTANTS.ts";
 
 // variables.CRM_URL always resolves to the private server value in frontmatter; this needs the public origin.
 const crmOrigin =
@@ -19,11 +19,7 @@ interface Props {
   description?: string;
   image?: string;
   canonical?: string;
-  keywords?: string;
 }
-
-const defaultKeywords =
-  "apsc coaching in guwahati, apsc coaching, adre coaching, upsc, apsc full form, upsc full form, best apsc coaching in guwahati, adre syllabus, apsc syllabus, upsc syllabus, apsc cce full form, scs current affairs, upsc coaching in assam, apsc coaching in assam, upsc strategy, upsc 2026 exam date, adre exam date,  guwahati apsc coaching centre, difference between apsc and upsc, apsc vs upsc, best coaching center in Northeast India, guwahati upsc coaching centre, syllabus of upsc, civil service exam, coaching center, coaching centre in guwahati, assam coaching centre";
 
 // Normalize to the canonical host + trailing slash regardless of which
 // host/slash variant the page was actually requested on.
@@ -32,11 +28,10 @@ if (!normalizedPath.endsWith("/")) normalizedPath += "/";
 const defaultCanonical = new URL(normalizedPath, SITE_URL).href;
 
 const {
-  title = "The Best UPSC and APSC Coaching in Guwahati - Takshasheela School of Civil Services",
-  description = "At Takshasheela School of Civil Services, the best UPSC and APSC coaching in Guwahati, we are committed to helping you achieve your dream of becoming a civil servant. Prepare for ADRE, APSC, and UPSC. Both online and offline batches are available, best coaching institute in guwahati",
+  title = "Best UPSC & APSC Coaching in Guwahati | Takshasheela SCS",
+  description = "Join Takshasheela School of Civil Services for expert UPSC, APSC & ADRE coaching in Guwahati. Online/offline batches with comprehensive study material.",
   image = "/og/index.png",
   canonical = defaultCanonical,
-  keywords = defaultKeywords,
 } = Astro.props;
 ---
 
@@ -51,7 +46,6 @@ const {
     <link rel="sitemap" href="/sitemap-index.xml" />
     <link rel="icon" href="/favicon.ico" />
     <meta name="generator" content={Astro.generator} />
-    <meta name="keywords" content={keywords} />
     <title>{title}</title>
     <slot name="head_data" />
     <SEO
@@ -69,7 +63,7 @@ const {
         },
       }}
       twitter={{
-        creator: "@takshashila",
+        creator: "@takshashilascs",
         card: "summary_large_image",
         title: title,
         description: description,
@@ -80,16 +74,37 @@ const {
       item={{
         "@context": "https://schema.org",
         "@type": "EducationalOrganization",
+        "@id": `${SITE_URL}/#organization`,
         name: "Takshasheela School of Civil Services",
+        alternateName: "Takshasheela SCS",
         description: description,
         url: Astro.site ? Astro.site.href : SITE_URL,
-        logo: `${SITE_URL}/favicon.svg`,
+        logo: `${SITE_URL}/logo-full-black.png`,
+        image: new URL(image, Astro.url).href,
+        telephone: PHONE_TEL,
+        email: EMAIL,
         address: {
           "@type": "PostalAddress",
+          streetAddress: "6th Floor, Unique Avenue Building, near Super Market",
           addressLocality: "Guwahati",
           addressRegion: "Assam",
+          postalCode: "781006",
           addressCountry: "IN",
         },
+        geo: {
+          "@type": "GeoCoordinates",
+          // TODO: replace with exact coordinates from the Google Business Profile pin
+          latitude: 26.14,
+          longitude: 91.78,
+        },
+        areaServed: { "@type": "State", name: "Assam" },
+        sameAs: [
+          socials.FACEBOOK,
+          socials.INSTAGRAM,
+          socials.TWITTER,
+          socials.YOUTUBE,
+          socials.LINKEDIN,
+        ],
       }}
     />
     <link rel="preconnect" href="https://challenges.cloudflare.com" />
