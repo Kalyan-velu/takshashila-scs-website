@@ -1,7 +1,6 @@
 <!--suppress ALL -->
 <script setup lang="ts">
 import { computed, ref } from "vue";
-import { ArrowRight } from "lucide-vue-next";
 import { cn } from "@/lib/utils";
 import { whatsappUrl } from "@/config/CONSTANTS.ts";
 import type { Course } from "@/content.config.ts";
