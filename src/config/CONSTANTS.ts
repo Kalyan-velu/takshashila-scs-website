@@ -17,11 +17,11 @@ export function whatsappUrl(message: string): string {
 }
 
 export const socials = {
-  FACEBOOK: "https://www.facebook.com/takshashilascs",
-  INSTAGRAM: "https://www.instagram.com/takshashilascs",
+  FACEBOOK: "https://www.facebook.com/takshasheelascs",
+  INSTAGRAM: "https://www.instagram.com/takshasheelascs",
   LINKEDIN:
     "https://www.linkedin.com/company/takshashila-school-of-civil-services",
   TWITTER: "https://twitter.com/takshashilascs",
-  YOUTUBE: "https://www.youtube.com/@takshashilascs",
+  YOUTUBE: "https://www.youtube.com/@Takshashilascs",
 };
 
