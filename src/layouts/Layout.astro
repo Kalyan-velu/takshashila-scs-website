@@ -73,19 +73,22 @@ const {
     <Schema
       item={{
         "@context": "https://schema.org",
-        "@type": "EducationalOrganization",
+        "@type": ["EducationalOrganization", "LocalBusiness"],
         "@id": `${SITE_URL}/#organization`,
-        name: "Takshasheela School of Civil Services",
+        name: "Takshashila School of Civil Services",
         alternateName: "Takshasheela SCS",
         description: description,
         url: Astro.site ? Astro.site.href : SITE_URL,
         logo: `${SITE_URL}/logo-full-black.png`,
         image: new URL(image, Astro.url).href,
-        telephone: PHONE_TEL,
+        telephone: [
+          "+91 60016 57575",
+          "+91 69132 03751"
+        ],
         email: EMAIL,
         address: {
           "@type": "PostalAddress",
-          streetAddress: "6th Floor, Unique Avenue Building, near Super Market",
+          streetAddress: "6th Floor, Unique Avenue Building, Bus Stand, Near Super Market, GS Rd",
           addressLocality: "Guwahati",
           addressRegion: "Assam",
           postalCode: "781006",
@@ -93,9 +96,22 @@ const {
         },
         geo: {
           "@type": "GeoCoordinates",
-          // TODO: replace with exact coordinates from the Google Business Profile pin
-          latitude: 26.14,
-          longitude: 91.78,
+          latitude: 26.1411661,
+          longitude: 91.7962836,
+        },
+        openingHoursSpecification: {
+          "@type": "OpeningHoursSpecification",
+          dayOfWeek: [
+            "Monday",
+            "Tuesday",
+            "Wednesday",
+            "Thursday",
+            "Friday",
+            "Saturday",
+            "Sunday",
+          ],
+          opens: "10:00",
+          closes: "19:00",
         },
         areaServed: { "@type": "State", name: "Assam" },
         sameAs: [

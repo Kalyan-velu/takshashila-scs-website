@@ -9,9 +9,9 @@ interface Stat {
 
 interface Topper {
   name: string;
-  exam: string; // e.g. "APSC CCE 2023"
   rank: string; // e.g. "ACS Rank 12"
-  image: string; // e.g. "/Takshasheela/toppers/priya-das.webp"
+  exam?: string; // e.g. "APSC CCE 2023"
+  image?: string; // e.g. "/Takshasheela/toppers/priya-das.webp"
 }
 
 interface TestimonialVideo {
@@ -19,19 +19,48 @@ interface TestimonialVideo {
   title: string;
 }
 
+import abhigyanGogoi from "../assets/selected-candidates/Abhigyan Gogoi.png";
+import angshurajDas from "../assets/selected-candidates/Angshuraj Das.png";
+import guninPegu from "../assets/selected-candidates/Gunin Pegu.png";
+import himasriSarma from "../assets/selected-candidates/Himasri Sarma.png";
+import hirakRajbongshi from "../assets/selected-candidates/Hirak Rajbongshi.png";
+import kritarthaKashyap from "../assets/selected-candidates/Kitartha.png";
+import manishBaruah from "../assets/selected-candidates/Manish Baruah.png";
+import rahulDas from "../assets/selected-candidates/Rahul Das.png";
+
 const stats: Stat[] = [
-  // { value: "120+", label: "Selections in APSC, UPSC & ADRE" },
-  // { value: "2,000+", label: "Students Trained" },
-  // { value: "15+", label: "Expert Faculty from Delhi & Assam" },
-  // { value: "500+", label: "Mock Tests Conducted" },
+  { value: "20+", label: "Selections in APSC, UPSC & ADRE" },
+  { value: "2,000+", label: "Students Trained" },
+  { value: "10+", label: "Expert Faculty from Delhi & Assam" },
+  { value: "500+", label: "Mock Tests Conducted" },
 ];
 
+// Toppers without a matching photo in src/assets/selected-candidates are
+// omitted here rather than shown without an image.
 const toppers: Topper[] = [
-  // { name: "Full Name", exam: "APSC CCE 2023", rank: "ACS Rank 12", image: "/Takshasheela/toppers/name.webp" },
+  {
+    name: "Kritartha Kashyap",
+    rank: "ACS Rank 25",
+    image: kritarthaKashyap.src,
+  },
+  { name: "Gunin Pegu", rank: "APS Rank 14", image: guninPegu.src },
+  { name: "Angshuraj Das", rank: "IT Rank 12", image: angshurajDas.src },
+  { name: "Manish Baruah", rank: "IT Rank 31", image: manishBaruah.src },
+  { name: "Rahul Das", rank: "IE Rank 06", image: rahulDas.src },
+  { name: "Abhigyan Gogoi", rank: "AEO Rank 11", image: abhigyanGogoi.src },
+  { name: "Himasri Sarma", rank: "AAO Rank 02", image: himasriSarma.src },
+  {
+    name: "Hirak Rajbongshi",
+    rank: "AAO Rank 03",
+    image: hirakRajbongshi.src,
+  },
 ];
 
 const testimonialVideos: TestimonialVideo[] = [
-  // { id: "XXXXXXXXXXX", title: "Topper Name — ACS Rank 12 | Takshasheela Success Story" },
+  {
+    id: "XXXXXXXXXXX",
+    title: "Topper Name — ACS Rank 12 | Takshasheela Success Story",
+  },
 ];
 
 const hasAnyContent =
@@ -69,21 +98,24 @@ const hasAnyContent =
           <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-4 mb-16">
             {toppers.map((t) => (
               <div class="rounded-2xl overflow-hidden border border-border bg-card">
-                <img
-                  src={t.image}
-                  alt={`${t.name} — ${t.rank}, ${t.exam} — Takshasheela School of Civil Services`}
-                  width="300"
-                  height="300"
-                  loading="lazy"
-                  decoding="async"
-                  class="w-full aspect-square object-cover"
-                />
+                {t.image && (
+                  <img
+                    src={t.image}
+                    alt={`${t.name} — ${t.rank}${t.exam ? `, ${t.exam}` : ""} — Takshasheela School of Civil Services`}
+                    width="300"
+                    height="300"
+                    loading="lazy"
+                    decoding="async"
+                    class="w-full aspect-square object-cover"
+                  />
+                )}
                 <div class="p-3">
                   <div class="text-sm font-medium text-foreground">
                     {t.name}
                   </div>
                   <div class="text-xs text-muted-foreground">
-                    {t.rank} · {t.exam}
+                    {t.rank}
+                    {t.exam ? ` · ${t.exam}` : ""}
                   </div>
                 </div>
               </div>

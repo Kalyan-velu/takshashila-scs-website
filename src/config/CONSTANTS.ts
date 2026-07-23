@@ -24,3 +24,4 @@ export const socials = {
   TWITTER: "https://twitter.com/takshashilascs",
   YOUTUBE: "https://www.youtube.com/@takshashilascs",
 };
+

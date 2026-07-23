@@ -19,7 +19,7 @@ const posts = await getLatestPosts(1, 4).catch(() => []);
   <WhyChooseUs id="about" />
   <CoachingProse id="coaching-in-guwahati" />
   <Courses id="courses" />
+  <LatestArticles posts={posts} client:load />
   <FaqSection />
-  <!--<LatestArticles posts={posts} client:load />-->
   <Gallery />
 </Layout>
