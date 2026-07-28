@@ -2,6 +2,7 @@
 // import CoursesCarousel from "@/components/courses/CoursesCarousel.vue";
 import { CATEGORIES, CATEGORY_MAP } from "@/data/category.ts";
 import { getCollection } from "astro:content";
+import { SITE_URL } from "@/config/CONSTANTS.ts";
 
 const { id } = Astro.props;
 
@@ -15,16 +16,73 @@ const courses = aboutCourseEntries.flatMap((e) =>
     url: `/courses/${e.data.courseSlug}/`,
   })),
 );
+
+const courseSchema = {
+  "@context": "https://schema.org",
+  "@type": "ItemList",
+  itemListElement: aboutCourseEntries.map((e, index) => {
+    const firstItem = e.data.courses?.[0];
+    const hasCourseInstance = [];
+    if (firstItem?.prices?.online) {
+      hasCourseInstance.push({
+        "@type": "CourseInstance",
+        courseMode: "online",
+        offers: {
+          "@type": "Offer",
+          price: String(
+            firstItem.prices.online.original - firstItem.prices.online.discount,
+          ),
+          priceCurrency: "INR",
+        },
+      });
+    }
+    if (firstItem?.prices?.offline) {
+      hasCourseInstance.push({
+        "@type": "CourseInstance",
+        courseMode: "onsite",
+        offers: {
+          "@type": "Offer",
+          price: String(
+            firstItem.prices.offline.original -
+              firstItem.prices.offline.discount,
+          ),
+          priceCurrency: "INR",
+        },
+      });
+    }
+    if (hasCourseInstance.length === 0 && firstItem?.modes) {
+      firstItem.modes.forEach((mode) =>
+        hasCourseInstance.push({
+          "@type": "CourseInstance",
+          courseMode: mode === "offline" ? "onsite" : "online",
+        }),
+      );
+    }
+
+    return {
+      "@type": "ListItem",
+      position: index + 1,
+      item: {
+        "@type": "Course",
+        name: e.data.title,
+        description: e.data.seoDescription ?? e.data.description,
+        url: `${SITE_URL}/courses/${e.data.courseSlug}/`,
+        provider: { "@id": `${SITE_URL}/#organization` },
+        hasCourseInstance,
+      },
+    };
+  }),
+};
 ---
 
-<section id={id} class="pb-12 scroll-pt-4 lg:pb-32">
-  <div class="px-4 md:px-6">
+<section id={id} class="pb-12 scroll-pt-4 lg:pb-32 bg-background">
+  <div class="px-4 md:px-6 max-w-7xl mx-auto">
     <div class="flex-col lg:flex-row flex lg:items-center lg:justify-between">
       <div class="text-left mb-10">
         <h2
           class="text-3xl md:text-5xl font-light tracking-tight text-gray-900 mb-4"
         >
-          Our Popular Courses
+          Our APSC, UPSC &amp; ADRE Coaching Courses
         </h2>
         <p class="text-gray-600 font-light text-lg max-w-2xl leading-relaxed">
           Join the most comprehensive civil services coaching programs in
@@ -54,6 +112,8 @@ const courses = aboutCourseEntries.flatMap((e) =>
     <!--<CoursesCarousel courses={courses} client:only="vue" />-->
   </div>
 </section>
+
+<script type="application/ld+json" set:html={JSON.stringify(courseSchema)} />
 
 <style>
   .hide-scrollbar::-webkit-scrollbar {

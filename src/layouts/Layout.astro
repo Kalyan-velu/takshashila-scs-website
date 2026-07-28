@@ -6,24 +6,24 @@ import { Schema } from "astro-seo-schema";
 import { Font } from "astro:assets";
 
 import variables from "@/config/variables.ts";
-import { SITE_URL } from "@/config/CONSTANTS.ts";
 
 import Navbar from "@/components/header/Header.astro";
 import LeadPopup from "@/components/LeadPopup.vue";
 import Footer from "@/components/Footer.astro";
 import GoogleTagManager from "@/lib/GTag/GoogleTagManager.astro";
 import GoogleTagManagerNoscript from "@/lib/GTag/GoogleTagManagerNoscript.astro";
+import { SITE_URL, PHONE_TEL, EMAIL, socials } from "@/config/CONSTANTS.ts";
+
+// variables.CRM_URL always resolves to the private server value in frontmatter; this needs the public origin.
+const crmOrigin =
+  import.meta.env.PUBLIC_CRM_URL || "https://crm.takshashilascs.com";
 
 interface Props {
   title?: string;
   description?: string;
   image?: string;
   canonical?: string;
-  keywords?: string;
 }
-
-const defaultKeywords =
-  "apsc coaching in guwahati, apsc coaching, adre coaching, upsc, apsc full form, upsc full form, best apsc coaching in guwahati, adre syllabus, apsc syllabus, upsc syllabus, apsc cce full form, scs current affairs, upsc coaching in assam, apsc coaching in assam, upsc strategy, upsc 2026 exam date, adre exam date,  guwahati apsc coaching centre, difference between apsc and upsc, apsc vs upsc, best coaching center in Northeast India, guwahati upsc coaching centre, syllabus of upsc, civil service exam, coaching center, coaching centre in guwahati, assam coaching centre";
 
 // Normalizing to the canonical host + trailing slash regardless of which
 // host/slash variant the page was actually requested on.
@@ -32,8 +32,8 @@ if (!normalizedPath.endsWith("/")) normalizedPath += "/";
 const defaultCanonical = new URL(normalizedPath, SITE_URL).href;
 
 const {
-  title = "The Best UPSC and APSC Coaching in Guwahati - Takshasheela School of Civil Services",
-  description = "At Takshasheela School of Civil Services, the best UPSC and APSC coaching in Guwahati, we are committed to helping you achieve your dream of becoming a civil servant. Prepare for ADRE, APSC, and UPSC. Both online and offline batches are available, best coaching institute in guwahati",
+  title = "Best UPSC & APSC Coaching in Guwahati | Takshasheela SCS",
+  description = "Join Takshasheela School of Civil Services for expert UPSC, APSC & ADRE coaching in Guwahati. Online/offline batches with comprehensive study material.",
   image = "/og/index.png",
   canonical = defaultCanonical,
   keywords = defaultKeywords,
@@ -69,7 +69,7 @@ const {
         },
       }}
       twitter={{
-        creator: "@takshasheela",
+        creator: "@takshashilascs",
         card: "summary_large_image",
         title: title,
         description: description,
@@ -79,17 +79,52 @@ const {
     <Schema
       item={{
         "@context": "https://schema.org",
-        "@type": "EducationalOrganization",
-        name: "Takshasheela School of Civil Services",
+        "@type": ["EducationalOrganization", "LocalBusiness"],
+        "@id": `${SITE_URL}/#organization`,
+        name: "Takshashila School of Civil Services",
+        alternateName: "Takshasheela SCS",
         description: description,
         url: Astro.site ? Astro.site.href : SITE_URL,
-        logo: `${SITE_URL}/favicon.svg`,
+        logo: `${SITE_URL}/logo-full-black.png`,
+        image: new URL(image, Astro.url).href,
+        telephone: [
+          "+91 60016 57575",
+          "+91 69132 03751"
+        ],
+        email: EMAIL,
         address: {
           "@type": "PostalAddress",
           addressLocality: "Guwahati",
           addressRegion: "Assam",
           addressCountry: "IN",
         },
+        geo: {
+          "@type": "GeoCoordinates",
+          latitude: 26.1411661,
+          longitude: 91.7962836,
+        },
+        openingHoursSpecification: {
+          "@type": "OpeningHoursSpecification",
+          dayOfWeek: [
+            "Monday",
+            "Tuesday",
+            "Wednesday",
+            "Thursday",
+            "Friday",
+            "Saturday",
+            "Sunday",
+          ],
+          opens: "10:00",
+          closes: "19:00",
+        },
+        areaServed: { "@type": "State", name: "Assam" },
+        sameAs: [
+          socials.FACEBOOK,
+          socials.INSTAGRAM,
+          socials.TWITTER,
+          socials.YOUTUBE,
+          socials.LINKEDIN,
+        ],
       }}
     />
     <link rel="preconnect" href="https://challenges.cloudflare.com" />

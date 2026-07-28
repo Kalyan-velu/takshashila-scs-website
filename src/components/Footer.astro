@@ -5,6 +5,7 @@ import {
   PHONE_DISPLAY,
   PHONE_HREF,
   CURRENT_AFFAIRS_URL,
+  socials,
 } from "@/config/CONSTANTS.ts";
 import contentData from "@/data/content.json";
 
@@ -31,7 +32,10 @@ const { footer } = contentData;
         </p>
         <div class="flex gap-4">
           <a
-            href="#"
+            href={socials.FACEBOOK}
+            target="_blank"
+            rel="noopener noreferrer"
+            aria-label="Facebook"
             class="h-10 w-10 flex items-center justify-center rounded-full bg-gray-100 text-gray-600 hover:bg-primary-500 hover:text-white transition-colors"
           >
             <svg
@@ -48,7 +52,10 @@ const { footer } = contentData;
             </svg>
           </a>
           <a
-            href="#"
+            href={socials.TWITTER}
+            target="_blank"
+            rel="noopener noreferrer"
+            aria-label="Twitter/X"
             class="h-10 w-10 flex items-center justify-center rounded-full bg-gray-100 text-gray-600 hover:bg-primary-500 hover:text-white transition-colors"
           >
             <svg
@@ -65,8 +72,11 @@ const { footer } = contentData;
             </svg>
           </a>
           <a
-            href="#"
-            class="h-10 w-10 flex items-center justify-center rounded-full bg-gray-100 text-gray-600 hover:bg-primary-500 hover:text-white transition-colors"
+            href={socials.INSTAGRAM}
+            target="_blank"
+            rel="noopener noreferrer"
+            aria-label="Instagram"
+            class="h-10 w-10 flex items-center justify-center rounded-full bg-muted text-muted-foreground hover:bg-primary hover:text-primary-foreground transition-colors"
           >
             <svg
               xmlns="http://www.w3.org/2000/svg"
@@ -78,6 +88,25 @@ const { footer } = contentData;
               <path
                 fill="currentColor"
                 d="M7.8 2h8.4C19.4 2 22 4.6 22 7.8v8.4a5.8 5.8 0 0 1-5.8 5.8H7.8C4.6 22 2 19.4 2 16.2V7.8A5.8 5.8 0 0 1 7.8 2m-.2 2A3.6 3.6 0 0 0 4 7.6v8.8C4 18.39 5.61 20 7.6 20h8.8a3.6 3.6 0 0 0 3.6-3.6V7.6C20 5.61 18.39 4 16.4 4zm9.65 1.5a1.25 1.25 0 0 1 1.25 1.25A1.25 1.25 0 0 1 17.25 8A1.25 1.25 0 0 1 16 6.75a1.25 1.25 0 0 1 1.25-1.25M12 7a5 5 0 0 1 5 5a5 5 0 0 1-5 5a5 5 0 0 1-5-5a5 5 0 0 1 5-5m0 2a3 3 0 0 0-3 3a3 3 0 0 0 3 3a3 3 0 0 0 3-3a3 3 0 0 0-3-3"
+              ></path>
+            </svg>
+          </a>
+          <a
+            href={socials.YOUTUBE}
+            target="_blank"
+            rel="noopener noreferrer"
+            aria-label="YouTube"
+            class="h-10 w-10 flex items-center justify-center rounded-full bg-muted text-muted-foreground hover:bg-primary hover:text-primary-foreground transition-colors"
+          >
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="1em"
+              height="1em"
+              viewBox="0 0 576 512"
+            >
+              <path
+                fill="currentColor"
+                d="M549.7 124.1c-6.3-23.7-24.8-42.3-48.3-48.6C458.8 64 288 64 288 64S117.2 64 74.6 75.5c-23.5 6.3-42 24.9-48.3 48.6-11.4 42.9-11.4 132.3-11.4 132.3s0 89.4 11.4 132.3c6.3 23.7 24.8 41.5 48.3 47.8C117.2 448 288 448 288 448s170.8 0 213.4-11.5c23.5-6.3 42-24.2 48.3-47.8 11.4-42.9 11.4-132.3 11.4-132.3s0-89.4-11.4-132.3zm-317.5 213.5V175.2l142.7 81.2-142.7 81.2z"
               ></path>
             </svg>
           </a>

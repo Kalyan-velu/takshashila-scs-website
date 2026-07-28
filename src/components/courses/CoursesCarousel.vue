@@ -21,12 +21,13 @@ const filteredCourses = computed(() => {
       .includes(activeTab.value.toLowerCase()),
   );
 });
-window.addEventListener("course-tab-change", (e) => {
-  const customEvent = e as CustomEvent;
-  if (customEvent.detail) {
-    console.log("customEvent.detail", customEvent.detail);
-    activeTab.value = customEvent.detail.tab;
-  }
+onMounted(() => {
+  window.addEventListener("course-tab-change", (e) => {
+    const customEvent = e as CustomEvent;
+    if (customEvent.detail) {
+      activeTab.value = customEvent.detail.tab;
+    }
+  });
 });
 </script>
 
@@ -39,7 +40,7 @@ window.addEventListener("course-tab-change", (e) => {
         :key="course.title"
       >
         <div class="p-1 h-full">
-          <div
+          <article
             :class="
               cn(
                 'course-card  select-none cursor-grab active:cursor-grabbing h-full group relative flex flex-col  snap-center shrink-0 rounded-tl-[2rem] rounded-br-[2rem] border overflow-clip transition-all duration-500 hover:shadow-2xl hover:shadow-primary-500/5 hover:border-primary-500/20',
@@ -138,7 +139,7 @@ window.addEventListener("course-tab-change", (e) => {
                 </svg>
               </a>
             </div>
-          </div>
+          </article>
         </div>
       </CarouselItem>
     </CarouselContent>

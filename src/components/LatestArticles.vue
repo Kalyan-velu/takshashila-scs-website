@@ -4,8 +4,12 @@ import { getLatestPosts } from "../lib/wordpress";
 import type { WPPost } from "@/types";
 import { CURRENT_AFFAIRS_URL } from "@/config/CONSTANTS.ts";
 
-const posts = ref<WPPost[]>([]);
-const isLoading = ref(true);
+const props = defineProps<{
+  posts?: WPPost[];
+}>();
+
+const posts = ref<WPPost[]>(props.posts ?? []);
+const isLoading = ref(!props.posts);
 
 const renderPosts = computed(() => {
   return posts.value.length > 0 ? posts.value : [];
@@ -22,6 +26,7 @@ const getCleanExcerpt = (post: WPPost) => {
 };
 
 onMounted(async () => {
+  if (props.posts) return;
   try {
     const fetchedPosts = await getLatestPosts(1, 6);
     if (fetchedPosts && fetchedPosts.length > 0) {

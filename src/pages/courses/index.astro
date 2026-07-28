@@ -1,6 +1,7 @@
 ---
 import Layout from "@/layouts/Layout.astro";
 import CourseTabs from "@/components/courses/CourseTabs.vue";
+import CoachingProse from "@/components/CoachingProse.astro";
 import { CATEGORIES } from "@/data/category.ts";
 import { getCollection } from "astro:content";
 
@@ -52,4 +53,6 @@ const courses = aboutCourseEntries.flatMap((e) =>
   <div class="container mx-auto px-4 lg:px-24 py-8 md:py-16">
     <CourseTabs client:load courses={courses} categories={CATEGORIES} />
   </div>
+
+  <CoachingProse id="coaching-in-guwahati" />
 </Layout>
