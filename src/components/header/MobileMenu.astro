@@ -116,14 +116,12 @@ import { CURRENT_AFFAIRS_URL, EMAIL, PHONE_DISPLAY, PHONE_HREF } from "@/config/
 <script>
   const drawer          = document.querySelector(".js-mobile-drawer")           as HTMLElement;
   const slider          = document.querySelector(".js-mobile-slider-wrapper")   as HTMLElement;
-  const toggle          = document.querySelector(".js-mobile-menu-toggle")      as HTMLElement;
   const logoOverlay     = document.querySelector(".js-logo-scroll-overlay")     as HTMLElement;
   const coursesTrigger  = document.querySelector(".js-mobile-sub-trigger-courses") as HTMLElement;
   const aboutTrigger    = document.querySelector(".js-mobile-sub-trigger-about")   as HTMLElement;
   const backButton      = document.querySelector(".js-mobile-back-button")      as HTMLElement;
   const coursesList     = document.querySelector(".js-mobile-sub-list-courses") as HTMLElement;
   const aboutList       = document.querySelector(".js-mobile-sub-list-about")   as HTMLElement;
-  const mobileLinks     = document.querySelectorAll(".js-mobile-link");
   const line1           = document.querySelector(".js-hamburger-line-1");
   const line2           = document.querySelector(".js-hamburger-line-2");
   const line3           = document.querySelector(".js-hamburger-line-3");
@@ -131,6 +129,7 @@ import { CURRENT_AFFAIRS_URL, EMAIL, PHONE_DISPLAY, PHONE_HREF } from "@/config/
   let isOpen = false;
 
   function openDrawer() {
+    if (!drawer) return;
     isOpen = true;
     // Close menus + search without triggering header:close-mobile (avoids closing self)
     document.dispatchEvent(new CustomEvent("header:close-megamenus"));
@@ -146,6 +145,7 @@ import { CURRENT_AFFAIRS_URL, EMAIL, PHONE_DISPLAY, PHONE_HREF } from "@/config/
   }
 
   function closeDrawer() {
+    if (!drawer) return;
     isOpen = false;
     drawer.style.maxHeight = "0rem";
     drawer.classList.remove("opacity-100");
@@ -154,41 +154,50 @@ import { CURRENT_AFFAIRS_URL, EMAIL, PHONE_DISPLAY, PHONE_HREF } from "@/config/
     line2?.classList.remove("opacity-0");
     line3?.classList.remove("-rotate-45", "-translate-y-1.25");
     logoOverlay?.classList.add("pointer-events-none");
-    slider.style.transform = "translateX(0%)";
+    if (slider) slider.style.transform = "translateX(0%)";
     setTimeout(() => {
       coursesList?.classList.add("hidden");
       aboutList?.classList.add("hidden");
     }, 300);
   }
 
-  // Hamburger toggle
-  toggle?.addEventListener("click", () => (isOpen ? closeDrawer() : openDrawer()));
+  // Document-level event delegation for hamburger toggle button
+  document.addEventListener("click", (e) => {
+    const toggleBtn = (e.target as HTMLElement).closest(".js-mobile-menu-toggle");
+    if (toggleBtn) {
+      e.preventDefault();
+      isOpen ? closeDrawer() : openDrawer();
+      return;
+    }
+
+    const mobileLink = (e.target as HTMLElement).closest(".js-mobile-link");
+    if (mobileLink) {
+      closeDrawer();
+    }
+  });
 
   // Level 2 — Courses
   coursesTrigger?.addEventListener("click", () => {
     coursesList?.classList.remove("hidden");
     aboutList?.classList.add("hidden");
-    slider.style.transform = "translateX(-50%)";
+    if (slider) slider.style.transform = "translateX(-50%)";
   });
 
   // Level 2 — About
   aboutTrigger?.addEventListener("click", () => {
     aboutList?.classList.remove("hidden");
     coursesList?.classList.add("hidden");
-    slider.style.transform = "translateX(-50%)";
+    if (slider) slider.style.transform = "translateX(-50%)";
   });
 
   // Back to Level 1
   backButton?.addEventListener("click", () => {
-    slider.style.transform = "translateX(0%)";
+    if (slider) slider.style.transform = "translateX(0%)";
     setTimeout(() => {
       coursesList?.classList.add("hidden");
       aboutList?.classList.add("hidden");
     }, 300);
   });
-
-  // Close on any mobile nav link click
-  mobileLinks.forEach(link => link.addEventListener("click", closeDrawer));
 
   // Close when scroll or search opens (dispatched by header.ts)
   document.addEventListener("header:close-mobile", closeDrawer);

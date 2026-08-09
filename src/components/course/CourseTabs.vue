@@ -57,8 +57,9 @@ const selectMode = (mode: string) => {
       <button
         v-for="tab in tabs"
         :key="tab.id"
-        @click="selectTab(tab.id)"
-        class="whitespace-nowrap px-6 md:px-8 py-4 md:py-5 text-sm md:text-base font-medium transition-colors border-b-2 relative -mb-px"
+        type="button"
+        @click.prevent="selectTab(tab.id)"
+        class="whitespace-nowrap px-6 md:px-8 py-4 md:py-5 text-sm md:text-base font-medium transition-colors border-b-2 relative -mb-px cursor-pointer"
         :class="
           activeTab === tab.id
             ? 'border-primary-500 text-primary-500 bg-white'
@@ -78,8 +79,9 @@ const selectMode = (mode: string) => {
       <button
         v-for="mode in availableModes"
         :key="mode"
-        @click="selectMode(mode)"
-        class="px-4 py-1.5 rounded-full text-sm font-medium transition-all border"
+        type="button"
+        @click.prevent="selectMode(mode)"
+        class="px-4 py-1.5 rounded-full text-sm font-medium transition-all border cursor-pointer"
         :class="
           selectedMode === mode
             ? 'bg-primary-500 text-white border-primary-500'
@@ -92,19 +94,19 @@ const selectMode = (mode: string) => {
 
     <div class="w-full p-6 md:p-10 markdown-content">
       <div
-        v-show="activeTab === 'about-course'"
+        :class="activeTab === 'about-course' ? 'block' : 'hidden'"
         class="w-full animate-in fade-in duration-300"
       >
         <slot name="about-course" />
       </div>
       <div
-        v-show="activeTab === 'about-exam'"
+        :class="activeTab === 'about-exam' ? 'block' : 'hidden'"
         class="w-full animate-in fade-in duration-300"
       >
         <slot name="about-exam" />
       </div>
       <div
-        v-show="activeTab === 'notification'"
+        :class="activeTab === 'notification' ? 'block' : 'hidden'"
         class="w-full animate-in fade-in duration-300"
       >
         <slot name="notification" />

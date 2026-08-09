@@ -1,7 +1,6 @@
 // @ts-check
 import tailwindcss from "@tailwindcss/vite";
 import { defineConfig, fontProviders } from "astro/config";
-import react from "@astrojs/react";
 import vue from "@astrojs/vue";
 import vercel from "@astrojs/vercel";
 import sitemap from "@astrojs/sitemap";
@@ -19,7 +18,6 @@ export default defineConfig({
     },
   ],
   integrations: [
-    react(),
     vue(),
     sitemap({
       xslURL: "/sitemap.xsl",

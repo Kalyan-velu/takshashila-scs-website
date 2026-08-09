@@ -1,10 +1,10 @@
 <script setup lang="ts">
 import { computed, nextTick, onMounted, onUnmounted, ref } from "vue";
-import variables from "@/config/variables.ts";
-import { PHONE_HREF } from "@/config/CONSTANTS.ts";
+import variables from "@/config/variables";
+import { PHONE_HREF } from "@/config/CONSTANTS";
 import { coursesItems } from "@/data/navigation";
 import { useTurnstile } from "@/lib/useTurnstile";
-import { submitLead } from "@/lib/submitLead.ts";
+import { submitLead } from "@/lib/submitLead";
 
 interface CoursePrice {
   original: number;
@@ -133,7 +133,7 @@ const submitForm = async () => {
   isSubmitting.value = true;
   try {
     const selectedCourseTitle =
-      courseItems.value[selectedCourseIndex.value]?.title || "Civil Services Course";
+      props.courseItems[selectedCourseIndex.value]?.title || "Civil Services Course";
 
     let phone = form.value.phone.trim();
     if (phone && !phone.startsWith("+")) {
