@@ -1,6 +1,6 @@
 ---
-
 import CourseTabs from "@/components/course/CourseTabs.vue";
+import Enroll from "@/components/course/EnrollmentSidebar.vue";
 import Layout from "@/layouts/Layout.astro";
 import { getCollection, render } from "astro:content";
 
@@ -94,14 +94,14 @@ const hasModes = availableModes.length > 1;
       <div
         class="lg:col-span-4 w-full sticky top-0 z-10 transition-all duration-500"
       >
-        <!--<Enroll-->
-        <!--  client:load-->
-        <!--  price={data.price}-->
-        <!--  period={data.pricePeriod}-->
-        <!--  features={data.features}-->
-        <!--  courseItems={courseItems}-->
-        <!--  hasModes={hasModes}-->
-        <!--/>-->
+        <Enroll
+          client:load="vue"
+          price={data.price}
+          period={data.pricePeriod}
+          features={data.features}
+          courseItems={courseItems}
+          hasModes={hasModes}
+        />
       </div>
     </div>
   </div>

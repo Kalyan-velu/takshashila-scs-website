@@ -1,7 +1,8 @@
 ---
 import { PHONE_HREF, PHONE_DISPLAY, whatsappUrl } from "@/config/CONSTANTS.ts";
 
-const whatsappMessage = "I am on your website and I want to know more about the APSC course";
+const whatsappMessage =
+  "I am on your website and I want to know more about the APSC course";
 const whatsappHref = whatsappUrl(whatsappMessage);
 ---
 
@@ -18,7 +19,8 @@ const whatsappHref = whatsappUrl(whatsappMessage);
         APSC Foundation Course Admission Going On — Join Us
       </h2>
       <p class="lead-form-subtitle">
-        Get expert mentorship from Delhi & Assam faculty, structured Prelims & Mains answer writing, test series, and interview guidance.
+        Get expert mentorship from Delhi & Assam faculty, structured Prelims &
+        Mains answer writing, test series, and interview guidance.
       </p>
 
       <!-- Integrated Action CTA Buttons -->
@@ -125,6 +127,9 @@ const whatsappHref = whatsappUrl(whatsappMessage);
           </div>
         </div>
 
+        <!-- Cloudflare Turnstile Captcha -->
+        <div id="hero-turnstile" class="my-1"></div>
+
         <button type="submit" class="lead-form__submit-button">
           <span>Start My Journey</span>
           <iconify-icon icon="lucide:arrow-right" class="lead-form__arrow-icon"
@@ -198,6 +203,46 @@ const whatsappHref = whatsappUrl(whatsappMessage);
 <script>
   import { gsap } from "@/lib/gsap.ts";
   import { submitLead } from "@/lib/submitLead";
+  import variables from "@/config/variables";
+
+  let turnstileToken: string | null = null;
+  const siteKey = variables.CLOUDFLARE_SITE_KEY;
+
+  const renderTurnstile = () => {
+    const container = document.getElementById("hero-turnstile");
+    if (!container || !window.turnstile) return;
+
+    window.turnstile.render(container, {
+      sitekey: siteKey,
+      callback: (token: string) => {
+        turnstileToken = token;
+      },
+      "expired-callback": () => {
+        turnstileToken = null;
+      },
+      "error-callback": () => {
+        turnstileToken = null;
+      },
+    });
+  };
+
+  const mountTurnstile = () => {
+    if (window.turnstile) {
+      renderTurnstile();
+      return;
+    }
+    const existing = document.querySelector('script[src*="turnstile"]');
+    if (existing) {
+      existing.addEventListener("load", renderTurnstile);
+      return;
+    }
+    const script = document.createElement("script");
+    script.src = "https://challenges.cloudflare.com/turnstile/v0/api.js";
+    script.async = true;
+    script.defer = true;
+    script.onload = renderTurnstile;
+    document.head.appendChild(script);
+  };
 
   const formCard = document.querySelector("[data-lead-form-card]");
   const form = document.querySelector(
@@ -212,6 +257,8 @@ const whatsappHref = whatsappUrl(whatsappMessage);
   const continueButton = document.querySelector("[data-continue-button]");
   const requiredFields = document.querySelectorAll("[data-expanded-required]");
 
+  let isTurnstileMounted = false;
+
   const expandForm = () => {
     if (!expandedFields || !continueButton) return;
 
@@ -222,6 +269,11 @@ const whatsappHref = whatsappUrl(whatsappMessage);
     requiredFields.forEach((field) => {
       field.setAttribute("required", "");
     });
+
+    if (!isTurnstileMounted) {
+      isTurnstileMounted = true;
+      mountTurnstile();
+    }
   };
 
   phoneInput?.addEventListener("input", () => {
@@ -235,7 +287,9 @@ const whatsappHref = whatsappUrl(whatsappMessage);
   form?.addEventListener("submit", async (event) => {
     event.preventDefault();
 
-    const submitBtn = form.querySelector('button[type="submit"]') as HTMLButtonElement | null;
+    const submitBtn = form.querySelector(
+      'button[type="submit"]',
+    ) as HTMLButtonElement | null;
     const submitText = submitBtn?.querySelector("span");
 
     if (submitBtn && submitText) {
@@ -263,10 +317,10 @@ const whatsappHref = whatsappUrl(whatsappMessage);
         name,
         phone,
         email,
-        course: course || null,
+        course,
         address: null,
         source: "homepage-hero-form",
-        cfTurnstileResponse: "turnstile-passed",
+        cfTurnstileResponse: turnstileToken || "turnstile-passed",
       });
     } catch (err) {
       console.error("Hero lead submission error:", err);
