@@ -3,7 +3,7 @@ import { aboutItems, coursesItems } from "@/data/navigation.ts";
 import { CURRENT_AFFAIRS_URL, EMAIL, PHONE_DISPLAY, PHONE_HREF } from "@/config/CONSTANTS.ts";
 ---
 
-<div class="w-full relative z-40 lg:hidden transition-all duration-300 overflow-hidden bg-white dark:bg-slate-950 border-b border-gray-100 dark:border-slate-900 max-height-0 opacity-0 js-mobile-drawer" style="max-height: 0rem;">
+<div class="w-full relative z-40 lg:hidden transition-all duration-300 overflow-hidden bg-white dark:bg-slate-950 border-b border-gray-100 dark:border-slate-900 opacity-0 pointer-events-none js-mobile-drawer" style="max-height: 0rem;">
   <div class="w-[200%] flex transition-transform duration-300 ease-out js-mobile-slider-wrapper">
     
     <!-- Level 1: Main links (w-1/2) -->
@@ -114,30 +114,24 @@ import { CURRENT_AFFAIRS_URL, EMAIL, PHONE_DISPLAY, PHONE_HREF } from "@/config/
 </div>
 
 <script>
-  const drawer          = document.querySelector(".js-mobile-drawer")           as HTMLElement;
-  const slider          = document.querySelector(".js-mobile-slider-wrapper")   as HTMLElement;
-  const logoOverlay     = document.querySelector(".js-logo-scroll-overlay")     as HTMLElement;
-  const coursesTrigger  = document.querySelector(".js-mobile-sub-trigger-courses") as HTMLElement;
-  const aboutTrigger    = document.querySelector(".js-mobile-sub-trigger-about")   as HTMLElement;
-  const backButton      = document.querySelector(".js-mobile-back-button")      as HTMLElement;
-  const coursesList     = document.querySelector(".js-mobile-sub-list-courses") as HTMLElement;
-  const aboutList       = document.querySelector(".js-mobile-sub-list-about")   as HTMLElement;
-  const line1           = document.querySelector(".js-hamburger-line-1");
-  const line2           = document.querySelector(".js-hamburger-line-2");
-  const line3           = document.querySelector(".js-hamburger-line-3");
-
   let isOpen = false;
 
   function openDrawer() {
+    const drawer = document.querySelector(".js-mobile-drawer") as HTMLElement | null;
+    const line1 = document.querySelector(".js-hamburger-line-1");
+    const line2 = document.querySelector(".js-hamburger-line-2");
+    const line3 = document.querySelector(".js-hamburger-line-3");
+    const logoOverlay = document.querySelector(".js-logo-scroll-overlay") as HTMLElement | null;
+
     if (!drawer) return;
     isOpen = true;
-    // Close menus + search without triggering header:close-mobile (avoids closing self)
+
     document.dispatchEvent(new CustomEvent("header:close-megamenus"));
     document.dispatchEvent(new CustomEvent("header:close-search"));
 
     drawer.style.maxHeight = "85vh";
-    drawer.classList.remove("opacity-0");
-    drawer.classList.add("opacity-100");
+    drawer.classList.remove("opacity-0", "pointer-events-none");
+    drawer.classList.add("opacity-100", "pointer-events-auto");
     line1?.classList.add("rotate-45", "translate-y-1.25");
     line2?.classList.add("opacity-0");
     line3?.classList.add("-rotate-45", "-translate-y-1.25");
@@ -145,60 +139,75 @@ import { CURRENT_AFFAIRS_URL, EMAIL, PHONE_DISPLAY, PHONE_HREF } from "@/config/
   }
 
   function closeDrawer() {
+    const drawer = document.querySelector(".js-mobile-drawer") as HTMLElement | null;
+    const slider = document.querySelector(".js-mobile-slider-wrapper") as HTMLElement | null;
+    const line1 = document.querySelector(".js-hamburger-line-1");
+    const line2 = document.querySelector(".js-hamburger-line-2");
+    const line3 = document.querySelector(".js-hamburger-line-3");
+    const logoOverlay = document.querySelector(".js-logo-scroll-overlay") as HTMLElement | null;
+
     if (!drawer) return;
     isOpen = false;
+
     drawer.style.maxHeight = "0rem";
-    drawer.classList.remove("opacity-100");
-    drawer.classList.add("opacity-0");
+    drawer.classList.remove("opacity-100", "pointer-events-auto");
+    drawer.classList.add("opacity-0", "pointer-events-none");
     line1?.classList.remove("rotate-45", "translate-y-1.25");
     line2?.classList.remove("opacity-0");
     line3?.classList.remove("-rotate-45", "-translate-y-1.25");
     logoOverlay?.classList.add("pointer-events-none");
     if (slider) slider.style.transform = "translateX(0%)";
-    setTimeout(() => {
-      coursesList?.classList.add("hidden");
-      aboutList?.classList.add("hidden");
-    }, 300);
   }
 
-  // Document-level event delegation for hamburger toggle button
+  // Document-level event delegation for hamburger toggle and mobile nav links
   document.addEventListener("click", (e) => {
-    const toggleBtn = (e.target as HTMLElement).closest(".js-mobile-menu-toggle");
+    const target = e.target as HTMLElement | null;
+    if (!target) return;
+
+    const toggleBtn = target.closest(".js-mobile-menu-toggle");
     if (toggleBtn) {
       e.preventDefault();
       isOpen ? closeDrawer() : openDrawer();
       return;
     }
 
-    const mobileLink = (e.target as HTMLElement).closest(".js-mobile-link");
+    const coursesTrigger = target.closest(".js-mobile-sub-trigger-courses");
+    if (coursesTrigger) {
+      e.preventDefault();
+      const slider = document.querySelector(".js-mobile-slider-wrapper") as HTMLElement | null;
+      const coursesList = document.querySelector(".js-mobile-sub-list-courses");
+      const aboutList = document.querySelector(".js-mobile-sub-list-about");
+      coursesList?.classList.remove("hidden");
+      aboutList?.classList.add("hidden");
+      if (slider) slider.style.transform = "translateX(-50%)";
+      return;
+    }
+
+    const aboutTrigger = target.closest(".js-mobile-sub-trigger-about");
+    if (aboutTrigger) {
+      e.preventDefault();
+      const slider = document.querySelector(".js-mobile-slider-wrapper") as HTMLElement | null;
+      const coursesList = document.querySelector(".js-mobile-sub-list-courses");
+      const aboutList = document.querySelector(".js-mobile-sub-list-about");
+      aboutList?.classList.remove("hidden");
+      coursesList?.classList.add("hidden");
+      if (slider) slider.style.transform = "translateX(-50%)";
+      return;
+    }
+
+    const backButton = target.closest(".js-mobile-back-button");
+    if (backButton) {
+      e.preventDefault();
+      const slider = document.querySelector(".js-mobile-slider-wrapper") as HTMLElement | null;
+      if (slider) slider.style.transform = "translateX(0%)";
+      return;
+    }
+
+    const mobileLink = target.closest(".js-mobile-link");
     if (mobileLink) {
       closeDrawer();
     }
   });
 
-  // Level 2 — Courses
-  coursesTrigger?.addEventListener("click", () => {
-    coursesList?.classList.remove("hidden");
-    aboutList?.classList.add("hidden");
-    if (slider) slider.style.transform = "translateX(-50%)";
-  });
-
-  // Level 2 — About
-  aboutTrigger?.addEventListener("click", () => {
-    aboutList?.classList.remove("hidden");
-    coursesList?.classList.add("hidden");
-    if (slider) slider.style.transform = "translateX(-50%)";
-  });
-
-  // Back to Level 1
-  backButton?.addEventListener("click", () => {
-    if (slider) slider.style.transform = "translateX(0%)";
-    setTimeout(() => {
-      coursesList?.classList.add("hidden");
-      aboutList?.classList.add("hidden");
-    }, 300);
-  });
-
-  // Close when scroll or search opens (dispatched by header.ts)
   document.addEventListener("header:close-mobile", closeDrawer);
 </script>
