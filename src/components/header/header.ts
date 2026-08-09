@@ -291,9 +291,24 @@ function closeSearch() {
   document.dispatchEvent(new CustomEvent("header:search-close")); // → SearchDropdown resets input
 }
 
-searchToggle?.addEventListener("click", () =>
-  searchOpen ? closeSearch() : openSearch(),
-);
+searchToggle?.addEventListener("click", (e) => {
+  e.stopPropagation();
+  searchOpen ? closeSearch() : openSearch();
+});
+
+// Close search panel when clicking outside search dropdown or toggle button
+document.addEventListener("click", (e) => {
+  if (!searchOpen) return;
+  const target = e.target as HTMLElement | null;
+  if (!target) return;
+
+  const insideSearch = searchPanel?.contains(target);
+  const insideToggle = searchToggle?.contains(target);
+
+  if (!insideSearch && !insideToggle) {
+    closeSearch();
+  }
+});
 
 // Other components can ask search to close
 document.addEventListener("header:close-search", closeSearch);
