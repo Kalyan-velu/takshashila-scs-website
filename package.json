@@ -12,7 +12,8 @@
     "astro": "astro",
     "format": "prettier --write 'src/**/*.{astro,css,html,js,jsx,json,md,mdx,svelte,ts,tsx,vue}'",
     "test": "vitest run",
-    "test:watch": "vitest"
+    "test:watch": "vitest",
+    "csp": "node scripts/csp-hashes.mjs dist"
   },
   "dependencies": {
     "@astrojs/partytown": "^2.1.7",
