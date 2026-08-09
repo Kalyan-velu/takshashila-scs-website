@@ -22,6 +22,7 @@ describe("submitLead", () => {
 
     const result = await submitLead({
       ...basePayload,
+      course: "APSC Foundation Batch",
       source: "contact-page",
     });
 
@@ -35,6 +36,7 @@ describe("submitLead", () => {
     expect(body.get("name")).toBe("Jane Doe");
     expect(body.get("phone")).toBe("+911234567890");
     expect(body.get("email")).toBe("jane@example.com");
+    expect(body.get("course")).toBe("APSC Foundation Batch");
     expect(body.get("source")).toBe("contact-page");
     expect(body.get("cfTurnstileResponse")).toBe("token");
     // Omitted optional fields shouldn't be sent at all.

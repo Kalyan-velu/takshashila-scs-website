@@ -31,6 +31,8 @@ let normalizedPath = Astro.url.pathname;
 if (!normalizedPath.endsWith("/")) normalizedPath += "/";
 const defaultCanonical = new URL(normalizedPath, SITE_URL).href;
 
+const isHomePage = Astro.url.pathname === "/" || Astro.url.pathname === "";
+
 const {
   title = "Best UPSC & APSC Coaching in Guwahati | Takshasheela SCS",
   description = "Join Takshasheela School of Civil Services for expert UPSC, APSC & ADRE coaching in Guwahati. Online/offline batches with comprehensive study material.",
@@ -136,7 +138,7 @@ const {
     <main>
       <slot />
     </main>
-    <!--<LeadPopup client:only="vue" />-->
+    {!isHomePage && <LeadPopup client:only="vue" />}
     <Footer />
   </body>
 </html>

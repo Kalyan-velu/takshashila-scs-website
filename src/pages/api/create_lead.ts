@@ -1,7 +1,7 @@
 import { z } from "astro/zod";
 import type { APIRoute } from "astro";
 import { supabase } from "@/lib/db/supabase.ts";
-import { leadSchema, type LeadApiResponse } from "@/lib/schemas/lead.ts";
+import { type LeadApiResponse, leadSchema } from "@/lib/schemas/lead.ts";
 
 export const prerender = false;
 
@@ -42,6 +42,7 @@ export const POST: APIRoute = async ({ request, clientAddress }) => {
     email: formData.get("email") as string,
     address: formData.get("address") as string,
     source: formData.get("source") as string,
+    course: formData.get("course") as string,
     cfTurnstileResponse: formData.get("cfTurnstileResponse") as string,
   });
 
@@ -83,6 +84,7 @@ export const POST: APIRoute = async ({ request, clientAddress }) => {
       email: parsed.email,
       address: parsed.address,
       source: parsed.source,
+      course: parsed.course,
       // cfTurnstileResponse intentionally not inserted
     });
 

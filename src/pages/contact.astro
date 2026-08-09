@@ -499,23 +499,22 @@ const description =
       const formData = new FormData(form);
       const firstName = formData.get("firstName") as string;
       const lastName = formData.get("lastName") as string;
-      const phone = formData.get("phone") as string;
+      const rawPhone = formData.get("phone") as string;
       const email = formData.get("email") as string;
       const course = formData.get("course") as string;
       const address = formData.get("address") as string;
 
-      const formattedAddress = [
-        course ? `Course: ${course}` : null,
-        address ? `Address/Message: ${address.trim()}` : null,
-      ]
-        .filter(Boolean)
-        .join("\n");
+      let phone = rawPhone.trim();
+      if (phone && !phone.startsWith("+")) {
+        phone = `+91${phone.replace(/\D/g, "")}`;
+      }
 
       const result = await submitLead({
         name: `${firstName} ${lastName}`.trim(),
         phone,
         email,
-        address: formattedAddress || null,
+        course: course || null,
+        address: address ? address.trim() : null,
         source: "contact-page",
         cfTurnstileResponse: turnstileToken,
       });

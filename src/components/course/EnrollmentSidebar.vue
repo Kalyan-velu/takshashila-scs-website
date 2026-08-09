@@ -132,14 +132,21 @@ const submitForm = async () => {
   if (!turnstileToken.value) return;
   isSubmitting.value = true;
   try {
+    const selectedCourseTitle =
+      courseItems.value[selectedCourseIndex.value]?.title || "Civil Services Course";
+
+    let phone = form.value.phone.trim();
+    if (phone && !phone.startsWith("+")) {
+      phone = `+91${phone.replace(/\D/g, "")}`;
+    }
+
     await submitLead({
-      name: form.value.name,
-      phone: form.value.phone,
-      email: form.value.email,
+      name: form.value.name.trim(),
+      phone,
+      email: form.value.email.trim(),
+      course: selectedCourseTitle,
       source:
-        coursesItems[selectedCourseIndex.value].title
-          .toLowerCase()
-          .replace(/\s+/g, "-") +
+        selectedCourseTitle.toLowerCase().replace(/\s+/g, "-") +
         "-" +
         selectedMode.value.toLowerCase().replace(/\s+/g, "-"),
       cfTurnstileResponse: turnstileToken.value,

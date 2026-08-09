@@ -6,7 +6,7 @@ import { submitLead } from "@/lib/submitLead";
 
 const cloudflare_site_key = variables.CLOUDFLARE_SITE_KEY;
 
-const form = ref({ name: "", phone: "", email: "" });
+const form = ref({ name: "", phone: "", email: "", course: "" });
 const isVisible = ref(false);
 const isSubmitting = ref(false);
 const fieldErrors = ref<Record<string, string>>({});
@@ -68,11 +68,18 @@ const submitForm = async () => {
   isSubmitting.value = true;
   fieldErrors.value = {};
   formError.value = null;
+
+  let phone = form.value.phone.trim();
+  if (phone && !phone.startsWith("+")) {
+    phone = `+91${phone.replace(/\D/g, "")}`;
+  }
+
   try {
     const result = await submitLead({
-      name: form.value.name,
-      phone: form.value.phone,
-      email: form.value.email,
+      name: form.value.name.trim(),
+      phone,
+      email: form.value.email.trim(),
+      course: form.value.course || undefined,
       source: "lead-popup",
       cfTurnstileResponse: turnstileToken.value,
     });
@@ -266,6 +273,25 @@ const submitForm = async () => {
               {{ fieldErrors.phone }}
             </p>
           </div>
+
+          <div>
+            <label for="lead-course" class="block text-sm font-medium mb-1"
+              >Target Course</label
+            >
+            <select
+              id="lead-course"
+              v-model="form.course"
+              class="w-full px-4 py-2.5 border rounded-lg bg-white text-gray-900 focus:outline-none focus:ring-2 focus:ring-primary-500/50 border-gray-200 cursor-pointer"
+            >
+              <option value="" disabled selected>Select target course...</option>
+              <option value="APSC Foundation Batch">APSC Foundation Batch</option>
+              <option value="UPSC Foundation Batch">UPSC Foundation Batch</option>
+              <option value="ADRE Online Batch">ADRE Online Batch</option>
+              <option value="Optional Subject / Test Series">Optional Subject / Test Series</option>
+              <option value="General Inquiry">General Inquiry / Other</option>
+            </select>
+          </div>
+
           <!-- Turnstile widget -->
           <div ref="turnstileContainer" />
 
