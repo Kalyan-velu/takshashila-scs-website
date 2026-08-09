@@ -6,6 +6,7 @@ export const leadSchema = z.object({
   email: z.email({ message: "Email must be a valid format" }),
   address: z.string().nullable().optional(),
   source: z.string().optional(),
+  course: z.string().optional(),
   cfTurnstileResponse: z
     .string()
     .min(1, { message: "Captcha token is missing" }),

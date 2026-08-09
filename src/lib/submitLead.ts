@@ -6,6 +6,7 @@ export interface LeadPayload {
   email: string;
   address?: string | null;
   source?: string;
+  course?: string;
   cfTurnstileResponse: string;
 }
 
@@ -32,6 +33,7 @@ export async function submitLead(
   formData.set("email", payload.email);
   if (payload.address) formData.set("address", payload.address);
   if (payload.source) formData.set("source", payload.source);
+  if (payload.course) formData.set("course", payload.course);
   formData.set("cfTurnstileResponse", payload.cfTurnstileResponse);
 
   try {

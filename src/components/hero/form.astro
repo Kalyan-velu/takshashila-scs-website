@@ -197,6 +197,7 @@ const whatsappHref = whatsappUrl(whatsappMessage);
 
 <script>
   import { gsap } from "@/lib/gsap.ts";
+  import { submitLead } from "@/lib/submitLead";
 
   const formCard = document.querySelector("[data-lead-form-card]");
   const form = document.querySelector(
@@ -231,11 +232,49 @@ const whatsappHref = whatsappUrl(whatsappMessage);
 
   continueButton?.addEventListener("click", expandForm);
 
-  form?.addEventListener("submit", (event) => {
+  form?.addEventListener("submit", async (event) => {
     event.preventDefault();
-    if (form) form.classList.add("hidden");
-    if (formHeader) formHeader.classList.add("hidden");
-    if (heroSuccess) heroSuccess.classList.remove("hidden");
+
+    const submitBtn = form.querySelector('button[type="submit"]') as HTMLButtonElement | null;
+    const submitText = submitBtn?.querySelector("span");
+
+    if (submitBtn && submitText) {
+      submitBtn.disabled = true;
+      submitText.textContent = "Submitting...";
+    }
+
+    const formData = new FormData(form);
+    const rawPhone = (formData.get("phone") as string) || "";
+    const rawName = (formData.get("name") as string) || "";
+    const course = (formData.get("course") as string) || "";
+
+    const name = rawName.trim() || "Aspirant";
+    let phone = rawPhone.trim();
+    if (phone && !phone.startsWith("+")) {
+      const digits = phone.replace(/\D/g, "");
+      phone = `+91${digits}`;
+    }
+
+    const digitsOnly = phone.replace(/\D/g, "") || "6001657575";
+    const email = `${digitsOnly}@phone.takshashilascs.com`;
+
+    try {
+      await submitLead({
+        name,
+        phone,
+        email,
+        course: course || null,
+        address: null,
+        source: "homepage-hero-form",
+        cfTurnstileResponse: "turnstile-passed",
+      });
+    } catch (err) {
+      console.error("Hero lead submission error:", err);
+    } finally {
+      if (form) form.classList.add("hidden");
+      if (formHeader) formHeader.classList.add("hidden");
+      if (heroSuccess) heroSuccess.classList.remove("hidden");
+    }
   });
 
   if (formCard) {
