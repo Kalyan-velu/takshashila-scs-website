@@ -9,8 +9,7 @@ import partytown from "@astrojs/partytown";
 import robotsTxt from "astro-robots-txt";
 // https://astro.build/config
 export default defineConfig({
-  site: "https://www.takshashilascs.com",
-  trailingSlash: "always",
+  site: "https://takshashilascs.com",
   fonts: [
     {
       provider: fontProviders.fontsource(),

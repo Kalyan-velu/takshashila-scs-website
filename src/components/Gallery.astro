@@ -35,16 +35,16 @@ const galleryItems = [
 ];
 ---
 
-<section id="gallery" class="pb-12 bg-background">
-  <div class="px-4 md:px-6 max-w-7xl mx-auto">
+<section id="gallery" class="pb-12 bg-white">
+  <div class="px-4 md:px-6">
     <div class="mb-12 flex items-end justify-between">
       <div>
         <h2
-          class="text-3xl md:text-5xl font-light tracking-tight text-foreground mb-4"
+          class="text-3xl md:text-5xl font-light tracking-tight text-gray-900 mb-4"
         >
           Our Gallery
         </h2>
-        <p class="text-muted-foreground font-light text-lg">
+        <p class="text-gray-600 font-light text-lg">
           Glimpses of life at Takshasheela School of Civil Services.
         </p>
       </div>
@@ -56,7 +56,7 @@ const galleryItems = [
       {
         galleryItems.map((item, index) => (
           <div
-            class={`group relative overflow-hidden rounded-2xl bg-muted ${index === 0 ? "md:col-span-2 md:row-span-2" : ""} ${index === 3 ? "m7d:col-span-2" : ""}`}
+            class={`group relative overflow-hidden rounded-2xl bg-gray-100 ${index === 0 ? "md:col-span-2 md:row-span-2" : ""} ${index === 3 ? "m7d:col-span-2" : ""}`}
           >
             <Image
               src={item.image}

@@ -12,6 +12,8 @@ const isSubmitting = ref(false);
 const fieldErrors = ref<Record<string, string>>({});
 const formError = ref<string | null>(null);
 
+const isSubmitted = ref(false);
+
 const {
   token: turnstileToken,
   container: turnstileContainer,
@@ -76,7 +78,7 @@ const submitForm = async () => {
     });
 
     if (result.success) {
-      closePopup();
+      isSubmitted.value = true;
       localStorage.setItem("leadPopupSubmitted", "true");
       return;
     }
@@ -116,11 +118,11 @@ const submitForm = async () => {
     ></div>
 
     <div
-      class="relative bg-background text-foreground rounded-2xl overflow-hidden max-w-4xl w-[90%] md:flex shadow-2xl animate-in fade-in zoom-in-95 duration-300"
+      class="relative bg-white text-gray-900 rounded-2xl overflow-hidden max-w-4xl w-[90%] md:flex shadow-2xl animate-in fade-in zoom-in-95 duration-300"
     >
       <button
         @click="closePopup"
-        class="absolute top-4 right-4 z-10 bg-black/30 hover:bg-black/50 text-white rounded-full p-2 transition-colors md:text-foreground md:bg-transparent md:hover:bg-muted"
+        class="absolute top-4 right-4 z-10 bg-black/30 hover:bg-black/50 text-white rounded-full p-2 transition-colors md:text-gray-900 md:bg-transparent md:hover:bg-gray-100"
         aria-label="Close dialog"
       >
         <svg
@@ -139,7 +141,7 @@ const submitForm = async () => {
         </svg>
       </button>
 
-      <div class="md:w-1/2 h-56 md:h-auto relative bg-muted">
+      <div class="md:w-1/2 h-56 md:h-auto relative bg-gray-100">
         <img
           src="/Takshasheela/students-view-back.jpg"
           alt="Complimentary Demo"
@@ -148,16 +150,53 @@ const submitForm = async () => {
         />
       </div>
 
-      <div class="md:w-1/2 p-6 sm:p-10 flex flex-col justify-center">
+      <!-- Success Feedback View -->
+      <div v-if="isSubmitted" class="md:w-1/2 p-6 sm:p-10 flex flex-col justify-center text-center space-y-6">
+        <div class="w-16 h-16 rounded-full bg-emerald-500/10 border border-emerald-500/20 text-emerald-600 flex items-center justify-center mx-auto shadow-sm">
+          <iconify-icon icon="lucide:check-circle-2" class="text-4xl"></iconify-icon>
+        </div>
+
+        <div class="space-y-2">
+          <h3 class="text-2xl font-medium text-gray-900 tracking-tight">Query Submitted!</h3>
+          <p class="text-gray-600 text-sm leading-relaxed">
+            Thank you for submitting your query. Someone from our end will contact you shortly.
+          </p>
+        </div>
+
+        <div class="pt-4 border-t border-gray-100 space-y-3">
+          <p class="text-xs font-semibold uppercase tracking-wider text-gray-600">Discover More</p>
+          <div class="flex flex-wrap items-center justify-center gap-2">
+            <a href="/about" @click="closePopup" class="px-3.5 py-2 rounded-full bg-primary-500/10 text-primary-500 hover:bg-primary-500 hover:text-white transition-all text-xs font-medium">
+              Know More About Us
+            </a>
+            <a href="/courses/upsc" @click="closePopup" class="px-3.5 py-2 rounded-full bg-gray-100 text-gray-700 hover:bg-primary-500 hover:text-white transition-all text-xs font-medium">
+              UPSC Courses
+            </a>
+            <a href="/courses/apsc" @click="closePopup" class="px-3.5 py-2 rounded-full bg-gray-100 text-gray-700 hover:bg-primary-500 hover:text-white transition-all text-xs font-medium">
+              APSC Courses
+            </a>
+            <a href="/courses" @click="closePopup" class="px-3.5 py-2 rounded-full bg-gray-100 text-gray-700 hover:bg-primary-500 hover:text-white transition-all text-xs font-medium">
+              All Courses
+            </a>
+          </div>
+        </div>
+
+        <button @click="closePopup" class="w-full mt-4 bg-gray-900 text-white font-medium py-3 rounded-lg hover:bg-gray-800 transition-colors text-sm">
+          Close
+        </button>
+      </div>
+
+      <!-- Form View -->
+      <div v-else class="md:w-1/2 p-6 sm:p-10 flex flex-col justify-center">
         <h2
-          class="text-3xl md:text-4xl font-light tracking-tight text-primary mb-4 leading-tight"
+          class="text-3xl md:text-4xl font-light tracking-tight text-primary-500 mb-4 leading-tight"
         >
           Experience Our Class
-          <span class="block text-foreground text-2xl font-normal mt-1"
+          <span class="block text-gray-900 text-2xl font-normal mt-1"
             >with a Complimentary Demo!</span
           >
         </h2>
-        <p class="text-muted-foreground mb-8">
+        <p class="text-gray-600 mb-8">
           Register now and take the first step towards your civil services
           dream.
         </p>
@@ -173,10 +212,10 @@ const submitForm = async () => {
               type="text"
               required
               :class="[
-                'w-full px-4 py-2.5 border rounded-lg bg-background text-foreground focus:outline-none focus:ring-2 focus:ring-primary/50 transition-all',
+                'w-full px-4 py-2.5 border rounded-lg bg-white text-gray-900 focus:outline-none focus:ring-2 focus:ring-primary-500/50 transition-all',
                 fieldErrors.name
                   ? 'border-destructive focus:border-destructive'
-                  : 'border-border focus:border-primary',
+                  : 'border-gray-200 focus:border-primary-500',
               ]"
               placeholder="Your full name"
             />
@@ -194,10 +233,10 @@ const submitForm = async () => {
               type="email"
               required
               :class="[
-                'w-full px-4 py-2.5 border rounded-lg bg-background text-foreground focus:outline-none focus:ring-2 focus:ring-primary/50 transition-all',
+                'w-full px-4 py-2.5 border rounded-lg bg-white text-gray-900 focus:outline-none focus:ring-2 focus:ring-primary-500/50 transition-all',
                 fieldErrors.email
                   ? 'border-destructive focus:border-destructive'
-                  : 'border-border focus:border-primary',
+                  : 'border-gray-200 focus:border-primary-500',
               ]"
               placeholder="Enter your email"
             />
@@ -216,10 +255,10 @@ const submitForm = async () => {
               type="tel"
               required
               :class="[
-                'w-full px-4 py-2.5 border rounded-lg bg-background text-foreground focus:outline-none focus:ring-2 focus:ring-primary/50 transition-all',
+                'w-full px-4 py-2.5 border rounded-lg bg-white text-gray-900 focus:outline-none focus:ring-2 focus:ring-primary-500/50 transition-all',
                 fieldErrors.phone
                   ? 'border-destructive focus:border-destructive'
-                  : 'border-border focus:border-primary',
+                  : 'border-gray-200 focus:border-primary-500',
               ]"
               placeholder="+91 98765 43210"
             />
@@ -237,7 +276,7 @@ const submitForm = async () => {
           <button
             type="submit"
             :disabled="!isSubmitEnabled"
-            class="w-full bg-primary disabled:bg-primary/90 text-primary-foreground hover:opacity-90 font-medium py-3 px-4 rounded-lg transition-all disabled:opacity-50 mt-4 flex justify-center items-center cursor-pointer"
+            class="w-full bg-primary-500 disabled:bg-primary-500/90 text-white hover:opacity-90 font-medium py-3 px-4 rounded-lg transition-all disabled:opacity-50 mt-4 flex justify-center items-center cursor-pointer"
           >
             <span v-if="isSubmitting" class="flex items-center gap-2">
               <svg

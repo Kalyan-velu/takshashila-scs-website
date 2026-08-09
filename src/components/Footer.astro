@@ -1,5 +1,5 @@
 ---
-import { MapPin, Phone, Mail } from "lucide-react";
+import { Picture } from "astro:assets";
 import {
   EMAIL,
   PHONE_DISPLAY,
@@ -7,112 +7,68 @@ import {
   CURRENT_AFFAIRS_URL,
   socials,
 } from "@/config/CONSTANTS.ts";
+import contentData from "@/data/content.json";
+import Logo from "@/assets/taksheelascs_logo.png";
+const { footer } = contentData;
 ---
 
-<footer class="bg-background pt-20 pb-10 border-t border-border">
-  <div class="px-4 md:px-6">
+<footer class="bg-white pt-20 pb-10 border-t border-gray-200">
+  <div class="px-4 md:px-6 max-w-7xl mx-auto">
     <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12 mb-16">
+      {/* Brand Column */}
       <div class="flex flex-col gap-6 lg:col-span-1">
         <a href="/" class="flex items-center gap-2">
-          <picture>
-            <source srcset="/logo.webp" type="image/webp" />
-            <img
-              src="/logo.png"
-              alt="Takshasheela Logo"
-              width="160"
-              height="40"
-              loading="lazy"
-              decoding="async"
-              class="h-10 object-contain w-auto"
-            />
-          </picture>
-          <span class="font-semibold tracking-tight text-xl">Takshasheela</span>
+          <Picture
+            src={Logo}
+            formats={["avif", "webp"]}
+            alt="Takshasheela Logo"
+            class="object-contain"
+            width={260}
+            height={70}
+          />
+          <!--<span class="font-semibold tracking-tight text-xl">Takshasheela</span>-->
         </a>
-        <p class="text-muted-foreground font-light text-sm leading-relaxed">
-          Takshasheela School of Civil Services is a dedicated institute to
-          educate, train and guide young aspirants for Civil Services in India.
-          It is equipped with quality faculties and facilities in Assam with a
-          national outlook and standards.
+        <p class="text-gray-600 font-light text-sm leading-relaxed">
+          {footer.description}
         </p>
-        <div class="flex gap-4">
+        <div class="flex gap-3">
           <a
             href={socials.FACEBOOK}
             target="_blank"
             rel="noopener noreferrer"
             aria-label="Facebook"
-            class="h-10 w-10 flex items-center justify-center rounded-full bg-muted text-muted-foreground hover:bg-primary hover:text-primary-foreground transition-colors"
+            class="h-10 w-10 flex items-center justify-center rounded-full bg-gray-100 text-gray-600 hover:bg-primary-500 hover:text-white transition-colors"
           >
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              width="1em"
-              height="1em"
-              viewBox="0 0 24 24"
-            >
-              <path d="M0 0h24v24H0z" fill="none"></path>
-              <path
-                fill="currentColor"
-                d="M22 12c0-5.52-4.48-10-10-10S2 6.48 2 12c0 4.84 3.44 8.87 8 9.8V15H8v-3h2V9.5C10 7.57 11.57 6 13.5 6H16v3h-2c-.55 0-1 .45-1 1v2h3v3h-3v6.95c5.05-.5 9-4.76 9-9.95"
-              ></path>
-            </svg>
+            <iconify-icon icon="lucide:facebook" class="text-lg"></iconify-icon>
           </a>
           <a
             href={socials.TWITTER}
             target="_blank"
             rel="noopener noreferrer"
             aria-label="Twitter/X"
-            class="h-10 w-10 flex items-center justify-center rounded-full bg-muted text-muted-foreground hover:bg-primary hover:text-primary-foreground transition-colors"
+            class="h-10 w-10 flex items-center justify-center rounded-full bg-gray-100 text-gray-600 hover:bg-primary-500 hover:text-white transition-colors"
           >
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              width="1em"
-              height="1em"
-              viewBox="0 0 24 24"
-            >
-              <path d="M0 0h24v24H0z" fill="none"></path>
-              <path
-                fill="currentColor"
-                d="M22.46 6c-.77.35-1.6.58-2.46.69c.88-.53 1.56-1.37 1.88-2.38c-.83.5-1.75.85-2.72 1.05C18.37 4.5 17.26 4 16 4c-2.35 0-4.27 1.92-4.27 4.29c0 .34.04.67.11.98C8.28 9.09 5.11 7.38 3 4.79c-.37.63-.58 1.37-.58 2.15c0 1.49.75 2.81 1.91 3.56c-.71 0-1.37-.2-1.95-.5v.03c0 2.08 1.48 3.82 3.44 4.21a4.2 4.2 0 0 1-1.93.07a4.28 4.28 0 0 0 4 2.98a8.52 8.52 0 0 1-5.33 1.84q-.51 0-1.02-.06C3.44 20.29 5.7 21 8.12 21C16 21 20.33 14.46 20.33 8.79c0-.19 0-.37-.01-.56c.84-.6 1.56-1.36 2.14-2.23"
-              ></path>
-            </svg>
+            <iconify-icon icon="ri:twitter-x-fill" class="text-lg"
+            ></iconify-icon>
           </a>
           <a
             href={socials.INSTAGRAM}
             target="_blank"
             rel="noopener noreferrer"
             aria-label="Instagram"
-            class="h-10 w-10 flex items-center justify-center rounded-full bg-muted text-muted-foreground hover:bg-primary hover:text-primary-foreground transition-colors"
+            class="h-10 w-10 flex items-center justify-center rounded-full bg-gray-100 text-gray-600 hover:bg-primary-500 hover:text-white transition-colors"
           >
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              width="1em"
-              height="1em"
-              viewBox="0 0 24 24"
-            >
-              <path d="M0 0h24v24H0z" fill="none"></path>
-              <path
-                fill="currentColor"
-                d="M7.8 2h8.4C19.4 2 22 4.6 22 7.8v8.4a5.8 5.8 0 0 1-5.8 5.8H7.8C4.6 22 2 19.4 2 16.2V7.8A5.8 5.8 0 0 1 7.8 2m-.2 2A3.6 3.6 0 0 0 4 7.6v8.8C4 18.39 5.61 20 7.6 20h8.8a3.6 3.6 0 0 0 3.6-3.6V7.6C20 5.61 18.39 4 16.4 4zm9.65 1.5a1.25 1.25 0 0 1 1.25 1.25A1.25 1.25 0 0 1 17.25 8A1.25 1.25 0 0 1 16 6.75a1.25 1.25 0 0 1 1.25-1.25M12 7a5 5 0 0 1 5 5a5 5 0 0 1-5 5a5 5 0 0 1-5-5a5 5 0 0 1 5-5m0 2a3 3 0 0 0-3 3a3 3 0 0 0 3 3a3 3 0 0 0 3-3a3 3 0 0 0-3-3"
-              ></path>
-            </svg>
+            <iconify-icon icon="lucide:instagram" class="text-lg"
+            ></iconify-icon>
           </a>
           <a
             href={socials.YOUTUBE}
             target="_blank"
             rel="noopener noreferrer"
             aria-label="YouTube"
-            class="h-10 w-10 flex items-center justify-center rounded-full bg-muted text-muted-foreground hover:bg-primary hover:text-primary-foreground transition-colors"
+            class="h-10 w-10 flex items-center justify-center rounded-full bg-gray-100 text-gray-600 hover:bg-primary-500 hover:text-white transition-colors"
           >
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              width="1em"
-              height="1em"
-              viewBox="0 0 576 512"
-            >
-              <path
-                fill="currentColor"
-                d="M549.7 124.1c-6.3-23.7-24.8-42.3-48.3-48.6C458.8 64 288 64 288 64S117.2 64 74.6 75.5c-23.5 6.3-42 24.9-48.3 48.6-11.4 42.9-11.4 132.3-11.4 132.3s0 89.4 11.4 132.3c6.3 23.7 24.8 41.5 48.3 47.8C117.2 448 288 448 288 448s170.8 0 213.4-11.5c23.5-6.3 42-24.2 48.3-47.8 11.4-42.9 11.4-132.3 11.4-132.3s0-89.4-11.4-132.3zm-317.5 213.5V175.2l142.7 81.2-142.7 81.2z"
-              ></path>
-            </svg>
+            <iconify-icon icon="lucide:youtube" class="text-lg"></iconify-icon>
           </a>
         </div>
       </div>
@@ -135,7 +91,7 @@ import {
               <li>
                 <a
                   href={link.href}
-                  class="text-muted-foreground hover:text-primary text-sm transition-colors"
+                  class="text-gray-600 hover:text-primary-500 text-sm transition-colors"
                 >
                   {link.label}
                 </a>
@@ -159,7 +115,7 @@ import {
               <li>
                 <a
                   href={link.href}
-                  class="text-muted-foreground hover:text-primary text-sm transition-colors"
+                  class="text-gray-600 hover:text-primary-500 text-sm transition-colors"
                 >
                   {link.label}
                 </a>
@@ -174,40 +130,44 @@ import {
         <h4 class="font-medium tracking-tight text-lg mb-6">Contact us</h4>
         <ul class="space-y-4">
           <li class="flex items-start gap-3">
-            <Phone className="w-5 h-5 text-primary shrink-0 mt-0.5" />
+            <iconify-icon
+              icon="lucide:phone"
+              class="text-primary-500 text-lg shrink-0 mt-0.5"></iconify-icon>
             <div>
-              <span class="block text-sm font-medium text-foreground"
-                >Phone:</span
+              <span class="block text-sm font-medium text-gray-900">Phone:</span
               >
               <a
                 href={PHONE_HREF}
-                class="text-muted-foreground hover:text-primary text-sm transition-colors"
-                >{PHONE_DISPLAY}</a
+                class="text-gray-600 hover:text-primary-500 text-sm transition-colors"
               >
+                {PHONE_DISPLAY}
+              </a>
             </div>
           </li>
           <li class="flex items-start gap-3">
-            <MapPin className="w-5 h-5 text-primary shrink-0 mt-0.5" />
+            <iconify-icon
+              icon="lucide:map-pin"
+              class="text-primary-500 text-lg shrink-0 mt-0.5"></iconify-icon>
             <div>
-              <span class="block text-sm font-medium text-foreground"
+              <span class="block text-sm font-medium text-gray-900"
                 >Address:</span
               >
-              <span class="text-muted-foreground text-sm"
-                >6th Floor, Unique Avenue Building, near Super Market, Guwahati,
-                Assam 781006</span
-              >
+              <span class="text-gray-600 text-sm">{footer.address}</span>
             </div>
           </li>
           <li class="flex items-start gap-3">
-            <Mail className="w-5 h-5 text-primary shrink-0 mt-0.5" />
+            <iconify-icon
+              icon="lucide:mail"
+              class="text-primary-500 text-lg shrink-0 mt-0.5"></iconify-icon>
             <div>
-              <span class="block text-sm font-medium text-foreground"
+              <span class="block text-sm font-medium text-gray-900"
                 >Email address:</span
               >
               <a
                 href={`mailto:${EMAIL}`}
-                class="text-muted-foreground hover:text-primary text-sm transition-colors"
-                >{EMAIL}
+                class="text-gray-600 hover:text-primary-500 text-sm transition-colors"
+              >
+                {EMAIL}
               </a>
             </div>
           </li>
@@ -215,11 +175,17 @@ import {
       </div>
     </div>
 
+    {/* Bottom Bar */}
     <div
-      class="flex flex-col md:flex-row items-center justify-between border-t border-border pt-8 mt-8"
+      class="flex flex-col md:flex-row items-center justify-between border-t border-gray-200 pt-8 mt-8 text-center md:text-left gap-4"
     >
-      <p class="text-sm font-light text-muted-foreground mb-4 md:mb-0">
-        Copyright © {new Date().getFullYear()} - Takshasheela School of Civil Services
+      <p class="text-sm font-light text-gray-600">
+        Copyright © {new Date().getFullYear()} Takshasheela School of Civil Services.
+        All rights reserved.
+      </p>
+      <p class="text-xs text-gray-500 font-light">
+        A unit of <strong>Takshashila Educational Trust</strong> (Formerly known as
+        <em>Takshashila School of Civil Services</em>)
       </p>
     </div>
   </div>

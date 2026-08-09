@@ -1,15 +1,12 @@
 <!--suppress ALL -->
 <script setup lang="ts">
-import { computed, onMounted, ref } from "vue";
-import { Carousel, CarouselContent, CarouselItem } from "@/components/ui/carousel";
-import { ArrowRight } from "lucide-vue-next";
+import { computed, ref } from "vue";
 import { cn } from "@/lib/utils";
 import { whatsappUrl } from "@/config/CONSTANTS.ts";
 import type { Course } from "@/content.config.ts";
 
 const props = defineProps<{
   courses: Course[];
-  // selected: "All"|"UPSC"|"APSC"|"working-professional"|(string&{})
 }>();
 
 const activeTab = ref("All");
@@ -46,10 +43,10 @@ onMounted(() => {
           <article
             :class="
               cn(
-                'course-card  select-none cursor-grab active:cursor-grabbing h-full group relative flex flex-col  snap-center shrink-0 rounded-tl-[2rem] rounded-br-[2rem] border overflow-clip transition-all duration-500 hover:shadow-2xl hover:shadow-primary/5 hover:border-primary/20',
+                'course-card  select-none cursor-grab active:cursor-grabbing h-full group relative flex flex-col  snap-center shrink-0 rounded-tl-[2rem] rounded-br-[2rem] border overflow-clip transition-all duration-500 hover:shadow-2xl hover:shadow-primary-500/5 hover:border-primary-500/20',
                 course.popular
-                  ? 'border-primary/50 shadow-lg bg-primary/1'
-                  : 'border-border bg-card',
+                  ? 'border-primary-500/50 shadow-lg bg-primary-500/1'
+                  : 'border-gray-200 bg-white',
               )
             "
             :data-category="course.categories.join(',')"
@@ -69,7 +66,7 @@ onMounted(() => {
 
               <div
                 v-if="course.popular"
-                class="absolute top-5 right-5 bg-primary text-primary-foreground px-4 py-1.5 rounded-full text-[10px] font-bold tracking-widest uppercase shadow-xl z-10"
+                class="absolute top-5 right-5 bg-primary-500 text-white px-4 py-1.5 rounded-full text-[10px] font-bold tracking-widest uppercase shadow-xl z-10"
               >
                 Most Popular
               </div>
@@ -77,27 +74,27 @@ onMounted(() => {
 
             <a :href="`${course.url}`" class="flex flex-col flex-1 p-6 md:p-8">
               <h3
-                class="text-lg md:text-xl font-medium tracking-tight mb-3 group-hover:text-primary transition-colors leading-tight"
+                class="text-lg md:text-xl font-medium tracking-tight mb-3 group-hover:text-primary-500 transition-colors leading-tight"
               >
                 {{ course.title }}
               </h3>
 
               <div
-                class="h-1 w-12 bg-primary/10 rounded-full mb-6 group-hover:w-20 transition-all duration-500"
+                class="h-1 w-12 bg-primary-500/10 rounded-full mb-6 group-hover:w-20 transition-all duration-500"
               >
                 <div
-                  class="h-1 w-6 bg-primary rounded-full group-hover:w-10 transition-all duration-500"
+                  class="h-1 w-6 bg-primary-500 rounded-full group-hover:w-10 transition-all duration-500"
                 ></div>
               </div>
 
               <!--            <div v-if="course.price" class="mb-5 flex items-center">-->
-              <!--                <span class="text-base font-bold text-primary bg-primary/5 px-3 py-1 rounded-lg border border-primary/10 tracking-tight">-->
+              <!--                <span class="text-base font-bold text-primary-500 bg-primary-500/5 px-3 py-1 rounded-lg border border-primary-500/10 tracking-tight">-->
               <!--                  {{ course.price }}-->
               <!--                </span>-->
               <!--            </div>-->
 
               <p
-                class="text-muted-foreground line-clamp-3 font-light text-sm md:text-base leading-relaxed opacity-90"
+                class="text-gray-600 line-clamp-3 font-light text-sm md:text-base leading-relaxed opacity-90"
               >
                 {{ course.description }}
               </p>
@@ -109,8 +106,8 @@ onMounted(() => {
                   cn(
                     'inline-flex h-14 items-center justify-center  px-8 text-sm font-semibold transition-all flex-1 gap-2 group/btn',
                     course.popular
-                      ? 'bg-primary text-primary-foreground hover:bg-primary/90 shadow-lg shadow-primary/20'
-                      : 'border-t border-r border-border bg-background hover:bg-muted hover:border-primary/30 cursor-pointer',
+                      ? 'bg-primary-500 text-white hover:bg-primary-500/90 shadow-lg shadow-primary-500/20'
+                      : 'border-t border-r border-gray-200 bg-white hover:bg-gray-100 hover:border-primary-500/30 cursor-pointer',
                   )
                 "
               >
@@ -127,7 +124,7 @@ onMounted(() => {
                 "
                 target="_blank"
                 rel="noopener noreferrer"
-                class="inline-flex h-14 w-14 items-center justify-center rounded-br-2xl border-t border-l border-border bg-background hover:bg-muted hover:border-[#25D366] hover:text-[#25D366] transition-all group/wa"
+                class="inline-flex h-14 w-14 items-center justify-center rounded-br-2xl border-t border-l border-gray-200 bg-white hover:bg-gray-100 hover:border-[#25D366] hover:text-[#25D366] transition-all group/wa"
                 title="Enquire on WhatsApp"
               >
                 <svg

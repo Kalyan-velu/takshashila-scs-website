@@ -49,10 +49,10 @@ const selectMode = (mode: string) => {
 
 <template>
   <div
-    class="w-full bg-card text-card-foreground rounded-2xl shadow-sm border border-border mt-6 overflow-hidden"
+    class="w-full bg-white text-gray-900 rounded-2xl shadow-sm border border-gray-200 mt-6 overflow-hidden"
   >
     <div
-      class="flex overflow-x-auto border-b border-border hide-scrollbar scroll-smooth bg-muted/30"
+      class="flex overflow-x-auto border-b border-gray-200 hide-scrollbar scroll-smooth bg-gray-100/30"
     >
       <button
         v-for="tab in tabs"
@@ -61,8 +61,8 @@ const selectMode = (mode: string) => {
         class="whitespace-nowrap px-6 md:px-8 py-4 md:py-5 text-sm md:text-base font-medium transition-colors border-b-2 relative -mb-px"
         :class="
           activeTab === tab.id
-            ? 'border-primary text-primary bg-background'
-            : 'border-transparent text-muted-foreground hover:text-foreground hover:bg-muted/50'
+            ? 'border-primary-500 text-primary-500 bg-white'
+            : 'border-transparent text-gray-600 hover:text-gray-900 hover:bg-gray-100/50'
         "
       >
         {{ tab.label }}
@@ -74,7 +74,7 @@ const selectMode = (mode: string) => {
       v-if="hasModes && activeTab === 'about-course'"
       class="flex items-center gap-2 px-6 md:px-10 pt-6"
     >
-      <span class="text-sm font-medium text-muted-foreground mr-2">Mode:</span>
+      <span class="text-sm font-medium text-gray-600 mr-2">Mode:</span>
       <button
         v-for="mode in availableModes"
         :key="mode"
@@ -82,8 +82,8 @@ const selectMode = (mode: string) => {
         class="px-4 py-1.5 rounded-full text-sm font-medium transition-all border"
         :class="
           selectedMode === mode
-            ? 'bg-primary text-primary-foreground border-primary'
-            : 'bg-background border-border text-muted-foreground hover:border-primary/50'
+            ? 'bg-primary-500 text-white border-primary-500'
+            : 'bg-white border-gray-200 text-gray-600 hover:border-primary-500/50'
         "
       >
         {{ mode.charAt(0).toUpperCase() + mode.slice(1) }}

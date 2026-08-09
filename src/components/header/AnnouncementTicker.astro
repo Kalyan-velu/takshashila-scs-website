@@ -1,0 +1,93 @@
+---
+import { CURRENT_AFFAIRS_URL, whatsappUrl } from "@/config/CONSTANTS.ts";
+
+const NOTIFICATIONS = [
+  {
+    title:
+      "APSC Foundation Course Admission going on — Join us!",
+    icon: "🔥",
+    link: whatsappUrl("I am on your website and I want to know more about the APSC course"),
+    target: "_blank",
+  },
+  {
+    title:
+      "ADRE 2026 Batch Admissions Open! Enroll now for Civil Services preparation",
+    icon: "📢",
+    link: "/courses/adre/",
+  },
+  {
+    title: "Takshasheela APSC & UPSC success rates hit record highs this year!",
+    icon: "🏆",
+    link: "/about/",
+  },
+  {
+    title:
+      "Daily Free Mock Tests & Comprehensive Current Affairs updated daily",
+    icon: "✍️",
+    link: CURRENT_AFFAIRS_URL,
+    target: "_blank",
+  },
+  {
+    title: "Download free syllabus and prep guidelines for UPSC and APSC CCE",
+    icon: "📚",
+    link: "/courses/",
+  },
+];
+---
+
+<div
+  class="relative w-full overflow-hidden text-[11px] sm:text-xs py-1.5 flex items-center js-ticker-wrapper h-full bg-transparent"
+>
+  <div class="ticker-wrapper flex whitespace-nowrap w-full">
+    {
+      [false, true].map((isDuplicate) => (
+        <div
+          class="ticker-track flex"
+          aria-hidden={isDuplicate ? "true" : undefined}
+        >
+          {NOTIFICATIONS.map((notification) => (
+            <div class="ticker-item inline-flex items-center mx-6 sm:mx-10 hover:underline">
+              <a
+                href={notification.link}
+                target={notification.target}
+                class="inline-flex items-center gap-2"
+              >
+                <span>{notification.icon}</span>
+                <span class="font-light tracking-wide text-gray-800 dark:text-gray-200">
+                  {notification.title}
+                </span>
+                <iconify-icon
+                  icon="lucide:chevron-right"
+                  class="text-[10px] text-gray-500"
+                />
+              </a>
+            </div>
+          ))}
+        </div>
+      ))
+    }
+  </div>
+</div>
+
+<style>
+  .ticker-wrapper {
+    overflow: hidden;
+    width: 100%;
+  }
+  .ticker-track {
+    display: flex;
+    width: max-content;
+    animation: marquee 30s linear infinite;
+  }
+  .ticker-track:hover {
+    animation-play-state: paused;
+  }
+  @keyframes marquee {
+    0% {
+      transform: translateX(0%);
+    }
+    100% {
+      transform: translateX(-50%);
+    }
+  }
+</style>

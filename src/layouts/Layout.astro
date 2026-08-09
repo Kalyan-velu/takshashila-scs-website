@@ -1,9 +1,13 @@
 ---
-import { SEO } from "astro-seo";
+import "../styles/globals.css";
+
+// import { SEO } from "astro-seo";
 import { Schema } from "astro-seo-schema";
 import { Font } from "astro:assets";
-import "../styles/globals.css";
-import Navbar from "@/components/Header.vue";
+
+import variables from "@/config/variables.ts";
+
+import Navbar from "@/components/header/Header.astro";
 import LeadPopup from "@/components/LeadPopup.vue";
 import Footer from "@/components/Footer.astro";
 import GoogleTagManager from "@/lib/GTag/GoogleTagManager.astro";
@@ -21,7 +25,7 @@ interface Props {
   canonical?: string;
 }
 
-// Normalize to the canonical host + trailing slash regardless of which
+// Normalizing to the canonical host + trailing slash regardless of which
 // host/slash variant the page was actually requested on.
 let normalizedPath = Astro.url.pathname;
 if (!normalizedPath.endsWith("/")) normalizedPath += "/";
@@ -41,113 +45,107 @@ const {
     <GoogleTagManager />
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width" />
-    <link rel="preconnect" href={crmOrigin} />
+    <link rel="preconnect" href={variables.CRM_URL} />
     <link rel="preconnect" href={SITE_URL} />
     <link rel="sitemap" href="/sitemap-index.xml" />
     <link rel="icon" href="/favicon.ico" />
     <meta name="generator" content={Astro.generator} />
     <title>{title}</title>
     <slot name="head_data" />
-    <SEO
-      description={description}
-      canonical={canonical}
-      openGraph={{
-        basic: {
-          title: title,
-          type: "website",
-          image: new URL(image, Astro.url).href,
-        },
-        optional: {
-          description: description,
-          siteName: "Takshasheela School of Civil Services",
-        },
-      }}
-      twitter={{
-        creator: "@takshashilascs",
-        card: "summary_large_image",
-        title: title,
-        description: description,
-        image: new URL(image, Astro.url).href,
-      }}
-    />
-    <Schema
-      item={{
-        "@context": "https://schema.org",
-        "@type": ["EducationalOrganization", "LocalBusiness"],
-        "@id": `${SITE_URL}/#organization`,
-        name: "Takshashila School of Civil Services",
-        alternateName: "Takshasheela SCS",
-        description: description,
-        url: Astro.site ? Astro.site.href : SITE_URL,
-        logo: `${SITE_URL}/logo-full-black.png`,
-        image: new URL(image, Astro.url).href,
-        telephone: [
-          "+91 60016 57575",
-          "+91 69132 03751"
-        ],
-        email: EMAIL,
-        address: {
-          "@type": "PostalAddress",
-          streetAddress: "6th Floor, Unique Avenue Building, Bus Stand, Near Super Market, GS Rd",
-          addressLocality: "Guwahati",
-          addressRegion: "Assam",
-          postalCode: "781006",
-          addressCountry: "IN",
-        },
-        geo: {
-          "@type": "GeoCoordinates",
-          latitude: 26.1411661,
-          longitude: 91.7962836,
-        },
-        openingHoursSpecification: {
-          "@type": "OpeningHoursSpecification",
-          dayOfWeek: [
-            "Monday",
-            "Tuesday",
-            "Wednesday",
-            "Thursday",
-            "Friday",
-            "Saturday",
-            "Sunday",
-          ],
-          opens: "10:00",
-          closes: "19:00",
-        },
-        areaServed: { "@type": "State", name: "Assam" },
-        sameAs: [
-          socials.FACEBOOK,
-          socials.INSTAGRAM,
-          socials.TWITTER,
-          socials.YOUTUBE,
-          socials.LINKEDIN,
-        ],
-      }}
-    />
+    <!--<SEO-->
+    <!--  description={description}-->
+    <!--  canonical={canonical}-->
+    <!--  openGraph={{-->
+    <!--    basic: {-->
+    <!--      title: title,-->
+    <!--      type: "website",-->
+    <!--      image: new URL(image, Astro.url).href,-->
+    <!--    },-->
+    <!--    optional: {-->
+    <!--      description: description,-->
+    <!--      siteName: "Takshasheela School of Civil Services",-->
+    <!--    },-->
+    <!--  }}-->
+    <!--  twitter={{-->
+    <!--    creator: "@takshashilascs",-->
+    <!--    card: "summary_large_image",-->
+    <!--    title: title,-->
+    <!--    description: description,-->
+    <!--    image: new URL(image, Astro.url).href,-->
+    <!--  }}-->
+    <!--/>-->
+    <!--<Schema-->
+    <!--  item={{-->
+    <!--    "@context": "https://schema.org",-->
+    <!--    "@type": ["EducationalOrganization", "LocalBusiness"],-->
+    <!--    "@id": `${SITE_URL}/#organization`,-->
+    <!--    name: "Takshashila School of Civil Services",-->
+    <!--    alternateName: "Takshasheela SCS",-->
+    <!--    description: description,-->
+    <!--    url: Astro.site ? Astro.site.href : SITE_URL,-->
+    <!--    logo: `${SITE_URL}/logo-full-black.png`,-->
+    <!--    image: new URL(image, Astro.url).href,-->
+    <!--    telephone: [-->
+    <!--      "+91 60016 57575",-->
+    <!--      "+91 69132 03751"-->
+    <!--    ],-->
+    <!--    email: EMAIL,-->
+    <!--    address: {-->
+    <!--      "@type": "PostalAddress",-->
+    <!--      addressLocality: "Guwahati",-->
+    <!--      addressRegion: "Assam",-->
+    <!--      addressCountry: "IN",-->
+    <!--    },-->
+    <!--    geo: {-->
+    <!--      "@type": "GeoCoordinates",-->
+    <!--      latitude: 26.1411661,-->
+    <!--      longitude: 91.7962836,-->
+    <!--    },-->
+    <!--    openingHoursSpecification: {-->
+    <!--      "@type": "OpeningHoursSpecification",-->
+    <!--      dayOfWeek: [-->
+    <!--        "Monday",-->
+    <!--        "Tuesday",-->
+    <!--        "Wednesday",-->
+    <!--        "Thursday",-->
+    <!--        "Friday",-->
+    <!--        "Saturday",-->
+    <!--        "Sunday",-->
+    <!--      ],-->
+    <!--      opens: "10:00",-->
+    <!--      closes: "19:00",-->
+    <!--    },-->
+    <!--    areaServed: { "@type": "State", name: "Assam" },-->
+    <!--    sameAs: [-->
+    <!--      socials.FACEBOOK,-->
+    <!--      socials.INSTAGRAM,-->
+    <!--      socials.TWITTER,-->
+    <!--      socials.YOUTUBE,-->
+    <!--      socials.LINKEDIN,-->
+    <!--    ],-->
+    <!--  }}-->
+    <!--/>-->
     <link rel="preconnect" href="https://challenges.cloudflare.com" />
     <Font cssVariable="--geist-sans" preload />
-    <script
-      src="https://challenges.cloudflare.com/turnstile/v0/api.js"
-      async
-      defer></script>
   </head>
   <body
-    class="antialiased overflow-x-hidden selection:bg-primary/20 selection:text-primary"
+    class="antialiased overflow-x-hidden selection:bg-primary-500/20 selection:text-primary-500"
   >
     <GoogleTagManagerNoscript />
-    <Navbar client:load />
-    <main class="flex flex-col gap-8">
+    <Navbar />
+    <main>
       <slot />
     </main>
-    <LeadPopup client:only="vue" />
+    <!--<LeadPopup client:only="vue" />-->
     <Footer />
   </body>
 </html>
-
+<script>
+  import "iconify-icon";
+</script>
 <style>
-  html,
-  body {
-    margin: 0;
-    width: 100%;
-    height: 100%;
+  @reference "../styles/globals.css";
+  main {
+    @apply flex flex-col  w-full;
   }
 </style>

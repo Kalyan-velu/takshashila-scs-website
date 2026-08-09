@@ -1,25 +1,15 @@
 ---
 import Layout from "../layouts/Layout.astro";
-import Hero from "../components/Hero.astro";
 import ResultsSection from "../components/ResultsSection.astro";
+import Hero from "../components/hero/index.astro";
 import WhyChooseUs from "../components/WhyChooseUs.astro";
-import CoachingProse from "../components/CoachingProse.astro";
-import Courses from "../components/courses/CoursesWrapper.astro";
-import FaqSection from "../components/FaqSection.astro";
-import Gallery from "../components/Gallery.astro";
-import LatestArticles from "../components/LatestArticles.vue";
 import { getLatestPosts } from "../lib/wordpress";
-
-const posts = await getLatestPosts(1, 4).catch(() => []);
+import CoachingProse from "@/components/CoachingProse.astro";
 ---
 
 <Layout>
   <Hero />
   <ResultsSection />
   <WhyChooseUs id="about" />
-  <CoachingProse id="coaching-in-guwahati" />
-  <Courses id="courses" />
-  <LatestArticles posts={posts} client:load />
-  <FaqSection />
-  <Gallery />
+  <CoachingProse />
 </Layout>

@@ -1,0 +1,97 @@
+---
+import { CURRENT_AFFAIRS_URL } from "@/config/CONSTANTS.ts";
+
+const dropdownNavItems = [
+  {
+    label: "Courses",
+    triggerClass: "js-menu-trigger-courses",
+    chevronClass: "js-chevron-courses",
+  },
+  {
+    label: "About",
+    triggerClass: "js-menu-trigger-about",
+    chevronClass: "js-chevron-about",
+  },
+];
+
+const directNavItems = [
+  {
+    label: "Team",
+    href: "/team/",
+  },
+  {
+    label: "Current Affairs",
+    href: CURRENT_AFFAIRS_URL,
+    target: "_blank",
+  },
+  {
+    label: "Magazine",
+    href: "/magazine/",
+  },
+  {
+    label: "Contact",
+    href: "/contact/",
+  },
+];
+
+const navLinkClass =
+  "nav-link font-medium text-sm md:text-base leading-tight transition-colors text-white group-[.is-scrolled]:text-gray-800 dark:text-white group-[.is-scrolled]:dark:text-gray-200 hover:text-primary-400 group-[.is-scrolled]:hover:text-primary-500 group-[.is-scrolled]:dark:hover:text-primary-400";
+
+const dropdownNavLinkClass = `${navLinkClass} flex items-center gap-1`;
+---
+
+<nav class="hidden lg:inline-flex items-center h-full">
+  <ul class="flex items-center space-x-6 md:space-x-8 h-full">
+    {
+      dropdownNavItems.map((item) => (
+        <li
+          class={`relative flex items-center h-full cursor-pointer py-4 ${item.triggerClass}`}
+        >
+          <span class={dropdownNavLinkClass}>
+            {item.label}
+            <iconify-icon
+              icon="lucide:chevron-down"
+              class={`text-[14px] transition-transform duration-300 ${item.chevronClass}`}
+            />
+          </span>
+        </li>
+      ))
+    }
+
+    {
+      directNavItems.map((item) => (
+        <li class="relative flex items-center h-full py-4 js-menu-trigger-direct">
+          <a href={item.href} target={item.target} class={navLinkClass}>
+            {item.label}
+          </a>
+        </li>
+      ))
+    }
+  </ul>
+</nav>
+
+<style>
+  @reference "../../styles/globals.css";
+
+  .nav-link {
+    position: relative;
+  }
+
+  .nav-link::after {
+    content: "";
+    position: absolute;
+    width: 100%;
+    transform: scaleX(0);
+    height: 2px;
+    bottom: -4px;
+    left: 0;
+    background-color: var(--color-primary-500);
+    transform-origin: bottom center;
+    transition: transform 0.25s ease-out;
+  }
+
+  .nav-link:hover::after,
+  .nav-link-active::after {
+    transform: scaleX(1);
+  }
+</style>

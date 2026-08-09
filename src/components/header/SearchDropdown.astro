@@ -1,0 +1,193 @@
+---
+import { CURRENT_AFFAIRS_URL } from "@/config/CONSTANTS.ts";
+
+const popularSearches = [
+  {
+    label: "UPSC Coaching",
+    href: "/courses/upsc/",
+  },
+  {
+    label: "ADRE 2026 Batch",
+    href: "/courses/adre/",
+  },
+  {
+    label: "APSC CCE Prep",
+    href: "/courses/apsc/",
+  },
+  {
+    label: "Current Affairs",
+    href: CURRENT_AFFAIRS_URL,
+  },
+];
+
+const popularSearchLinkClass =
+  "js-popular-link inline-flex items-center px-4 py-2 rounded-full bg-gray-100 dark:bg-slate-800 text-sm text-gray-700 dark:text-gray-300 hover:bg-primary-500 hover:text-white dark:hover:bg-primary-500 dark:hover:text-white transition-all font-medium";
+---
+
+<div
+  class="absolute left-0 right-0 z-20 w-full bg-white dark:bg-slate-900 border-b border-gray-200 dark:border-slate-800 shadow-2xl opacity-0 -translate-y-4 pointer-events-none transition-all duration-300 overflow-hidden js-search-dropdown"
+>
+  <div class="max-w-7xl mx-auto px-6 py-8 md:py-12">
+    <div class="flex justify-between items-center mb-6">
+      <h2
+        class="text-xl md:text-2xl font-semibold text-gray-900 dark:text-white tracking-tight"
+      >
+        Site search
+      </h2>
+    </div>
+
+    <div class="relative w-full mb-6">
+      <label>
+        <span class="sr-only">Search</span>
+        <input
+          type="text"
+          placeholder="Please enter a search term, e.g. 'UPSC' or 'Admissions'"
+          class="w-full bg-gray-50 dark:bg-slate-800 text-gray-900 dark:text-white placeholder-gray-500 dark:placeholder-gray-400 text-lg md:text-xl px-6 py-4 rounded-full border border-gray-200 dark:border-slate-700 focus:outline-none focus:border-primary-500 focus:ring-1 focus:ring-primary-500 transition-all pr-16 js-search-input"
+        />
+      </label>
+      <div
+        class="absolute right-6 top-1/2 -translate-y-1/2 text-gray-400 dark:text-gray-500 pointer-events-none flex items-center justify-center"
+      >
+        <iconify-icon icon="lucide:search" class="text-2xl"></iconify-icon>
+      </div>
+    </div>
+
+    <div class="grid grid-cols-1 md:grid-cols-12 gap-8 js-search-content-area">
+      <!-- Popular searches state -->
+      <div class="md:col-span-12 js-popular-searches">
+        <h3
+          class="text-sm font-semibold text-gray-500 dark:text-gray-400 uppercase tracking-wider mb-3"
+        >
+          Popular Searches
+        </h3>
+        <div class="flex flex-wrap gap-3">
+          {
+            popularSearches.map((item) => (
+              <a href={item.href} class={popularSearchLinkClass}>
+                {item.label} &rarr;
+              </a>
+            ))
+          }
+        </div>
+      </div>
+
+      <div class="md:col-span-12 hidden js-filtered-searches">
+        <div
+          class="flex justify-between items-center border-b border-gray-100 dark:border-slate-800 pb-2 mb-4"
+        >
+          <span
+            class="text-sm font-medium text-gray-500 dark:text-gray-400 js-match-count"
+          >
+            Found 0 matching results
+          </span>
+        </div>
+        <div
+          class="grid grid-cols-1 md:grid-cols-2 gap-4 max-h-96 overflow-y-auto pr-2 js-search-results"
+        >
+          <!-- Rendered via JS -->
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+  import searchData from "@/data/searchData.json";
+
+  const searchInput = document.querySelector(
+    ".js-search-input",
+  ) as HTMLInputElement;
+  const popularArea = document.querySelector(
+    ".js-popular-searches",
+  ) as HTMLElement;
+  const filteredArea = document.querySelector(
+    ".js-filtered-searches",
+  ) as HTMLElement;
+  const matchCount = document.querySelector(".js-match-count") as HTMLElement;
+  const resultsGrid = document.querySelector(
+    ".js-search-results",
+  ) as HTMLElement;
+  const popLinks = document.querySelectorAll(".js-popular-link");
+
+  function resetSearch() {
+    if (searchInput) searchInput.value = "";
+    popularArea?.classList.remove("hidden");
+    filteredArea?.classList.add("hidden");
+  }
+
+  function renderResults(val: string) {
+    const matches = searchData.filter(
+      (item) =>
+        item.title.toLowerCase().includes(val) ||
+        item.description.toLowerCase().includes(val) ||
+        item.category.toLowerCase().includes(val),
+    );
+
+    popularArea?.classList.add("hidden");
+    filteredArea?.classList.remove("hidden");
+    if (matchCount)
+      matchCount.textContent = `Found ${matches.length} matching results`;
+
+    if (matches.length > 0) {
+      resultsGrid.innerHTML = matches
+        .map(
+          (r) => `
+        <a href="${r.url}" class="js-result-link group block p-4 rounded-2xl bg-gray-50 dark:bg-slate-800/50 hover:bg-primary-500/5 dark:hover:bg-primary-500/10 border border-gray-100 dark:border-slate-800/85 hover:border-primary-500/20 transition-all duration-200">
+          <div class="flex justify-between items-start">
+            <div>
+              <span class="inline-block px-2.5 py-0.5 rounded-full text-[10px] font-bold uppercase tracking-wider bg-primary-100 dark:bg-primary-950/40 text-primary-600 dark:text-primary-400 mb-2">${r.category}</span>
+              <h4 class="text-base font-semibold text-gray-900 dark:text-white group-hover:text-primary-500 transition-colors">${r.title}</h4>
+              <p class="text-xs text-gray-600 dark:text-gray-400 mt-1 line-clamp-2 font-light">${r.description}</p>
+            </div>
+            <span class="text-gray-400 dark:text-gray-500 group-hover:translate-x-1 transition-transform pl-2 mt-1 select-none">&rarr;</span>
+          </div>
+        </a>
+      `,
+        )
+        .join("");
+      // Close panel when a result is clicked
+      resultsGrid.querySelectorAll(".js-result-link").forEach((link) =>
+        link.addEventListener("click", () => {
+          resetSearch();
+          document.dispatchEvent(new CustomEvent("header:close-search"));
+        }),
+      );
+    } else {
+      resultsGrid.innerHTML = `
+        <div class="py-12 text-center col-span-2 w-full">
+          <iconify-icon icon="lucide:frown" class="text-5xl mx-auto block text-gray-400 dark:text-gray-500 mb-3"></iconify-icon>
+          <p class="text-lg font-light text-gray-600 dark:text-gray-400">No results for "<span class="font-semibold text-gray-900 dark:text-white">${val}</span>"</p>
+          <p class="text-sm text-gray-500 mt-1">Try "UPSC", "APSC", "ADRE", or "Current Affairs"</p>
+        </div>
+      `;
+    }
+  }
+
+  // Focus input when search panel opens
+  document.addEventListener("header:search-open", () => {
+    setTimeout(() => searchInput?.focus(), 150);
+  });
+
+  // Reset when closed from outside (e.g. scroll, ESC, mobile open)
+  document.addEventListener("header:search-close", resetSearch);
+
+  // ESC key → ask header.ts to close search
+  searchInput?.addEventListener("keydown", (e) => {
+    if (e.key === "Escape")
+      document.dispatchEvent(new CustomEvent("header:close-search"));
+  });
+
+  // Real-time filtering
+  searchInput?.addEventListener("input", () => {
+    const val = searchInput.value.trim().toLowerCase();
+    val ? renderResults(val) : resetSearch();
+  });
+
+  // Popular link clicks
+  popLinks.forEach((link) =>
+    link.addEventListener("click", () => {
+      resetSearch();
+      document.dispatchEvent(new CustomEvent("header:close-search"));
+    }),
+  );
+</script>

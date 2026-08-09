@@ -1,6 +1,6 @@
 ---
 import Layout from "@/layouts/Layout.astro";
-import CourseTabs from "@/components/courses/CourseTabs.vue";
+import CoursesTabs from "@/components/courses/CoursesTabs.vue";
 import CoachingProse from "@/components/CoachingProse.astro";
 import { CATEGORIES } from "@/data/category.ts";
 import { getCollection } from "astro:content";
@@ -25,22 +25,23 @@ const courses = aboutCourseEntries.flatMap((e) =>
 ---
 
 <Layout title={seoTitle} description={seoDescription}>
-  <div class="bg-primary/5 py-12 md:py-20 border-b border-border">
-    <div class="max-w-7xl mx-auto px-4 md:px-6">
+  <div class="bg-primary-500/5 py-12 md:py-20 border-b border-gray-200">
+    <div class="container mx-auto px-4 lg:px-24">
       <div
-        class="inline-flex items-center shrink-0 max-w-fit flex-nowrap rounded-full border border-border bg-background px-3 py-1 text-sm font-medium text-muted-foreground mb-6 shadow-sm"
+        class="inline-flex items-center shrink-0 max-w-fit flex-nowrap rounded-full border border-gray-200 bg-white px-3 py-1 text-sm font-medium text-gray-600 mb-6 shadow-sm"
       >
-        <span class="flex h-2 w-2 rounded-full bg-primary mr-2 animate-pulse"
+        <span
+          class="flex h-2 w-2 rounded-full bg-primary-500 mr-2 animate-pulse"
         ></span>
         Enrollments Open
       </div>
       <h1
-        class="text-4xl md:text-5xl lg:text-7xl font-light tracking-tight text-foreground max-w-4xl mb-6 leading-tight"
+        class="text-4xl md:text-5xl lg:text-7xl font-light tracking-tight text-gray-900 max-w-4xl mb-6 leading-tight"
       >
-        Explore Our <span class="text-primary font-medium">Courses</span>
+        Explore Our <span class="text-primary-500 font-medium">Courses</span>
       </h1>
       <p
-        class="text-lg md:text-xl text-muted-foreground max-w-2xl font-light mb-8 leading-relaxed"
+        class="text-lg md:text-xl text-gray-600 max-w-2xl font-light mb-8 leading-relaxed"
       >
         Discover comprehensive coaching programs tailored to help you conquer
         civil service examinations. Find the perfect course to kickstart your
@@ -49,8 +50,8 @@ const courses = aboutCourseEntries.flatMap((e) =>
     </div>
   </div>
 
-  <div class="max-w-7xl mx-auto px-4 md:px-6 py-8 md:py-16">
-    <CourseTabs client:load courses={courses} categories={CATEGORIES} />
+  <div class="container mx-auto px-4 lg:px-24 py-8 md:py-16">
+    <CoursesTabs client:load courses={courses} categories={CATEGORIES} />
   </div>
 
   <CoachingProse id="coaching-in-guwahati" />

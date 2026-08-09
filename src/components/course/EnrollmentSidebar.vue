@@ -4,7 +4,7 @@ import variables from "@/config/variables.ts";
 import { PHONE_HREF } from "@/config/CONSTANTS.ts";
 import { coursesItems } from "@/data/navigation";
 import { useTurnstile } from "@/lib/useTurnstile";
-import { submitLead } from "@/lib/submitLead";
+import { submitLead } from "@/lib/submitLead.ts";
 
 interface CoursePrice {
   original: number;
@@ -121,6 +121,7 @@ const displayPeriod = computed(() => {
 });
 
 const isSubmitting = ref(false);
+const isSubmitted = ref(false);
 const form = ref({ name: "", phone: "", email: "" });
 
 const isSubmitEnabled = computed(
@@ -143,6 +144,7 @@ const submitForm = async () => {
         selectedMode.value.toLowerCase().replace(/\s+/g, "-"),
       cfTurnstileResponse: turnstileToken.value,
     });
+    isSubmitted.value = true;
     form.value.name = "";
     form.value.phone = "";
     form.value.email = "";
@@ -158,15 +160,41 @@ const submitForm = async () => {
 
 <template>
   <div
-    class="bg-card text-card-foreground rounded-2xl border border-border overflow-hidden shadow-xl shadow-primary/5 mt-6"
+    class="bg-white text-gray-900 rounded-2xl border border-gray-200 overflow-hidden shadow-xl shadow-primary-500/5 mt-6"
   >
-    <div class="p-6 md:p-8">
+    <div v-if="isSubmitted" class="p-6 text-center space-y-6">
+      <div class="w-14 h-14 rounded-full bg-emerald-500/10 border border-emerald-500/20 text-emerald-600 flex items-center justify-center mx-auto shadow-sm">
+        <iconify-icon icon="lucide:check-circle-2" class="text-3xl"></iconify-icon>
+      </div>
+      <div class="space-y-2">
+        <h4 class="text-xl font-medium text-gray-900">Query Submitted!</h4>
+        <p class="text-sm text-gray-600 font-light leading-relaxed">
+          Thank you for submitting your query. Someone from our end will contact you shortly.
+        </p>
+      </div>
+      <div class="pt-4 border-t border-gray-100 space-y-3">
+        <p class="text-xs font-semibold uppercase tracking-wider text-gray-600">Discover More</p>
+        <div class="flex flex-col gap-2">
+          <a href="/about" class="w-full py-2.5 px-4 rounded-xl bg-primary-500/10 text-primary-500 hover:bg-primary-500 hover:text-white transition-colors text-xs font-medium text-center">
+            Know More About Us
+          </a>
+          <a href="/courses" class="w-full py-2.5 px-4 rounded-xl bg-gray-100 text-gray-700 hover:bg-primary-500 hover:text-white transition-colors text-xs font-medium text-center">
+            Explore All Courses
+          </a>
+        </div>
+      </div>
+      <button @click="isSubmitted = false" class="text-xs text-gray-500 underline hover:text-gray-900">
+        Submit another query
+      </button>
+    </div>
+
+    <div v-else class="p-6 md:p-8">
       <h3 class="text-2xl font-light tracking-tight mb-2">Enroll Now</h3>
 
       <div v-if="courseItems.length > 1" class="mb-4">
         <select
           v-model="selectedCourseIndex"
-          class="w-full px-4 py-2.5 border border-border rounded-lg bg-background text-foreground text-sm focus:outline-none focus:ring-2 focus:ring-primary/50"
+          class="w-full px-4 py-2.5 border border-gray-200 rounded-lg bg-white text-gray-900 text-sm focus:outline-none focus:ring-2 focus:ring-primary-500/50"
         >
           <option
             v-for="(course, index) in courseItems"
@@ -179,16 +207,16 @@ const submitForm = async () => {
       </div>
 
       <div class="flex items-baseline gap-2 mb-1">
-        <span class="text-3xl font-semibold text-primary">{{
+        <span class="text-3xl font-semibold text-primary-500">{{
           displayPrice
         }}</span>
-        <span class="text-muted-foreground text-sm">{{ displayPeriod }}</span>
+        <span class="text-gray-600 text-sm">{{ displayPeriod }}</span>
       </div>
       <div
         v-if="displayOriginalPrice && currentPrice"
         class="flex items-center gap-2 mb-6"
       >
-        <span class="text-muted-foreground text-sm line-through">{{
+        <span class="text-gray-600 text-sm line-through">{{
           displayOriginalPrice
         }}</span>
         <span
@@ -203,9 +231,9 @@ const submitForm = async () => {
         <li
           v-for="(feature, index) in features"
           :key="index"
-          class="flex items-center gap-3 text-sm text-muted-foreground"
+          class="flex items-center gap-3 text-sm text-gray-600"
         >
-          <div class="p-1.5 rounded-full bg-primary/10 text-primary">
+          <div class="p-1.5 rounded-full bg-primary-500/10 text-primary-500">
             <svg
               class="w-4 h-4 shrink-0"
               fill="none"
@@ -231,7 +259,7 @@ const submitForm = async () => {
             type="text"
             required
             name="name"
-            class="w-full px-4 py-3 border border-border rounded-lg bg-background text-foreground focus:outline-none focus:ring-2 focus:ring-primary/50"
+            class="w-full px-4 py-3 border border-gray-200 rounded-lg bg-white text-gray-900 focus:outline-none focus:ring-2 focus:ring-primary-500/50"
             placeholder="Full Name"
           />
         </div>
@@ -241,7 +269,7 @@ const submitForm = async () => {
             type="tel"
             required
             name="phone"
-            class="w-full px-4 py-3 border border-border rounded-lg bg-background text-foreground focus:outline-none focus:ring-2 focus:ring-primary/50"
+            class="w-full px-4 py-3 border border-gray-200 rounded-lg bg-white text-gray-900 focus:outline-none focus:ring-2 focus:ring-primary-500/50"
             placeholder="Phone Number"
           />
         </div>
@@ -250,7 +278,7 @@ const submitForm = async () => {
             v-model="form.email"
             type="email"
             required
-            class="w-full px-4 py-3 border border-border rounded-lg bg-background text-foreground focus:outline-none focus:ring-2 focus:ring-primary/50"
+            class="w-full px-4 py-3 border border-gray-200 rounded-lg bg-white text-gray-900 focus:outline-none focus:ring-2 focus:ring-primary-500/50"
             placeholder="Enter email"
           />
         </div>
@@ -261,7 +289,7 @@ const submitForm = async () => {
         <button
           type="submit"
           :disabled="!isSubmitEnabled"
-          class="w-full bg-primary disabled:opacity-50 text-primary-foreground hover:opacity-90 font-medium py-3 px-4 rounded-lg transition-all shadow-md mt-2 flex justify-center items-center cursor-pointer"
+          class="w-full bg-primary-500 disabled:opacity-50 text-white hover:opacity-90 font-medium py-3 px-4 rounded-lg transition-all shadow-md mt-2 flex justify-center items-center cursor-pointer"
         >
           <span v-if="isSubmitting" class="flex gap-2">
             <svg
@@ -291,20 +319,20 @@ const submitForm = async () => {
       </form>
 
       <div class="relative flex items-center py-6 pb-4">
-        <div class="grow border-t border-border"></div>
+        <div class="grow border-t border-gray-200"></div>
         <span
-          class="shrink-0 mx-4 text-muted-foreground text-xs uppercase font-medium tracking-wider"
+          class="shrink-0 mx-4 text-gray-600 text-xs uppercase font-medium tracking-wider"
           >Or</span
         >
-        <div class="grow border-t border-border"></div>
+        <div class="grow border-t border-gray-200"></div>
       </div>
 
       <a
         :href="PHONE_HREF"
-        class="w-full flex items-center justify-center gap-2 bg-background border border-border hover:bg-muted text-foreground font-medium py-3 px-4 rounded-lg transition-all"
+        class="w-full flex items-center justify-center gap-2 bg-white border border-gray-200 hover:bg-gray-100 text-gray-900 font-medium py-3 px-4 rounded-lg transition-all"
       >
         <svg
-          class="w-4 h-4 text-primary"
+          class="w-4 h-4 text-primary-500"
           fill="currentColor"
           viewBox="0 0 512 512"
         >

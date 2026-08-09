@@ -1,0 +1,144 @@
+---
+import { Image } from "astro:assets";
+import contentData from "@/data/content.json";
+import Form from "@/components/hero/form.astro";
+
+const { hero } = contentData;
+---
+
+<section class="hero section relative">
+  <div class="hero__image__container">
+    <div class="z-10 bg-black opacity-[0.8] absolute inset-0"></div>
+    <Image
+      src="/Takshasheela/students-view-back.webp"
+      alt="Takshasheela School of Civil Services Students"
+      class="hero__image"
+      loading={"eager"}
+      height={400}
+      width={800}
+      layout="full-width"
+      decoding="async"
+      fetchpriority="high"
+    />
+  </div>
+  <div class="hero__content">
+    <div class="hero__badge">
+      <span class="hero__badge-dot"></span>
+      <span class="hero__badge-text">
+        {hero.badge}
+      </span>
+    </div>
+
+    <h1 class="hero__title">
+      {hero.title_part1}
+      <span class="hero__title-highlight">
+        <span class="hero__title-highlight-text">{hero.title_highlight}</span>
+      </span>
+    </h1>
+
+    <p class="hero__description">
+      {hero.description}
+    </p>
+  </div>
+</section>
+<Form />
+
+<style>
+  @reference "@/styles/globals.css";
+
+  .hero {
+    @apply flex items-center py-52  lg:min-h-[calc(100dvh-8ch)] justify-center;
+
+    .hero__content {
+      @apply z-20  flex flex-col pb-16 md:pb-32 items-center justify-center text-center;
+      .hero__badge {
+        @apply mb-2 inline-flex max-w-fit shrink-0 flex-nowrap rounded-full bg-transparent items-center border border-gray-300  px-3 py-1 text-sm font-medium text-gray-300 md:text-base;
+        .hero__badge-dot {
+          @apply mr-2 flex h-2 w-2 bg-primary-500 md:mr-3;
+        }
+
+        .hero__badge-text {
+          @apply text-nowrap;
+        }
+      }
+    }
+    .hero__title {
+      @apply mb-4 max-w-4xl text-4xl font-light tracking-tight text-white sm:mb-6 sm:text-5xl lg:text-6xl md:leading-[1.1];
+      .hero__title-highlight {
+        @apply relative font-medium  lg:whitespace-nowrap;
+      }
+
+      .hero__title-highlight-text {
+        @apply relative tracking-wide;
+      }
+    }
+    .hero__description {
+      @apply mb-8 max-w-2xl text-base font-light text-gray-200 leading-relaxed sm:mb-10 sm:text-lg lg:text-xl;
+    }
+  }
+  .hero__image__container {
+    @apply absolute inset-0 z-10 overflow-hidden;
+    .hero__image {
+      @apply object-cover z-10 size-full aspect-video;
+    }
+  }
+  .hero__actions {
+    @apply flex flex-row items-center gap-4 sm:gap-6;
+  }
+
+  .hero__primary-link {
+    @apply relative inline-flex text-xs font-medium text-white outline-none focus:outline-none sm:text-sm md:text-base;
+  }
+
+  .hero__primary-label {
+    @apply relative inline-flex w-auto items-center justify-center overflow-hidden bg-primary-500 px-5 py-3 leading-tight shadow-none sm:px-7 sm:py-3.5 md:px-8 md:py-4;
+  }
+
+  .hero__primary-label-inner {
+    @apply relative top-px inline-flex shrink-0;
+  }
+
+  .hero__primary-icon {
+    @apply -ml-1 flex size-10 shrink-0 transform items-center justify-center overflow-hidden bg-primary-500 sm:size-12 md:size-14;
+  }
+
+  .hero__primary-icon-svg {
+    @apply ml-0.5 size-3 fill-current sm:size-4 md:size-5;
+  }
+
+  .hero__secondary-link {
+    @apply inline-flex h-10 items-center justify-center border border-gray-800 bg-transparent px-6 text-xs font-medium text-white transition-all hover:bg-gray-900/60 sm:h-12 sm:px-8 sm:text-sm md:h-14 md:text-base lg:text-base;
+  }
+
+  :global(.hero__secondary-icon) {
+    @apply ml-2 h-3 w-3 sm:h-4 sm:w-4 md:h-5 md:w-5;
+  }
+</style>
+
+<script>
+  import { gsap } from "@/lib/gsap.ts";
+
+  // Animate hero elements sequentially
+  gsap.from(".hero__badge", {
+    y: -20,
+    opacity: 0,
+    duration: 0.6,
+    ease: "power3.out",
+  });
+
+  gsap.from(".hero__title", {
+    y: 30,
+    opacity: 0,
+    duration: 0.8,
+    delay: 0.2,
+    ease: "power3.out",
+  });
+
+  gsap.from(".hero__description", {
+    y: 20,
+    opacity: 0,
+    duration: 0.8,
+    delay: 0.4,
+    ease: "power3.out",
+  });
+</script>
