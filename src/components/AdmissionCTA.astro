@@ -1,0 +1,82 @@
+---
+import { PHONE_HREF, PHONE_DISPLAY, whatsappUrl } from "@/config/CONSTANTS.ts";
+
+interface Props {
+  id?: string;
+  class?: string;
+}
+
+const { id, class: className = "" } = Astro.props;
+
+const whatsappMessage = "I am on your website and I want to know more about the APSC course";
+const whatsappHref = whatsappUrl(whatsappMessage);
+---
+
+<section id={id} class={`py-12 lg:py-16 bg-white relative z-10 ${className}`}>
+  <div class="px-4 md:px-6 max-w-7xl mx-auto">
+    <div
+      class="relative rounded-3xl bg-gray-50/80 border border-gray-200/80 p-8 md:p-12 lg:p-14 flex flex-col lg:flex-row lg:items-center justify-between gap-8 lg:gap-12 shadow-xs"
+    >
+      <!-- Content side -->
+      <div class="flex flex-col gap-4 max-w-2xl">
+        <div
+          class="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-primary-500/10 text-primary-500 text-xs font-semibold uppercase tracking-wider max-w-fit"
+        >
+          <span class="w-2 h-2 rounded-full bg-primary-500 animate-pulse"></span>
+          Admission Notice • APSC CCE 2026
+        </div>
+
+        <h2
+          class="text-3xl sm:text-4xl lg:text-5xl font-light tracking-tight text-gray-900 leading-tight"
+        >
+          APSC Foundation Course Admission <span
+            class="text-primary-500 italic font-medium">Going On</span
+          >
+        </h2>
+
+        <p class="text-gray-600 font-light text-base md:text-lg leading-relaxed">
+          Join Guwahati's top civil services institute. Admissions are open for the comprehensive APSC Foundation Batch with expert faculty from Delhi and Assam.
+        </p>
+      </div>
+
+      <!-- Action buttons side -->
+      <div
+        class="flex flex-col sm:flex-row lg:flex-col xl:flex-row items-stretch sm:items-center gap-3.5 shrink-0"
+      >
+        <!-- Call Us Button -->
+        <a
+          href={PHONE_HREF}
+          class="inline-flex items-center justify-center gap-2.5 px-6 py-3.5 rounded-full bg-primary-500 hover:bg-primary-600 text-white font-medium text-sm transition-all duration-300 shadow-xs hover:shadow-md"
+        >
+          <iconify-icon icon="lucide:phone-call" class="text-base"
+          ></iconify-icon>
+          <span>Call Us ({PHONE_DISPLAY})</span>
+        </a>
+
+        <!-- WhatsApp Us Button -->
+        <a
+          href={whatsappHref}
+          target="_blank"
+          rel="noopener noreferrer"
+          class="inline-flex items-center justify-center gap-2.5 px-6 py-3.5 rounded-full bg-emerald-600 hover:bg-emerald-700 text-white font-medium text-sm transition-all duration-300 shadow-xs hover:shadow-md"
+        >
+          <iconify-icon icon="ri:whatsapp-fill" class="text-lg"
+          ></iconify-icon>
+          <span>WhatsApp Us</span>
+        </a>
+
+        <!-- Enroll Button (Disabled) -->
+        <button
+          type="button"
+          disabled
+          title="Enrollment is currently managed via phone or WhatsApp"
+          class="inline-flex items-center justify-center gap-2 px-6 py-3.5 rounded-full bg-gray-100 text-gray-400 border border-gray-200 font-medium text-sm cursor-not-allowed select-none"
+        >
+          <iconify-icon icon="lucide:lock" class="text-sm text-gray-400"
+          ></iconify-icon>
+          <span>Enroll (Disabled)</span>
+        </button>
+      </div>
+    </div>
+  </div>
+</section>

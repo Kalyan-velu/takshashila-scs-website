@@ -1,54 +1,214 @@
 ---
 const { id } = Astro.props;
+
+const programs = [
+  {
+    title: "APSC CCE Preparation",
+    subtitle: "Combined Competitive Examination",
+    badge: "State Civil Services",
+    icon: "lucide:landmark",
+    description:
+      "Complete Prelims & Mains coverage engineered specifically for aspirants targeting top Assam administrative ranks.",
+    highlights: [
+      "Full General Studies (History, Polity, Economy, Ethics, Science & Tech)",
+      "Assam-Specific Focus: Assam History, Polity, Geography, Art & Culture",
+      "Assam Year Book analysis & Assam-centric current affairs",
+      "CSAT, PYQ breakdown, and weekly Mains answer-writing drills",
+    ],
+    tags: [
+      "Prelims & Mains",
+      "Assam Special",
+      "CSAT",
+      "Answer Writing",
+      "PYQ Analysis",
+    ],
+  },
+  {
+    title: "UPSC Civil Services",
+    subtitle: "IAS, IPS & Allied Services",
+    badge: "National Civil Services",
+    icon: "lucide:graduation-cap",
+    description:
+      "Rigorous preparation with Delhi and national expert mentors designed for clearing India’s premier examination.",
+    highlights: [
+      "Exhaustive coverage of General Studies Papers I–IV & Essay",
+      "Structured CSAT preparation & guidance for Optional subjects",
+      "Mains answer-writing evaluation with detailed faculty feedback",
+      "Personality test & mock interview sessions with veteran panellists",
+    ],
+    tags: [
+      "GS Papers I–IV",
+      "CSAT & Essay",
+      "Optionals",
+      "Mock Interviews",
+    ],
+  },
+  {
+    title: "ADRE Preparation",
+    subtitle: "Assam Direct Recruitment Exam",
+    badge: "State Recruitment",
+    icon: "lucide:clipboard-check",
+    description:
+      "Targeted batches for Class III and Class IV state government posts with focused practice and daily test series.",
+    highlights: [
+      "Complete syllabus coverage tailored for Class III & Class IV posts",
+      "Daily practice tests and speed-building assessment drills",
+      "Updated, exam-oriented study materials and revision notes",
+      "Short-term intensive batches with regular performance tracking",
+    ],
+    tags: ["Class III & IV", "Daily Tests", "Updated Notes", "Fast-Track"],
+  },
+];
+
+const features = [
+  {
+    icon: "lucide:monitor-play",
+    title: "Hybrid Learning Modes",
+    description:
+      "Classes in both online and offline modes in Guwahati, with full recorded lecture access for unlimited revision.",
+  },
+  {
+    icon: "lucide:users",
+    title: "Expert Delhi & National Mentors",
+    description:
+      "Mentorship from experienced faculty (5–20 years experience) bringing Delhi quality coaching directly to Assam.",
+  },
+  {
+    icon: "lucide:library",
+    title: "Library & Monthly Magazine",
+    description:
+      "Access to an advanced study library and our monthly current affairs magazine crafted for civil services.",
+  },
+  {
+    icon: "lucide:target",
+    title: "Personalized Growth Plan",
+    description:
+      "Individual progress tracking, periodic assessments, and expert guidance tailored to your target exam.",
+  },
+];
 ---
 
-<section id={id} class="border-t border-border pt-12 lg:pt-24 pb-12 lg:pb-24 bg-background">
-  <div class="px-4 md:px-6 lg:max-w-4xl mx-auto flex flex-col gap-6">
-    <h2 class="text-3xl md:text-5xl font-light tracking-tight text-foreground leading-tight">
-      APSC, UPSC &amp; ADRE Coaching in Guwahati — <span class="text-primary italic">What We Cover</span>
-    </h2>
-    <p class="text-muted-foreground font-light leading-relaxed">
-      Takshasheela School of Civil Services provides complete preparation for
-      the <strong class="text-foreground font-semibold">APSC Combined Competitive Examination (CCE)</strong>, the
-      <strong class="text-foreground font-semibold">UPSC Civil Services Examination</strong> and the
-      <strong class="text-foreground font-semibold">Assam Direct Recruitment Exam (ADRE)</strong> from our center in
-      Guwahati and through live online classes across Assam and the Northeast.
-    </p>
-    <p class="text-muted-foreground font-light leading-relaxed">
-      Our APSC CCE programme covers the full Prelims and Mains syllabus —
-      Indian History, Polity and Governance, Geography, Economy, Science &amp;
-      Technology, Environment, Ethics and Current Affairs — along with the
-      Assam-specific portions that decide ranks:
-      <strong class="text-foreground font-semibold">Assam History</strong>, <strong class="text-foreground font-semibold">Assam Geography and Polity</strong>,
-      <strong class="text-foreground font-semibold">Assam Art &amp; Culture</strong> and the
-      <strong class="text-foreground font-semibold">Assam Year Book</strong>. CSAT preparation, answer-writing
-      practice for Mains, and previous year question analysis are built into
-      every batch.
-    </p>
-    <p class="text-muted-foreground font-light leading-relaxed">
-      Our UPSC batches follow the same rigour for the Civil Services
-      Examination, with dedicated coverage of General Studies Papers I–IV,
-      CSAT, Essay and Optional subjects, plus structured mains answer-writing
-      and mock interview practice for aspirants targeting the IAS, IPS and
-      allied services. For state government aspirants, our ADRE batches focus
-      on the Assam Direct Recruitment Exam syllabus for Class III and Class IV
-      posts, with daily practice tests and updated study material.
-    </p>
-    <p class="text-muted-foreground font-light leading-relaxed">
-      Classes run in both <strong class="text-foreground font-semibold">online and offline modes</strong>, with
-      recorded lectures available for revision, a monthly current affairs
-      magazine, an advanced library, and regular full-length and sectional
-      mock tests with individual feedback. Faculty with 5–20 years of
-      experience from Delhi and across India mentor every batch, making
-      Takshasheela one of the most complete options for civil services
-      preparation in Guwahati.
-    </p>
-    <p class="text-muted-foreground font-light leading-relaxed">
-      Whether you are appearing for the APSC CCE Prelims for the first time,
-      preparing for UPSC Mains after clearing Prelims, or targeting an ADRE
-      Class III or Class IV post, our mentors help you build a personalized
-      study plan, track your progress through periodic assessments, and
-      refine your answer-writing and interview skills before exam day.
-    </p>
+<section
+  id={id}
+  class="py-16 md:py-24 bg-white border-t border-gray-200 relative z-10"
+>
+  <div class="px-4 md:px-6 max-w-7xl mx-auto flex flex-col gap-12 md:gap-16">
+    <!-- Header Section -->
+    <div class="flex flex-col gap-4 max-w-3xl">
+      <div
+        class="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-primary-500/10 text-primary-500 text-xs font-semibold tracking-wide uppercase max-w-fit"
+      >
+        <iconify-icon icon="lucide:sparkles" class="text-sm"></iconify-icon>
+        Comprehensive Exam Coverage
+      </div>
+      <h2
+        class="text-3xl md:text-5xl font-light tracking-tight text-gray-900 leading-tight"
+      >
+        APSC, UPSC & ADRE Coaching in Guwahati — <span
+          class="text-primary-500 italic font-medium">What We Cover</span
+        >
+      </h2>
+      <p class="text-base md:text-lg text-gray-600 font-light leading-relaxed">
+        Takshasheela School of Civil Services provides complete preparation for the <strong
+          class="text-gray-900 font-medium"
+          >APSC Combined Competitive Examination (CCE)</strong
+        >, the <strong class="text-gray-900 font-medium"
+          >UPSC Civil Services Examination</strong
+        >, and the <strong class="text-gray-900 font-medium"
+          >Assam Direct Recruitment Exam (ADRE)</strong
+        > from our premier centre in Guwahati and live online across Assam and the Northeast.
+      </p>
+    </div>
+
+    <!-- Exam Program Cards Grid -->
+    <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+      {
+        programs.map((prog) => (
+          <div class="flex flex-col justify-between p-8 rounded-3xl bg-white border border-gray-200 hover:border-primary-500/30 hover:shadow-lg transition-all duration-300 group">
+            <div class="flex flex-col gap-6">
+              <div class="flex items-center justify-between">
+                <div class="w-14 h-14 rounded-2xl bg-primary-500/10 flex items-center justify-center text-primary-500 group-hover:scale-110 transition-transform">
+                  <iconify-icon icon={prog.icon} class="text-2xl" />
+                </div>
+                <span class="text-xs font-medium px-3 py-1 rounded-full bg-gray-100 text-gray-600">
+                  {prog.badge}
+                </span>
+              </div>
+
+              <div>
+                <h3 class="text-2xl font-semibold text-gray-900 tracking-tight">
+                  {prog.title}
+                </h3>
+                <p class="text-sm font-medium text-primary-500 mt-1">
+                  {prog.subtitle}
+                </p>
+              </div>
+
+              <p class="text-sm text-gray-600 font-light leading-relaxed">
+                {prog.description}
+              </p>
+
+              <ul class="flex flex-col gap-2.5 pt-2 border-t border-gray-100">
+                {prog.highlights.map((item) => (
+                  <li class="flex items-start gap-2.5 text-xs text-gray-700 font-light">
+                    <iconify-icon
+                      icon="lucide:check-circle-2"
+                      class="text-primary-500 text-base shrink-0 mt-0.5"
+                    />
+                    <span>{item}</span>
+                  </li>
+                ))}
+              </ul>
+            </div>
+
+            <div class="flex flex-wrap gap-1.5 pt-6 mt-6 border-t border-gray-100">
+              {prog.tags.map((tag) => (
+                <span class="text-[11px] font-light px-2.5 py-1 rounded-md bg-gray-50 text-gray-600 border border-gray-100">
+                  #{tag}
+                </span>
+              ))}
+            </div>
+          </div>
+        ))
+      }
+    </div>
+
+    <!-- Feature Highlights Grid -->
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 pt-4">
+      {
+        features.map((feat) => (
+          <div class="p-6 rounded-2xl bg-gray-50/70 border border-gray-100 flex flex-col gap-3">
+            <div class="w-10 h-10 rounded-xl bg-white border border-gray-200 flex items-center justify-center text-primary-500 shadow-xs">
+              <iconify-icon icon={feat.icon} class="text-xl" />
+            </div>
+            <h4 class="text-base font-medium text-gray-900">{feat.title}</h4>
+            <p class="text-xs text-gray-600 font-light leading-relaxed">
+              {feat.description}
+            </p>
+          </div>
+        ))
+      }
+    </div>
+
+    <!-- Bottom Mentorship Callout Banner -->
+    <div
+      class="p-8 md:p-10 rounded-3xl bg-linear-to-r from-primary-500/10 via-primary-500/5 to-transparent border border-primary-500/20 flex flex-col md:flex-row items-start md:items-center justify-between gap-6"
+    >
+      <div class="flex flex-col gap-2 max-w-2xl">
+        <h3 class="text-xl md:text-2xl font-medium text-gray-900 tracking-tight">
+          Ready to start your preparation journey?
+        </h3>
+        <p class="text-sm text-gray-600 font-light leading-relaxed">
+          Whether you are appearing for APSC CCE Prelims for the first time, targeting UPSC Mains, or aiming for an ADRE post, our mentors build a personalized roadmap tailored to your target exam.
+        </p>
+      </div>
+      <a
+        href="/contact"
+        class="inline-flex items-center gap-2 px-6 py-3 rounded-full bg-primary-500 text-white font-medium text-sm hover:bg-primary-600 transition-colors shrink-0 shadow-md hover:shadow-lg"
+      >
+        Get Free Mentorship
+        <iconify-icon icon="lucide:arrow-right" class="text-base"></iconify-icon>
+      </a>
+    </div>
   </div>
 </section>

@@ -1,4 +1,4 @@
-import { gsap, GSDevTools } from "@/lib/gsap.ts";
+import { gsap } from "@/lib/gsap.ts";
 
 declare global {
   interface Window {
@@ -121,7 +121,10 @@ if (headerContainer && ticker && topBar && header && logos.length > 0) {
         // Background toggle logic for transparent header ONLY on home
         if (st > 20 && !headerContainer.classList.contains("is-scrolled")) {
           headerContainer.classList.add("is-scrolled");
-        } else if (st <= 20 && headerContainer.classList.contains("is-scrolled")) {
+        } else if (
+          st <= 20 &&
+          headerContainer.classList.contains("is-scrolled")
+        ) {
           headerContainer.classList.remove("is-scrolled");
         }
       }
@@ -294,6 +297,6 @@ searchToggle?.addEventListener("click", () =>
 
 // Other components can ask search to close
 document.addEventListener("header:close-search", closeSearch);
-if (import.meta.env.DEV) {
-  GSDevTools.create({ minimal: false });
-}
+// if (import.meta.env.DEV) {
+//   GSDevTools.create({ minimal: false });
+// }

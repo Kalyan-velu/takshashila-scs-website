@@ -1,26 +1,18 @@
 ---
-// import {
-//   GraduationCap,
-//   AppWindow,
-//   PlaySquare,
-//   Building,
-//   BookMarked,
-//   Newspaper,
-// } from "lucide-react";
 import contentData from "@/data/content.json";
 
-// const iconMap = {
-//   GraduationCap,
-//   AppWindow,
-//   PlaySquare,
-//   Building,
-//   BookMarked,
-//   Newspaper,
-// };
+const iconMap: Record<string, string> = {
+  GraduationCap: "lucide:graduation-cap",
+  AppWindow: "lucide:app-window",
+  PlaySquare: "lucide:square-play",
+  Building: "lucide:building-2",
+  BookMarked: "lucide:book-marked",
+  Newspaper: "lucide:newspaper",
+};
 
-const reasons = contentData.whyChooseUs.reasons.map(r => ({
+const reasons = contentData.whyChooseUs.reasons.map((r) => ({
   ...r,
-  // icon: iconMap[r.icon] || GraduationCap
+  iconName: iconMap[r.icon] || r.icon || "lucide:graduation-cap",
 }));
 
 const { whyChooseUs } = contentData;
@@ -50,13 +42,16 @@ const { id } = Astro.props;
         {
           reasons.map((item, i) => (
             <div
-              class="sticky w-full flex flex-col sm:flex-row items-start sm:items-center gap-6 md:gap-8 p-8 md:p-10 bg-white border border-gray-200 overflow-hidden transition-all duration-300"
+              class="sticky w-full flex flex-col rounded-xl sm:flex-row items-start sm:items-center gap-6 md:gap-8 p-8 md:p-10 bg-white border border-gray-200 overflow-hidden transition-all duration-300"
               style={`bottom: calc(15vh - ${i * 24}px); z-index: ${1 - i};`}
             >
               <div
                 class={`shrink-0 w-16 h-16 md:w-20 md:h-20 bg-white border border-gray-200 flex items-center justify-center relative z-10 text-primary-500`}
               >
-                <!--<item.icon className="w-8 h-8 md:w-10 md:h-10" />-->
+                <iconify-icon
+                  icon={item.iconName}
+                  class="text-3xl md:text-4xl"
+                />
               </div>
 
               <div class="flex flex-col gap-2 md:gap-3 relative z-10 flex-1">

@@ -1,9 +1,7 @@
 ---
-import Layout from "@/layouts/Layout.astro";
-//@ts-expect-error don't know why this is throwing error
+
 import CourseTabs from "@/components/course/CourseTabs.vue";
-//@ts-expect-error don't know why this is throwing error
-import EnrollmentSidebar from "@/components/course/EnrollmentSidebar.vue";
+import Layout from "@/layouts/Layout.astro";
 import { getCollection, render } from "astro:content";
 
 export async function getStaticPaths() {
@@ -45,7 +43,6 @@ const hasModes = availableModes.length > 1;
 <Layout
   title={data.seoTitle}
   description={data.seoDescription}
-  keywords={data.seoKeywords}
   image={data.ogImage}
 >
   <div class="bg-primary-500/5 py-12 md:py-20 border-b border-gray-200">
@@ -97,14 +94,14 @@ const hasModes = availableModes.length > 1;
       <div
         class="lg:col-span-4 w-full sticky top-0 z-10 transition-all duration-500"
       >
-        <EnrollmentSidebar
-          client:load
-          price={data.price}
-          period={data.pricePeriod}
-          features={data.features}
-          courseItems={courseItems}
-          hasModes={hasModes}
-        />
+        <!--<Enroll-->
+        <!--  client:load-->
+        <!--  price={data.price}-->
+        <!--  period={data.pricePeriod}-->
+        <!--  features={data.features}-->
+        <!--  courseItems={courseItems}-->
+        <!--  hasModes={hasModes}-->
+        <!--/>-->
       </div>
     </div>
   </div>

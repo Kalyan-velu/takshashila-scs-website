@@ -145,7 +145,7 @@ const description =
               <div
                 class="w-14 h-14 rounded-2xl bg-primary-500/10 flex items-center justify-center text-primary-500 shrink-0 transition-transform duration-500 group-hover:scale-110 group-hover:shadow-[0_0_20px_-5px_rgba(var(--primary),0.5)] relative z-10"
               >
-                <!--<Phone className="w-6 h-6" />-->
+                <iconify-icon icon="lucide:phone" class="text-2xl"></iconify-icon>
               </div>
               <div class="space-y-2 relative z-10 w-full">
                 <p
@@ -171,7 +171,7 @@ const description =
               <div
                 class="w-14 h-14 rounded-2xl bg-primary-500/10 flex items-center justify-center text-primary-500 shrink-0 transition-transform duration-500 group-hover:scale-110 group-hover:shadow-[0_0_20px_-5px_rgba(var(--primary),0.5)] relative z-10"
               >
-                <!--<Mail className="w-6 h-6" />-->
+                <iconify-icon icon="lucide:mail" class="text-2xl"></iconify-icon>
               </div>
               <div class="space-y-2 relative z-10 w-full">
                 <p
@@ -197,7 +197,7 @@ const description =
               <div
                 class="w-14 h-14 rounded-2xl bg-primary-500/10 flex items-center justify-center text-primary-500 shrink-0 transition-transform duration-500 group-hover:scale-110 group-hover:shadow-[0_0_20px_-5px_rgba(var(--primary),0.5)] relative z-10"
               >
-                <!--<MapPin className="w-6 h-6" />-->
+                <iconify-icon icon="lucide:map-pin" class="text-2xl"></iconify-icon>
               </div>
               <div class="space-y-2 relative z-10">
                 <p
@@ -319,12 +319,50 @@ const description =
 
                 <div class="space-y-3">
                   <label class="text-sm font-medium text-gray-900 tracking-wide"
-                    >Address
+                    >Target Course <span class="text-primary-500">*</span>
+                    <div class="relative mt-2">
+                      <select
+                        name="course"
+                        required
+                        class="w-full px-5 py-4 border border-gray-200/50 rounded-2xl bg-white/50 backdrop-blur-md text-gray-900 focus:outline-none focus:ring-2 focus:ring-primary-500/30 focus:border-primary-500/50 transition-all shadow-inner appearance-none cursor-pointer"
+                      >
+                        <option value="" disabled selected
+                          >Select your target course...</option
+                        >
+                        <option value="APSC Foundation Batch"
+                          >APSC Foundation Batch</option
+                        >
+                        <option value="UPSC Foundation Batch"
+                          >UPSC Foundation Batch</option
+                        >
+                        <option value="ADRE Online Batch"
+                          >ADRE Online Batch</option
+                        >
+                        <option value="Optional Subject / Test Series"
+                          >Optional Subject / Test Series</option
+                        >
+                        <option value="General Inquiry"
+                          >General Inquiry / Other</option
+                        >
+                      </select>
+                      <div
+                        class="absolute inset-y-0 right-0 flex items-center pr-5 pointer-events-none text-gray-500"
+                      >
+                        <iconify-icon icon="lucide:chevron-down" class="text-lg"
+                        ></iconify-icon>
+                      </div>
+                    </div>
+                  </label>
+                </div>
+
+                <div class="space-y-3">
+                  <label class="text-sm font-medium text-gray-900 tracking-wide"
+                    >Address / Message
                     <textarea
                       rows="3"
                       name="address"
                       class="w-full px-5 py-4 border border-gray-200/50 rounded-2xl bg-white/50 backdrop-blur-md text-gray-900 focus:outline-none focus:ring-2 focus:ring-primary-500/30 focus:border-primary-500/50 transition-all placeholder:text-gray-600/40 resize-none shadow-inner"
-                      placeholder="Your full address"></textarea>
+                      placeholder="Your full address or message"></textarea>
                   </label>
                 </div>
 
@@ -350,11 +388,52 @@ const description =
                   <span class="relative z-10 text-lg submit-text"
                     >Send Message</span
                   >
-                  <!--<Send-->
-                  <!--  className="w-5 h-5 relative z-10 transition-transform duration-300 group-hover:-translate-y-1 group-hover:translate-x-1 group-hover:scale-110 submit-icon"-->
-                  <!--/>-->
+                  <iconify-icon icon="lucide:send" class="text-lg relative z-10 transition-transform duration-300 group-hover:-translate-y-1 group-hover:translate-x-1 group-hover:scale-110 submit-icon"></iconify-icon>
                 </button>
               </form>
+
+              <!-- Inline Success Feedback Card -->
+              <div id="contact-success-card" class="hidden space-y-8 text-center py-6 px-2">
+                <div class="w-16 h-16 rounded-full bg-emerald-500/10 border border-emerald-500/20 text-emerald-600 flex items-center justify-center mx-auto shadow-sm">
+                  <iconify-icon icon="lucide:check-circle-2" class="text-4xl"></iconify-icon>
+                </div>
+                
+                <div class="space-y-3">
+                  <h3 class="text-2xl font-medium text-gray-900 tracking-tight">Query Submitted!</h3>
+                  <p class="text-gray-600 font-light text-base max-w-md mx-auto leading-relaxed">
+                    Thank you for submitting your query. Someone from our end will contact you shortly.
+                  </p>
+                </div>
+
+                <div class="pt-6 border-t border-gray-200/80 space-y-4">
+                  <p class="text-xs font-medium uppercase tracking-wider text-gray-600">Discover More</p>
+                  
+                  <div class="flex flex-wrap items-center justify-center gap-3">
+                    <a href="/about" class="px-4 py-2.5 rounded-full bg-primary-500/10 text-primary-500 hover:bg-primary-500 hover:text-white transition-all text-xs font-medium flex items-center gap-1.5 shadow-xs">
+                      <iconify-icon icon="lucide:info" class="text-sm"></iconify-icon>
+                      Know More About Us
+                    </a>
+                    <a href="/courses/upsc" class="px-4 py-2.5 rounded-full bg-white border border-gray-200 text-gray-700 hover:border-primary-500 hover:text-primary-500 transition-all text-xs font-medium flex items-center gap-1.5 shadow-xs">
+                      <iconify-icon icon="lucide:graduation-cap" class="text-sm"></iconify-icon>
+                      UPSC Courses
+                    </a>
+                    <a href="/courses/apsc" class="px-4 py-2.5 rounded-full bg-white border border-gray-200 text-gray-700 hover:border-primary-500 hover:text-primary-500 transition-all text-xs font-medium flex items-center gap-1.5 shadow-xs">
+                      <iconify-icon icon="lucide:landmark" class="text-sm"></iconify-icon>
+                      APSC Courses
+                    </a>
+                    <a href="/courses" class="px-4 py-2.5 rounded-full bg-white border border-gray-200 text-gray-700 hover:border-primary-500 hover:text-primary-500 transition-all text-xs font-medium flex items-center gap-1.5 shadow-xs">
+                      <iconify-icon icon="lucide:book-open" class="text-sm"></iconify-icon>
+                      All Courses
+                    </a>
+                  </div>
+                </div>
+
+                <div class="pt-2">
+                  <button id="reset-contact-form-btn" type="button" class="text-xs text-gray-500 underline hover:text-gray-900 transition-colors">
+                    Send another query
+                  </button>
+                </div>
+              </div>
             </div>
           </div>
         </div>
@@ -371,6 +450,8 @@ const description =
   const form = document.getElementById(
     "contact-form",
   ) as HTMLFormElement | null;
+  const successCard = document.getElementById("contact-success-card");
+  const resetBtn = document.getElementById("reset-contact-form-btn");
 
   function setFieldError(id: string, message: string | undefined) {
     const el = document.getElementById(id);
@@ -384,6 +465,12 @@ const description =
     setFieldError("email-error", undefined);
     setFieldError("form-error", undefined);
   }
+
+  resetBtn?.addEventListener("click", () => {
+    if (successCard) successCard.classList.add("hidden");
+    if (form) form.classList.remove("hidden");
+    window.turnstile?.reset();
+  });
 
   if (form) {
     form.addEventListener("submit", async (e) => {
@@ -414,20 +501,29 @@ const description =
       const lastName = formData.get("lastName") as string;
       const phone = formData.get("phone") as string;
       const email = formData.get("email") as string;
+      const course = formData.get("course") as string;
       const address = formData.get("address") as string;
+
+      const formattedAddress = [
+        course ? `Course: ${course}` : null,
+        address ? `Address/Message: ${address.trim()}` : null,
+      ]
+        .filter(Boolean)
+        .join("\n");
 
       const result = await submitLead({
         name: `${firstName} ${lastName}`.trim(),
         phone,
         email,
-        address,
+        address: formattedAddress || null,
         source: "contact-page",
         cfTurnstileResponse: turnstileToken,
       });
 
       if (result.success) {
-        alert("Thank you! Your message has been sent successfully.");
         form.reset();
+        form.classList.add("hidden");
+        if (successCard) successCard.classList.remove("hidden");
       } else if (result.code === "VALIDATION_ERROR") {
         setFieldError("phone-error", result.fieldErrors.phone?.[0]);
         setFieldError("email-error", result.fieldErrors.email?.[0]);

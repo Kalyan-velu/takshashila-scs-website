@@ -1,17 +1,58 @@
 ---
+import { PHONE_HREF, PHONE_DISPLAY, whatsappUrl } from "@/config/CONSTANTS.ts";
 
+const whatsappMessage = "I am on your website and I want to know more about the APSC course";
+const whatsappHref = whatsappUrl(whatsappMessage);
 ---
 
 <section class="lead-form-section">
   <div data-lead-form-card class="lead-form-card">
     <div class="lead-form-header">
+      <div
+        class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-primary-500/10 text-primary-500 text-xs font-semibold uppercase tracking-wider mb-3"
+      >
+        <span class="w-2 h-2 rounded-full bg-primary-500 animate-pulse"></span>
+        Admissions Open 2026
+      </div>
       <h2 class="lead-form-title">
-        Prepare for Exams with Structured Guidance
+        APSC Foundation Course Admission Going On — Join Us
       </h2>
       <p class="lead-form-subtitle">
-        Get expert mentorship, answer-writing practice, test series and
-        interview guidance.
+        Get expert mentorship from Delhi & Assam faculty, structured Prelims & Mains answer writing, test series, and interview guidance.
       </p>
+
+      <!-- Integrated Action CTA Buttons -->
+      <div class="flex flex-wrap items-center gap-2.5 mt-5">
+        <a
+          href={PHONE_HREF}
+          class="inline-flex items-center gap-2 px-4 py-2.5 rounded-full bg-primary-500 hover:bg-primary-600 text-white font-medium text-xs transition-all shadow-xs hover:shadow-md"
+        >
+          <iconify-icon icon="lucide:phone-call" class="text-sm"></iconify-icon>
+          <span>Call Us ({PHONE_DISPLAY})</span>
+        </a>
+
+        <a
+          href={whatsappHref}
+          target="_blank"
+          rel="noopener noreferrer"
+          class="inline-flex items-center gap-2 px-4 py-2.5 rounded-full bg-emerald-600 hover:bg-emerald-700 text-white font-medium text-xs transition-all shadow-xs hover:shadow-md"
+        >
+          <iconify-icon icon="ri:whatsapp-fill" class="text-base"
+          ></iconify-icon>
+          <span>WhatsApp Us</span>
+        </a>
+
+        <button
+          type="button"
+          disabled
+          title="Enrollment is currently managed via phone or WhatsApp"
+          class="inline-flex items-center gap-1.5 px-4 py-2.5 rounded-full bg-gray-100 text-gray-400 border border-gray-200 font-medium text-xs cursor-not-allowed select-none"
+        >
+          <iconify-icon icon="lucide:lock" class="text-xs text-gray-400"
+          ></iconify-icon>
+          <span>Enroll (Disabled)</span>
+        </button>
+      </div>
     </div>
 
     <form data-lead-form class="lead-form-element">
@@ -99,6 +140,58 @@
         Continue
       </button>
     </form>
+
+    <!-- Success Feedback View -->
+    <div
+      id="hero-lead-success"
+      class="hidden w-full text-center py-6 px-4 space-y-6"
+    >
+      <div
+        class="w-14 h-14 rounded-full bg-emerald-500/10 border border-emerald-500/20 text-emerald-600 flex items-center justify-center mx-auto shadow-sm"
+      >
+        <iconify-icon icon="lucide:check-circle-2" class="text-3xl"
+        ></iconify-icon>
+      </div>
+      <div class="space-y-2">
+        <h3 class="text-2xl font-medium text-gray-900 tracking-tight">
+          Query Submitted!
+        </h3>
+        <p
+          class="text-gray-600 font-light text-base max-w-lg mx-auto leading-relaxed"
+        >
+          Thank you for submitting your query. Someone from our end will contact
+          you shortly.
+        </p>
+      </div>
+      <div
+        class="pt-4 border-t border-gray-100 flex flex-wrap items-center justify-center gap-3"
+      >
+        <a
+          href="/about"
+          class="px-4 py-2 rounded-full bg-primary-500/10 text-primary-500 hover:bg-primary-500 hover:text-white transition-all text-xs font-medium"
+        >
+          Know More About Us
+        </a>
+        <a
+          href="/courses/upsc"
+          class="px-4 py-2 rounded-full bg-gray-100 text-gray-700 hover:bg-primary-500 hover:text-white transition-all text-xs font-medium"
+        >
+          UPSC Courses
+        </a>
+        <a
+          href="/courses/apsc"
+          class="px-4 py-2 rounded-full bg-gray-100 text-gray-700 hover:bg-primary-500 hover:text-white transition-all text-xs font-medium"
+        >
+          APSC Courses
+        </a>
+        <a
+          href="/courses"
+          class="px-4 py-2 rounded-full bg-gray-100 text-gray-700 hover:bg-primary-500 hover:text-white transition-all text-xs font-medium"
+        >
+          All Courses
+        </a>
+      </div>
+    </div>
   </div>
 </section>
 
@@ -106,7 +199,11 @@
   import { gsap } from "@/lib/gsap.ts";
 
   const formCard = document.querySelector("[data-lead-form-card]");
-  const form = document.querySelector("[data-lead-form]");
+  const form = document.querySelector(
+    "[data-lead-form]",
+  ) as HTMLFormElement | null;
+  const formHeader = document.querySelector(".lead-form-header");
+  const heroSuccess = document.querySelector("#hero-lead-success");
   const phoneInput = document.querySelector(
     "#phone",
   ) as HTMLInputElement | null;
@@ -136,8 +233,9 @@
 
   form?.addEventListener("submit", (event) => {
     event.preventDefault();
-
-    alert("Form submitted! In production, this finalizes the lead in your DB.");
+    if (form) form.classList.add("hidden");
+    if (formHeader) formHeader.classList.add("hidden");
+    if (heroSuccess) heroSuccess.classList.remove("hidden");
   });
 
   if (formCard) {
@@ -158,24 +256,24 @@
   }
 
   .lead-form-card {
-    @apply w-full xl:flex space-x-4 items-start xl:max-w-6xl -mt-32 bg-white border border-gray-100 p-6 sm:p-10;
+    @apply w-full xl:flex space-x-4 items-start xl:max-w-6xl -mt-32 bg-white border border-gray-100 p-6 sm:p-10 shadow-xl rounded-2xl;
     border-top: 4px solid var(--color-gold-500) !important;
   }
 
   .lead-form-header {
-    @apply mb-8;
+    @apply mb-8 xl:mb-0 xl:w-1/2 pr-0 xl:pr-6;
   }
 
   .lead-form-title {
-    @apply text-xl lg:text-2xl font-medium text-primary-500 mb-2;
+    @apply text-xl lg:text-2xl font-medium text-primary-500 mb-2 leading-tight;
   }
 
   .lead-form-subtitle {
-    @apply text-gray-500 text-sm lg:text-base font-light;
+    @apply text-gray-500 text-sm lg:text-base font-light leading-relaxed;
   }
 
   .lead-form-element {
-    @apply w-full max-w-lg mx-auto flex flex-col gap-5;
+    @apply w-full xl:w-1/2 flex flex-col gap-5;
   }
 
   .lead-form__field {
@@ -191,7 +289,7 @@
   }
 
   .lead-form__input {
-    @apply w-full pl-12 pr-4 py-3.5 bg-gray-50 border border-gray-200 text-gray-900 focus:outline-none focus:ring-2 focus:ring-primary-500 focus:bg-white transition-all duration-300 placeholder:text-gray-400 text-sm;
+    @apply w-full pl-12 pr-4 py-3.5 bg-gray-50 border border-gray-200 text-gray-900 focus:outline-none focus:ring-2 focus:ring-primary-500 focus:bg-white transition-all duration-300 placeholder:text-gray-400 text-sm rounded-xl;
   }
 
   .lead-form__input--lg {
@@ -199,7 +297,7 @@
   }
 
   .lead-form__select {
-    @apply w-full pl-12 pr-10 py-3.5 bg-gray-50 border border-gray-200 text-gray-900 focus:outline-none focus:ring-2 focus:ring-primary-500 focus:bg-white transition-all duration-300 appearance-none cursor-pointer text-sm;
+    @apply w-full pl-12 pr-10 py-3.5 bg-gray-50 border border-gray-200 text-gray-900 focus:outline-none focus:ring-2 focus:ring-primary-500 focus:bg-white transition-all duration-300 appearance-none cursor-pointer text-sm rounded-xl;
   }
 
   .lead-form__chevron-container {
@@ -223,7 +321,7 @@
   }
 
   .lead-form__submit-button {
-    @apply w-full mt-2 inline-flex items-center justify-center bg-primary-500 hover:bg-primary-600 text-white font-medium py-4 transition-all duration-300 cursor-pointer gap-2;
+    @apply w-full mt-2 inline-flex items-center justify-center bg-primary-500 hover:bg-primary-600 text-white font-medium py-4 transition-all duration-300 cursor-pointer gap-2 rounded-xl;
   }
 
   .lead-form__submit-button:hover .lead-form__arrow-icon {
@@ -235,6 +333,6 @@
   }
 
   .lead-form__continue-button {
-    @apply w-full inline-flex items-center justify-center bg-gray-900 hover:bg-gray-800 text-white font-medium py-4 transition-all duration-300 cursor-pointer;
+    @apply w-full inline-flex items-center justify-center bg-gray-900 hover:bg-gray-800 text-white font-medium py-4 transition-all duration-300 cursor-pointer rounded-xl;
   }
 </style>

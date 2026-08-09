@@ -4,7 +4,7 @@ import variables from "@/config/variables.ts";
 import { PHONE_HREF } from "@/config/CONSTANTS.ts";
 import { coursesItems } from "@/data/navigation";
 import { useTurnstile } from "@/lib/useTurnstile";
-import { submitLead } from "@/lib/submitLead";
+import { submitLead } from "@/lib/submitLead.ts";
 
 interface CoursePrice {
   original: number;
@@ -121,6 +121,7 @@ const displayPeriod = computed(() => {
 });
 
 const isSubmitting = ref(false);
+const isSubmitted = ref(false);
 const form = ref({ name: "", phone: "", email: "" });
 
 const isSubmitEnabled = computed(
@@ -143,6 +144,7 @@ const submitForm = async () => {
         selectedMode.value.toLowerCase().replace(/\s+/g, "-"),
       cfTurnstileResponse: turnstileToken.value,
     });
+    isSubmitted.value = true;
     form.value.name = "";
     form.value.phone = "";
     form.value.email = "";
@@ -160,7 +162,33 @@ const submitForm = async () => {
   <div
     class="bg-white text-gray-900 rounded-2xl border border-gray-200 overflow-hidden shadow-xl shadow-primary-500/5 mt-6"
   >
-    <div class="p-6 md:p-8">
+    <div v-if="isSubmitted" class="p-6 text-center space-y-6">
+      <div class="w-14 h-14 rounded-full bg-emerald-500/10 border border-emerald-500/20 text-emerald-600 flex items-center justify-center mx-auto shadow-sm">
+        <iconify-icon icon="lucide:check-circle-2" class="text-3xl"></iconify-icon>
+      </div>
+      <div class="space-y-2">
+        <h4 class="text-xl font-medium text-gray-900">Query Submitted!</h4>
+        <p class="text-sm text-gray-600 font-light leading-relaxed">
+          Thank you for submitting your query. Someone from our end will contact you shortly.
+        </p>
+      </div>
+      <div class="pt-4 border-t border-gray-100 space-y-3">
+        <p class="text-xs font-semibold uppercase tracking-wider text-gray-600">Discover More</p>
+        <div class="flex flex-col gap-2">
+          <a href="/about" class="w-full py-2.5 px-4 rounded-xl bg-primary-500/10 text-primary-500 hover:bg-primary-500 hover:text-white transition-colors text-xs font-medium text-center">
+            Know More About Us
+          </a>
+          <a href="/courses" class="w-full py-2.5 px-4 rounded-xl bg-gray-100 text-gray-700 hover:bg-primary-500 hover:text-white transition-colors text-xs font-medium text-center">
+            Explore All Courses
+          </a>
+        </div>
+      </div>
+      <button @click="isSubmitted = false" class="text-xs text-gray-500 underline hover:text-gray-900">
+        Submit another query
+      </button>
+    </div>
+
+    <div v-else class="p-6 md:p-8">
       <h3 class="text-2xl font-light tracking-tight mb-2">Enroll Now</h3>
 
       <div v-if="courseItems.length > 1" class="mb-4">

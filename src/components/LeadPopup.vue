@@ -12,6 +12,8 @@ const isSubmitting = ref(false);
 const fieldErrors = ref<Record<string, string>>({});
 const formError = ref<string | null>(null);
 
+const isSubmitted = ref(false);
+
 const {
   token: turnstileToken,
   container: turnstileContainer,
@@ -76,7 +78,7 @@ const submitForm = async () => {
     });
 
     if (result.success) {
-      closePopup();
+      isSubmitted.value = true;
       localStorage.setItem("leadPopupSubmitted", "true");
       return;
     }
@@ -148,7 +150,44 @@ const submitForm = async () => {
         />
       </div>
 
-      <div class="md:w-1/2 p-6 sm:p-10 flex flex-col justify-center">
+      <!-- Success Feedback View -->
+      <div v-if="isSubmitted" class="md:w-1/2 p-6 sm:p-10 flex flex-col justify-center text-center space-y-6">
+        <div class="w-16 h-16 rounded-full bg-emerald-500/10 border border-emerald-500/20 text-emerald-600 flex items-center justify-center mx-auto shadow-sm">
+          <iconify-icon icon="lucide:check-circle-2" class="text-4xl"></iconify-icon>
+        </div>
+
+        <div class="space-y-2">
+          <h3 class="text-2xl font-medium text-gray-900 tracking-tight">Query Submitted!</h3>
+          <p class="text-gray-600 text-sm leading-relaxed">
+            Thank you for submitting your query. Someone from our end will contact you shortly.
+          </p>
+        </div>
+
+        <div class="pt-4 border-t border-gray-100 space-y-3">
+          <p class="text-xs font-semibold uppercase tracking-wider text-gray-600">Discover More</p>
+          <div class="flex flex-wrap items-center justify-center gap-2">
+            <a href="/about" @click="closePopup" class="px-3.5 py-2 rounded-full bg-primary-500/10 text-primary-500 hover:bg-primary-500 hover:text-white transition-all text-xs font-medium">
+              Know More About Us
+            </a>
+            <a href="/courses/upsc" @click="closePopup" class="px-3.5 py-2 rounded-full bg-gray-100 text-gray-700 hover:bg-primary-500 hover:text-white transition-all text-xs font-medium">
+              UPSC Courses
+            </a>
+            <a href="/courses/apsc" @click="closePopup" class="px-3.5 py-2 rounded-full bg-gray-100 text-gray-700 hover:bg-primary-500 hover:text-white transition-all text-xs font-medium">
+              APSC Courses
+            </a>
+            <a href="/courses" @click="closePopup" class="px-3.5 py-2 rounded-full bg-gray-100 text-gray-700 hover:bg-primary-500 hover:text-white transition-all text-xs font-medium">
+              All Courses
+            </a>
+          </div>
+        </div>
+
+        <button @click="closePopup" class="w-full mt-4 bg-gray-900 text-white font-medium py-3 rounded-lg hover:bg-gray-800 transition-colors text-sm">
+          Close
+        </button>
+      </div>
+
+      <!-- Form View -->
+      <div v-else class="md:w-1/2 p-6 sm:p-10 flex flex-col justify-center">
         <h2
           class="text-3xl md:text-4xl font-light tracking-tight text-primary-500 mb-4 leading-tight"
         >

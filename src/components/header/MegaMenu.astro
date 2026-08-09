@@ -150,18 +150,18 @@ const featuredItem = isCourses ? coursesFeatured : aboutFeatured;
             class="w-full h-full object-cover transform group-hover:scale-103 transition-transform duration-500"
           />
           <div
-            class="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent pointer-events-none"
+            class="absolute inset-0 bg-linear-to-t from-black/20 to-transparent pointer-events-none"
           >
           </div>
         </div>
         <div class="flex items-center justify-between">
           <h4
-            class="text-base font-semibold text-gray-900 dark:text-white group-hover:text-primary-500 transition-colors"
+            class="text-base font-semibold text-gray-900 group-hover:text-primary-500 transition-colors"
           >
             {featuredItem.title}
           </h4>
           <span
-            class="text-primary-500 dark:text-primary-400 font-semibold text-sm group-hover:translate-x-1 transition-transform flex items-center gap-1 select-none"
+            class="dark:text-primary-400 font-semibold text-sm group-hover:translate-x-1 transition-transform flex items-center gap-1 select-none"
           >
             Explore &rarr;
           </span>

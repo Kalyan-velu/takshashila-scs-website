@@ -1,0 +1,54 @@
+---
+import Layout from "@/layouts/Layout.astro";
+import { EMAIL, PHONE_DISPLAY, PHONE_HREF } from "@/config/CONSTANTS.ts";
+---
+
+<Layout>
+  <Fragment slot="head_data">
+    <title>Disclaimer | Takshasheela School of Civil Services</title>
+  </Fragment>
+  <div class="bg-primary-500/5 py-12 md:py-20 border-b border-gray-200">
+    <div class="container mx-auto px-4 lg:px-24">
+      <h1
+        class="text-4xl md:text-5xl lg:text-7xl font-light tracking-tight text-gray-900 max-w-4xl mb-6 leading-tight"
+      >
+        Disclaimer <span class="text-primary-500 font-medium">Notice</span>
+      </h1>
+      <p
+        class="text-lg md:text-xl text-gray-600 max-w-3xl font-light mb-8 leading-relaxed"
+      >
+        Takshasheela School of Civil Services is a unit of <strong>Takshashila Educational Trust</strong> (formerly known as <strong>Takshashila School of Civil Services</strong>).
+      </p>
+    </div>
+  </div>
+  <div
+    class="container px-4 lg:px-24 mx-auto py-16 md:py-24 space-y-12 text-gray-600 leading-relaxed"
+  >
+    <section>
+      <h2 class="text-2xl md:text-3xl font-semibold text-gray-900 mb-4">
+        Legal Entity & Brand Information
+      </h2>
+      <p class="mb-4">
+        Takshasheela School of Civil Services operates as an educational unit of <strong>Takshashila Educational Trust</strong>. Students, parents, and platform users are hereby informed that the institute's former registered name was <strong>Takshashila School of Civil Services</strong>. All legal agreements, admissions, academic programs, and administrative operations are conducted under the umbrella of Takshashila Educational Trust.
+      </p>
+    </section>
+
+    <section>
+      <h2 class="text-2xl md:text-3xl font-semibold text-gray-900 mb-4">
+        Website Content & Services Disclaimer
+      </h2>
+      <p class="mb-4">
+        The information contained on this website is for general educational and guidance purposes regarding UPSC and APSC civil services exam preparation. While Takshasheela School of Civil Services endeavors to maintain accurate and up-to-date study material, notifications, and course details, we make no representations or warranties of any kind regarding completeness, accuracy, or suitability.
+      </p>
+    </section>
+
+    <section>
+      <h2 class="text-2xl md:text-3xl font-semibold text-gray-900 mb-4">
+        Contact & Inquiries
+      </h2>
+      <p class="mb-4">
+        For any formal legal inquiries, registration questions, or administrative clarifications, please reach out to us at <a href={`mailto:${EMAIL}`} class="text-primary-500 underline">{EMAIL}</a> or contact us at <a href={PHONE_HREF} class="text-primary-500 underline">{PHONE_DISPLAY}</a>.
+      </p>
+    </section>
+  </div>
+</Layout>

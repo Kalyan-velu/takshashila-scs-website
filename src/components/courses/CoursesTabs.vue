@@ -14,14 +14,12 @@ const props = defineProps<{
   categories: string[];
 }>();
 
-// State management
 const searchQuery = ref("");
 const selectedCategory = ref("ALL");
 const selectedMode = ref("all"); // 'all' | 'online' | 'offline'
 const sortBy = ref("recommended"); // 'recommended' | 'price-asc' | 'price-desc' | 'duration-asc' | 'alphabetical'
 const viewMode = ref("grid"); // 'grid' | 'list'
 
-// Helper to calculate lowest price for sorting
 const getLowestPrice = (course: EnrichedCourse): number => {
   const pricesList: number[] = [];
   if (course.prices?.online) {
@@ -39,30 +37,25 @@ const getLowestPrice = (course: EnrichedCourse): number => {
   }
   // If no prices list, try to parse parentPrice (e.g. "₹1999" -> 1999)
   if (course.parentPrice) {
-    const num = parseInt(course.parentPrice.replace(/[^\d]/g, ""), 10);
+    const num = parseInt(course.parentPrice.replace(/\D/g, ""), 10);
     if (!isNaN(num)) return num;
   }
   return 0; // Fallback
 };
 
-// Helper to calculate duration in months for sorting
 const getDurationMonths = (course: EnrichedCourse): number => {
   const match = course.duration.match(/(\d+)/);
   return match ? parseInt(match[1], 10) : 0;
 };
 
-// Filtering and sorting logic
 const filteredAndSortedCourses = computed(() => {
-  // 1. Filter
   let result = props.courses.filter((course) => {
-    // Category filter
     const matchesCategory =
       selectedCategory.value.toLowerCase() === "all" ||
       course.categories
         .map((cat) => cat.toLowerCase().split(" ")?.[0])
         .includes(selectedCategory.value.toLowerCase());
 
-    // Search query filter
     const matchesSearch =
       !searchQuery.value ||
       course.title.toLowerCase().includes(searchQuery.value.toLowerCase()) ||
@@ -74,7 +67,6 @@ const filteredAndSortedCourses = computed(() => {
           h.toLowerCase().includes(searchQuery.value.toLowerCase()),
         ));
 
-    // Learning Mode filter
     const matchesMode =
       selectedMode.value === "all" ||
       course.modes.includes(selectedMode.value as "online" | "offline");
@@ -82,7 +74,6 @@ const filteredAndSortedCourses = computed(() => {
     return matchesCategory && matchesSearch && matchesMode;
   });
 
-  // 2. Sort
   const sorted = [...result];
   if (sortBy.value === "recommended") {
     // Popular courses first, then keep relative order
@@ -709,10 +700,9 @@ const resetFilters = () => {
                     v-if="selectedMode === 'online' && course.prices.online"
                     class="flex flex-col"
                   >
-                    <span
-                      class="text-xs text-gray-600 line-through opacity-70"
-                      >{{ toINR(course.prices.online.original) }}</span
-                    >
+                    <span class="text-xs text-gray-600 line-through opacity-70">
+                      {{ toINR(course.prices.online.original) }}
+                    </span>
                     <span class="text-2xl font-bold text-gray-900">{{
                       toINR(
                         course.prices.online.original -
