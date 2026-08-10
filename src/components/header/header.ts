@@ -1,5 +1,3 @@
-import { gsap } from "@/lib/gsap.ts";
-
 declare global {
   interface Window {
     __headerCleanup?: () => void;
@@ -15,8 +13,6 @@ if (window.__headerCleanup) window.__headerCleanup();
 const headerContainer = document.querySelector(
   ".js-header-container",
 ) as HTMLElement;
-const ticker = document.querySelector(".js-ticker-wrapper") as HTMLElement;
-const topBar = document.querySelector(".js-top-bar-wrapper") as HTMLElement;
 const header = document.querySelector(".js-header") as HTMLElement;
 const logoOverlay = document.querySelector(
   ".js-logo-scroll-overlay",
@@ -58,48 +54,12 @@ const searchIconClose = document.querySelector(
 ) as HTMLElement;
 
 /* ==========================================================================
-   1. GSAP Scroll Animations
+   1. Scroll State Management
    ========================================================================== */
-let headerTimeline: gsap.core.Timeline | null = null;
 let handleScroll: (() => void) | null = null;
 
-if (headerContainer && ticker && topBar && header && logos.length > 0) {
+if (headerContainer && header && logos.length > 0) {
   const isHome = headerContainer.dataset.isHome === "true";
-
-  if (isHome) {
-    headerTimeline = gsap.timeline({
-      scrollTrigger: {
-        trigger: "body",
-        start: "top+=10 top",
-        end: "top+=60 top",
-        scrub: 0.3,
-      },
-    });
-
-    headerTimeline
-      .to(ticker, { height: 0, opacity: 0, ease: "power1.inOut" }, 0)
-      .to(topBar, { height: 0, opacity: 0, ease: "power1.inOut" }, 0)
-      .to(
-        header,
-        {
-          paddingBlock: window.innerWidth < 768 ? "0.5rem" : "0.75rem",
-          ease: "power1.inOut",
-        },
-        0,
-      );
-
-    logos.forEach((logo) =>
-      headerTimeline?.to(
-        logo,
-        {
-          width: window.innerWidth < 768 ? "9rem" : "12rem",
-          ease: "power1.inOut",
-        },
-        0,
-      ),
-    );
-  }
-
   let lastScrollY = 0;
   let isHidden = false;
 
@@ -108,41 +68,21 @@ if (headerContainer && ticker && topBar && header && logos.length > 0) {
     const scrollingDown = st > lastScrollY && st > 300;
 
     if (isHome) {
-      if (st <= 0) {
-        if (headerContainer.classList.contains("is-scrolled")) {
-          headerContainer.classList.remove("is-scrolled");
-        }
-        if (headerTimeline) {
-          headerTimeline.progress(0);
-        }
-      } else {
-        if (st > 20 && !headerContainer.classList.contains("is-scrolled")) {
-          headerContainer.classList.add("is-scrolled");
-        } else if (
-          st <= 20 &&
-          headerContainer.classList.contains("is-scrolled")
-        ) {
-          headerContainer.classList.remove("is-scrolled");
-        }
+      if (st > 20 && !headerContainer.classList.contains("is-scrolled")) {
+        headerContainer.classList.add("is-scrolled");
+      } else if (st <= 20 && headerContainer.classList.contains("is-scrolled")) {
+        headerContainer.classList.remove("is-scrolled");
       }
 
       if (scrollingDown && !isHidden) {
         isHidden = true;
-        gsap.to(headerContainer, {
-          yPercent: -100,
-          duration: 0.35,
-          ease: "power2.out",
-        });
+        headerContainer.classList.add("-translate-y-full");
         document.dispatchEvent(new CustomEvent("header:close-search"));
         document.dispatchEvent(new CustomEvent("header:close-mobile"));
         closeMegaMenus();
       } else if (!scrollingDown && isHidden) {
         isHidden = false;
-        gsap.to(headerContainer, {
-          yPercent: 0,
-          duration: 0.35,
-          ease: "power2.out",
-        });
+        headerContainer.classList.remove("-translate-y-full");
       }
     } else {
       if (scrollingDown) {
@@ -162,8 +102,6 @@ if (headerContainer && ticker && topBar && header && logos.length > 0) {
   window.__headerCleanup = () => {
     handleScroll && window.removeEventListener("scroll", handleScroll);
     logoOverlay?.removeEventListener("click", onLogoClick);
-    headerTimeline?.scrollTrigger?.kill();
-    headerTimeline?.kill();
   };
 }
 
