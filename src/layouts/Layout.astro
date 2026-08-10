@@ -9,6 +9,7 @@ import variables from "@/config/variables.ts";
 
 import Navbar from "@/components/header/Header.astro";
 import LeadPopup from "@/components/LeadPopup.vue";
+import CookieConsent from "@/components/CookieConsent.vue";
 import Footer from "@/components/Footer.astro";
 import GoogleTagManager from "@/lib/GTag/GoogleTagManager.astro";
 import GoogleTagManagerNoscript from "@/lib/GTag/GoogleTagManagerNoscript.astro";
@@ -140,11 +141,25 @@ const {
       <slot />
     </main>
     {!isHomePage && <LeadPopup client:only="vue" />}
+    <CookieConsent client:only="vue" />
     <Footer />
   </body>
 </html>
 <script>
   import "iconify-icon";
+  import { trackContactClick } from "@/lib/analytics";
+
+  document.addEventListener("click", (e) => {
+    const target = (e.target as HTMLElement | null)?.closest("a");
+    if (!target) return;
+    const href = target.getAttribute("href") || "";
+
+    if (href.startsWith("tel:")) {
+      trackContactClick("phone", href.replace("tel:", ""));
+    } else if (href.includes("wa.me") || href.includes("whatsapp")) {
+      trackContactClick("whatsapp", href);
+    }
+  });
 </script>
 <style>
   @reference "../styles/globals.css";

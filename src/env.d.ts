@@ -10,6 +10,7 @@ interface ImportMetaEnv {
   readonly PUBLIC_SUPABASE_KEY: string;
   readonly PUBLIC_CLOUDFLARE_SITE_KEY: string;
   readonly PUBLIC_CRM_URL: string;
+  readonly PUBLIC_CLARITY_PROJECT_ID?: string;
 }
 
 interface ImportMeta {

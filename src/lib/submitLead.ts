@@ -41,7 +41,12 @@ export async function submitLead(
       method: "POST",
       body: formData,
     });
-    return (await res.json()) as LeadApiResponse;
+    const data = (await res.json()) as LeadApiResponse;
+    if (data.success) {
+      const { trackLeadSubmit } = await import("@/lib/analytics");
+      trackLeadSubmit(payload.source || "unknown_source", payload.course);
+    }
+    return data;
   } catch (err) {
     console.error(err);
     return {
