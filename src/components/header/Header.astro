@@ -36,16 +36,16 @@ const isHome = pathname === "/" || pathname === "/index.html";
             src={Logo}
             alt="Takshasheela Logo"
             fetchpriority="high"
-            height="100"
-            width="300"
+            widths={[224, 448]}
+            sizes="(max-width: 768px) 176px, 224px"
             class="h-auto transition-all hidden group-[.is-scrolled]:block bg-transparent duration-300 w-44 md:w-56 js-header-logo"
           />
           <Image
             src={LogoWhite}
             alt="Takshasheela Logo"
             fetchpriority="high"
-            height="217"
-            width="887"
+            widths={[224, 448]}
+            sizes="(max-width: 768px) 176px, 224px"
             class="h-auto transition-all group-[.is-scrolled]:hidden bg-transparent duration-300 w-44 md:w-56 js-header-logo"
           />
         </a>

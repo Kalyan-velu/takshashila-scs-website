@@ -2,6 +2,7 @@
 import { Image } from "astro:assets";
 import contentData from "@/data/content.json";
 import Form from "@/components/hero/form.astro";
+import heroBg from "../../../public/Takshasheela/students-view-back.webp";
 
 const { hero } = contentData;
 ---
@@ -10,13 +11,12 @@ const { hero } = contentData;
   <div class="hero__image__container">
     <div class="z-10 bg-black opacity-[0.8] absolute inset-0"></div>
     <Image
-      src="/Takshasheela/students-view-back.webp"
+      src={heroBg}
       alt="Takshasheela School of Civil Services Students"
       class="hero__image"
-      loading={"eager"}
-      height={400}
-      width={800}
-      layout="full-width"
+      widths={[640, 1024, 1440, 1920, 2560]}
+      sizes="100vw"
+      loading="eager"
       decoding="async"
       fetchpriority="high"
     />
