@@ -145,7 +145,8 @@ const description =
               <div
                 class="w-14 h-14 rounded-2xl bg-primary-500/10 flex items-center justify-center text-primary-500 shrink-0 transition-transform duration-500 group-hover:scale-110 group-hover:shadow-[0_0_20px_-5px_rgba(var(--primary),0.5)] relative z-10"
               >
-                <iconify-icon icon="lucide:phone" class="text-2xl"></iconify-icon>
+                <iconify-icon icon="lucide:phone" class="text-2xl"
+                ></iconify-icon>
               </div>
               <div class="space-y-2 relative z-10 w-full">
                 <p
@@ -171,7 +172,8 @@ const description =
               <div
                 class="w-14 h-14 rounded-2xl bg-primary-500/10 flex items-center justify-center text-primary-500 shrink-0 transition-transform duration-500 group-hover:scale-110 group-hover:shadow-[0_0_20px_-5px_rgba(var(--primary),0.5)] relative z-10"
               >
-                <iconify-icon icon="lucide:mail" class="text-2xl"></iconify-icon>
+                <iconify-icon icon="lucide:mail" class="text-2xl"
+                ></iconify-icon>
               </div>
               <div class="space-y-2 relative z-10 w-full">
                 <p
@@ -197,7 +199,8 @@ const description =
               <div
                 class="w-14 h-14 rounded-2xl bg-primary-500/10 flex items-center justify-center text-primary-500 shrink-0 transition-transform duration-500 group-hover:scale-110 group-hover:shadow-[0_0_20px_-5px_rgba(var(--primary),0.5)] relative z-10"
               >
-                <iconify-icon icon="lucide:map-pin" class="text-2xl"></iconify-icon>
+                <iconify-icon icon="lucide:map-pin" class="text-2xl"
+                ></iconify-icon>
               </div>
               <div class="space-y-2 relative z-10">
                 <p
@@ -388,48 +391,86 @@ const description =
                   <span class="relative z-10 text-lg submit-text"
                     >Send Message</span
                   >
-                  <iconify-icon icon="lucide:send" class="text-lg relative z-10 transition-transform duration-300 group-hover:-translate-y-1 group-hover:translate-x-1 group-hover:scale-110 submit-icon"></iconify-icon>
+                  <iconify-icon
+                    icon="lucide:send"
+                    class="text-lg relative z-10 transition-transform duration-300 group-hover:-translate-y-1 group-hover:translate-x-1 group-hover:scale-110 submit-icon"
+                  ></iconify-icon>
                 </button>
               </form>
 
               <!-- Inline Success Feedback Card -->
-              <div id="contact-success-card" class="hidden space-y-8 text-center py-6 px-2">
-                <div class="w-16 h-16 rounded-full bg-emerald-500/10 border border-emerald-500/20 text-emerald-600 flex items-center justify-center mx-auto shadow-sm">
-                  <iconify-icon icon="lucide:check-circle-2" class="text-4xl"></iconify-icon>
+              <div
+                id="contact-success-card"
+                class="hidden space-y-8 text-center py-6 px-2"
+              >
+                <div
+                  class="w-16 h-16 rounded-full bg-emerald-500/10 border border-emerald-500/20 text-emerald-600 flex items-center justify-center mx-auto shadow-sm"
+                >
+                  <iconify-icon icon="lucide:check-circle-2" class="text-4xl"
+                  ></iconify-icon>
                 </div>
-                
+
                 <div class="space-y-3">
-                  <h3 class="text-2xl font-medium text-gray-900 tracking-tight">Query Submitted!</h3>
-                  <p class="text-gray-600 font-light text-base max-w-md mx-auto leading-relaxed">
-                    Thank you for submitting your query. Someone from our end will contact you shortly.
+                  <h3 class="text-2xl font-medium text-gray-900 tracking-tight">
+                    Query Submitted!
+                  </h3>
+                  <p
+                    class="text-gray-600 font-light text-base max-w-md mx-auto leading-relaxed"
+                  >
+                    Thank you for submitting your query. Someone from our end
+                    will contact you shortly.
                   </p>
                 </div>
 
                 <div class="pt-6 border-t border-gray-200/80 space-y-4">
-                  <p class="text-xs font-medium uppercase tracking-wider text-gray-600">Discover More</p>
-                  
+                  <p
+                    class="text-xs font-medium uppercase tracking-wider text-gray-600"
+                  >
+                    Discover More
+                  </p>
+
                   <div class="flex flex-wrap items-center justify-center gap-3">
-                    <a href="/about" class="px-4 py-2.5 rounded-full bg-primary-500/10 text-primary-500 hover:bg-primary-500 hover:text-white transition-all text-xs font-medium flex items-center gap-1.5 shadow-xs">
-                      <iconify-icon icon="lucide:info" class="text-sm"></iconify-icon>
+                    <a
+                      href="/about"
+                      class="px-4 py-2.5 rounded-full bg-primary-500/10 text-primary-500 hover:bg-primary-500 hover:text-white transition-all text-xs font-medium flex items-center gap-1.5 shadow-xs"
+                    >
+                      <iconify-icon icon="lucide:info" class="text-sm"
+                      ></iconify-icon>
                       Know More About Us
                     </a>
-                    <a href="/courses/upsc" class="px-4 py-2.5 rounded-full bg-white border border-gray-200 text-gray-700 hover:border-primary-500 hover:text-primary-500 transition-all text-xs font-medium flex items-center gap-1.5 shadow-xs">
-                      <iconify-icon icon="lucide:graduation-cap" class="text-sm"></iconify-icon>
+                    <a
+                      href="/courses/upsc"
+                      class="px-4 py-2.5 rounded-full bg-white border border-gray-200 text-gray-700 hover:border-primary-500 hover:text-primary-500 transition-all text-xs font-medium flex items-center gap-1.5 shadow-xs"
+                    >
+                      <iconify-icon icon="lucide:graduation-cap" class="text-sm"
+                      ></iconify-icon>
                       UPSC Courses
                     </a>
-                    <a href="/courses/apsc" class="px-4 py-2.5 rounded-full bg-white border border-gray-200 text-gray-700 hover:border-primary-500 hover:text-primary-500 transition-all text-xs font-medium flex items-center gap-1.5 shadow-xs">
-                      <iconify-icon icon="lucide:landmark" class="text-sm"></iconify-icon>
+                    <a
+                      href="/courses/apsc"
+                      class="px-4 py-2.5 rounded-full bg-white border border-gray-200 text-gray-700 hover:border-primary-500 hover:text-primary-500 transition-all text-xs font-medium flex items-center gap-1.5 shadow-xs"
+                    >
+                      <iconify-icon icon="lucide:landmark" class="text-sm"
+                      ></iconify-icon>
                       APSC Courses
                     </a>
-                    <a href="/courses" class="px-4 py-2.5 rounded-full bg-white border border-gray-200 text-gray-700 hover:border-primary-500 hover:text-primary-500 transition-all text-xs font-medium flex items-center gap-1.5 shadow-xs">
-                      <iconify-icon icon="lucide:book-open" class="text-sm"></iconify-icon>
+                    <a
+                      href="/courses"
+                      class="px-4 py-2.5 rounded-full bg-white border border-gray-200 text-gray-700 hover:border-primary-500 hover:text-primary-500 transition-all text-xs font-medium flex items-center gap-1.5 shadow-xs"
+                    >
+                      <iconify-icon icon="lucide:book-open" class="text-sm"
+                      ></iconify-icon>
                       All Courses
                     </a>
                   </div>
                 </div>
 
                 <div class="pt-2">
-                  <button id="reset-contact-form-btn" type="button" class="text-xs text-gray-500 underline hover:text-gray-900 transition-colors">
+                  <button
+                    id="reset-contact-form-btn"
+                    type="button"
+                    class="text-xs text-gray-500 underline hover:text-gray-900 transition-colors"
+                  >
                     Send another query
                   </button>
                 </div>
@@ -513,7 +554,7 @@ const description =
         name: `${firstName} ${lastName}`.trim(),
         phone,
         email,
-        course: course || null,
+        course: course,
         address: address ? address.trim() : null,
         source: "contact-page",
         cfTurnstileResponse: turnstileToken,

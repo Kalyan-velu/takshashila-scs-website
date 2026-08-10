@@ -1,0 +1,40 @@
+---
+interface Props {
+  title?: string;
+  description?: string;
+  image?: string;
+  canonical?: string;
+  siteName?: string;
+  twitterHandle?: string;
+}
+
+const {
+  title = "Best UPSC & APSC Coaching in Guwahati | Takshasheela SCS",
+  description = "Join Takshasheela School of Civil Services for expert UPSC, APSC & ADRE coaching in Guwahati. Online/offline batches with comprehensive study material.",
+  image = "/og/index.png",
+  canonical,
+  siteName = "Takshasheela School of Civil Services",
+  twitterHandle = "@takshashilascs",
+} = Astro.props;
+
+const imageUrl = new URL(image, Astro.url).href;
+---
+
+<title>{title}</title>
+<meta name="description" content={description} />
+{canonical && <link rel="canonical" href={canonical} />}
+
+<!-- Open Graph / Facebook -->
+<meta property="og:type" content="website" />
+<meta property="og:title" content={title} />
+<meta property="og:description" content={description} />
+{canonical && <meta property="og:url" content={canonical} />}
+<meta property="og:image" content={imageUrl} />
+<meta property="og:site_name" content={siteName} />
+
+<!-- Twitter -->
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:creator" content={twitterHandle} />
+<meta name="twitter:title" content={title} />
+<meta name="twitter:description" content={description} />
+<meta name="twitter:image" content={imageUrl} />
