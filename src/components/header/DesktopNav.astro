@@ -6,11 +6,13 @@ const dropdownNavItems = [
     label: "Courses",
     triggerClass: "js-menu-trigger-courses",
     chevronClass: "js-chevron-courses",
+    controlsId: "mega-menu-courses",
   },
   {
     label: "About",
     triggerClass: "js-menu-trigger-about",
     chevronClass: "js-chevron-about",
+    controlsId: "mega-menu-about",
   },
 ];
 
@@ -35,9 +37,9 @@ const directNavItems = [
 ];
 
 const navLinkClass =
-  "nav-link font-medium text-sm md:text-base leading-tight transition-colors text-white group-[.is-scrolled]:text-gray-800 dark:text-white group-[.is-scrolled]:dark:text-gray-200 hover:text-primary-400 group-[.is-scrolled]:hover:text-primary-500 group-[.is-scrolled]:dark:hover:text-primary-400";
+  "nav-link font-medium text-sm md:text-base leading-tight transition-colors text-white group-[.is-scrolled]:text-gray-800 dark:text-white group-[.is-scrolled]:dark:text-gray-200 hover:text-primary-400 group-[.is-scrolled]:hover:text-primary-500 group-[.is-scrolled]:dark:hover:text-primary-400 focus:outline-none focus-visible:ring-2 focus-visible:ring-primary-500 focus-visible:ring-offset-2 rounded-sm";
 
-const dropdownNavLinkClass = `${navLinkClass} flex items-center gap-1`;
+const dropdownNavLinkClass = `${navLinkClass} flex items-center gap-1 cursor-pointer bg-transparent border-0 p-0`;
 ---
 
 <nav class="hidden lg:inline-flex items-center h-full">
@@ -45,15 +47,21 @@ const dropdownNavLinkClass = `${navLinkClass} flex items-center gap-1`;
     {
       dropdownNavItems.map((item) => (
         <li
-          class={`relative flex items-center h-full cursor-pointer py-4 ${item.triggerClass}`}
+          class={`relative flex items-center h-full py-4`}
         >
-          <span class={dropdownNavLinkClass}>
+          <button
+            type="button"
+            aria-expanded="false"
+            aria-haspopup="true"
+            aria-controls={item.controlsId}
+            class={`${dropdownNavLinkClass} ${item.triggerClass}`}
+          >
             {item.label}
             <iconify-icon
               icon="lucide:chevron-down"
               class={`text-[14px] transition-transform duration-300 ${item.chevronClass}`}
             />
-          </span>
+          </button>
         </li>
       ))
     }
@@ -91,6 +99,7 @@ const dropdownNavLinkClass = `${navLinkClass} flex items-center gap-1`;
   }
 
   .nav-link:hover::after,
+  .nav-link:focus-visible::after,
   .nav-link-active::after {
     transform: scaleX(1);
   }

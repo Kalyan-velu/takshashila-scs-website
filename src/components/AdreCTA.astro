@@ -1,0 +1,111 @@
+---
+import { PHONE_HREF, PHONE_DISPLAY, whatsappUrl } from "@/config/CONSTANTS.ts";
+
+interface Props {
+  id?: string;
+  class?: string;
+}
+
+const { id = "adre-cta", class: className = "" } = Astro.props;
+
+const whatsappMessage = "Hello, I am interested in joining the ADRE (Assam Direct Recruitment Exam) coaching batch at Takshashila SCS. Please share course details.";
+const whatsappHref = whatsappUrl(whatsappMessage);
+---
+
+<section id={id} class={`py-14 lg:py-20 bg-white relative z-10 ${className}`}>
+  <div class="px-4 md:px-6 max-w-7xl mx-auto">
+    <div
+      class="relative rounded-3xl bg-gradient-to-br from-slate-900 via-primary-950 to-slate-900 border border-primary-900/50 p-8 md:p-12 lg:p-14 overflow-hidden shadow-2xl"
+    >
+      <!-- Ambient Background Glows -->
+      <div class="absolute -top-24 -right-24 w-80 h-80 bg-primary-500/20 rounded-full blur-3xl pointer-events-none"></div>
+      <div class="absolute -bottom-24 -left-24 w-80 h-80 bg-emerald-500/10 rounded-full blur-3xl pointer-events-none"></div>
+
+      <div class="grid lg:grid-cols-12 gap-8 lg:gap-12 items-center relative z-10">
+        <!-- Text & Details Side (7 cols) -->
+        <div class="lg:col-span-7 flex flex-col gap-5 text-left">
+          <!-- Badge Pill -->
+          <div
+            class="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-primary-500/20 text-primary-300 border border-primary-500/30 text-xs font-semibold uppercase tracking-wider max-w-fit"
+          >
+            <span class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
+            Assam Direct Recruitment • ADRE Batch 2026
+          </div>
+
+          <!-- Main Heading -->
+          <h2
+            class="text-3xl sm:text-4xl lg:text-5xl font-light tracking-tight text-white leading-tight"
+          >
+            Crack <span class="text-primary-400 font-medium italic">ADRE Grade III & IV</span> Exams With Confidence
+          </h2>
+
+          <!-- Subtitle -->
+          <p class="text-slate-300 font-light text-base md:text-lg leading-relaxed">
+            Targeted coaching for SLRC Assam Direct Recruitment. Master Quantitative Aptitude, Reasoning, General Awareness, English, and specialized Assam GK with expert guidance.
+          </p>
+
+          <!-- Feature Bullets -->
+          <div class="grid sm:grid-cols-2 gap-3 pt-2">
+            {[
+              { title: "Complete SLRC Syllabus", desc: "Covers Maths, Reasoning, English & Assam GK", icon: "lucide:book-open-check" },
+              { title: "Full-Length Mock Tests", desc: "Modeled on latest exam pattern & negative marking", icon: "lucide:file-text" },
+              { title: "Bilingual Notes & Materials", desc: "Assamese & English study resources", icon: "lucide:layers" },
+              { title: "Offline & Online Batches", desc: "Flexible morning, evening & weekend slots", icon: "lucide:monitor-play" },
+            ].map((feature) => (
+              <div class="flex items-start gap-3 bg-white/5 border border-white/10 rounded-xl p-3 backdrop-blur-xs">
+                <div class="h-8 w-8 rounded-lg bg-primary-500/20 text-primary-400 flex items-center justify-center shrink-0 mt-0.5">
+                  <iconify-icon icon={feature.icon} class="text-base"></iconify-icon>
+                </div>
+                <div>
+                  <h4 class="text-xs font-semibold text-white">{feature.title}</h4>
+                  <p class="text-[11px] text-slate-400 leading-tight mt-0.5">{feature.desc}</p>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+
+        <!-- Action Box Side (5 cols) -->
+        <div class="lg:col-span-5 flex flex-col gap-4 bg-white/10 backdrop-blur-md border border-white/15 rounded-2xl p-6 sm:p-8 text-center shadow-xl">
+          <div class="flex flex-col items-center gap-2">
+            <span class="inline-block px-3 py-1 bg-emerald-500/20 text-emerald-300 text-xs font-semibold rounded-full border border-emerald-500/30">
+              Limited Seats Available
+            </span>
+            <h3 class="text-xl sm:text-2xl font-semibold text-white tracking-tight">
+              Enroll in ADRE Special Batch
+            </h3>
+            <p class="text-xs text-slate-300 font-light">
+              Get personalized mentoring & free demo class at our Guwahati campus.
+            </p>
+          </div>
+
+          <div class="flex flex-col gap-3 pt-2">
+            <!-- Call Us Button -->
+            <a
+              href={PHONE_HREF}
+              class="inline-flex items-center justify-center gap-2.5 px-6 py-3.5 rounded-xl bg-primary-500 hover:bg-primary-600 text-white font-medium text-sm transition-all duration-300 shadow-lg shadow-primary-500/30 hover:scale-[1.02]"
+            >
+              <iconify-icon icon="lucide:phone-call" class="text-base"></iconify-icon>
+              <span>Call For ADRE Details ({PHONE_DISPLAY})</span>
+            </a>
+
+            <!-- WhatsApp Button -->
+            <a
+              href={whatsappHref}
+              target="_blank"
+              rel="noopener noreferrer"
+              class="inline-flex items-center justify-center gap-2.5 px-6 py-3.5 rounded-xl bg-emerald-600 hover:bg-emerald-500 text-white font-medium text-sm transition-all duration-300 shadow-lg shadow-emerald-600/30 hover:scale-[1.02]"
+            >
+              <iconify-icon icon="ri:whatsapp-fill" class="text-lg"></iconify-icon>
+              <span>Inquire via WhatsApp</span>
+            </a>
+          </div>
+
+          <p class="text-[11px] text-slate-400 font-light pt-1">
+            📍 Campus Location: Guwahati, Assam • Online Batches Also Available
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
