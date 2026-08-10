@@ -3,7 +3,7 @@ import Layout from "../layouts/Layout.astro";
 import ResultsSection from "../components/ResultsSection.astro";
 import Hero from "../components/hero/index.astro";
 import WhyChooseUs from "../components/WhyChooseUs.astro";
-import { getLatestPosts } from "../lib/wordpress";
+import AdreCTA from "@/components/AdreCTA.astro";
 import CoachingProse from "@/components/CoachingProse.astro";
 ---
 
@@ -11,5 +11,6 @@ import CoachingProse from "@/components/CoachingProse.astro";
   <Hero />
   <ResultsSection />
   <WhyChooseUs id="about" />
+  <AdreCTA />
   <CoachingProse />
 </Layout>

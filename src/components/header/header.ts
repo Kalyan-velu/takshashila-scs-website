@@ -48,8 +48,7 @@ const chevronCourses = document.querySelector(
 ) as HTMLElement;
 const chevronAbout = document.querySelector(".js-chevron-about") as HTMLElement;
 
-// Search toggle button lives in HeaderActions — coordinated here because it
-// spans both HeaderActions (icon) and SearchDropdown (panel).
+// Search toggle button lives in HeaderActions
 const searchToggle = document.querySelector(".js-search-toggle") as HTMLElement;
 const searchIconOpen = document.querySelector(
   ".js-search-icon-search",
@@ -59,7 +58,7 @@ const searchIconClose = document.querySelector(
 ) as HTMLElement;
 
 /* ==========================================================================
-   1. GSAP Scroll Animations  (Header.astro — spans Ticker, TopBar, Nav, Logo)
+   1. GSAP Scroll Animations
    ========================================================================== */
 let headerTimeline: gsap.core.Timeline | null = null;
 let handleScroll: (() => void) | null = null;
@@ -109,7 +108,6 @@ if (headerContainer && ticker && topBar && header && logos.length > 0) {
     const scrollingDown = st > lastScrollY && st > 300;
 
     if (isHome) {
-      // Force timeline to 0 and remove is-scrolled when at the very top (safety check)
       if (st <= 0) {
         if (headerContainer.classList.contains("is-scrolled")) {
           headerContainer.classList.remove("is-scrolled");
@@ -118,7 +116,6 @@ if (headerContainer && ticker && topBar && header && logos.length > 0) {
           headerTimeline.progress(0);
         }
       } else {
-        // Background toggle logic for transparent header ONLY on home
         if (st > 20 && !headerContainer.classList.contains("is-scrolled")) {
           headerContainer.classList.add("is-scrolled");
         } else if (
@@ -130,7 +127,6 @@ if (headerContainer && ticker && topBar && header && logos.length > 0) {
       }
 
       if (scrollingDown && !isHidden) {
-        // Only hide once — don't re-trigger while already hidden
         isHidden = true;
         gsap.to(headerContainer, {
           yPercent: -100,
@@ -141,7 +137,6 @@ if (headerContainer && ticker && topBar && header && logos.length > 0) {
         document.dispatchEvent(new CustomEvent("header:close-mobile"));
         closeMegaMenus();
       } else if (!scrollingDown && isHidden) {
-        // Only show once — don't re-trigger while already visible
         isHidden = false;
         gsap.to(headerContainer, {
           yPercent: 0,
@@ -150,7 +145,6 @@ if (headerContainer && ticker && topBar && header && logos.length > 0) {
         });
       }
     } else {
-      // For non-home, just close menus on scroll down if needed, but no hiding
       if (scrollingDown) {
         document.dispatchEvent(new CustomEvent("header:close-search"));
         document.dispatchEvent(new CustomEvent("header:close-mobile"));
@@ -163,9 +157,8 @@ if (headerContainer && ticker && topBar && header && logos.length > 0) {
   window.addEventListener("scroll", handleScroll, { passive: true });
 
   const onLogoClick = () => window.scrollTo({ top: 0, behavior: "smooth" });
-  logoOverlay.addEventListener("click", onLogoClick);
+  logoOverlay?.addEventListener("click", onLogoClick);
 
-  // Cleanup: kill GSAP, remove window-level listeners only
   window.__headerCleanup = () => {
     handleScroll && window.removeEventListener("scroll", handleScroll);
     logoOverlay?.removeEventListener("click", onLogoClick);
@@ -180,14 +173,20 @@ if (headerContainer && ticker && topBar && header && logos.length > 0) {
 let activeMenu: HTMLElement | null = null;
 
 function openMenu(el: HTMLElement) {
+  if (activeMenu === el) return;
   closeMegaMenus();
-  el.classList.remove("opacity-0", "-translate-y-4", "pointer-events-none");
+  el.classList.remove("opacity-0", "-translate-y-4", "pointer-events-none", "invisible");
   el.classList.add("opacity-100", "translate-y-0", "pointer-events-auto");
   activeMenu = el;
-  if (el === coursesMenu)
+
+  if (el === coursesMenu) {
     chevronCourses?.classList.add("rotate-180", "text-primary-500");
-  if (el === aboutMenu)
+    triggerCourses?.setAttribute("aria-expanded", "true");
+  }
+  if (el === aboutMenu) {
     chevronAbout?.classList.add("rotate-180", "text-primary-500");
+    triggerAbout?.setAttribute("aria-expanded", "true");
+  }
 }
 
 function closeMegaMenus() {
@@ -198,14 +197,16 @@ function closeMegaMenus() {
       "translate-y-0",
       "pointer-events-auto",
     );
-    menu.classList.add("opacity-0", "-translate-y-4", "pointer-events-none");
+    menu.classList.add("opacity-0", "-translate-y-4", "pointer-events-none", "invisible");
   });
   chevronCourses?.classList.remove("rotate-180", "text-primary-500");
   chevronAbout?.classList.remove("rotate-180", "text-primary-500");
+  triggerCourses?.setAttribute("aria-expanded", "false");
+  triggerAbout?.setAttribute("aria-expanded", "false");
   activeMenu = null;
 }
 
-// Hover open
+// Mouse open & close
 triggerCourses?.addEventListener(
   "mouseenter",
   () => coursesMenu && openMenu(coursesMenu),
@@ -215,25 +216,68 @@ triggerAbout?.addEventListener(
   () => aboutMenu && openMenu(aboutMenu),
 );
 
-// Close on mouseleave of the full header container
 headerContainer?.addEventListener("mouseleave", closeMegaMenus);
-
-// Close when hovering a direct (non-dropdown) link
 triggerDirects.forEach((link) =>
   link.addEventListener("mouseenter", closeMegaMenus),
 );
 
-// Close when a link inside a mega menu is clicked
 document
   .querySelectorAll(".js-mega-link")
   .forEach((link) => link.addEventListener("click", closeMegaMenus));
 
-// Respond to close requests from other components
 document.addEventListener("header:close-megamenus", closeMegaMenus);
+
+// Keyboard Tab & Focus navigation logic
+triggerCourses?.addEventListener("focus", () => {
+  coursesMenu && openMenu(coursesMenu);
+});
+
+triggerAbout?.addEventListener("focus", () => {
+  aboutMenu && openMenu(aboutMenu);
+});
+
+// Click toggle for buttons
+triggerCourses?.addEventListener("click", (e) => {
+  e.preventDefault();
+  activeMenu === coursesMenu ? closeMegaMenus() : openMenu(coursesMenu);
+});
+
+triggerAbout?.addEventListener("click", (e) => {
+  e.preventDefault();
+  activeMenu === aboutMenu ? closeMegaMenus() : openMenu(aboutMenu);
+});
+
+// Focusout listener to close mega menus when tabbing outside the menu container & trigger
+[
+  { trigger: triggerCourses, menu: coursesMenu },
+  { trigger: triggerAbout, menu: aboutMenu },
+].forEach(({ trigger, menu }) => {
+  const handleFocusOut = (e: FocusEvent) => {
+    const nextFocused = e.relatedTarget as HTMLElement | null;
+    if (!nextFocused) {
+      setTimeout(() => {
+        if (!headerContainer?.contains(document.activeElement)) {
+          closeMegaMenus();
+        }
+      }, 50);
+      return;
+    }
+    const insideTrigger = trigger?.contains(nextFocused);
+    const insideMenu = menu?.contains(nextFocused);
+    if (!insideTrigger && !insideMenu) {
+      // If tabbing to the other trigger, openMenu will take care of closing
+      if (nextFocused === triggerCourses && menu === aboutMenu) return;
+      if (nextFocused === triggerAbout && menu === coursesMenu) return;
+      closeMegaMenus();
+    }
+  };
+
+  trigger?.addEventListener("focusout", handleFocusOut);
+  menu?.addEventListener("focusout", handleFocusOut);
+});
 
 /* ==========================================================================
    3. Search Toggle — coordinates HeaderActions icon + SearchDropdown panel
-      (Filtering logic lives in SearchDropdown.astro's own <script>)
    ========================================================================== */
 let searchOpen = false;
 
@@ -246,6 +290,7 @@ function openSearch() {
     "opacity-0",
     "-translate-y-4",
     "pointer-events-none",
+    "invisible",
   );
   searchPanel?.classList.add(
     "opacity-100",
@@ -262,7 +307,7 @@ function openSearch() {
   );
   searchToggle?.classList.add("bg-primary-500");
 
-  document.dispatchEvent(new CustomEvent("header:search-open")); // → SearchDropdown focuses input
+  document.dispatchEvent(new CustomEvent("header:search-open"));
 }
 
 function closeSearch() {
@@ -276,6 +321,7 @@ function closeSearch() {
     "opacity-0",
     "-translate-y-4",
     "pointer-events-none",
+    "invisible",
   );
   searchIconOpen?.classList.remove("hidden");
   searchIconOpen?.classList.add("block");
@@ -288,7 +334,7 @@ function closeSearch() {
     "dark:text-slate-900",
   );
 
-  document.dispatchEvent(new CustomEvent("header:search-close")); // → SearchDropdown resets input
+  document.dispatchEvent(new CustomEvent("header:search-close"));
 }
 
 searchToggle?.addEventListener("click", (e) => {
@@ -296,7 +342,6 @@ searchToggle?.addEventListener("click", (e) => {
   searchOpen ? closeSearch() : openSearch();
 });
 
-// Close search panel when clicking outside search dropdown or toggle button
 document.addEventListener("click", (e) => {
   if (!searchOpen) return;
   const target = e.target as HTMLElement | null;
@@ -310,8 +355,30 @@ document.addEventListener("click", (e) => {
   }
 });
 
-// Other components can ask search to close
+searchPanel?.addEventListener("focusout", (e: FocusEvent) => {
+  const nextFocused = e.relatedTarget as HTMLElement | null;
+  if (
+    nextFocused &&
+    !searchPanel?.contains(nextFocused) &&
+    !searchToggle?.contains(nextFocused)
+  ) {
+    closeSearch();
+  }
+});
+
+// ESC Key listener to close open menus or search
+document.addEventListener("keydown", (e: KeyboardEvent) => {
+  if (e.key === "Escape") {
+    if (searchOpen) {
+      closeSearch();
+      searchToggle?.focus();
+    } else if (activeMenu) {
+      const activeTrigger =
+        activeMenu === coursesMenu ? triggerCourses : triggerAbout;
+      closeMegaMenus();
+      activeTrigger?.focus();
+    }
+  }
+});
+
 document.addEventListener("header:close-search", closeSearch);
-// if (import.meta.env.DEV) {
-//   GSDevTools.create({ minimal: false });
-// }

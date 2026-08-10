@@ -5,39 +5,89 @@ import {
   PHONE_DISPLAY,
   PHONE_HREF,
   CURRENT_AFFAIRS_URL,
+  whatsappUrl,
   socials,
 } from "@/config/CONSTANTS.ts";
 import contentData from "@/data/content.json";
-import Logo from "@/assets/taksheelascs_logo.png";
+import LogoWhite from "@/assets/logo-full-white.png";
+
 const { footer } = contentData;
+
+const whatsappMessage = "Hello, I want to inquire about APSC & UPSC coaching at Takshashila SCS";
+const whatsappHref = whatsappUrl(whatsappMessage);
 ---
 
-<footer class="bg-white pt-20 pb-10 border-t border-gray-200">
-  <div class="px-4 md:px-6 max-w-7xl mx-auto">
-    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12 mb-16">
-      {/* Brand Column */}
-      <div class="flex flex-col gap-6 lg:col-span-1">
-        <a href="/" class="flex items-center gap-2">
+<footer class="bg-slate-950 text-slate-300 relative overflow-hidden border-t border-slate-800/80">
+  <!-- Subtle Background Glows -->
+  <div class="absolute -top-40 -left-40 w-96 h-96 bg-primary-500/10 rounded-full blur-3xl pointer-events-none"></div>
+  <div class="absolute -bottom-40 -right-40 w-96 h-96 bg-primary-500/10 rounded-full blur-3xl pointer-events-none"></div>
+
+  <div class="px-4 md:px-6 max-w-7xl mx-auto pt-16 pb-12 relative z-10">
+    <!-- Top Pre-Footer Callout Card -->
+    <div class="relative rounded-3xl bg-gradient-to-r from-slate-900 via-slate-900/90 to-slate-900 border border-slate-800/90 p-8 md:p-12 mb-16 shadow-2xl overflow-hidden">
+      <div class="absolute top-0 right-0 -mt-8 -mr-8 w-64 h-64 bg-primary-500/10 rounded-full blur-2xl pointer-events-none"></div>
+
+      <div class="flex flex-col lg:flex-row lg:items-center justify-between gap-8 relative z-10">
+        <div class="max-w-2xl flex flex-col gap-3">
+          <div class="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-primary-500/20 text-primary-400 text-xs font-semibold uppercase tracking-wider max-w-fit border border-primary-500/30">
+            <span class="w-2 h-2 rounded-full bg-primary-400 animate-pulse"></span>
+            Admissions Open • 2026-27 Batches
+          </div>
+          <h3 class="text-2xl sm:text-3xl md:text-4xl font-light text-white tracking-tight leading-tight">
+            Ready to Begin Your <span class="text-primary-400 italic font-medium">Civil Services Journey?</span>
+          </h3>
+          <p class="text-slate-400 text-sm md:text-base font-light leading-relaxed">
+            Join Guwahati's top-rated institute for APSC CCE & UPSC CSE. Expert faculty, comprehensive study material, and personalized mentorship.
+          </p>
+        </div>
+
+        <div class="flex flex-col sm:flex-row items-stretch sm:items-center gap-3.5 shrink-0">
+          <a
+            href={PHONE_HREF}
+            class="inline-flex items-center justify-center gap-2.5 px-6 py-3.5 rounded-xl bg-primary-500 hover:bg-primary-600 text-white font-medium text-sm transition-all duration-300 shadow-lg shadow-primary-500/20 hover:shadow-primary-500/30"
+          >
+            <iconify-icon icon="lucide:phone-call" class="text-base"></iconify-icon>
+            <span>Call Us Now</span>
+          </a>
+          <a
+            href={whatsappHref}
+            target="_blank"
+            rel="noopener noreferrer"
+            class="inline-flex items-center justify-center gap-2.5 px-6 py-3.5 rounded-xl bg-emerald-600 hover:bg-emerald-500 text-white font-medium text-sm transition-all duration-300 shadow-lg shadow-emerald-600/20"
+          >
+            <iconify-icon icon="ri:whatsapp-fill" class="text-lg"></iconify-icon>
+            <span>WhatsApp Us</span>
+          </a>
+        </div>
+      </div>
+    </div>
+
+    <!-- Main Footer Columns -->
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-12 gap-10 lg:gap-8 mb-16">
+      <!-- Brand & Bio Column (4 cols) -->
+      <div class="flex flex-col gap-6 lg:col-span-4">
+        <a href="/" class="inline-block">
           <Picture
-            src={Logo}
+            src={LogoWhite}
             formats={["avif", "webp"]}
-            alt="Takshasheela Logo"
-            class="object-contain"
-            width={260}
-            height={70}
+            alt="Takshashila School of Civil Services Logo"
+            class="object-contain h-12 w-auto"
+            width={240}
+            height={60}
           />
-          <!--<span class="font-semibold tracking-tight text-xl">Takshasheela</span>-->
         </a>
-        <p class="text-gray-600 font-light text-sm leading-relaxed">
+        <p class="text-slate-400 font-light text-sm leading-relaxed pr-4">
           {footer.description}
         </p>
-        <div class="flex gap-3">
+
+        <!-- Social Media Buttons -->
+        <div class="flex items-center gap-3 pt-2">
           <a
             href={socials.FACEBOOK}
             target="_blank"
             rel="noopener noreferrer"
             aria-label="Facebook"
-            class="h-10 w-10 flex items-center justify-center rounded-full bg-gray-100 text-gray-600 hover:bg-primary-500 hover:text-white transition-colors"
+            class="h-10 w-10 flex items-center justify-center rounded-xl bg-slate-900 border border-slate-800 text-slate-400 hover:bg-primary-500 hover:border-primary-500 hover:text-white transition-all duration-300 shadow-xs"
           >
             <iconify-icon icon="lucide:facebook" class="text-lg"></iconify-icon>
           </a>
@@ -46,155 +96,181 @@ const { footer } = contentData;
             target="_blank"
             rel="noopener noreferrer"
             aria-label="Twitter/X"
-            class="h-10 w-10 flex items-center justify-center rounded-full bg-gray-100 text-gray-600 hover:bg-primary-500 hover:text-white transition-colors"
+            class="h-10 w-10 flex items-center justify-center rounded-xl bg-slate-900 border border-slate-800 text-slate-400 hover:bg-primary-500 hover:border-primary-500 hover:text-white transition-all duration-300 shadow-xs"
           >
-            <iconify-icon icon="ri:twitter-x-fill" class="text-lg"
-            ></iconify-icon>
+            <iconify-icon icon="ri:twitter-x-fill" class="text-lg"></iconify-icon>
           </a>
           <a
             href={socials.INSTAGRAM}
             target="_blank"
             rel="noopener noreferrer"
             aria-label="Instagram"
-            class="h-10 w-10 flex items-center justify-center rounded-full bg-gray-100 text-gray-600 hover:bg-primary-500 hover:text-white transition-colors"
+            class="h-10 w-10 flex items-center justify-center rounded-xl bg-slate-900 border border-slate-800 text-slate-400 hover:bg-primary-500 hover:border-primary-500 hover:text-white transition-all duration-300 shadow-xs"
           >
-            <iconify-icon icon="lucide:instagram" class="text-lg"
-            ></iconify-icon>
+            <iconify-icon icon="lucide:instagram" class="text-lg"></iconify-icon>
           </a>
           <a
             href={socials.YOUTUBE}
             target="_blank"
             rel="noopener noreferrer"
             aria-label="YouTube"
-            class="h-10 w-10 flex items-center justify-center rounded-full bg-gray-100 text-gray-600 hover:bg-primary-500 hover:text-white transition-colors"
+            class="h-10 w-10 flex items-center justify-center rounded-xl bg-slate-900 border border-slate-800 text-slate-400 hover:bg-primary-500 hover:border-primary-500 hover:text-white transition-all duration-300 shadow-xs"
           >
             <iconify-icon icon="lucide:youtube" class="text-lg"></iconify-icon>
           </a>
         </div>
       </div>
 
-      {/* Quick Links */}
-      <div>
-        <h4 class="font-medium tracking-tight text-lg mb-6">Quick Links</h4>
+      <!-- Quick Navigation (2 cols) -->
+      <div class="lg:col-span-2">
+        <h4 class="font-medium text-white tracking-tight text-base mb-6 flex items-center gap-2">
+          <span class="w-1.5 h-1.5 rounded-full bg-primary-500"></span>
+          Quick Links
+        </h4>
         <ul class="space-y-3">
-          {
-            [
-              { label: "Home", href: "/" },
-              { label: "Team", href: "/team" },
-              { label: "About us", href: "/about" },
-              {
-                label: "Current Affairs",
-                href: CURRENT_AFFAIRS_URL,
-              },
-              { label: "UPSC- APSC", href: "/courses" },
-            ].map((link) => (
-              <li>
-                <a
-                  href={link.href}
-                  class="text-gray-600 hover:text-primary-500 text-sm transition-colors"
-                >
-                  {link.label}
-                </a>
-              </li>
-            ))
-          }
+          {[
+            { label: "Home", href: "/" },
+            { label: "About Us", href: "/about" },
+            { label: "Faculty & Team", href: "/team" },
+            { label: "Current Affairs", href: CURRENT_AFFAIRS_URL },
+            { label: "All Courses", href: "/courses" },
+            { label: "Contact Us", href: "#contact" },
+          ].map((link) => (
+            <li>
+              <a
+                href={link.href}
+                class="text-slate-400 hover:text-primary-400 text-sm transition-all duration-200 inline-flex items-center gap-1.5 group"
+              >
+                <iconify-icon icon="lucide:chevron-right" class="text-xs text-slate-600 group-hover:text-primary-400 group-hover:translate-x-0.5 transition-all"></iconify-icon>
+                <span>{link.label}</span>
+              </a>
+            </li>
+          ))}
         </ul>
       </div>
 
-      {/* Legal Links */}
-      <div>
-        <h4 class="font-medium tracking-tight text-lg mb-6">Legal</h4>
+      <!-- Popular Courses (3 cols) -->
+      <div class="lg:col-span-3">
+        <h4 class="font-medium text-white tracking-tight text-base mb-6 flex items-center gap-2">
+          <span class="w-1.5 h-1.5 rounded-full bg-primary-500"></span>
+          Programs & Courses
+        </h4>
         <ul class="space-y-3">
-          {
-            [
-              { label: "Privacy Policy", href: "/privacy-policy" },
-              { label: "Payment Terms", href: "/payment-terms" },
-              { label: "Refund & Cancellation", href: "/refunds-policy" },
-              { label: "Disclaimer", href: "/disclaimer" },
-            ].map((link) => (
-              <li>
-                <a
-                  href={link.href}
-                  class="text-gray-600 hover:text-primary-500 text-sm transition-colors"
-                >
-                  {link.label}
-                </a>
-              </li>
-            ))
-          }
-          <li>
-            <button
-              type="button"
-              onclick="window.dispatchEvent(new CustomEvent('open-cookie-consent'))"
-              class="text-gray-600 hover:text-primary-500 text-sm transition-colors cursor-pointer text-left"
-            >
-              Cookie Settings
-            </button>
-          </li>
+          {[
+            { label: "APSC Foundation Batch", href: "/courses" },
+            { label: "UPSC Integrated Prep", href: "/courses" },
+            { label: "Prelims Test Series 2026", href: "/courses" },
+            { label: "Mains Answer Writing", href: "/courses" },
+            { label: "ADRE & State Exams", href: "/courses" },
+          ].map((link) => (
+            <li>
+              <a
+                href={link.href}
+                class="text-slate-400 hover:text-primary-400 text-sm transition-all duration-200 inline-flex items-center gap-1.5 group"
+              >
+                <iconify-icon icon="lucide:chevron-right" class="text-xs text-slate-600 group-hover:text-primary-400 group-hover:translate-x-0.5 transition-all"></iconify-icon>
+                <span>{link.label}</span>
+              </a>
+            </li>
+          ))}
         </ul>
       </div>
 
-      {/* Contact */}
-      <div id="contact">
-        <h4 class="font-medium tracking-tight text-lg mb-6">Contact us</h4>
+      <!-- Contact Us (3 cols) -->
+      <div id="contact" class="lg:col-span-3">
+        <h4 class="font-medium text-white tracking-tight text-base mb-6 flex items-center gap-2">
+          <span class="w-1.5 h-1.5 rounded-full bg-primary-500"></span>
+          Contact Us
+        </h4>
         <ul class="space-y-4">
           <li class="flex items-start gap-3">
-            <iconify-icon
-              icon="lucide:phone"
-              class="text-primary-500 text-lg shrink-0 mt-0.5"></iconify-icon>
+            <div class="h-9 w-9 rounded-lg bg-slate-900 border border-slate-800 flex items-center justify-center text-primary-400 shrink-0 mt-0.5">
+              <iconify-icon icon="lucide:phone" class="text-base"></iconify-icon>
+            </div>
             <div>
-              <span class="block text-sm font-medium text-gray-900">Phone:</span
-              >
+              <span class="block text-xs text-slate-500 font-medium uppercase tracking-wider">Phone</span>
               <a
                 href={PHONE_HREF}
-                class="text-gray-600 hover:text-primary-500 text-sm transition-colors"
+                class="text-slate-300 hover:text-primary-400 text-sm transition-colors font-medium"
               >
                 {PHONE_DISPLAY}
               </a>
             </div>
           </li>
+
           <li class="flex items-start gap-3">
-            <iconify-icon
-              icon="lucide:map-pin"
-              class="text-primary-500 text-lg shrink-0 mt-0.5"></iconify-icon>
-            <div>
-              <span class="block text-sm font-medium text-gray-900"
-                >Address:</span
-              >
-              <span class="text-gray-600 text-sm">{footer.address}</span>
+            <div class="h-9 w-9 rounded-lg bg-slate-900 border border-slate-800 flex items-center justify-center text-primary-400 shrink-0 mt-0.5">
+              <iconify-icon icon="lucide:mail" class="text-base"></iconify-icon>
             </div>
-          </li>
-          <li class="flex items-start gap-3">
-            <iconify-icon
-              icon="lucide:mail"
-              class="text-primary-500 text-lg shrink-0 mt-0.5"></iconify-icon>
             <div>
-              <span class="block text-sm font-medium text-gray-900"
-                >Email address:</span
-              >
+              <span class="block text-xs text-slate-500 font-medium uppercase tracking-wider">Email</span>
               <a
                 href={`mailto:${EMAIL}`}
-                class="text-gray-600 hover:text-primary-500 text-sm transition-colors"
+                class="text-slate-300 hover:text-primary-400 text-sm transition-colors"
               >
                 {EMAIL}
               </a>
+            </div>
+          </li>
+
+          <li class="flex items-start gap-3">
+            <div class="h-9 w-9 rounded-lg bg-slate-900 border border-slate-800 flex items-center justify-center text-primary-400 shrink-0 mt-0.5">
+              <iconify-icon icon="lucide:map-pin" class="text-base"></iconify-icon>
+            </div>
+            <div>
+              <span class="block text-xs text-slate-500 font-medium uppercase tracking-wider">Address</span>
+              <span class="text-slate-400 text-sm leading-relaxed block">{footer.address}</span>
             </div>
           </li>
         </ul>
       </div>
     </div>
 
-    {/* Bottom Bar */}
-    <div
-      class="flex flex-col md:flex-row items-center justify-between border-t border-gray-200 pt-8 mt-8 text-center md:text-left gap-4"
-    >
-      <p class="text-sm font-light text-gray-600">
-        Copyright © {new Date().getFullYear()} Takshasheela School of Civil Services.
-        All rights reserved.
+    <!-- Legal & Privacy Row -->
+    <div class="border-t border-slate-800/80 pt-8 pb-4 flex flex-wrap items-center justify-between gap-4">
+      <div class="flex flex-wrap items-center gap-6">
+        {[
+          { label: "Privacy Policy", href: "/privacy-policy" },
+          { label: "Payment Terms", href: "/payment-terms" },
+          { label: "Refund & Cancellation", href: "/refunds-policy" },
+          { label: "Disclaimer", href: "/disclaimer" },
+        ].map((link) => (
+          <a
+            href={link.href}
+            class="text-slate-400 hover:text-primary-400 text-xs transition-colors"
+          >
+            {link.label}
+          </a>
+        ))}
+        <button
+          type="button"
+          onclick="window.dispatchEvent(new CustomEvent('open-cookie-consent'))"
+          class="text-slate-400 hover:text-primary-400 text-xs transition-colors cursor-pointer flex items-center gap-1.5"
+        >
+          <iconify-icon icon="lucide:cookie" class="text-primary-400 text-xs"></iconify-icon>
+          <span>Cookie Settings</span>
+        </button>
+      </div>
+
+      <!-- Back to Top Button -->
+      <button
+        type="button"
+        onclick="window.scrollTo({top: 0, behavior: 'smooth'})"
+        aria-label="Back to Top"
+        class="inline-flex items-center gap-2 px-3 py-1.5 rounded-lg bg-slate-900 hover:bg-slate-800 border border-slate-800 text-slate-400 hover:text-white text-xs font-medium transition-all"
+      >
+        <span>Back to top</span>
+        <iconify-icon icon="lucide:arrow-up" class="text-xs"></iconify-icon>
+      </button>
+    </div>
+
+    <!-- Copyright & Trust Declaration -->
+    <div class="border-t border-slate-900 pt-6 mt-4 flex flex-col md:flex-row items-center justify-between text-center md:text-left gap-3">
+      <p class="text-xs text-slate-500 font-light">
+        Copyright © {new Date().getFullYear()} Takshasheela School of Civil Services. All rights reserved.
       </p>
-      <p class="text-xs text-gray-500 font-light">
-        A unit of <strong>Takshashila Educational Trust</strong> (Formerly known as
-        <em>Takshashila School of Civil Services</em>)
+      <p class="text-xs text-slate-500 font-light">
+        A unit of <strong class="text-slate-400 font-medium">Takshashila Educational Trust</strong> (Formerly known as <em>Takshashila School of Civil Services</em>)
       </p>
     </div>
   </div>
