@@ -76,7 +76,7 @@ const hasModes = availableModes.length > 1;
     >
       <div class="lg:col-span-8 w-full min-w-0">
         <CourseTabs
-          client:load
+          client:visible
           hasModes={hasModes}
           availableModes={availableModes}
         >
@@ -95,7 +95,7 @@ const hasModes = availableModes.length > 1;
         class="lg:col-span-4 w-full sticky top-0 z-10 transition-all duration-500"
       >
         <Enroll
-          client:load="vue"
+          client:visible="vue"
           price={data.price}
           period={data.pricePeriod}
           features={data.features}
