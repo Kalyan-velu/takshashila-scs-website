@@ -5,6 +5,7 @@ export default ((isServer: boolean | undefined = false) => {
     return {
       CRM_URL: import.meta.env.PUBLIC_CRM_URL || "",
       GTM_CONTAINER: import.meta.env.PUBLIC_GTM_CONTAINER || "",
+      CLARITY_PROJECT_ID: import.meta.env.PUBLIC_CLARITY_PROJECT_ID || "",
       SUPABASE_URL: import.meta.env.PUBLIC_SUPABASE_URL || "",
       SUPABASE_KEY: import.meta.env.PUBLIC_SUPABASE_KEY || "",
       CLOUDFLARE_SITE_KEY: import.meta.env.PUBLIC_CLOUDFLARE_SITE_KEY || "",
