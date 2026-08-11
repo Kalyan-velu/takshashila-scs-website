@@ -1,6 +1,6 @@
 ---
 import Layout from "../layouts/Layout.astro";
-// import { Phone, Mail, MapPin, Send } from "lucide-react";
+import FaqSection from "@/components/FaqSection.astro";
 import variables from "@/config/variables.ts";
 import { EMAIL, PHONE_DISPLAY, PHONE_HREF } from "@/config/CONSTANTS.ts";
 const cloudflare_site_key = variables.CLOUDFLARE_SITE_KEY;
@@ -481,6 +481,8 @@ const description =
       </div>
     </div>
   </section>
+
+  <FaqSection />
 </Layout>
 
 <script>

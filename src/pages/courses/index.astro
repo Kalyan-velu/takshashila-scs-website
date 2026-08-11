@@ -2,6 +2,7 @@
 import Layout from "@/layouts/Layout.astro";
 import CoursesTabs from "@/components/courses/CoursesTabs.vue";
 import CoachingProse from "@/components/CoachingProse.astro";
+import FaqSection from "@/components/FaqSection.astro";
 import AdreCTA from "@/components/AdreCTA.astro";
 import { CATEGORIES } from "@/data/category.ts";
 import { getCollection } from "astro:content";
@@ -20,12 +21,36 @@ const courses = aboutCourseEntries.flatMap((e) =>
     url: `/courses/${e.data.courseSlug}/`,
     parentPrice: e.data.price,
     parentPricePeriod: e.data.pricePeriod,
-    parentBadge: e.data.badge,
   })),
 );
+const siteUrl = Astro.site ? Astro.site.href.replace(/\/$/, "") : "https://takshashilascs.com";
+
+const itemListSchema = {
+  "@context": "https://schema.org",
+  "@type": "ItemList",
+  "name": "Civil Services Coaching Programs",
+  "itemListElement": aboutCourseEntries.map((e, index) => ({
+    "@type": "ListItem",
+    "position": index + 1,
+    "item": {
+      "@type": "Course",
+      "name": e.data.title,
+      "description": e.data.description,
+      "url": `${siteUrl}/courses/${e.data.courseSlug}/`,
+      "provider": {
+        "@type": "EducationalOrganization",
+        "name": "Takshasheela School of Civil Services",
+        "sameAs": siteUrl
+      }
+    }
+  }))
+};
 ---
 
 <Layout title={seoTitle} description={seoDescription}>
+  <Fragment slot="head_data">
+    <script type="application/ld+json" set:html={JSON.stringify(itemListSchema)} />
+  </Fragment>
   <div class="bg-primary-500/5 py-12 md:py-20 border-b border-gray-200">
     <div class="container mx-auto px-4 lg:px-24">
       <div
@@ -58,4 +83,6 @@ const courses = aboutCourseEntries.flatMap((e) =>
   <AdreCTA />
 
   <CoachingProse id="coaching-in-guwahati" />
+
+  <FaqSection />
 </Layout>

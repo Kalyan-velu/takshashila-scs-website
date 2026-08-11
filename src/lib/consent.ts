@@ -58,7 +58,11 @@ export function loadClarity(clarityId?: string): void {
     t.async = 1;
     t.src = "https://www.clarity.ms/tag/" + i;
     const y = l.getElementsByTagName(r)[0];
-    y.parentNode.insertBefore(t, y);
+    if (y && y.parentNode) {
+      y.parentNode.insertBefore(t, y);
+    } else if (l.head) {
+      l.head.appendChild(t);
+    }
   })(window, document, "clarity", "script", projectId);
 }
 

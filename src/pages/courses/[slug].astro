@@ -38,13 +38,63 @@ const { Content: Notification } = await render(notification);
 const courseItems = data.courses ?? [];
 const availableModes = [...new Set(courseItems.flatMap((c) => c.modes))];
 const hasModes = availableModes.length > 1;
+
+const canonicalUrl = new URL(Astro.url.pathname, Astro.site || "https://takshashilascs.com").href;
+
+const courseSchema = {
+  "@context": "https://schema.org",
+  "@type": "Course",
+  "name": data.title,
+  "description": data.description,
+  "url": canonicalUrl,
+  "provider": {
+    "@type": "EducationalOrganization",
+    "name": "Takshasheela School of Civil Services",
+    "sameAs": "https://takshashilascs.com"
+  },
+  "hasCourseInstance": [
+    {
+      "@type": "CourseInstance",
+      "courseMode": "Online",
+      "instructor": {
+        "@type": "Person",
+        "name": "Experienced Faculties from Delhi and Assam"
+      }
+    },
+    {
+      "@type": "CourseInstance",
+      "courseMode": "Offline",
+      "location": {
+        "@type": "Place",
+        "name": "Guwahati Center",
+        "address": {
+          "@type": "PostalAddress",
+          "addressLocality": "Guwahati",
+          "addressRegion": "Assam",
+          "addressCountry": "IN"
+        }
+      }
+    }
+  ],
+  "offers": courseItems.map((c) => ({
+    "@type": "Offer",
+    "name": c.title,
+    "category": "Paid",
+    "price": c.prices?.online?.discount || c.prices?.offline?.discount || 0,
+    "priceCurrency": "INR"
+  }))
+};
 ---
 
 <Layout
   title={data.seoTitle}
   description={data.seoDescription}
+  keywords={data.seoKeywords}
   image={data.ogImage}
 >
+  <Fragment slot="head_data">
+    <script type="application/ld+json" set:html={JSON.stringify(courseSchema)} />
+  </Fragment>
   <div class="bg-primary-500/5 py-12 md:py-20 border-b border-gray-200">
     <div class="container mx-auto px-4 lg:px-24">
       <div
