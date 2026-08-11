@@ -40,26 +40,62 @@ courses:
       - "offline"
 ---
 
-Our **Combined Package for Prelims, Mains, and Interview Guidance** is a meticulously structured program designed to help you conquer the Civil Services Examination (CSE).
+Our **Combined Package for Prelims, Mains, and Interview Guidance** is a meticulously structured program designed to help you conquer the Civil Services Examination (CSE) conducted by the Union Public Service Commission (UPSC).
 
-### Essential Details
+### Essential Course Details
 
-- **Course Duration:** 9 – 10 months of intensive preparation.
-- **Learning Modes:** Both **Offline** and **Online** classes are available to suit your convenience and location.
-- **Flexible Payments:** We believe in accessible education. Your course fees can be paid in easy **Installments**.
+- **Course Duration:** 9 – 10 months of intensive preparation followed by dedicated revision and test series.
+- **Learning Modes:** Select between interactive **Offline** classroom batches at our Guwahati campus or flexible **Online** live interactive sessions.
+- **Flexible Payments:** We believe quality civil services coaching should be accessible to all deserving students. Course fees can be paid in convenient monthly **Installments**.
 
-### Why Choose This Package? (Perks)
+---
 
-We provide a 360-degree ecosystem to ensure you have everything needed to succeed:
+### Comprehensive 3-Stage UPSC CSE Guidance
 
-- **Full Study Materials:** Exhaustive, updated, and curated specifically for the latest UPSC patterns.
-- **Regular Test Series:** Rigorous evaluation through frequent prelims and mains test series.
-- **Recorded Class Videos:** Never miss a lecture. Revisit concepts anytime with our video library.
-- **Monthly Magazine & Daily Current Affairs:** Stay updated with the world without drowning in newspapers.
-- **Class Notes & Model Answers:** Ready-made structured notes and perfect model Q&As for mains.
-- **PYQ Mastery:** Detailed previous years' solved questions and answers.
-- **Answer Writing Practice:** Daily and weekly initiatives to perfect your mains answer writing speed and quality.
-- **Personal Mentorship:** One-on-one sessions to track your progress and solve roadblocks.
-- **MOCK Interview Guidance:** Specialized personality development and DAF-based interview coaching by experts.
+#### 1. Stage I: Civil Services Preliminary Examination (CSAT & GS)
+The Preliminary examination tests foundational knowledge, analytical speed, and conceptual clarity across General Studies Paper I and CSAT Paper II.
+- **General Studies (GS Paper I):** In-depth coverage of Indian Polity & Governance, History of India & Indian National Movement, Indian and World Geography, Economic & Social Development, General issues on Environmental Ecology & Biodiversity, and General Science.
+- **CSAT (GS Paper II):** Focused practice on Comprehension, Logical Reasoning, Analytical Ability, General Mental Ability, Basic Numeracy, and Data Interpretation to clear the qualifying threshold with confidence.
+- **Prelims Test Series:** Over 40+ full-length and sectional mock tests with negative marking analytics, rank tracking, and detailed explanatory notes.
 
-_Takshashila School of Civil Services is a dedicated institute to educate, train, and guide young aspirants for Civil Services in India. It is equipped with quality faculties and facilities in Assam with a national outlook and standards._
+#### 2. Stage II: Civil Services Main Examination (Written Test)
+The Mains exam requires analytical depth, logical articulation, and time-bound answer writing capabilities. Our curriculum covers all 9 papers:
+- **General Studies I (GS 1):** Indian Heritage and Culture, History and Geography of the World and Society.
+- **General Studies II (GS 2):** Governance, Constitution, Polity, Social Justice and International Relations.
+- **General Studies III (GS 3):** Technology, Economic Development, Bio-diversity, Environment, Security and Disaster Management.
+- **General Studies IV (GS 4):** Ethics, Integrity, and Aptitude featuring real-world case studies and ethical dilemma solving techniques.
+- **Essay Paper Guidance:** Brainstorming frameworks, thesis formulation, and multi-dimensional essay writing practice.
+- **Daily & Weekly Mains Evaluation:** Individualized evaluation of student answers by experienced faculty members within 48 hours, highlighting structure, presentation, keywords, and model answers.
+
+#### 3. Stage III: Personality Test & Mock Interviews
+- **DAF (Detailed Application Form) Analysis:** Personalized session analyzing your background, educational qualification, optional subject choices, and hobbies.
+- **Mock Interview Panels:** Panel sessions with former civil servants, senior academicians, and domain experts simulating the actual UPSC interview atmosphere in New Delhi.
+
+---
+
+### Course Perks & Ecosystem
+
+We provide a 360-degree learning ecosystem designed to eliminate guesswork from your preparation:
+
+- **Exhaustive Printed & Digital Study Materials:** Curated specifically for the latest UPSC trends, combining standard textbooks, NCERT summaries, and current affairs integration.
+- **Recorded Lecture Backup:** Full access to recorded video sessions allowing you to revise concepts anytime or catch up on missed classes.
+- **Monthly Current Affairs Magazine:** Curated monthly compilations synthesizing The Hindu, Indian Express, PIB, Down To Earth, and Yojana.
+- **PYQ Mastery Sessions:** Detailed 15-year previous years' solved question analysis for Prelims and Mains.
+- **Personal Mentorship:** Dedicated one-on-one sessions with senior mentors to resolve personal academic roadblocks, manage stress, and track weekly study schedules.
+
+---
+
+### Frequently Asked Questions (UPSC Preparation)
+
+#### What is the eligibility criteria for joining the UPSC Foundation Batch?
+Candidates must hold a graduate degree in any discipline from a recognized university, or be in their final year of graduation. The minimum age limit is 21 years as of August 1st of the exam year.
+
+#### Are online classes live or recorded?
+Our online classes are conducted live, allowing real-time interaction with faculties. High-definition recordings of every lecture are uploaded to the student portal within 2 hours for revision.
+
+#### Does the course fee include study material and test series?
+Yes, the complete UPSC package includes all printed study materials, class notes, prelims test series, mains answer evaluation, monthly magazines, and mock interview guidance.
+
+---
+
+_Takshasheela School of Civil Services is Guwahati's premier institute dedicated to educating, training, and guiding civil services aspirants in Assam and the North-East with national outlook and standards._

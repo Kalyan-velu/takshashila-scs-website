@@ -9,6 +9,7 @@ import robotsTxt from "astro-robots-txt";
 // https://astro.build/config
 export default defineConfig({
   site: "https://takshashilascs.com",
+  trailingSlash: "always",
   fonts: [
     {
       provider: fontProviders.fontsource(),

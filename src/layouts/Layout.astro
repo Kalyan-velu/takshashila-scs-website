@@ -22,6 +22,7 @@ const crmOrigin =
 interface Props {
   title?: string;
   description?: string;
+  keywords?: string;
   image?: string;
   canonical?: string;
 }
@@ -37,6 +38,7 @@ const isHomePage = Astro.url.pathname === "/" || Astro.url.pathname === "";
 const {
   title = "Best UPSC & APSC Coaching in Guwahati | Takshasheela SCS",
   description = "Join Takshasheela School of Civil Services for expert UPSC, APSC & ADRE coaching in Guwahati. Online/offline batches with comprehensive study material.",
+  keywords,
   image = "/og/index.png",
   canonical = defaultCanonical,
 } = Astro.props;
@@ -59,6 +61,7 @@ const {
     <SEO
       title={title}
       description={description}
+      keywords={keywords}
       image={image}
       canonical={canonical}
     />
@@ -67,8 +70,12 @@ const {
         "@context": "https://schema.org",
         "@type": ["EducationalOrganization", "LocalBusiness"],
         "@id": `${SITE_URL}/#organization`,
-        name: "Takshashila School of Civil Services",
-        alternateName: "Takshasheela SCS",
+        name: "Takshasheela School of Civil Services",
+        alternateName: ["Takshashila School of Civil Services", "Takshasheela SCS"],
+        parentOrganization: {
+          "@type": "Organization",
+          name: "Takshashila Educational Trust",
+        },
         description: description,
         url: Astro.site ? Astro.site.href : SITE_URL,
         logo: `${SITE_URL}/logo-full-black.png`,

@@ -44,17 +44,14 @@ const content = rewriteMediaUrls(
 const headings = await getBlogTOC(content);
 ---
 
-<Layout title={yoast?.title ?? post.title.rendered}>
+<Layout
+  title={yoast?.title ?? post.title.rendered}
+  description={yoast?.og_description}
+  image={ogImage?.url}
+  canonical={`${SITE_URL}/${post.slug}/`}
+>
   <Fragment slot="head_data">
-    <meta name="description" content={yoast?.og_description} />
-    <link rel="canonical" href={`${SITE_URL}/${post.slug}/`} />
-
-    <!-- Open Graph -->
-    <meta property="og:title" content={yoast?.og_title} />
-    <meta property="og:description" content={yoast?.og_description} />
     <meta property="og:type" content="article" />
-    <meta property="og:url" content={`${SITE_URL}/${post.slug}/`} />
-    {ogImage && <meta property="og:image" content={ogImage.url} />}
     {
       ogImage && (
         <meta property="og:image:width" content={String(ogImage.width)} />
@@ -65,16 +62,7 @@ const headings = await getBlogTOC(content);
         <meta property="og:image:height" content={String(ogImage.height)} />
       )
     }
-
-    <!-- Twitter Card -->
-    <meta name="twitter:card " content={yoast?.twitter_card} />
-    <meta name="twitter:title" content={yoast?.og_title} />
-    <meta name="twitter:description" content={yoast?.og_description} />
-    {
-      ogImage?.url ? (
-        <meta name="twitter:image" content={ogImage.url} />
-      ) : undefined
-    }
+    <meta name="twitter:card" content={yoast?.twitter_card || "summary_large_image"} />
   </Fragment>
 
   <div class="w-full max-w-7xl mx-auto px-4 py-4">

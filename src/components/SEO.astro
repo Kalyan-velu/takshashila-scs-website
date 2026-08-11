@@ -2,6 +2,7 @@
 interface Props {
   title?: string;
   description?: string;
+  keywords?: string;
   image?: string;
   canonical?: string;
   siteName?: string;
@@ -11,6 +12,7 @@ interface Props {
 const {
   title = "Best UPSC & APSC Coaching in Guwahati | Takshasheela SCS",
   description = "Join Takshasheela School of Civil Services for expert UPSC, APSC & ADRE coaching in Guwahati. Online/offline batches with comprehensive study material.",
+  keywords,
   image = "/og/index.png",
   canonical,
   siteName = "Takshasheela School of Civil Services",
@@ -22,6 +24,7 @@ const imageUrl = new URL(image, Astro.url).href;
 
 <title>{title}</title>
 <meta name="description" content={description} />
+{keywords && <meta name="keywords" content={keywords} />}
 {canonical && <link rel="canonical" href={canonical} />}
 
 <!-- Open Graph / Facebook -->
