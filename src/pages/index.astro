@@ -8,67 +8,75 @@ import CoachingProse from "@/components/CoachingProse.astro";
 import FaqSection from "@/components/FaqSection.astro";
 
 const title = "Best UPSC and APSC Coaching in Guwahati - Takshasheela";
-const description = "Takshasheela is the best UPSC and APSC coaching in Guwahati, offering top Delhi faculty, online & offline classes, study material, and test series.";
+const description =
+  "Takshasheela is the best UPSC and APSC coaching in Guwahati, offering top Delhi faculty, online & offline classes, study material, and test series.";
 
 const siteUrl = "https://takshashilascs.com";
 
 const itemListSchema = {
   "@context": "https://schema.org",
   "@type": "ItemList",
-  "name": "Featured Coaching Programs",
-  "itemListElement": [
+  name: "Featured Coaching Programs",
+  itemListElement: [
     {
       "@type": "ListItem",
-      "position": 1,
-      "item": {
+      position: 1,
+      item: {
         "@type": "Course",
-        "name": "Comprehensive UPSC Package",
-        "description": "Comprehensive guidance for IAS, IPS & Central Civil Services.",
-        "url": `${siteUrl}/courses/upsc/`,
-        "provider": {
+        name: "Comprehensive UPSC Package",
+        description:
+          "Comprehensive guidance for IAS, IPS & Central Civil Services.",
+        url: `${siteUrl}/courses/upsc/`,
+        provider: {
           "@type": "EducationalOrganization",
-          "name": "Takshasheela School of Civil Services",
-          "sameAs": siteUrl
-        }
-      }
+          name: "Takshasheela School of Civil Services",
+          sameAs: siteUrl,
+        },
+      },
     },
     {
       "@type": "ListItem",
-      "position": 2,
-      "item": {
+      position: 2,
+      item: {
         "@type": "Course",
-        "name": "Comprehensive APSC CCE Package",
-        "description": "Top-rated APSC CCE coaching online & offline with Assam GS Paper 5.",
-        "url": `${siteUrl}/courses/apsc/`,
-        "provider": {
+        name: "Comprehensive APSC CCE Package",
+        description:
+          "Top-rated APSC CCE coaching online & offline with Assam GS Paper 5.",
+        url: `${siteUrl}/courses/apsc/`,
+        provider: {
           "@type": "EducationalOrganization",
-          "name": "Takshasheela School of Civil Services",
-          "sameAs": siteUrl
-        }
-      }
+          name: "Takshasheela School of Civil Services",
+          sameAs: siteUrl,
+        },
+      },
     },
     {
       "@type": "ListItem",
-      "position": 3,
-      "item": {
+      position: 3,
+      item: {
         "@type": "Course",
-        "name": "ADRE 2026 Online Course",
-        "description": "Dedicated online course for Assam Direct Recruitment Exam Grade III and Grade IV posts.",
-        "url": `${siteUrl}/courses/adre/`,
-        "provider": {
+        name: "ADRE 2026 Online Course",
+        description:
+          "Dedicated online course for Assam Direct Recruitment Exam Grade III and Grade IV posts.",
+        url: `${siteUrl}/courses/adre/`,
+        provider: {
           "@type": "EducationalOrganization",
-          "name": "Takshasheela School of Civil Services",
-          "sameAs": siteUrl
-        }
-      }
-    }
-  ]
+          name: "Takshasheela School of Civil Services",
+          sameAs: siteUrl,
+        },
+      },
+    },
+  ],
 };
 ---
 
 <Layout title={title} description={description}>
   <Fragment slot="head_data">
-    <script type="application/ld+json" set:html={JSON.stringify(itemListSchema)} />
+    <script
+      is:inline
+      type="application/ld+json"
+      set:html={JSON.stringify(itemListSchema)}
+    />
   </Fragment>
   <Hero />
   <ResultsSection />

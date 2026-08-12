@@ -71,7 +71,15 @@ const whatsappHref = whatsappUrl(whatsappMessage);
           placeholder="Enter your phone number..."
           class="lead-form__input lead-form__input--lg"
           required
+          data-field-input="phone"
+          aria-describedby="phone-error"
+          aria-invalid="false"
         />
+        <p
+          id="phone-error"
+          data-field-error="phone"
+          class="mt-1 hidden text-xs text-destructive"
+        ></p>
       </div>
 
       <div
@@ -91,7 +99,15 @@ const whatsappHref = whatsappUrl(whatsappMessage);
             placeholder="Your Full Name"
             class="lead-form__input"
             data-expanded-required
+            data-field-input="name"
+            aria-describedby="name-error"
+            aria-invalid="false"
           />
+          <p
+            id="name-error"
+            data-field-error="name"
+            class="mt-1 hidden text-xs text-destructive"
+          ></p>
         </div>
 
         <div class="lead-form__field">
@@ -105,6 +121,9 @@ const whatsappHref = whatsappUrl(whatsappMessage);
             name="course"
             class="lead-form__select"
             data-expanded-required
+            data-field-input="course"
+            aria-describedby="course-error"
+            aria-invalid="false"
           >
             <option value="" disabled selected>
               Select your target course...
@@ -125,12 +144,27 @@ const whatsappHref = whatsappUrl(whatsappMessage);
               ></path>
             </svg>
           </div>
+          <p
+            id="course-error"
+            data-field-error="course"
+            class="mt-1 hidden text-xs text-destructive"
+          ></p>
         </div>
 
         <!-- Cloudflare Turnstile Captcha -->
         <div id="hero-turnstile" class="my-1"></div>
+        <p
+          id="form-error"
+          data-form-error
+          class="hidden text-sm text-destructive"
+          aria-live="polite"
+        ></p>
 
-        <button type="submit" class="lead-form__submit-button">
+        <button
+          type="submit"
+          class="lead-form__submit-button"
+          data-submit-button
+        >
           <span>Start My Journey</span>
           <iconify-icon icon="lucide:arrow-right" class="lead-form__arrow-icon"
           ></iconify-icon>
@@ -201,17 +235,19 @@ const whatsappHref = whatsappUrl(whatsappMessage);
 </section>
 
 <script>
+  import { buildHeroLeadPayload } from "@/lib/heroLeadForm";
   import { submitLead } from "@/lib/submitLead";
   import variables from "@/config/variables";
 
   let turnstileToken: string | null = null;
+  let turnstileWidgetId: string | null = null;
   const siteKey = variables.CLOUDFLARE_SITE_KEY;
 
   const renderTurnstile = () => {
     const container = document.getElementById("hero-turnstile");
     if (!container || !window.turnstile) return;
 
-    window.turnstile.render(container, {
+    turnstileWidgetId = window.turnstile.render(container, {
       sitekey: siteKey,
       callback: (token: string) => {
         turnstileToken = token;
@@ -243,7 +279,6 @@ const whatsappHref = whatsappUrl(whatsappMessage);
     document.head.appendChild(script);
   };
 
-  const formCard = document.querySelector("[data-lead-form-card]");
   const form = document.querySelector(
     "[data-lead-form]",
   ) as HTMLFormElement | null;
@@ -255,8 +290,72 @@ const whatsappHref = whatsappUrl(whatsappMessage);
   const expandedFields = document.querySelector("[data-expanded-fields]");
   const continueButton = document.querySelector("[data-continue-button]");
   const requiredFields = document.querySelectorAll("[data-expanded-required]");
+  const submitButton = document.querySelector(
+    "[data-submit-button]",
+  ) as HTMLButtonElement | null;
+  const formError = document.querySelector("[data-form-error]");
+  const fieldInputs = {
+    name: document.querySelector('[data-field-input="name"]'),
+    phone: document.querySelector('[data-field-input="phone"]'),
+    course: document.querySelector('[data-field-input="course"]'),
+  } as const;
+  const fieldErrors = {
+    name: document.querySelector('[data-field-error="name"]'),
+    phone: document.querySelector('[data-field-error="phone"]'),
+    course: document.querySelector('[data-field-error="course"]'),
+  } as const;
 
   let isTurnstileMounted = false;
+
+  const setFormError = (message?: string) => {
+    if (!formError) return;
+
+    if (message) {
+      formError.textContent = message;
+      formError.classList.remove("hidden");
+      return;
+    }
+
+    formError.textContent = "";
+    formError.classList.add("hidden");
+  };
+
+  const setFieldError = (
+    field: keyof typeof fieldInputs,
+    message?: string,
+  ) => {
+    const input = fieldInputs[field];
+    const error = fieldErrors[field];
+    if (!input || !error) return;
+
+    input.setAttribute("aria-invalid", message ? "true" : "false");
+    input.classList.toggle("border-destructive", !!message);
+    input.classList.toggle("focus:ring-destructive/50", !!message);
+    input.classList.toggle("focus:border-destructive", !!message);
+
+    if (message) {
+      error.textContent = message;
+      error.classList.remove("hidden");
+      return;
+    }
+
+    error.textContent = "";
+    error.classList.add("hidden");
+  };
+
+  const clearValidationState = () => {
+    setFormError();
+    setFieldError("name");
+    setFieldError("phone");
+    setFieldError("course");
+  };
+
+  const resetTurnstileWidget = () => {
+    if (turnstileWidgetId !== null && window.turnstile) {
+      window.turnstile.reset(turnstileWidgetId);
+    }
+    turnstileToken = null;
+  };
 
   const expandForm = () => {
     if (!expandedFields || !continueButton) return;
@@ -276,57 +375,89 @@ const whatsappHref = whatsappUrl(whatsappMessage);
   };
 
   phoneInput?.addEventListener("input", () => {
+    setFieldError("phone");
     if (phoneInput.value.trim().length > 0) {
       expandForm();
     }
   });
+
+  fieldInputs.name?.addEventListener("input", () => setFieldError("name"));
+  fieldInputs.phone?.addEventListener("input", () => setFieldError("phone"));
+  fieldInputs.course?.addEventListener("change", () => setFieldError("course"));
 
   continueButton?.addEventListener("click", expandForm);
 
   form?.addEventListener("submit", async (event) => {
     event.preventDefault();
 
-    const submitBtn = form.querySelector(
-      'button[type="submit"]',
-    ) as HTMLButtonElement | null;
-    const submitText = submitBtn?.querySelector("span");
+    clearValidationState();
 
-    if (submitBtn && submitText) {
-      submitBtn.disabled = true;
+    const submitText = submitButton?.querySelector("span");
+    const turnstileResponse = turnstileToken;
+    turnstileToken = null;
+
+    if (!turnstileResponse) {
+      setFormError("Please complete the captcha before submitting.");
+      return;
+    }
+
+    if (submitButton && submitText) {
+      submitButton.disabled = true;
       submitText.textContent = "Submitting...";
     }
 
     const formData = new FormData(form);
-    const rawPhone = (formData.get("phone") as string) || "";
-    const rawName = (formData.get("name") as string) || "";
-    const course = (formData.get("course") as string) || "";
-
-    const name = rawName.trim() || "Aspirant";
-    let phone = rawPhone.trim();
-    if (phone && !phone.startsWith("+")) {
-      const digits = phone.replace(/\D/g, "");
-      phone = `+91${digits}`;
-    }
-
-    const digitsOnly = phone.replace(/\D/g, "") || "6001657575";
-    const email = `${digitsOnly}@phone.takshashilascs.com`;
+    const validation = buildHeroLeadPayload({
+      name: (formData.get("name") as string) || "",
+      phone: (formData.get("phone") as string) || "",
+      course: (formData.get("course") as string) || "",
+      cfTurnstileResponse: turnstileResponse,
+    });
 
     try {
-      await submitLead({
-        name,
-        phone,
-        email,
-        course,
-        address: null,
-        source: "homepage-hero-form",
-        cfTurnstileResponse: turnstileToken || "turnstile-passed",
-      });
-    } catch (err) {
-      console.error("Hero lead submission error:", err);
-    } finally {
+      if (!validation.success) {
+        Object.entries(validation.fieldErrors).forEach(([field, messages]) => {
+          if (field === "name" || field === "phone" || field === "course") {
+            setFieldError(field, messages?.[0]);
+          }
+        });
+        setFormError(validation.message);
+        return;
+      }
+
+      const result = await submitLead(validation.payload);
+
+      if (!result.success) {
+        if (result.code === "VALIDATION_ERROR") {
+          Object.entries(result.fieldErrors).forEach(([field, messages]) => {
+            if (field === "name" || field === "phone" || field === "course") {
+              setFieldError(field, messages?.[0]);
+            }
+          });
+
+          if (result.fieldErrors.cfTurnstileResponse?.length) {
+            setFormError("Please complete the captcha again.");
+          } else {
+            setFormError(result.message);
+          }
+        } else {
+          setFormError(result.message);
+        }
+        return;
+      }
+
       if (form) form.classList.add("hidden");
       if (formHeader) formHeader.classList.add("hidden");
       if (heroSuccess) heroSuccess.classList.remove("hidden");
+    } catch (err) {
+      console.error("Hero lead submission error:", err);
+      setFormError("Could not submit the form. Please try again.");
+    } finally {
+      resetTurnstileWidget();
+      if (submitButton && submitText) {
+        submitButton.disabled = false;
+        submitText.textContent = "Start My Journey";
+      }
     }
   });
 </script>
