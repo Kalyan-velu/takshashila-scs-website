@@ -37,7 +37,7 @@ export async function submitLead(
   formData.set("cfTurnstileResponse", payload.cfTurnstileResponse);
 
   try {
-    const res = await fetch("/api/create_lead", {
+    const res = await fetch("/api/create_lead/", {
       method: "POST",
       body: formData,
     });
