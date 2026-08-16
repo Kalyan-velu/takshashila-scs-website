@@ -1,6 +1,12 @@
 import { z } from "astro/zod";
 import type { LeadPayload } from "@/lib/submitLead";
 
+// This schema runs in the browser (imported by hero/form.astro's client
+// script). Zod's JIT compiler probes for eval support via `Function("")`,
+// which trips the page's CSP (no 'unsafe-eval' in script-src). Disabling
+// JIT avoids that probe entirely; it only affects parse speed, not behavior.
+z.config({ jitless: true });
+
 const HERO_FORM_SOURCE = "homepage-hero-form" as const;
 const HERO_COURSES = ["apsc", "upsc", "adre"] as const;
 
