@@ -67,7 +67,7 @@
           <div class="flex-1">
             <h3 class="text-sm font-semibold text-gray-900">We value your privacy</h3>
             <p class="mt-1 text-xs text-gray-600 leading-relaxed">
-              We use cookies and analytical tools (Google Tag Manager & Microsoft Clarity) to enhance user experience, analyze website traffic, and optimize performance.
+              We use cookies and analytical tools to enhance user experience, analyze website traffic, and optimize performance.
             </p>
           </div>
         </div>
@@ -159,7 +159,7 @@
               <div class="space-y-1">
                 <span class="font-medium text-gray-900 text-sm block">Analytics & Performance</span>
                 <p class="text-gray-600 leading-relaxed">
-                  Allows us to monitor website traffic, track user engagement via <strong>Google Tag Manager</strong>, and review visual heatmaps & recordings with <strong>Microsoft Clarity</strong>.
+                  Allows us to monitor website traffic and user engagement to help us improve the site.
                 </p>
               </div>
               <label class="relative inline-flex items-center cursor-pointer shrink-0 mt-1">

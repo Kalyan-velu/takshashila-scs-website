@@ -1,18 +1,30 @@
 ---
 import { CURRENT_AFFAIRS_URL } from "@/config/CONSTANTS.ts";
 
+const currentPath = Astro.url.pathname;
+
+function isActive(href: string): boolean {
+  const normalized = (path: string) => path.replace(/\/+$/, "") || "/";
+  return normalized(href) === normalized(currentPath);
+}
+
+const isCoursesActive = currentPath.startsWith("/courses");
+const isAboutActive = isActive("/about/");
+
 const dropdownNavItems = [
   {
     label: "Courses",
     triggerClass: "js-menu-trigger-courses",
     chevronClass: "js-chevron-courses",
     controlsId: "mega-menu-courses",
+    active: isCoursesActive,
   },
   {
     label: "About",
     triggerClass: "js-menu-trigger-about",
     chevronClass: "js-chevron-about",
     controlsId: "mega-menu-about",
+    active: isAboutActive,
   },
 ];
 
@@ -20,6 +32,10 @@ const directNavItems = [
   {
     label: "Team",
     href: "/team/",
+  },
+  {
+    label: "Blog",
+    href: "/blogs/",
   },
   {
     label: "Current Affairs",
@@ -40,6 +56,9 @@ const navLinkClass =
   "nav-link font-medium text-sm md:text-base leading-tight transition-colors text-white group-[.is-scrolled]:text-gray-800 dark:text-white group-[.is-scrolled]:dark:text-gray-200 hover:text-primary-400 group-[.is-scrolled]:hover:text-primary-500 group-[.is-scrolled]:dark:hover:text-primary-400 focus:outline-none focus-visible:ring-2 focus-visible:ring-primary-500 focus-visible:ring-offset-2 rounded-sm";
 
 const dropdownNavLinkClass = `${navLinkClass} flex items-center gap-1 cursor-pointer bg-transparent border-0 p-0`;
+
+const activeClass =
+  "nav-link-active text-primary-400 group-[.is-scrolled]:text-primary-500 dark:group-[.is-scrolled]:text-primary-400";
 ---
 
 <nav class="hidden lg:inline-flex items-center h-full">
@@ -54,7 +73,7 @@ const dropdownNavLinkClass = `${navLinkClass} flex items-center gap-1 cursor-poi
             aria-expanded="false"
             aria-haspopup="true"
             aria-controls={item.controlsId}
-            class={`${dropdownNavLinkClass} ${item.triggerClass}`}
+            class={`${dropdownNavLinkClass} ${item.triggerClass} ${item.active ? activeClass : ""}`}
           >
             {item.label}
             <iconify-icon
@@ -69,7 +88,12 @@ const dropdownNavLinkClass = `${navLinkClass} flex items-center gap-1 cursor-poi
     {
       directNavItems.map((item) => (
         <li class="relative flex items-center h-full py-4 js-menu-trigger-direct">
-          <a href={item.href} target={item.target} class={navLinkClass}>
+          <a
+            href={item.href}
+            target={item.target}
+            aria-current={isActive(item.href) ? "page" : undefined}
+            class={`${navLinkClass} ${isActive(item.href) ? activeClass : ""}`}
+          >
             {item.label}
           </a>
         </li>

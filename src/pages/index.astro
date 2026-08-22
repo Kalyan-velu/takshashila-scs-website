@@ -6,6 +6,10 @@ import WhyChooseUs from "../components/WhyChooseUs.astro";
 import AdreCTA from "@/components/AdreCTA.astro";
 import CoachingProse from "@/components/CoachingProse.astro";
 import FaqSection from "@/components/FaqSection.astro";
+import LatestArticles from "@/components/LatestArticles.vue";
+import { getLatestPosts } from "@/lib/blogger";
+
+const latestPosts = await getLatestPosts(1, 6);
 
 const title = "Best UPSC and APSC Coaching in Guwahati - Takshasheela";
 const description =
@@ -83,5 +87,6 @@ const itemListSchema = {
   <WhyChooseUs id="about" />
   <AdreCTA />
   <CoachingProse />
+  <LatestArticles posts={latestPosts} />
   <FaqSection />
 </Layout>

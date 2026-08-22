@@ -1,68 +1,55 @@
 ---
 import Layout from "@/layouts/Layout.astro";
-import type { WPPost } from "@/types";
-import { getBlogTOC, getLatestPosts, rewriteMediaUrls } from "@/lib/wordpress";
-import { isServer } from "@/config/variables.ts";
+import CommentItem from "@/components/blog/CommentItem.astro";
+import type { BlogComment } from "@/lib/blogger";
+import { getAllPosts, getBlogTOC, getComments } from "@/lib/blogger";
 import { SITE_URL } from "@/config/CONSTANTS.ts";
-import { Image } from "astro:assets";
+
 export async function getStaticPaths() {
-  let allPosts: WPPost[] = [];
-  let page = 1;
+  const posts = await getAllPosts();
 
-  try {
-    const posts = await getLatestPosts(page, 100, {
-      _fields: "slug,title,content,date,excerpt,yoast_head_json",
-    });
-
-    if (!posts || posts.length === 0) return;
-
-    allPosts = [...allPosts, ...posts];
-  } catch (error) {
-    console.error("Error fetching WP posts:", error);
+  const seenSlugs = new Set<string>();
+  for (const post of posts) {
+    if (seenSlugs.has(post.slug)) {
+      console.warn(
+        `Duplicate blog slug "${post.slug}" — only one post will be reachable at /${post.slug}/`,
+      );
+    }
+    seenSlugs.add(post.slug);
   }
 
-  return allPosts.map((post) => ({
-    params: { slug: (post as { slug: string }).slug },
+  return posts.map((post) => ({
+    params: { slug: post.slug },
     props: { post },
   }));
 }
 
 const { post } = Astro.props;
 
-const yoast = post.yoast_head_json;
-const ogImage = yoast?.og_image?.[0];
-const publishedDate = new Date(post.date).toLocaleDateString("en-IN", {
+const publishedDate = new Date(post.publishedAt).toLocaleDateString("en-IN", {
   year: "numeric",
   month: "long",
   day: "numeric",
 });
 
-const content = rewriteMediaUrls(
-  post.content.rendered,
-  import.meta.env.PUBLIC_WORDPRESS_URL ?? "",
-);
-const headings = await getBlogTOC(content);
+const headings = getBlogTOC(post.content);
+const comments = await getComments(post);
+
+function countComments(list: BlogComment[]): number {
+  return list.reduce((sum, comment) => sum + 1 + countComments(comment.replies), 0);
+}
+const totalComments = countComments(comments);
 ---
 
 <Layout
-  title={yoast?.title ?? post.title.rendered}
-  description={yoast?.og_description}
-  image={ogImage?.url}
+  title={`${post.title} | Takshasheela School of Civil Services`}
+  description={post.excerpt}
+  image={post.imageUrl ?? undefined}
   canonical={`${SITE_URL}/${post.slug}/`}
 >
   <Fragment slot="head_data">
     <meta property="og:type" content="article" />
-    {
-      ogImage && (
-        <meta property="og:image:width" content={String(ogImage.width)} />
-      )
-    }
-    {
-      ogImage && (
-        <meta property="og:image:height" content={String(ogImage.height)} />
-      )
-    }
-    <meta name="twitter:card" content={yoast?.twitter_card || "summary_large_image"} />
+    <meta name="twitter:card" content="summary_large_image" />
   </Fragment>
 
   <div class="w-full max-w-7xl mx-auto px-4 py-4">
@@ -91,10 +78,30 @@ const headings = await getBlogTOC(content);
     <header class="max-w-4xl mb-8">
       <h1
         class="text-3xl md:text-4xl lg:text-5xl font-light tracking-tight text-gray-900 mb-4 leading-tight font-sans"
-        set:html={post.title.rendered}
-      />
+      >
+        {post.title}
+      </h1>
+      <div class="flex items-center gap-2 mb-3">
+        {
+          post.author.avatarUrl ? (
+            <img
+              src={post.author.avatarUrl}
+              alt=""
+              width="28"
+              height="28"
+              class="w-7 h-7 rounded-full object-cover border border-gray-200"
+              loading="lazy"
+            />
+          ) : (
+            <div class="w-7 h-7 rounded-full bg-primary-500/10 text-primary-500 flex items-center justify-center text-xs font-semibold border border-gray-200">
+              {post.author.name.charAt(0).toUpperCase()}
+            </div>
+          )
+        }
+        <span class="text-sm font-medium text-gray-900">{post.author.name}</span>
+      </div>
       <div class="flex items-center gap-4 text-sm text-gray-600 font-light">
-        <time datetime={post.date} class="flex items-center gap-1.5">
+        <time datetime={post.publishedAt} class="flex items-center gap-1.5">
           <svg
             xmlns="http://www.w3.org/2000/svg"
             width="14"
@@ -113,36 +120,32 @@ const headings = await getBlogTOC(content);
           </svg>
           {publishedDate}
         </time>
-        {
-          yoast?.twitter_misc?.["Est. reading time"] && (
-            <span class="flex items-center gap-1.5">
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                width="14"
-                height="14"
-                viewBox="0 0 24 24"
-                fill="none"
-                stroke="currentColor"
-                stroke-width="2"
-                stroke-linecap="round"
-                stroke-linejoin="round"
-              >
-                <circle cx="12" cy="12" r="10" />
-                <polyline points="12 6 12 12 16 14" />
-              </svg>
-              {yoast.twitter_misc["Est. reading time"]}
-            </span>
-          )
-        }
+        <span class="flex items-center gap-1.5">
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            width="14"
+            height="14"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+          >
+            <circle cx="12" cy="12" r="10" />
+            <polyline points="12 6 12 12 16 14" />
+          </svg>
+          {post.readingTimeMinutes} min read
+        </span>
       </div>
     </header>
 
     {
-      ogImage?.url && (
+      post.imageUrl && (
         <div class="relative w-full aspect-video md:aspect-21/9 max-h-120 rounded-3xl overflow-hidden shadow-md mb-10 md:mb-12 border border-gray-200/60">
           <img
-            src={ogImage.url}
-            alt={post.title.rendered}
+            src={post.imageUrl}
+            alt={post.title}
             class="w-full h-full object-cover object-center"
             loading="lazy"
           />
@@ -196,7 +199,7 @@ const headings = await getBlogTOC(content);
       }
 
       <main class="lg:col-span-9 w-full min-w-0">
-        <div class="post__content" set:html={content} />
+        <div class="post__content" set:html={post.content} />
       </main>
 
       {
@@ -227,6 +230,53 @@ const headings = await getBlogTOC(content);
         )
       }
     </div>
+
+    <section class="max-w-4xl mt-16 pt-10 border-t border-gray-200">
+      <h2
+        class="text-2xl font-medium tracking-tight text-gray-900 mb-8 flex items-center gap-2"
+      >
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          width="20"
+          height="20"
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="2"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          class="text-primary-500"
+        >
+          <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path>
+        </svg>
+        Comments ({totalComments})
+      </h2>
+
+      {
+        comments.length === 0 ? (
+          <div class="text-center py-10 bg-gray-100/30 border border-dashed border-gray-200 rounded-2xl">
+            <p class="text-gray-600 text-sm">
+              No comments yet.{" "}
+              <a
+                href={`${post.bloggerLink}#comment-form`}
+                target="_blank"
+                rel="noopener noreferrer"
+                class="text-primary-500 font-medium hover:underline"
+              >
+                Be the first to comment
+              </a>
+              .
+            </p>
+          </div>
+        ) : (
+          <div class="space-y-6">
+            {comments.map((comment) => (
+              <CommentItem comment={comment} />
+            ))}
+          </div>
+        )
+      }
+    </section>
   </div>
 </Layout>
 

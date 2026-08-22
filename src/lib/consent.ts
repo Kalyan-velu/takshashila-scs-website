@@ -7,14 +7,6 @@ export interface CookieConsentPreferences {
 
 export const CONSENT_STORAGE_KEY = "takshashila_cookie_consent_v1";
 
-declare global {
-  interface Window {
-    dataLayer?: Record<string, any>[];
-    gtag?: (...args: any[]) => void;
-    clarity?: (...args: any[]) => void;
-  }
-}
-
 /**
  * Retrieves stored cookie consent preferences from localStorage.
  */
@@ -31,77 +23,7 @@ export function getStoredConsent(): CookieConsentPreferences | null {
 }
 
 /**
- * Dynamically loads the Microsoft Clarity script if consent is granted.
- */
-export function loadClarity(clarityId?: string): void {
-  if (typeof window === "undefined") return;
-
-  const projectId =
-    clarityId ||
-    import.meta.env.PUBLIC_CLARITY_PROJECT_ID ||
-    "";
-
-  if (!projectId) return;
-
-  if (window.clarity) {
-    window.clarity("consent");
-    return;
-  }
-
-  (function (c: any, l: any, a: any, r: any, i: any) {
-    c[a] =
-      c[a] ||
-      function () {
-        (c[a].q = c[a].q || []).push(arguments);
-      };
-    const t = l.createElement(r);
-    t.async = 1;
-    t.src = "https://www.clarity.ms/tag/" + i;
-    const y = l.getElementsByTagName(r)[0];
-    if (y && y.parentNode) {
-      y.parentNode.insertBefore(t, y);
-    } else if (l.head) {
-      l.head.appendChild(t);
-    }
-  })(window, document, "clarity", "script", projectId);
-}
-
-/**
- * Updates Google Consent Mode v2 state and triggers GTM / Clarity integration.
- */
-export function updateGoogleConsentMode(prefs: CookieConsentPreferences): void {
-  if (typeof window === "undefined") return;
-
-  window.dataLayer = window.dataLayer || [];
-  if (!window.gtag) {
-    window.gtag = function () {
-      window.dataLayer?.push(arguments);
-    };
-  }
-
-  const analyticsState = prefs.analytics ? "granted" : "denied";
-  const marketingState = prefs.marketing ? "granted" : "denied";
-
-  window.gtag("consent", "update", {
-    analytics_storage: analyticsState,
-    ad_storage: marketingState,
-    ad_user_data: marketingState,
-    ad_personalization: marketingState,
-  });
-
-  window.dataLayer.push({
-    event: "consent_update",
-    cookie_consent_analytics: prefs.analytics,
-    cookie_consent_marketing: prefs.marketing,
-  });
-
-  if (prefs.analytics) {
-    loadClarity();
-  }
-}
-
-/**
- * Saves consent preferences to localStorage and updates consent mode & analytics scripts.
+ * Saves consent preferences to localStorage and notifies listeners.
  */
 export function saveConsent(prefs: Partial<CookieConsentPreferences>): CookieConsentPreferences {
   const fullPrefs: CookieConsentPreferences = {
@@ -118,9 +40,6 @@ export function saveConsent(prefs: Partial<CookieConsentPreferences>): CookieCon
       console.error("Failed to save cookie consent to storage", e);
     }
 
-    updateGoogleConsentMode(fullPrefs);
-
-    // Notify listeners
     window.dispatchEvent(
       new CustomEvent("cookie_consent_updated", { detail: fullPrefs })
     );

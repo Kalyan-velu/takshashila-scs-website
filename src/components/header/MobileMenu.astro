@@ -1,6 +1,19 @@
 ---
 import { aboutItems, coursesItems } from "@/data/navigation.ts";
 import { CURRENT_AFFAIRS_URL, EMAIL, PHONE_DISPLAY, PHONE_HREF } from "@/config/CONSTANTS.ts";
+
+const currentPath = Astro.url.pathname;
+
+function isActive(href: string): boolean {
+  const normalized = (path: string) => path.replace(/\/+$/, "") || "/";
+  return normalized(href) === normalized(currentPath);
+}
+
+const isCoursesActive = currentPath.startsWith("/courses");
+const isAboutActive = isActive("/about/");
+
+const activeLinkClass = "text-primary-500 dark:text-primary-400";
+const linkClass = "text-gray-900 dark:text-white";
 ---
 
 <div class="w-full relative z-40 lg:hidden transition-all duration-300 overflow-hidden bg-white dark:bg-slate-950 border-b border-gray-100 dark:border-slate-900 opacity-0 pointer-events-none js-mobile-drawer" style="max-height: 0rem;">
@@ -16,27 +29,54 @@ import { CURRENT_AFFAIRS_URL, EMAIL, PHONE_DISPLAY, PHONE_HREF } from "@/config/
         <ul class="flex flex-col space-y-4 w-full">
           <li class="relative w-full border-b border-gray-100 dark:border-slate-900/60 pb-3">
             <button class="w-full flex justify-between items-center text-left text-2xl font-bold tracking-tight text-gray-900 dark:text-white cursor-pointer js-mobile-sub-trigger-courses">
-              <span>UPSC - APSC Programs</span>
+              <span class={isCoursesActive ? activeLinkClass : ""}>UPSC - APSC Programs</span>
               <iconify-icon icon="lucide:chevron-right" class="text-xl text-gray-400 dark:text-gray-500"></iconify-icon>
             </button>
           </li>
           <li class="relative w-full border-b border-gray-100 dark:border-slate-900/60 pb-3">
-            <a href="/team/" class="js-mobile-link block w-full text-2xl font-bold tracking-tight text-gray-900 dark:text-white">Team Faculty</a>
+            <a
+              href="/team/"
+              aria-current={isActive("/team/") ? "page" : undefined}
+              class={`js-mobile-link block w-full text-2xl font-bold tracking-tight ${isActive("/team/") ? activeLinkClass : linkClass}`}
+            >
+              Team Faculty
+            </a>
           </li>
           <li class="relative w-full border-b border-gray-100 dark:border-slate-900/60 pb-3">
             <button class="w-full flex justify-between items-center text-left text-2xl font-bold tracking-tight text-gray-900 dark:text-white cursor-pointer js-mobile-sub-trigger-about">
-              <span>About Center</span>
+              <span class={isAboutActive ? activeLinkClass : ""}>About Center</span>
               <iconify-icon icon="lucide:chevron-right" class="text-xl text-gray-400 dark:text-gray-500"></iconify-icon>
             </button>
+          </li>
+          <li class="relative w-full border-b border-gray-100 dark:border-slate-900/60 pb-3">
+            <a
+              href="/blogs/"
+              aria-current={isActive("/blogs/") ? "page" : undefined}
+              class={`js-mobile-link block w-full text-2xl font-bold tracking-tight ${isActive("/blogs/") ? activeLinkClass : linkClass}`}
+            >
+              Blog
+            </a>
           </li>
           <li class="relative w-full border-b border-gray-100 dark:border-slate-900/60 pb-3">
             <a target="_blank" href={CURRENT_AFFAIRS_URL} class="js-mobile-link block w-full text-2xl font-bold tracking-tight text-gray-900 dark:text-white">Current Affairs</a>
           </li>
           <li class="relative w-full border-b border-gray-100 dark:border-slate-900/60 pb-3">
-            <a href="/magazine/" class="js-mobile-link block w-full text-2xl font-bold tracking-tight text-gray-900 dark:text-white">Magazines</a>
+            <a
+              href="/magazine/"
+              aria-current={isActive("/magazine/") ? "page" : undefined}
+              class={`js-mobile-link block w-full text-2xl font-bold tracking-tight ${isActive("/magazine/") ? activeLinkClass : linkClass}`}
+            >
+              Magazines
+            </a>
           </li>
           <li class="relative w-full border-b border-gray-100 dark:border-slate-900/60 pb-3">
-            <a href="/contact/" class="js-mobile-link block w-full text-2xl font-bold tracking-tight text-gray-900 dark:text-white">Contact</a>
+            <a
+              href="/contact/"
+              aria-current={isActive("/contact/") ? "page" : undefined}
+              class={`js-mobile-link block w-full text-2xl font-bold tracking-tight ${isActive("/contact/") ? activeLinkClass : linkClass}`}
+            >
+              Contact
+            </a>
           </li>
         </ul>
 
@@ -80,7 +120,13 @@ import { CURRENT_AFFAIRS_URL, EMAIL, PHONE_DISPLAY, PHONE_HREF } from "@/config/
           <ul class="flex flex-col space-y-4">
             {coursesItems.map((item) => (
               <li class="border-b border-gray-100 dark:border-slate-900/60 pb-3">
-                <a href={item.url} class="js-mobile-link block text-xl font-bold tracking-tight text-gray-900 dark:text-white">{item.title}</a>
+                <a
+                  href={item.url}
+                  aria-current={isActive(item.url) ? "page" : undefined}
+                  class={`js-mobile-link block text-xl font-bold tracking-tight ${isActive(item.url) ? activeLinkClass : linkClass}`}
+                >
+                  {item.title}
+                </a>
               </li>
             ))}
             <li class="pb-3">
@@ -95,7 +141,13 @@ import { CURRENT_AFFAIRS_URL, EMAIL, PHONE_DISPLAY, PHONE_HREF } from "@/config/
           <ul class="flex flex-col space-y-4">
             {aboutItems.map((item) => (
               <li class="border-b border-gray-100 dark:border-slate-900/60 pb-3">
-                <a href={item.url} class="js-mobile-link block text-xl font-bold tracking-tight text-gray-900 dark:text-white">{item.title}</a>
+                <a
+                  href={item.url}
+                  aria-current={isActive(item.url) ? "page" : undefined}
+                  class={`js-mobile-link block text-xl font-bold tracking-tight ${isActive(item.url) ? activeLinkClass : linkClass}`}
+                >
+                  {item.title}
+                </a>
               </li>
             ))}
             <li class="border-b border-gray-100 dark:border-slate-900/60 pb-3">

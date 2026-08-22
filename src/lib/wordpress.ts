@@ -1,4 +1,4 @@
-import type { WPMedia, WPPage, WPPost } from "@/types";
+import type { WPMedia, WPPage } from "@/types";
 import variables from "@/config/variables.ts";
 import { SITE_DOMAIN } from "@/config/CONSTANTS.ts";
 import * as cheerio from "cheerio";
@@ -17,33 +17,12 @@ async function wpFetch<T>(
   if (params) {
     Object.entries(params).forEach(([k, v]) => url.searchParams.set(k, v));
   }
-  console.log("Url:", url.toString());
 
   const res = await fetch(url.toString());
   if (!res.ok) {
     throw new Error(`WP API error [${res.status}] for: ${url.toString()}`);
   }
   return res.json() as Promise<T>;
-}
-
-/** Fetch paginated posts. Uses _embed to get featured images in one request. */
-export async function getLatestPosts(
-  page = 1,
-  perPage = 10,
-  extra?: Record<string, string>,
-): Promise<WPPost[]> {
-  return wpFetch<WPPost[]>("posts", {
-    page: String(page),
-    per_page: String(perPage),
-    _embed: "1",
-    ...extra,
-  });
-}
-
-/** Fetch a single post by slug */
-export async function getPostBySlug(slug: string): Promise<WPPost | null> {
-  const posts = await wpFetch<WPPost[]>("posts", { slug, _embed: "1" });
-  return posts[0] ?? null;
 }
 
 /** Fetch all pages */
@@ -60,15 +39,6 @@ export async function getPageBySlug(slug: string): Promise<WPPage | null> {
 /** Fetch media by ID */
 export async function getMedia(id: number): Promise<WPMedia> {
   return wpFetch<WPMedia>(`media/${id}`);
-}
-
-/**
- * Rewrites WordPress media URLs to go through your Astro proxy.
- * Use this on any HTML content from WordPress to fix broken image/file URLs.
- */
-export function rewriteMediaUrls(html: string, wpBase: string): string {
-  // Replace absolute WP URLs with proxied paths
-  return html.replaceAll(wpBase.replace(/\/$/, ""), "/api/wp");
 }
 
 export interface Magazine {
@@ -143,17 +113,4 @@ export async function getMagazines(): Promise<Magazine[]> {
     });
   });
   return magazines;
-}
-/**
- * Create a table of content to link the tags
- * */
-export async function getBlogTOC(content: string) {
-  let subHeadings: { id: string; text: string }[] = [];
-
-  const $ = cheerio.load(content);
-  $("h2").each((_, el) => {
-    const id = el.attribs?.id;
-    subHeadings.push({ id: `#${id}`, text: $(el).text() });
-  });
-  return subHeadings;
 }
