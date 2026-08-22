@@ -1,8 +1,8 @@
 // Scans a built `dist/client` output for inline <script> bodies (no `src`,
 // excluding JSON-LD and Partytown-typed scripts, which browsers never execute)
 // and prints their CSP `sha256-` sources. Re-run after `pnpm build` whenever
-// Astro, Partytown, or the GTM container ID changes, and update the
-// `script-src` hashes in vercel.json accordingly.
+// Astro or Partytown changes, and update the `script-src` hashes in
+// vercel.json accordingly.
 //
 // Usage: node scripts/csp-hashes.mjs [dist/client]
 

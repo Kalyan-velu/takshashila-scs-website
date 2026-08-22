@@ -1,0 +1,56 @@
+---
+import type { BlogComment } from "@/lib/blogger";
+
+interface Props {
+  comment: BlogComment;
+}
+
+const { comment } = Astro.props;
+
+const publishedDate = new Date(comment.publishedAt).toLocaleDateString("en-IN", {
+  year: "numeric",
+  month: "short",
+  day: "numeric",
+});
+---
+
+<div class="flex gap-3">
+  {
+    comment.author.avatarUrl ? (
+      <img
+        src={comment.author.avatarUrl}
+        alt=""
+        width="36"
+        height="36"
+        class="w-9 h-9 rounded-full object-cover shrink-0 bg-gray-100 border border-gray-200"
+        loading="lazy"
+      />
+    ) : (
+      <div class="w-9 h-9 rounded-full shrink-0 bg-primary-500/10 text-primary-500 flex items-center justify-center text-sm font-semibold border border-gray-200">
+        {comment.author.name.charAt(0).toUpperCase()}
+      </div>
+    )
+  }
+  <div class="flex-1 min-w-0">
+    <div class="flex items-center gap-2 flex-wrap">
+      <span class="font-medium text-sm text-gray-900">{comment.author.name}</span>
+      <span class="text-gray-300">&middot;</span>
+      <time datetime={comment.publishedAt} class="text-xs text-gray-500">
+        {publishedDate}
+      </time>
+    </div>
+    <p class="text-sm text-gray-700 mt-1 leading-relaxed whitespace-pre-line">
+      {comment.content}
+    </p>
+
+    {
+      comment.replies.length > 0 && (
+        <div class="mt-4 space-y-4 border-l border-gray-200 pl-4">
+          {comment.replies.map((reply) => (
+            <Astro.self comment={reply} />
+          ))}
+        </div>
+      )
+    }
+  </div>
+</div>

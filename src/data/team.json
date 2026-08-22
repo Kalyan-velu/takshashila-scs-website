@@ -2,38 +2,115 @@
   "faculty": [
     {
       "name": "Prabhakar Jha",
-      "designation": "Faculty Member",
-      "description": "Have more than 10 years of teaching experience as a General Studies faculty, both online and offline. Former mentor and faculty at renowned institutions, including Unacademy, Adda 24/7, Unified IAS Academy, UPSC Pathshala, Ray IAS Academy, and Madhubani IAS Academy. Expertise in teaching Polity and Governance, Indian Economy, and International Relations. Successfully appeared for the UPSC interview three times and in various State Services Exams.",
-      "image": "/Takshasheela/faculty/prabhakar-jha.png",
-      "socials": {}
+      "experience": "Over 10 years as a General Studies faculty and more than 6 years of content creation expertise",
+      "expertise": [
+        "Polity and Governance",
+        "Indian Economy",
+        "International Relations"
+      ],
+      "track_record": "Successfully appeared for the UPSC interview three times and excelled in various state services examinations, bringing firsthand insights to the classroom",
+      "associations": [
+        "Unacademy",
+        "Adda 24/7",
+        "Unified IAS Academy",
+        "UPSC Pathshala",
+        "Ray IAS Academy",
+        "Madhubani IAS Academy"
+      ],
+      "description": "A blend of in-depth knowledge, practical experience, and a student-centric approach makes this mentor an invaluable resource for aspirants aiming for success in competitive exams.",
+      "image": "/Takshasheela/faculty/prabhakar-jha.png"
+    },
+    {
+      "name": "Vaibhav Patil",
+      "experience": "Over 8 years of teaching and mentoring experience in Geography and Environment",
+      "expertise": ["Geography", "Environment"],
+      "track_record": "Successfully mentored thousands of students, guiding many to achieve their dreams of clearing the Civil Services Examination",
+      "associations": [
+        "Drishti IAS",
+        "Guidance Group",
+        "Shivvidya Prabodhini Academy",
+        "Royal IAS Academy"
+      ],
+      "description": "A dedicated mentor with a passion for simplifying complex topics and inspiring aspirants to achieve excellence in competitive exams.",
+      "image": "/Takshasheela/faculty/vaibhav-patil.png"
+    },
+    {
+      "name": "Nishant N. Kashyap",
+      "experience": "Over 3 years as a General Studies faculty and 5+ years in content creation",
+      "expertise": [
+        "History",
+        "Assam History and Assam related topics",
+        "Art and Culture",
+        "International Relations",
+        "Geography"
+      ],
+      "track_record": "Successfully appeared for the APSC interview",
+      "associations": ["Ministry of External Affairs", "PRS India"],
+      "description": "Combining scholarly excellence with a passion for mentoring, this educator consistently inspires and shapes future leaders in civil services.",
+      "image": "/Takshasheela/faculty/nishant-nirlav-kashyap.png"
+    },
+    {
+      "name": "Hriday Kr Khakholary",
+      "experience": "Over 10 years of experience guiding APSC and UPSC aspirants both online and offline",
+      "expertise": [
+        "Indian Economy",
+        "Indian Polity and Governance",
+        "Assam related topics",
+        "Current Affairs"
+      ],
+      "track_record": "Helped more than 1,500 students clear APSC exams and achieve final selection through expert guidance, strategic preparation, and dedication; successfully appeared for UPSC and APSC interview/viva voce multiple times",
+      "associations": [
+        "Founder and Director of Triguna IAS Academy",
+        "Former mentor and faculty of several reputed institutions in Delhi and Assam"
+      ],
+      "description": "With his innovative teaching methods, this educator provides an engaging and effective learning experience for the aspirants of both UPSC and APSC.",
+      "image": "/Takshasheela/faculty/khaklary-sir.webp"
     },
     {
       "name": "Sanjay Kumar",
-      "designation": "Faculty Member",
-      "description": "Have more than 8 years of teaching and mentoring experience. Post-Graduate from the Delhi School of Economics. Appeared for UPSC CSE MAINS 2017. Formerly associated with Vision IAS, Khan study group, IAS Gurukul and Borthakur IAS Academy, as content creator, mentor and teacher. Expertise in GS paper II, III and Sociology Optional.",
-      "image": "/Takshasheela/faculty/sanjay-kumar.png",
-      "socials": {}
-    },
-    {
-      "name": "Nishant N Kashyap",
-      "designation": "Faculty Member",
-      "description": "Have more than 4 years of teaching experience as a General Studies Faculty, both online and offline. Formerly associated with reputed Civil Service Institutions. Worked in the Ministry of External Affairs. Expertise in teaching History and International Relations. Successfully appeared for Civil Services interviews. Mentored thousands of students to clear the Civil Services Exam.",
-      "image": "/Takshasheela/faculty/nishant-nirlav-kashyap.png",
-      "socials": {}
+      "experience": "Over 8 years of teaching and mentoring experience",
+      "expertise": ["GS Paper II", "GS Paper III", "Sociology Optional"],
+      "track_record": "Post-Graduate from the Delhi School of Economics; appeared for UPSC CSE Mains 2017",
+      "associations": [
+        "Vision IAS",
+        "Khan Study Group",
+        "IAS Gurukul",
+        "Borthakur IAS Academy"
+      ],
+      "description": "A former content creator, mentor, and teacher whose academic depth and exam-focused approach help aspirants build strong conceptual foundations in GS and Sociology.",
+      "image": "/Takshasheela/faculty/sanjay-kumar.png"
     },
     {
       "name": "Bhargab Hazarika",
-      "designation": "Faculty Member",
-      "description": "Have more than 3 years of teaching and mentoring experience. Expertise in teaching Geography, Environment, Assam-specific contents, and Internal Security. Formerly associated with many reputed institutions like Borthakur IAS Academy, Aarohan Civil Service Institute, Uncomplicated by career guide, etc.",
-      "image": "/Takshasheela/faculty/bhargab-hazarika.png",
-      "socials": {}
+      "experience": "Over 3 years of teaching and mentoring experience",
+      "expertise": [
+        "Geography",
+        "Environment",
+        "Assam-specific contents",
+        "Internal Security"
+      ],
+      "track_record": "Formerly associated with many reputed institutions, bringing hands-on teaching experience across diverse civil services programs",
+      "associations": [
+        "Borthakur IAS Academy",
+        "Aarohan Civil Service Institute",
+        "Uncomplicated by Career Guide"
+      ],
+      "description": "A dedicated educator known for simplifying Geography, Environment, and Assam-specific content for aspirants preparing for competitive exams.",
+      "image": "/Takshasheela/faculty/bhargab-hazarika.png"
     },
     {
       "name": "Sangeeta Das",
-      "designation": "Guest Faculty",
-      "description": "ALS IAS \u2013 Faculty (CSAT): Delivered CSAT training with interactive sessions and one-on-one mentoring; guided students for CUET and other exams. MAKE IAS, Nehru Vihar \u2013 Faculty: Taught CSAT and Science & Technology. South Point School (2020\u20132022): Subject Teacher for Science and Mathematics. Francis De Sales Higher Secondary School (2012\u20132016): Subject Teacher for Science and Mathematics.",
-      "image": "/Takshasheela/faculty/sangeeta.jpeg",
-      "socials": {}
+      "experience": "Extensive teaching experience across school and coaching institutes, including CSAT training and mentoring",
+      "expertise": ["CSAT", "Science and Technology", "Science", "Mathematics"],
+      "track_record": "Delivered CSAT training with interactive sessions and one-on-one mentoring; guided students for CUET and other exams",
+      "associations": [
+        "ALS IAS",
+        "MAKE IAS, Nehru Vihar",
+        "South Point School",
+        "Francis De Sales Higher Secondary School"
+      ],
+      "description": "An experienced educator whose diverse teaching background in Science, Mathematics, and CSAT brings a well-rounded, student-focused approach to exam preparation.",
+      "image": "/Takshasheela/faculty/sangeeta.jpeg"
     }
   ]
 }

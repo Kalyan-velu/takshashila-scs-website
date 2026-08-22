@@ -22,8 +22,8 @@ the edge; Astro/the app code has no involvement at request time.
 ## CSP directives, and why each is what it is
 
 - **`default-src 'self'`** — fallback for any directive not listed explicitly.
-- **`script-src`** — `'self'` + `'unsafe-inline'` + `googletagmanager.com` + `challenges.cloudflare.com` + `code.iconify.design` + `googleads.g.doubleclick.net` + `googleadservices.com` + `google.com`.
-- **Note on `'unsafe-inline'`**: When explicit `'sha256-...'` hashes are present in `script-src`, W3C CSP Level 2/3 specifications require browser engines to ignore `'unsafe-inline'` completely. To ensure runtime inline tags injected by Google Tag Manager, Partytown, and dynamic Astro hydration work across all browsers without CSP blocks, explicit script hashes are omitted in favor of `'unsafe-inline'` combined with strict origin directives.
+- **`script-src`** — `'self'` + `'unsafe-inline'` + `challenges.cloudflare.com` + `code.iconify.design`.
+- **Note on `'unsafe-inline'`**: When explicit `'sha256-...'` hashes are present in `script-src`, W3C CSP Level 2/3 specifications require browser engines to ignore `'unsafe-inline'` completely. To ensure runtime inline tags injected by Partytown and dynamic Astro hydration work across all browsers without CSP blocks, explicit script hashes are omitted in favor of `'unsafe-inline'` combined with strict origin directives.
 
 - **Note on `'unsafe-eval'`**: deliberately *not* added to `script-src`. Zod v4
   (used client-side by `src/lib/heroLeadForm.ts` for the hero form) probes for
@@ -37,12 +37,11 @@ the edge; Astro/the app code has no involvement at request time.
 
 - **`style-src 'self' 'unsafe-inline'`** — kept permissive because Vue's
   dynamic `:style` bindings and Tailwind's inline styles depend on it.
-- **`img-src 'self' https: data: blob:`** — permissive because post and media images come from WordPress/CRM content.
+- **`img-src 'self' https: data: blob:`** — permissive because post and media images come from WordPress/CRM content and from Blogger (`blogger.googleusercontent.com`).
 - **`font-src 'self' data:`** — fonts are self-hosted via Astro's `fontProviders.fontsource()`.
-- **`connect-src`** — `'self'` + GTM / Cloudflare / Google Analytics / DoubleClick (`ad.doubleclick.net`, `googleads.g.doubleclick.net`, `pagead2.googlesyndication.com`, `googleadservices.com`, `google.com`) + `crm.takshashilascs.com` + Iconify API endpoints (`api.iconify.design`, `api.simplesvg.com`, `api.unisvg.com`).
-  - `pagead2.googlesyndication.com` is required for the Google Ads (`gtag`) conversion-measurement `collect` beacon fired alongside `AW-` conversion IDs; without it, Chrome blocks the beacon with a CSP `connect-src` violation.
-- **`frame-src`** — `'self'` + GTM noscript iframe + Turnstile challenge iframe + `google.com` + `googleads.g.doubleclick.net`.
-- **`worker-src 'self' blob:`** — Partytown runs GTM in a web worker.
+- **`connect-src`** — `'self'` + Cloudflare + Iconify API endpoints (`api.iconify.design`, `api.simplesvg.com`, `api.unisvg.com`). Blog posts are fetched from Blogger's public JSON feed (`src/lib/blogger.ts`), but only from Astro frontmatter at build/request time on the server — never from browser JS — so `blogs.takshashilascs.com` doesn't need to be listed here.
+- **`frame-src`** — `'self'` + Turnstile challenge iframe.
+- **`worker-src 'self' blob:`** — Partytown runs offloaded scripts in a web worker.
 - **`object-src 'none'`** — no plugin/Flash content.
 - **`base-uri 'self'`** — blocks `<base>` tag injection.
 - **`form-action 'self'`** — form submissions post to `/api/create_lead`.

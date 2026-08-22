@@ -1,6 +1,5 @@
-<!--suppress ALL -->
 <script setup lang="ts">
-import { computed, ref } from "vue";
+import { computed, onMounted, ref } from "vue";
 import { cn } from "@/lib/utils";
 import { whatsappUrl } from "@/config/CONSTANTS.ts";
 import type { Course } from "@/content.config.ts";
@@ -43,7 +42,7 @@ onMounted(() => {
           <article
             :class="
               cn(
-                'course-card  select-none cursor-grab active:cursor-grabbing h-full group relative flex flex-col  snap-center shrink-0 rounded-tl-[2rem] rounded-br-[2rem] border overflow-clip transition-all duration-500 hover:shadow-2xl hover:shadow-primary-500/5 hover:border-primary-500/20',
+                'course-card  select-none active:cursor-grabbing h-full group relative flex flex-col  snap-center shrink-0 rounded-tl-[2rem] rounded-br-[2rem] border overflow-clip transition-all duration-500 hover:shadow-2xl hover:shadow-primary-500/5 hover:border-primary-500/20',
                 course.popular
                   ? 'border-primary-500/50 shadow-lg bg-primary-500/1'
                   : 'border-gray-200 bg-white',

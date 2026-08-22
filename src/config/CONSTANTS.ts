@@ -11,6 +11,8 @@ export const SITE_URL = "https://www.takshashilascs.com";
 // Bare domain (no www) — this is the host WordPress content itself links to.
 export const SITE_DOMAIN = "https://takshashilascs.com";
 export const CURRENT_AFFAIRS_URL = "https://currentaffairs.takshashilascs.com";
+// Blogger-hosted blog — see src/lib/blogger.ts for the feed client.
+export const BLOG_URL = "https://blogs.takshashilascs.com";
 
 export function whatsappUrl(message: string): string {
   return `https://wa.me/91${phoneDigits}?text=${encodeURIComponent(message)}`;

@@ -1,0 +1,101 @@
+---
+import Layout from "@/layouts/Layout.astro";
+import { getAllPosts } from "@/lib/blogger";
+
+const FALLBACK_IMAGE =
+  "https://images.unsplash.com/photo-1456324504439-367cee3b3c32";
+
+const posts = await getAllPosts();
+
+const formatDate = (iso: string) =>
+  new Date(iso).toLocaleDateString("en-IN", {
+    year: "numeric",
+    month: "long",
+    day: "numeric",
+  });
+---
+
+<Layout
+  title="Blog | Takshasheela School of Civil Services"
+  description="Insights, strategies, and updates from Takshasheela School of Civil Services to help you crack the UPSC and APSC exams."
+>
+  <div
+    class="bg-primary-500/5 py-16 flex flex-col items-center justify-center text-center px-4 border-b border-gray-200"
+  >
+    <h1
+      class="text-4xl md:text-5xl lg:text-7xl font-light tracking-tight text-gray-900 max-w-4xl mb-4 leading-tight"
+    >
+      Our <span class="text-primary-500 font-medium">Blog</span>
+    </h1>
+    <p class="text-gray-600 font-light text-lg max-w-2xl leading-relaxed">
+      Insights, updates, and articles from Takshasheela to fuel your UPSC and
+      APSC preparation.
+    </p>
+  </div>
+
+  <div class="px-4 py-16 md:px-6 max-w-7xl mx-auto w-full">
+    {
+      posts.length === 0 ? (
+        <div class="text-center py-20 bg-gray-100/20 border border-dashed border-gray-200 rounded-3xl max-w-md mx-auto px-6">
+          <h3 class="text-xl font-medium mb-2">No Articles Yet</h3>
+          <p class="text-gray-600 font-light text-sm">
+            We are working on new content. Please check back soon.
+          </p>
+        </div>
+      ) : (
+        <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+          {posts.map((post) => (
+            <a
+              href={post.link}
+              class="group flex flex-col items-start bg-white rounded-2xl border border-gray-200 overflow-hidden hover:shadow-md transition-all hover:-translate-y-1 h-full"
+            >
+              <div class="w-full aspect-video overflow-hidden bg-gray-100">
+                <img
+                  src={post.imageUrl || FALLBACK_IMAGE}
+                  alt={post.title}
+                  width="350"
+                  height="197"
+                  class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                  loading="lazy"
+                />
+              </div>
+              <div class="p-6 flex flex-col grow">
+                <div class="flex items-center gap-2 mb-3 text-xs text-gray-600 font-light">
+                  <time datetime={post.publishedAt}>
+                    {formatDate(post.publishedAt)}
+                  </time>
+                  <span>&middot;</span>
+                  <span>{post.readingTimeMinutes} min read</span>
+                </div>
+                <h3 class="text-xl font-medium tracking-tight mb-3 line-clamp-2 group-hover:text-primary-500 transition-colors">
+                  {post.title}
+                </h3>
+                <p class="text-gray-600 font-light text-sm line-clamp-3 mb-4 grow">
+                  {post.excerpt}
+                </p>
+                <div class="mt-auto inline-flex items-center text-sm font-medium text-gray-900 group-hover:text-primary-500">
+                  Read More
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="16"
+                    height="16"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="2"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    class="ml-1 w-4 h-4 opacity-0 -translate-x-2 group-hover:opacity-100 group-hover:translate-x-0 transition-all"
+                  >
+                    <line x1="7" y1="17" x2="17" y2="7" />
+                    <polyline points="7 7 17 7 17 17" />
+                  </svg>
+                </div>
+              </div>
+            </a>
+          ))}
+        </div>
+      )
+    }
+  </div>
+</Layout>

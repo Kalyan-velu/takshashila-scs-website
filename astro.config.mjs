@@ -51,6 +51,7 @@ export default defineConfig({
       tsconfigPaths: true,
     },
     server: {
+      host: true,
       proxy: {
         "/storage": {
           target: "https://crm.takshashilascs.com",

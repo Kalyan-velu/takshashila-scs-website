@@ -1,43 +1,12 @@
 <script setup lang="ts">
-import { computed, onMounted, ref } from "vue";
-import { getLatestPosts } from "../lib/wordpress";
-import type { WPPost } from "@/types";
-import { CURRENT_AFFAIRS_URL } from "@/config/CONSTANTS.ts";
+import type { BlogPost } from "@/lib/blogger";
 
-const props = defineProps<{
-  posts?: WPPost[];
+const FALLBACK_IMAGE =
+  "https://images.unsplash.com/photo-1456324504439-367cee3b3c32";
+
+defineProps<{
+  posts: BlogPost[];
 }>();
-
-const posts = ref<WPPost[]>(props.posts ?? []);
-const isLoading = ref(!props.posts);
-
-const renderPosts = computed(() => {
-  return posts.value.length > 0 ? posts.value : [];
-});
-
-const getImageUrl = (post: WPPost) => {
-  const fallbackImage =
-    "https://images.unsplash.com/photo-1456324504439-367cee3b3c32";
-  return post._embedded?.["wp:featuredmedia"]?.[0]?.source_url || fallbackImage;
-};
-
-const getCleanExcerpt = (post: WPPost) => {
-  return post.excerpt?.rendered?.replace(/<\/?[^>]+(>|$)/g, "") || "";
-};
-
-onMounted(async () => {
-  if (props.posts) return;
-  try {
-    const fetchedPosts = await getLatestPosts(1, 6);
-    if (fetchedPosts && fetchedPosts.length > 0) {
-      posts.value = fetchedPosts;
-    }
-  } catch (error) {
-    console.error("Error fetching trending posts:", error);
-  } finally {
-    isLoading.value = false;
-  }
-});
 </script>
 
 <template>
@@ -59,8 +28,7 @@ onMounted(async () => {
         </div>
 
         <a
-          target="_blank"
-          :href="CURRENT_AFFAIRS_URL"
+          href="/blogs/"
           class="inline-flex items-center text-primary-500 font-medium hover:underline w-fit"
         >
           View all articles
@@ -82,59 +50,22 @@ onMounted(async () => {
         </a>
       </div>
 
-      <!-- Loading Skeletons -->
-      <div
-        v-if="isLoading"
-        class="grid md:grid-cols-2 lg:grid-cols-3 2xl:grid-cols-4 gap-6"
-      >
-        <div
-          v-for="n in 4"
-          :key="n"
-          class="flex flex-col items-start bg-white rounded-2xl border border-gray-200 overflow-hidden h-full"
-        >
-          <div class="w-full aspect-video bg-gray-100 animate-pulse"></div>
-
-          <div class="p-6 flex flex-col grow w-full">
-            <div class="flex items-center gap-2 mb-3">
-              <div
-                class="h-5 w-16 rounded-full bg-gray-100 animate-pulse"
-              ></div>
-            </div>
-
-            <div class="space-y-2 mb-3 h-14">
-              <div class="h-5 w-full rounded bg-gray-100 animate-pulse"></div>
-              <div class="h-5 w-3/4 rounded bg-gray-100 animate-pulse"></div>
-            </div>
-
-            <div class="space-y-2 mb-4 grow">
-              <div class="h-4 w-full rounded bg-gray-100 animate-pulse"></div>
-              <div class="h-4 w-full rounded bg-gray-100 animate-pulse"></div>
-              <div class="h-4 w-2/3 rounded bg-gray-100 animate-pulse"></div>
-            </div>
-
-            <div
-              class="mt-auto h-4 w-24 rounded bg-gray-100 animate-pulse"
-            ></div>
-          </div>
-        </div>
-      </div>
-
-      <div v-else-if="renderPosts.length === 0" class="text-center py-12">
+      <div v-if="posts.length === 0" class="text-center py-12">
         <p class="text-gray-600">No articles available at the moment.</p>
       </div>
 
       <!-- Actual Content -->
       <div v-else class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
         <a
-          v-for="post in renderPosts"
+          v-for="post in posts"
           :key="post.id"
-          :href="`${post.link.replace('crm.', '')}`"
+          :href="post.link"
           class="group flex flex-col items-start bg-white rounded-2xl border border-gray-200 overflow-hidden hover:shadow-md transition-all hover:-translate-y-1 h-full"
         >
           <div class="w-full aspect-video overflow-hidden bg-gray-100">
             <img
-              :src="getImageUrl(post)"
-              :alt="post.title.rendered"
+              :src="post.imageUrl || FALLBACK_IMAGE"
+              :alt="post.title"
               width="350"
               height="197"
               class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
@@ -151,12 +82,12 @@ onMounted(async () => {
             </div>
             <h3
               class="text-xl font-medium tracking-tight mb-3 line-clamp-2 group-hover:text-primary-500 transition-colors h-14"
-              v-html="post.title.rendered"
-            ></h3>
-            <p
-              class="text-gray-600 font-light text-sm line-clamp-3 mb-4 grow"
-              v-html="getCleanExcerpt(post)"
-            ></p>
+            >
+              {{ post.title }}
+            </h3>
+            <p class="text-gray-600 font-light text-sm line-clamp-3 mb-4 grow">
+              {{ post.excerpt }}
+            </p>
 
             <div
               class="mt-auto inline-flex items-center text-sm font-medium text-gray-900 group-hover:text-primary-500"
