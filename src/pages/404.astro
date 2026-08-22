@@ -1,0 +1,131 @@
+---
+import Layout from "@/layouts/Layout.astro";
+import { coursesItems } from "@/data/navigation.ts";
+
+const courses = coursesItems.filter((item) => item.url.startsWith("/courses/"));
+
+const suggestedPages = [
+  { title: "Home", description: "Back to the homepage", url: "/" },
+  {
+    title: "Courses",
+    description: "Explore our UPSC, APSC & ADRE coaching programs",
+    url: "/courses/",
+  },
+  {
+    title: "Our Team",
+    description: "Meet our expert faculty and mentors",
+    url: "/team/",
+  },
+  {
+    title: "Blog",
+    description: "Read our latest articles and exam tips",
+    url: "/blogs/",
+  },
+  {
+    title: "Magazine",
+    description: "Monthly current affairs magazines",
+    url: "/magazine/",
+  },
+  {
+    title: "Contact Us",
+    description: "Get in touch with our Guwahati campus",
+    url: "/contact/",
+  },
+];
+---
+
+<Layout
+  title="Page Not Found | Takshasheela School of Civil Services"
+  description="The page you were looking for doesn't exist. Explore our UPSC & APSC courses, faculty, and other resources instead."
+>
+  <div
+    class="min-h-[60vh] flex flex-col items-center justify-center text-center px-4 py-20 md:py-28 bg-primary-500/5 border-b border-gray-200"
+  >
+    <span
+      class="text-sm font-semibold text-primary-500 uppercase tracking-widest mb-4"
+    >
+      Error 404
+    </span>
+    <h1
+      class="text-5xl md:text-7xl font-light tracking-tight text-gray-900 mb-6 leading-tight"
+    >
+      Page <span class="text-primary-500 font-medium">Not Found</span>
+    </h1>
+    <p class="text-gray-600 text-lg font-light max-w-xl mb-10 leading-relaxed">
+      The page you're looking for might have been moved, renamed, or doesn't
+      exist. Here are a few places that might help instead.
+    </p>
+    <a
+      href="/"
+      class="inline-flex items-center gap-2 px-6 py-3 rounded-full bg-primary-500 text-white font-medium hover:bg-primary-600 transition-colors shadow-lg shadow-primary-500/20"
+    >
+      <svg
+        xmlns="http://www.w3.org/2000/svg"
+        width="18"
+        height="18"
+        viewBox="0 0 24 24"
+        fill="none"
+        stroke="currentColor"
+        stroke-width="2"
+        stroke-linecap="round"
+        stroke-linejoin="round"
+      >
+        <path d="m3 9 9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path>
+        <polyline points="9 22 9 12 15 12 15 22"></polyline>
+      </svg>
+      Back to Home
+    </a>
+  </div>
+
+  <div class="max-w-6xl mx-auto px-4 py-16 md:py-24">
+    <h2
+      class="text-2xl md:text-3xl font-light tracking-tight text-gray-900 mb-8 text-center"
+    >
+      Suggested <span class="text-primary-500 font-medium">Pages</span>
+    </h2>
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 mb-20">
+      {
+        suggestedPages.map((page) => (
+          <a
+            href={page.url}
+            class="group flex flex-col p-6 bg-white border border-gray-200 rounded-2xl hover:shadow-lg hover:border-primary-500/30 transition-all duration-300"
+          >
+            <span class="text-base font-semibold text-gray-900 group-hover:text-primary-500 transition-colors mb-1.5">
+              {page.title}
+            </span>
+            <span class="text-sm text-gray-600 font-light leading-relaxed">
+              {page.description}
+            </span>
+          </a>
+        ))
+      }
+    </div>
+
+    <h2
+      class="text-2xl mt-8 md:text-3xl font-light tracking-tight text-gray-900 mb-3 text-center"
+    >
+      Explore Our <span class="text-primary-500 font-medium">Courses</span>
+    </h2>
+    <p class="text-gray-600 font-light text-center max-w-xl mx-auto mb-8">
+      Comprehensive coaching programs designed to guide you through UPSC, APSC,
+      and Assam Direct Recruitment Exams.
+    </p>
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+      {
+        courses.map((course) => (
+          <a
+            href={course.url}
+            class="group flex flex-col p-6 bg-primary-500/5 border border-primary-500/10 rounded-2xl hover:shadow-lg hover:border-primary-500/30 transition-all duration-300"
+          >
+            <span class="text-base font-semibold text-gray-900 group-hover:text-primary-500 transition-colors mb-1.5">
+              {course.title}
+            </span>
+            <span class="text-sm text-gray-600 font-light leading-relaxed">
+              {course.description}
+            </span>
+          </a>
+        ))
+      }
+    </div>
+  </div>
+</Layout>
