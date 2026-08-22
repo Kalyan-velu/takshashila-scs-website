@@ -41,16 +41,15 @@ const seoDescription =
         facultyList.map((member) => (
           <a
             href={`/team/${member.slug}/`}
-            class="group flex flex-col bg-white border aspect-3/4 border-gray-200/70 rounded-3xl overflow-hidden hover:shadow-2xl hover:border-primary-500/30 transition-all duration-500"
+            class="group flex flex-col bg-white border aspect-2/3 border-gray-200/70 rounded-3xl overflow-hidden hover:shadow-2xl hover:border-primary-500/30 transition-all duration-500"
           >
-            {/* Faculty Photo */}
-            <div class="relative w-full aspect-3/4 overflow-hidden bg-gray-100/20">
+            <div class="relative w-full overflow-hidden bg-gray-100/20">
               <img
                 src={member.image}
                 alt={member.name}
-                height="400"
+                height="350"
                 width="300"
-                class="w-full h-full object-cover object-top aspect-4/3 transform scale-100 group-hover:scale-105 transition-transform duration-700 ease-in-out"
+                class="object-cover object-top mx-auto aspect-3/4 transform scale-100 group-hover:scale-105 transition-transform duration-700 ease-in-out"
                 loading="lazy"
               />
             </div>
@@ -61,7 +60,6 @@ const seoDescription =
                 {member.name}
               </h3>
 
-              {/* Subject highlights */}
               <div class="flex flex-wrap gap-1.5 mb-3">
                 {member.expertise.map((subject) => (
                   <span class="inline-block px-2.5 py-0.5 bg-primary-500/10 text-primary-500 text-[11px] font-semibold rounded-full">

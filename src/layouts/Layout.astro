@@ -11,6 +11,8 @@ import Navbar from "@/components/header/Header.astro";
 import LeadPopup from "@/components/LeadPopup.vue";
 import CookieConsent from "@/components/CookieConsent.vue";
 import Footer from "@/components/Footer.astro";
+import GoogleTagManager from "@/lib/GTag/GoogleTagManager.astro";
+import GoogleTagManagerNoscript from "@/lib/GTag/GoogleTagManagerNoscript.astro";
 import { SITE_URL, PHONE_TEL, EMAIL, socials } from "@/config/CONSTANTS.ts";
 
 // variables.CRM_URL always resolves to the private server value in frontmatter; this needs the public origin.
@@ -45,6 +47,7 @@ const {
 <!doctype html>
 <html lang="en" class="scroll-smooth">
   <head>
+    <GoogleTagManager />
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width" />
     <link rel="sitemap" href="/sitemap-index.xml" />
@@ -124,6 +127,7 @@ const {
   <body
     class="antialiased overflow-x-hidden selection:bg-primary-500/20 selection:text-primary-500"
   >
+    <GoogleTagManagerNoscript />
     <Navbar />
     <main>
       <slot />
@@ -135,6 +139,19 @@ const {
 </html>
 <script>
   import "iconify-icon";
+  import { trackContactClick } from "@/lib/analytics";
+
+  document.addEventListener("click", (e) => {
+    const target = (e.target as HTMLElement | null)?.closest("a");
+    if (!target) return;
+    const href = target.getAttribute("href") || "";
+
+    if (href.startsWith("tel:")) {
+      trackContactClick("phone", href.replace("tel:", ""));
+    } else if (href.includes("wa.me") || href.includes("whatsapp")) {
+      trackContactClick("whatsapp", href);
+    }
+  });
 </script>
 <style>
   @reference "../styles/globals.css";

@@ -3,9 +3,7 @@
 
 @custom-variant dark (&:is(.dark *));
 
-:root {
-    color-scheme: light;
-}
+
 
 @theme inline {
     --font-sans: var(--geist-sans);
@@ -36,6 +34,17 @@
     /* Accents */
     --color-success: oklch(0.627 0.265 142.9);
     --color-danger: oklch(0.637 0.237 25.3);
+}
+
+:root {
+    color-scheme: light;
+
+    --muted: oklch(0.9 0.01 240);
+    --muted-foreground: oklch(0.6 0.01 240);
+
+    --primary: var(--color-primary-500);
+    --primary-foreground: var(--color-primary-500);
+    --foreground: var(--color-neutral-800);
 }
 
 @layer base {
