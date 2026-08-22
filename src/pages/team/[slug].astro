@@ -1,0 +1,120 @@
+---
+import Layout from "@/layouts/Layout.astro";
+import { getFacultyList } from "@/lib/team";
+import { SITE_URL } from "@/config/CONSTANTS.ts";
+
+export function getStaticPaths() {
+  return getFacultyList().map((member) => ({
+    params: { slug: member.slug },
+    props: { member },
+  }));
+}
+
+const { member } = Astro.props;
+---
+
+<Layout
+  title={`${member.name} | Takshasheela School of Civil Services`}
+  description={member.description}
+  canonical={`${SITE_URL}/team/${member.slug}/`}
+>
+  <div class="container mx-auto px-4 lg:px-24 py-8 md:py-12">
+    <a
+      href="/team/"
+      class="inline-flex items-center gap-2 text-sm font-medium text-gray-600 hover:text-primary-500 transition-colors mb-8 group"
+    >
+      <svg
+        xmlns="http://www.w3.org/2000/svg"
+        width="16"
+        height="16"
+        viewBox="0 0 24 24"
+        fill="none"
+        stroke="currentColor"
+        stroke-width="2"
+        stroke-linecap="round"
+        stroke-linejoin="round"
+        class="group-hover:-translate-x-1 transition-transform"
+      >
+        <line x1="19" y1="12" x2="5" y2="12"></line>
+        <polyline points="12 19 5 12 12 5"></polyline>
+      </svg>
+      Back to Team
+    </a>
+
+    <div
+      class="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-12 max-w-5xl mx-auto pb-16"
+    >
+      <div class="lg:col-span-4">
+        <div class="relative w-full aspect-3/4 rounded-3xl overflow-hidden">
+          <img
+            src={member.image}
+            alt={member.name}
+            width="400"
+            height="533"
+            class="w-full h-full object-cover object-top"
+          />
+        </div>
+      </div>
+
+      <div class="lg:col-span-8">
+        <h1
+          class="text-3xl md:text-4xl font-light tracking-tight text-gray-900 mb-4 leading-tight"
+        >
+          {member.name}
+        </h1>
+
+        {/* Subject highlights */}
+        <div class="flex flex-wrap gap-2 mb-6">
+          {
+            member.expertise.map((subject) => (
+              <span class="inline-block px-3 py-1 bg-primary-500/10 text-primary-500 text-xs font-semibold rounded-full uppercase tracking-wide">
+                {subject}
+              </span>
+            ))
+          }
+        </div>
+
+        <p class="text-gray-700 text-lg font-light leading-relaxed mb-10">
+          {member.description}
+        </p>
+
+        <div class="space-y-8">
+          <div>
+            <h2
+              class="text-sm font-semibold uppercase tracking-wider text-primary-500 mb-2"
+            >
+              Experience
+            </h2>
+            <p class="text-gray-700 leading-relaxed">{member.experience}</p>
+          </div>
+
+          <div>
+            <h2
+              class="text-sm font-semibold uppercase tracking-wider text-primary-500 mb-2"
+            >
+              Track Record
+            </h2>
+            <p class="text-gray-700 leading-relaxed">{member.trackRecord}</p>
+          </div>
+
+          {
+            member.associations.length > 0 && (
+              <div>
+                <h2 class="text-sm font-semibold uppercase tracking-wider text-primary-500 mb-3">
+                  Associations
+                </h2>
+                <ul class="flex flex-wrap gap-2">
+                  {member.associations.map((association) => (
+                    <li class="px-3 py-1.5 bg-gray-100 text-gray-700 text-sm rounded-full">
+                      {association}
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            )
+          }
+        </div>
+      </div>
+    </div>
+  </div>
+</Layout>
