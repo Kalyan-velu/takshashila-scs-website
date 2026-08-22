@@ -1,6 +1,11 @@
 ---
 import { aboutItems, coursesItems } from "@/data/navigation.ts";
-import { CURRENT_AFFAIRS_URL, EMAIL, PHONE_DISPLAY, PHONE_HREF } from "@/config/CONSTANTS.ts";
+import {
+  CURRENT_AFFAIRS_URL,
+  EMAIL,
+  PHONE_DISPLAY,
+  PHONE_HREF,
+} from "@/config/CONSTANTS.ts";
 
 const currentPath = Astro.url.pathname;
 
@@ -16,39 +21,70 @@ const activeLinkClass = "text-primary-500 dark:text-primary-400";
 const linkClass = "text-gray-900 dark:text-white";
 ---
 
-<div class="w-full relative z-40 lg:hidden transition-all duration-300 overflow-hidden bg-white dark:bg-slate-950 border-b border-gray-100 dark:border-slate-900 opacity-0 pointer-events-none js-mobile-drawer" style="max-height: 0rem;">
-  <div class="w-[200%] flex transition-transform duration-300 ease-out js-mobile-slider-wrapper">
-    
+<div
+  class="w-full relative z-40 lg:hidden transition-all duration-300 overflow-hidden bg-white dark:bg-slate-950 border-b border-gray-100 dark:border-slate-900 opacity-0 pointer-events-none js-mobile-drawer"
+  style="max-height: 0rem;"
+>
+  <div
+    class="w-[200%] flex transition-transform duration-300 ease-out js-mobile-slider-wrapper"
+  >
     <!-- Level 1: Main links (w-1/2) -->
-    <div class="w-1/2 px-5 py-6 overflow-y-auto max-h-[80vh] flex flex-col justify-between shrink-0">
+    <div
+      class="w-1/2 px-5 py-6 overflow-y-auto max-h-[80vh] flex flex-col justify-between shrink-0"
+    >
       <div>
         <div class="inline-flex items-center space-x-2 mb-6">
-          <div class="bg-primary-500 w-1.5 h-1.5 rounded-full animate-pulse"></div>
-          <div class="font-medium text-xs text-gray-500 dark:text-gray-400 uppercase tracking-wider">Navigation Menu</div>
+          <div class="bg-primary-500 w-1.5 h-1.5 rounded-full animate-pulse">
+          </div>
+          <div
+            class="font-medium text-xs text-gray-500 dark:text-gray-400 uppercase tracking-wider"
+          >
+            Navigation Menu
+          </div>
         </div>
         <ul class="flex flex-col space-y-4 w-full">
-          <li class="relative w-full border-b border-gray-100 dark:border-slate-900/60 pb-3">
-            <button class="w-full flex justify-between items-center text-left text-2xl font-bold tracking-tight text-gray-900 dark:text-white cursor-pointer js-mobile-sub-trigger-courses">
-              <span class={isCoursesActive ? activeLinkClass : ""}>UPSC - APSC Programs</span>
-              <iconify-icon icon="lucide:chevron-right" class="text-xl text-gray-400 dark:text-gray-500"></iconify-icon>
+          <li
+            class="relative w-full border-b border-gray-100 dark:border-slate-900/60 pb-3"
+          >
+            <button
+              class="w-full flex justify-between items-center text-left text-2xl font-bold tracking-tight text-gray-900 dark:text-white cursor-pointer js-mobile-sub-trigger-courses"
+            >
+              <span class={isCoursesActive ? activeLinkClass : ""}
+                >UPSC - APSC Programs</span
+              >
+              <iconify-icon
+                icon="lucide:chevron-right"
+                class="text-xl text-gray-400 dark:text-gray-500"></iconify-icon>
             </button>
           </li>
-          <li class="relative w-full border-b border-gray-100 dark:border-slate-900/60 pb-3">
+          <li
+            class="relative w-full border-b border-gray-100 dark:border-slate-900/60 pb-3"
+          >
             <a
-              href="/team/"
+              href="/pages/faculty/"
               aria-current={isActive("/team/") ? "page" : undefined}
               class={`js-mobile-link block w-full text-2xl font-bold tracking-tight ${isActive("/team/") ? activeLinkClass : linkClass}`}
             >
               Team Faculty
             </a>
           </li>
-          <li class="relative w-full border-b border-gray-100 dark:border-slate-900/60 pb-3">
-            <button class="w-full flex justify-between items-center text-left text-2xl font-bold tracking-tight text-gray-900 dark:text-white cursor-pointer js-mobile-sub-trigger-about">
-              <span class={isAboutActive ? activeLinkClass : ""}>About Center</span>
-              <iconify-icon icon="lucide:chevron-right" class="text-xl text-gray-400 dark:text-gray-500"></iconify-icon>
+          <li
+            class="relative w-full border-b border-gray-100 dark:border-slate-900/60 pb-3"
+          >
+            <button
+              class="w-full flex justify-between items-center text-left text-2xl font-bold tracking-tight text-gray-900 dark:text-white cursor-pointer js-mobile-sub-trigger-about"
+            >
+              <span class={isAboutActive ? activeLinkClass : ""}
+                >About Center</span
+              >
+              <iconify-icon
+                icon="lucide:chevron-right"
+                class="text-xl text-gray-400 dark:text-gray-500"></iconify-icon>
             </button>
           </li>
-          <li class="relative w-full border-b border-gray-100 dark:border-slate-900/60 pb-3">
+          <li
+            class="relative w-full border-b border-gray-100 dark:border-slate-900/60 pb-3"
+          >
             <a
               href="/blogs/"
               aria-current={isActive("/blogs/") ? "page" : undefined}
@@ -57,10 +93,19 @@ const linkClass = "text-gray-900 dark:text-white";
               Blog
             </a>
           </li>
-          <li class="relative w-full border-b border-gray-100 dark:border-slate-900/60 pb-3">
-            <a target="_blank" href={CURRENT_AFFAIRS_URL} class="js-mobile-link block w-full text-2xl font-bold tracking-tight text-gray-900 dark:text-white">Current Affairs</a>
+          <li
+            class="relative w-full border-b border-gray-100 dark:border-slate-900/60 pb-3"
+          >
+            <a
+              target="_blank"
+              href={CURRENT_AFFAIRS_URL}
+              class="js-mobile-link block w-full text-2xl font-bold tracking-tight text-gray-900 dark:text-white"
+              >Current Affairs</a
+            >
           </li>
-          <li class="relative w-full border-b border-gray-100 dark:border-slate-900/60 pb-3">
+          <li
+            class="relative w-full border-b border-gray-100 dark:border-slate-900/60 pb-3"
+          >
             <a
               href="/magazine/"
               aria-current={isActive("/magazine/") ? "page" : undefined}
@@ -69,7 +114,9 @@ const linkClass = "text-gray-900 dark:text-white";
               Magazines
             </a>
           </li>
-          <li class="relative w-full border-b border-gray-100 dark:border-slate-900/60 pb-3">
+          <li
+            class="relative w-full border-b border-gray-100 dark:border-slate-900/60 pb-3"
+          >
             <a
               href="/contact/"
               aria-current={isActive("/contact/") ? "page" : undefined}
@@ -81,25 +128,48 @@ const linkClass = "text-gray-900 dark:text-white";
         </ul>
 
         <!-- Promo card -->
-        <div class="mt-6 p-4 rounded-2xl bg-primary-50/50 dark:bg-slate-900/40 border border-primary-500/10 flex flex-col items-start gap-2">
-          <span class="px-2.5 py-0.5 rounded-full text-[10px] font-bold bg-primary-100 dark:bg-primary-950/40 text-primary-600 dark:text-primary-400 uppercase tracking-wider">Now Enrolling</span>
-          <h4 class="text-base font-semibold text-gray-900 dark:text-white">ADRE 2026 Admissions Open</h4>
-          <p class="text-xs text-gray-600 dark:text-gray-400 font-light leading-relaxed mb-1">
-            Guwahati's premier preparation batch for Assam Direct Recruitment Exams. Both online and offline study programs are available.
+        <div
+          class="mt-6 p-4 rounded-2xl bg-primary-50/50 dark:bg-slate-900/40 border border-primary-500/10 flex flex-col items-start gap-2"
+        >
+          <span
+            class="px-2.5 py-0.5 rounded-full text-[10px] font-bold bg-primary-100 dark:bg-primary-950/40 text-primary-600 dark:text-primary-400 uppercase tracking-wider"
+            >Now Enrolling</span
+          >
+          <h4 class="text-base font-semibold text-gray-900 dark:text-white">
+            ADRE 2026 Admissions Open
+          </h4>
+          <p
+            class="text-xs text-gray-600 dark:text-gray-400 font-light leading-relaxed mb-1"
+          >
+            Guwahati's premier preparation batch for Assam Direct Recruitment
+            Exams. Both online and offline study programs are available.
           </p>
-          <a href="/courses/adre/" class="js-mobile-link inline-flex px-4 py-2 rounded-full text-xs font-semibold text-white bg-primary-500 hover:bg-primary-600 transition-colors" aria-label="Explore ADRE 2026 Batch Details">Explore ADRE 2026 Batch &rarr;</a>
+          <a
+            href="/courses/adre/"
+            class="js-mobile-link inline-flex px-4 py-2 rounded-full text-xs font-semibold text-white bg-primary-500 hover:bg-primary-600 transition-colors"
+            aria-label="Explore ADRE 2026 Batch Details"
+            >Explore ADRE 2026 Batch &rarr;</a
+          >
         </div>
       </div>
 
       <!-- Bottom details -->
       <div class="mt-8 pt-4 border-t border-gray-100 dark:border-slate-900">
         <div class="flex flex-col space-y-2 mb-3">
-          <a href={PHONE_HREF} class="flex items-center gap-2.5 text-gray-600 dark:text-gray-400 hover:text-primary-500 text-sm">
-            <iconify-icon icon="lucide:phone" class="text-[15px] shrink-0"></iconify-icon>
+          <a
+            href={PHONE_HREF}
+            class="flex items-center gap-2.5 text-gray-600 dark:text-gray-400 hover:text-primary-500 text-sm"
+          >
+            <iconify-icon icon="lucide:phone" class="text-[15px] shrink-0"
+            ></iconify-icon>
             <span>{PHONE_DISPLAY}</span>
           </a>
-          <a href={`mailto:${EMAIL}`} class="flex items-center gap-2.5 text-gray-600 dark:text-gray-400 hover:text-primary-500 text-sm">
-            <iconify-icon icon="lucide:mail" class="text-[15px] shrink-0"></iconify-icon>
+          <a
+            href={`mailto:${EMAIL}`}
+            class="flex items-center gap-2.5 text-gray-600 dark:text-gray-400 hover:text-primary-500 text-sm"
+          >
+            <iconify-icon icon="lucide:mail" class="text-[15px] shrink-0"
+            ></iconify-icon>
             <span>{EMAIL}</span>
           </a>
         </div>
@@ -107,61 +177,87 @@ const linkClass = "text-gray-900 dark:text-white";
     </div>
 
     <!-- Level 2: Sub-lists (w-1/2) -->
-    <div class="w-1/2 px-5 py-6 overflow-y-auto max-h-[80vh] flex flex-col justify-between shrink-0">
+    <div
+      class="w-1/2 px-5 py-6 overflow-y-auto max-h-[80vh] flex flex-col justify-between shrink-0"
+    >
       <div>
-        <button class="inline-flex items-center gap-2 text-primary-500 dark:text-primary-400 text-sm font-semibold mb-6 uppercase tracking-wider cursor-pointer js-mobile-back-button">
-          <iconify-icon icon="lucide:chevron-left" class="text-base"></iconify-icon>
+        <button
+          class="inline-flex items-center gap-2 text-primary-500 dark:text-primary-400 text-sm font-semibold mb-6 uppercase tracking-wider cursor-pointer js-mobile-back-button"
+        >
+          <iconify-icon icon="lucide:chevron-left" class="text-base"
+          ></iconify-icon>
           Go back
         </button>
 
         <!-- Courses list -->
         <div class="js-mobile-sub-list-courses hidden">
-          <h3 class="text-xs font-bold text-gray-400 dark:text-gray-500 uppercase tracking-wider mb-4">UPSC - APSC Programs</h3>
+          <h3
+            class="text-xs font-bold text-gray-400 dark:text-gray-500 uppercase tracking-wider mb-4"
+          >
+            UPSC - APSC Programs
+          </h3>
           <ul class="flex flex-col space-y-4">
-            {coursesItems.map((item) => (
-              <li class="border-b border-gray-100 dark:border-slate-900/60 pb-3">
-                <a
-                  href={item.url}
-                  aria-current={isActive(item.url) ? "page" : undefined}
-                  class={`js-mobile-link block text-xl font-bold tracking-tight ${isActive(item.url) ? activeLinkClass : linkClass}`}
-                >
-                  {item.title}
-                </a>
-              </li>
-            ))}
+            {
+              coursesItems.map((item) => (
+                <li class="border-b border-gray-100 dark:border-slate-900/60 pb-3">
+                  <a
+                    href={item.url}
+                    aria-current={isActive(item.url) ? "page" : undefined}
+                    class={`js-mobile-link block text-xl font-bold tracking-tight ${isActive(item.url) ? activeLinkClass : linkClass}`}
+                  >
+                    {item.title}
+                  </a>
+                </li>
+              ))
+            }
             <li class="pb-3">
-              <a href="/courses/" class="js-mobile-link block text-xl font-bold text-primary-500 dark:text-primary-400">View all Programs &rarr;</a>
+              <a
+                href="/courses/"
+                class="js-mobile-link block text-xl font-bold text-primary-500 dark:text-primary-400"
+                >View all Programs &rarr;</a
+              >
             </li>
           </ul>
         </div>
 
         <!-- About list -->
         <div class="js-mobile-sub-list-about hidden">
-          <h3 class="text-xs font-bold text-gray-400 dark:text-gray-500 uppercase tracking-wider mb-4">About our Academy</h3>
+          <h3
+            class="text-xs font-bold text-gray-400 dark:text-gray-500 uppercase tracking-wider mb-4"
+          >
+            About our Academy
+          </h3>
           <ul class="flex flex-col space-y-4">
-            {aboutItems.map((item) => (
-              <li class="border-b border-gray-100 dark:border-slate-900/60 pb-3">
-                <a
-                  href={item.url}
-                  aria-current={isActive(item.url) ? "page" : undefined}
-                  class={`js-mobile-link block text-xl font-bold tracking-tight ${isActive(item.url) ? activeLinkClass : linkClass}`}
-                >
-                  {item.title}
-                </a>
-              </li>
-            ))}
+            {
+              aboutItems.map((item) => (
+                <li class="border-b border-gray-100 dark:border-slate-900/60 pb-3">
+                  <a
+                    href={item.url}
+                    aria-current={isActive(item.url) ? "page" : undefined}
+                    class={`js-mobile-link block text-xl font-bold tracking-tight ${isActive(item.url) ? activeLinkClass : linkClass}`}
+                  >
+                    {item.title}
+                  </a>
+                </li>
+              ))
+            }
             <li class="border-b border-gray-100 dark:border-slate-900/60 pb-3">
-              <a href="/#gallery" class="js-mobile-link block text-xl font-bold tracking-tight text-gray-900 dark:text-white">Campus Gallery</a>
+              <a
+                href="/#gallery"
+                class="js-mobile-link block text-xl font-bold tracking-tight text-gray-900 dark:text-white"
+                >Campus Gallery</a
+              >
             </li>
           </ul>
         </div>
       </div>
-      
-      <div class="mt-8 pt-4 border-t border-gray-100 dark:border-slate-900 text-center text-xs text-gray-500">
+
+      <div
+        class="mt-8 pt-4 border-t border-gray-100 dark:border-slate-900 text-center text-xs text-gray-500"
+      >
         Takshasheela School of Civil Services
       </div>
     </div>
-
   </div>
 </div>
 
@@ -169,11 +265,15 @@ const linkClass = "text-gray-900 dark:text-white";
   let isOpen = false;
 
   function openDrawer() {
-    const drawer = document.querySelector(".js-mobile-drawer") as HTMLElement | null;
+    const drawer = document.querySelector(
+      ".js-mobile-drawer",
+    ) as HTMLElement | null;
     const line1 = document.querySelector(".js-hamburger-line-1");
     const line2 = document.querySelector(".js-hamburger-line-2");
     const line3 = document.querySelector(".js-hamburger-line-3");
-    const logoOverlay = document.querySelector(".js-logo-scroll-overlay") as HTMLElement | null;
+    const logoOverlay = document.querySelector(
+      ".js-logo-scroll-overlay",
+    ) as HTMLElement | null;
 
     if (!drawer) return;
     isOpen = true;
@@ -191,12 +291,18 @@ const linkClass = "text-gray-900 dark:text-white";
   }
 
   function closeDrawer() {
-    const drawer = document.querySelector(".js-mobile-drawer") as HTMLElement | null;
-    const slider = document.querySelector(".js-mobile-slider-wrapper") as HTMLElement | null;
+    const drawer = document.querySelector(
+      ".js-mobile-drawer",
+    ) as HTMLElement | null;
+    const slider = document.querySelector(
+      ".js-mobile-slider-wrapper",
+    ) as HTMLElement | null;
     const line1 = document.querySelector(".js-hamburger-line-1");
     const line2 = document.querySelector(".js-hamburger-line-2");
     const line3 = document.querySelector(".js-hamburger-line-3");
-    const logoOverlay = document.querySelector(".js-logo-scroll-overlay") as HTMLElement | null;
+    const logoOverlay = document.querySelector(
+      ".js-logo-scroll-overlay",
+    ) as HTMLElement | null;
 
     if (!drawer) return;
     isOpen = false;
@@ -226,7 +332,9 @@ const linkClass = "text-gray-900 dark:text-white";
     const coursesTrigger = target.closest(".js-mobile-sub-trigger-courses");
     if (coursesTrigger) {
       e.preventDefault();
-      const slider = document.querySelector(".js-mobile-slider-wrapper") as HTMLElement | null;
+      const slider = document.querySelector(
+        ".js-mobile-slider-wrapper",
+      ) as HTMLElement | null;
       const coursesList = document.querySelector(".js-mobile-sub-list-courses");
       const aboutList = document.querySelector(".js-mobile-sub-list-about");
       coursesList?.classList.remove("hidden");
@@ -238,7 +346,9 @@ const linkClass = "text-gray-900 dark:text-white";
     const aboutTrigger = target.closest(".js-mobile-sub-trigger-about");
     if (aboutTrigger) {
       e.preventDefault();
-      const slider = document.querySelector(".js-mobile-slider-wrapper") as HTMLElement | null;
+      const slider = document.querySelector(
+        ".js-mobile-slider-wrapper",
+      ) as HTMLElement | null;
       const coursesList = document.querySelector(".js-mobile-sub-list-courses");
       const aboutList = document.querySelector(".js-mobile-sub-list-about");
       aboutList?.classList.remove("hidden");
@@ -250,7 +360,9 @@ const linkClass = "text-gray-900 dark:text-white";
     const backButton = target.closest(".js-mobile-back-button");
     if (backButton) {
       e.preventDefault();
-      const slider = document.querySelector(".js-mobile-slider-wrapper") as HTMLElement | null;
+      const slider = document.querySelector(
+        ".js-mobile-slider-wrapper",
+      ) as HTMLElement | null;
       if (slider) slider.style.transform = "translateX(0%)";
       return;
     }

@@ -19,7 +19,13 @@ export default defineConfig({
     },
   ],
   integrations: [
-    vue(),
+    vue({
+      template: {
+        compilerOptions: {
+          isCustomElement: (tag) => tag === "iconify-icon",
+        },
+      },
+    }),
     sitemap({
       xslURL: "/sitemap.xsl",
     }),
@@ -44,6 +50,7 @@ export default defineConfig({
       { protocol: "https", hostname: "takshashilascs.com" },
     ],
   },
+
   adapter: vercel(),
   vite: {
     plugins: [tailwindcss()],

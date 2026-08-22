@@ -22,7 +22,7 @@ the edge; Astro/the app code has no involvement at request time.
 ## CSP directives, and why each is what it is
 
 - **`default-src 'self'`** — fallback for any directive not listed explicitly.
-- **`script-src`** — `'self'` + `'unsafe-inline'` + `challenges.cloudflare.com` + `code.iconify.design`.
+- **`script-src`** — `'self'` + `'unsafe-inline'` + `challenges.cloudflare.com` + `code.iconify.design` + `www.googletagmanager.com` + `www.clarity.ms`. The GTM/Clarity origins are needed even though those scripts load inside the Partytown web worker: Partytown fetches the actual script bytes through the main thread's network stack (via its sandboxed proxy), so the browser still enforces `script-src` against the real script origin.
 - **Note on `'unsafe-inline'`**: When explicit `'sha256-...'` hashes are present in `script-src`, W3C CSP Level 2/3 specifications require browser engines to ignore `'unsafe-inline'` completely. To ensure runtime inline tags injected by Partytown and dynamic Astro hydration work across all browsers without CSP blocks, explicit script hashes are omitted in favor of `'unsafe-inline'` combined with strict origin directives.
 
 - **Note on `'unsafe-eval'`**: deliberately *not* added to `script-src`. Zod v4
@@ -39,9 +39,9 @@ the edge; Astro/the app code has no involvement at request time.
   dynamic `:style` bindings and Tailwind's inline styles depend on it.
 - **`img-src 'self' https: data: blob:`** — permissive because post and media images come from WordPress/CRM content and from Blogger (`blogger.googleusercontent.com`).
 - **`font-src 'self' data:`** — fonts are self-hosted via Astro's `fontProviders.fontsource()`.
-- **`connect-src`** — `'self'` + Cloudflare + Iconify API endpoints (`api.iconify.design`, `api.simplesvg.com`, `api.unisvg.com`). Blog posts are fetched from Blogger's public JSON feed (`src/lib/blogger.ts`), but only from Astro frontmatter at build/request time on the server — never from browser JS — so `blogs.takshashilascs.com` doesn't need to be listed here.
-- **`frame-src`** — `'self'` + Turnstile challenge iframe.
-- **`worker-src 'self' blob:`** — Partytown runs offloaded scripts in a web worker.
+- **`connect-src`** — `'self'` + Cloudflare + Iconify API endpoints (`api.iconify.design`, `api.simplesvg.com`, `api.unisvg.com`) + GTM/GA/Clarity beacon endpoints (`www.googletagmanager.com`, `www.google-analytics.com`, `region1.google-analytics.com`, `www.clarity.ms`, `c.clarity.ms`). Blog posts are fetched from Blogger's public JSON feed (`src/lib/blogger.ts`), but only from Astro frontmatter at build/request time on the server — never from browser JS — so `blogs.takshashilascs.com` doesn't need to be listed here.
+- **`frame-src`** — `'self'` + Turnstile challenge iframe + `www.googletagmanager.com` (GTM's `<noscript>` fallback iframe, `src/lib/GTag/GoogleTagManagerNoscript.astro`).
+- **`worker-src 'self' blob:`** — Partytown runs offloaded scripts (GTM, Microsoft Clarity — see `src/lib/GTag/GoogleTagManager.astro`) in a web worker instead of the main thread.
 - **`object-src 'none'`** — no plugin/Flash content.
 - **`base-uri 'self'`** — blocks `<base>` tag injection.
 - **`form-action 'self'`** — form submissions post to `/api/create_lead`.

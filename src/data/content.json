@@ -64,6 +64,8 @@
   },
   "footer": {
     "description": "Takshasheela School of Civil Services is a dedicated institute to educate, train and guide young aspirants for Civil Services in India. It is equipped with quality faculties and facilities in Assam with a national outlook and standards.",
-    "address": "6th Floor, Unique Avenue Building, near Super Market, Guwahati, Assam 781006"
+    "addresses": [
+      "6th Floor, Unique Avenue Building, near Super Market, Guwahati, Assam 781006"
+    ]
   }
 }

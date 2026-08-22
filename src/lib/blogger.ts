@@ -45,7 +45,7 @@ interface BloggerLink {
 interface BloggerAuthorEntry {
   name: { $t: string };
   uri?: { $t: string };
-  "gd$image"?: { src: string };
+  gd$image?: { src: string };
 }
 
 interface BloggerEntry {
@@ -57,7 +57,7 @@ interface BloggerEntry {
   link: BloggerLink[];
   author?: BloggerAuthorEntry[];
   media$thumbnail?: { url: string };
-  "thr$total"?: { $t: string };
+  thr$total?: { $t: string };
 }
 
 interface BloggerFeedResponse {
@@ -107,7 +107,9 @@ function mapAuthor(entry?: BloggerAuthorEntry): BlogAuthor {
   const avatarSrc = entry?.["gd$image"]?.src;
   return {
     name: entry?.name.$t ? decodeEntities(entry.name.$t) : "Anonymous",
-    avatarUrl: avatarSrc ? normalizeAvatarUrl(upsizeThumbnail(avatarSrc)) : null,
+    avatarUrl: avatarSrc
+      ? normalizeAvatarUrl(upsizeThumbnail(avatarSrc))
+      : null,
     profileUrl: entry?.uri?.$t ?? null,
   };
 }
@@ -204,9 +206,7 @@ function mapEntry(entry: BloggerEntry): BlogPost {
     bloggerLink: alternate,
     title: decodeEntities(entry.title.$t),
     excerpt:
-      plainText.length > 160
-        ? `${plainText.slice(0, 160).trim()}…`
-        : plainText,
+      plainText.length > 160 ? `${plainText.slice(0, 160).trim()}…` : plainText,
     content,
     imageUrl,
     author: mapAuthor(entry.author?.[0]),
@@ -227,7 +227,9 @@ async function fetchFeed(
 
   const res = await fetch(url.toString());
   if (!res.ok) {
-    throw new Error(`Blogger feed error [${res.status}] for: ${url.toString()}`);
+    throw new Error(
+      `Blogger feed error [${res.status}] for: ${url.toString()}`,
+    );
   }
   return res.json() as Promise<BloggerFeedResponse>;
 }
@@ -254,7 +256,8 @@ async function fetchAllPosts(): Promise<BlogPost[]> {
   }
 
   return posts.sort(
-    (a, b) => new Date(b.publishedAt).getTime() - new Date(a.publishedAt).getTime(),
+    (a, b) =>
+      new Date(b.publishedAt).getTime() - new Date(a.publishedAt).getTime(),
   );
 }
 
@@ -265,7 +268,8 @@ let allPostsPromise: Promise<BlogPost[]> | null = null;
 
 /** All posts, newest first. */
 export function getAllPosts(): Promise<BlogPost[]> {
-  if (!allPostsPromise) allPostsPromise = fetchAllPosts();
+  // TODO - Upodate
+  allPostsPromise = fetchAllPosts();
   return allPostsPromise;
 }
 
@@ -325,7 +329,10 @@ function buildCommentTree(entries: BloggerCommentEntry[]): BlogComment[] {
     byId.set(entry.id.$t, {
       id: entry.id.$t,
       author: mapAuthor(entry.author?.[0]),
-      content: cheerio.load(entry.content?.$t ?? "").text().trim(),
+      content: cheerio
+        .load(entry.content?.$t ?? "")
+        .text()
+        .trim(),
       publishedAt: entry.published.$t,
       replies: [],
     });
