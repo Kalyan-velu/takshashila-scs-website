@@ -7,72 +7,80 @@ const { id = import.meta.env.PUBLIC_GTM_CONTAINER } = Astro.props;
 
 {
   id && (
-    <script type="text/partytown" is:inline define:vars={{ id }}>
-      (function () {
-        window.dataLayer = window.dataLayer || [];
-        function gtag() {
-          window.dataLayer.push(arguments);
-        }
-        window.gtag = gtag;
-
-        // Read stored consent
-        var CONSENT_KEY = "takshashila_cookie_consent_v1";
-        function readConsent() {
-          try {
-            var raw = localStorage.getItem(CONSENT_KEY);
-            return raw ? JSON.parse(raw) : null;
-          } catch (e) {
-            return null;
+    <Fragment>
+      <script is:inline define:vars={{ id }}>
+        (function () {
+          window.dataLayer = window.dataLayer || [];
+          function gtag() {
+            window.dataLayer.push(arguments);
           }
-        }
+          window.gtag = gtag;
 
-        var savedConsent = readConsent();
-        var analyticsGranted = savedConsent ? !!savedConsent.analytics : false;
-        var marketingGranted = savedConsent ? !!savedConsent.marketing : false;
+          // Read stored consent
+          var CONSENT_KEY = "takshashila_cookie_consent_v1";
+          function readConsent() {
+            try {
+              var raw = localStorage.getItem(CONSENT_KEY);
+              return raw ? JSON.parse(raw) : null;
+            } catch (e) {
+              return null;
+            }
+          }
 
-        // 1. Google Consent Mode v2 default settings (must run before GTM loads).
-        // GTM's own "Consent Initialization" trigger also runs on load and every
-        // tag (e.g. the Microsoft Clarity tag) checks analytics_storage/ad_storage
-        // via its own Consent Settings — this just sets the state as early as
-        // possible, before gtm.js is even requested.
-        gtag("consent", "default", {
-          ad_storage: marketingGranted ? "granted" : "denied",
-          ad_user_data: marketingGranted ? "granted" : "denied",
-          ad_personalization: marketingGranted ? "granted" : "denied",
-          analytics_storage: analyticsGranted ? "granted" : "denied",
-          functionality_storage: "granted",
-          security_storage: "granted",
-          wait_for_update: 500,
-        });
+          var savedConsent = readConsent();
+          var analyticsGranted = savedConsent ? !!savedConsent.analytics : false;
+          var marketingGranted = savedConsent ? !!savedConsent.marketing : false;
 
-        // 2. Google Tag Manager
-        window.dataLayer.push({
-          "gtm.start": new Date().getTime(),
-          event: "gtm.js",
-        });
-        var f = document.getElementsByTagName("script")[0];
-        var j = document.createElement("script");
-        j.async = true;
-        j.src = "https://www.googletagmanager.com/gtm.js?id=" + id;
-        if (f && f.parentNode) {
-          f.parentNode.insertBefore(j, f);
-        } else {
-          document.head.appendChild(j);
-        }
-
-        // 3. Keep GTM's tags (GA4, Clarity, Ads) in sync when the visitor
-        // updates their cookie preferences later without a page reload.
-        window.addEventListener("cookie_consent_updated", function (e) {
-          var prefs = e.detail || {};
-          gtag("consent", "update", {
-            ad_storage: prefs.marketing ? "granted" : "denied",
-            ad_user_data: prefs.marketing ? "granted" : "denied",
-            ad_personalization: prefs.marketing ? "granted" : "denied",
-            analytics_storage: prefs.analytics ? "granted" : "denied",
+          // Google Consent Mode v2 default settings. Runs on the main thread,
+          // synchronously, before the GTM container (loaded via Partytown below)
+          // is even requested — GTM's tags (e.g. the Microsoft Clarity tag) check
+          // analytics_storage/ad_storage via their own Consent Settings.
+          gtag("consent", "default", {
+            ad_storage: marketingGranted ? "granted" : "denied",
+            ad_user_data: marketingGranted ? "granted" : "denied",
+            ad_personalization: marketingGranted ? "granted" : "denied",
+            analytics_storage: analyticsGranted ? "granted" : "denied",
+            functionality_storage: "granted",
+            security_storage: "granted",
+            wait_for_update: 500,
           });
-        });
-      })();
-    </script>
+
+          // Keep GTM's tags (GA4, Clarity, Ads) in sync when the visitor updates
+          // their cookie preferences later without a page reload. This listener
+          // deliberately stays on the main thread (same realm as CookieConsent.vue,
+          // which dispatches this event) rather than inside the Partytown worker —
+          // a CustomEvent's `detail` payload isn't guaranteed to survive being
+          // forwarded across the worker boundary, which silently dropped consent
+          // updates when this lived in the partytown script.
+          window.addEventListener("cookie_consent_updated", function (e) {
+            console.log("[GTM_DEBUG] listener fired", e && e.detail);
+            var prefs = (e && e.detail) || {};
+            gtag("consent", "update", {
+              ad_storage: prefs.marketing ? "granted" : "denied",
+              ad_user_data: prefs.marketing ? "granted" : "denied",
+              ad_personalization: prefs.marketing ? "granted" : "denied",
+              analytics_storage: prefs.analytics ? "granted" : "denied",
+            });
+          });
+          console.log("[GTM_DEBUG] listener registered");
+        })();
+      </script>
+      <script type="text/partytown" is:inline define:vars={{ id }}>
+        (function (w, d, s, l, i) {
+          w[l] = w[l] || [];
+          w[l].push({ "gtm.start": new Date().getTime(), event: "gtm.js" });
+          var f = d.getElementsByTagName(s)[0];
+          var j = d.createElement(s);
+          j.async = true;
+          j.src = "https://www.googletagmanager.com/gtm.js?id=" + i;
+          if (f && f.parentNode) {
+            f.parentNode.insertBefore(j, f);
+          } else {
+            d.head.appendChild(j);
+          }
+        })(window, document, "script", "dataLayer", id);
+      </script>
+    </Fragment>
   )
 }
 <!-- End Google Tag Manager (GA4, Google Ads, and Microsoft Clarity are all configured as tags inside GTM-{id} — see Tag Manager) -->
