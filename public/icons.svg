@@ -1,8 +1,1 @@
-<svg xmlns="http://www.w3.org/2000/svg" display="none">
-    <symbol id="arrow" viewBox="0 0 512 512">
-        <path
-                fill="currentColor"
-                d="M328 96h24v288h-48V177.9L81 401l-17 17-33.9-34 17-17 223-223H64V96h264z"
-        ></path>
-    </symbol>
-</svg>
+<svg xmlns="http://www.w3.org/2000/svg" display="none"><symbol id="arrow" viewBox="0 0 512 512"><path fill="currentColor" d="M328 96h24v288h-48V177.9L81 401l-17 17-33.9-34 17-17 223-223H64V96h264z"/></symbol></svg>
