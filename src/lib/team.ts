@@ -1,4 +1,4 @@
-import teamData from "@/data/team.json";
+import teamData from "@/data/faculty.json";
 
 export interface FacultyMember {
   slug: string;
