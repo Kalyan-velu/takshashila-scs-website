@@ -328,14 +328,14 @@ Also add `Course` schema (neither competitor has it) using the data already pres
 const orgSchema = {
   "@context": "https://schema.org",
   "@type": "EducationalOrganization",
-  "@id": "https://www.takshashilascs.com/#organization",
+  "@id": "https://takshashilascs.com/#organization",
   name: "Takshasheela School of Civil Services",
   alternateName: "Takshasheela SCS",
   description:
     "Takshasheela School of Civil Services is the best UPSC and APSC coaching institute in Guwahati, Assam, offering online and offline batches for UPSC CSE, APSC CCE and ADRE preparation.",
-  url: "https://www.takshashilascs.com/",
-  logo: "https://www.takshashilascs.com/logo-full-black.png",
-  image: "https://www.takshashilascs.com/og/index.png",
+  url: "https://takshashilascs.com/",
+  logo: "https://takshashilascs.com/logo-full-black.png",
+  image: "https://takshashilascs.com/og/index.png",
   telephone: "+91-6001657575",
   email: "info@takshashilascs.com",
   address: {
@@ -380,8 +380,8 @@ const courseSchema = {
         name: "APSC Foundation Batch",
         description:
           "12-month APSC CCE coaching covering the complete syllabus including Assam History, Assam Geography and Polity, GS and CSAT, with regular mock tests. Online and offline modes.",
-        url: "https://www.takshashilascs.com/courses/apsc/",
-        provider: { "@id": "https://www.takshashilascs.com/#organization" },
+        url: "https://takshashilascs.com/courses/apsc/",
+        provider: { "@id": "https://takshashilascs.com/#organization" },
         hasCourseInstance: [
           {
             "@type": "CourseInstance",
@@ -406,8 +406,8 @@ const courseSchema = {
         name: "UPSC Foundation Batch",
         description:
           "Comprehensive 12-month UPSC CSE coaching in Guwahati with expert mentors from Delhi and across India. Online and offline modes.",
-        url: "https://www.takshashilascs.com/courses/upsc/",
-        provider: { "@id": "https://www.takshashilascs.com/#organization" },
+        url: "https://takshashilascs.com/courses/upsc/",
+        provider: { "@id": "https://takshashilascs.com/#organization" },
         hasCourseInstance: [
           {
             "@type": "CourseInstance",
@@ -432,8 +432,8 @@ const courseSchema = {
         name: "ADRE Online Batch",
         description:
           "Specialized 3–6 month online course for the Assam Direct Recruitment Exam (ADRE) with targeted preparation and mock tests.",
-        url: "https://www.takshashilascs.com/courses/adre/",
-        provider: { "@id": "https://www.takshashilascs.com/#organization" },
+        url: "https://takshashilascs.com/courses/adre/",
+        provider: { "@id": "https://takshashilascs.com/#organization" },
         hasCourseInstance: [
           { "@type": "CourseInstance", courseMode: "online", courseWorkload: "P6M" },
         ],

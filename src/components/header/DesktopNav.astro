@@ -30,8 +30,8 @@ const dropdownNavItems = [
 
 const directNavItems = [
   {
-    label: "Team",
-    href: "/team/",
+    label: "Faculty",
+    href: "/faculty/",
   },
   {
     label: "Blog",
@@ -65,9 +65,7 @@ const activeClass =
   <ul class="flex items-center space-x-6 md:space-x-8 h-full">
     {
       dropdownNavItems.map((item) => (
-        <li
-          class={`relative flex items-center h-full py-4`}
-        >
+        <li class={`relative flex items-center h-full py-4`}>
           <button
             type="button"
             aria-expanded="false"
