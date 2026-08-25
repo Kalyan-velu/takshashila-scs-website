@@ -5,6 +5,7 @@ import Hero from "../components/hero/index.astro";
 import WhyChooseUs from "../components/WhyChooseUs.astro";
 import AdreCTA from "@/components/AdreCTA.astro";
 import CoachingProse from "@/components/CoachingProse.astro";
+import CoursesWrapper from "@/components/courses/CoursesWrapper.astro";
 import FaqSection from "@/components/FaqSection.astro";
 import LatestArticles from "@/components/LatestArticles.vue";
 import { getLatestPosts } from "@/lib/blogger";
@@ -72,9 +73,11 @@ const itemListSchema = {
     },
   ],
 };
+const keywords =
+  "adre coaching, upsc coaching, apsc coaching, coaching institute, best coaching, in guwahati, best coaching in guwahati";
 ---
 
-<Layout title={title} description={description}>
+<Layout title={title} keywords={keywords} description={description}>
   <Fragment slot="head_data">
     <script
       is:inline
@@ -84,9 +87,10 @@ const itemListSchema = {
   </Fragment>
   <Hero />
   <ResultsSection />
+  <CoursesWrapper id="courses" />
+  <CoachingProse id="coaching-in-guwahati" />
   <WhyChooseUs id="about" />
   <AdreCTA />
-  <CoachingProse />
   <LatestArticles posts={latestPosts} />
   <FaqSection />
 </Layout>
