@@ -268,7 +268,6 @@ let allPostsPromise: Promise<BlogPost[]> | null = null;
 
 /** All posts, newest first. */
 export function getAllPosts(): Promise<BlogPost[]> {
-  // TODO - Upodate
   allPostsPromise = fetchAllPosts();
   return allPostsPromise;
 }
