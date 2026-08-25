@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { computed, ref, onMounted, onUnmounted } from "vue";
+import { computed, onMounted, onUnmounted, ref } from "vue";
 import { toINR } from "@/lib/utils.ts";
 import { whatsappUrl } from "@/config/CONSTANTS.ts";
 
@@ -135,9 +135,7 @@ onUnmounted(() => {
           class="w-10 h-10 rounded-full border border-gray-200 bg-white flex items-center justify-center text-gray-700 hover:bg-primary-500 hover:text-white hover:border-primary-500 transition-all duration-300 disabled:opacity-40 disabled:pointer-events-none shadow-xs cursor-pointer"
         >
           <svg class="w-5 h-5 fill-current" viewBox="0 0 24 24">
-            <path
-              d="M15.41 7.41L14 6l-6 6 6 6 1.41-1.41L10.83 12z"
-            />
+            <path d="M15.41 7.41L14 6l-6 6 6 6 1.41-1.41L10.83 12z" />
           </svg>
         </button>
         <button
@@ -147,9 +145,7 @@ onUnmounted(() => {
           class="w-10 h-10 rounded-full border border-gray-200 bg-white flex items-center justify-center text-gray-700 hover:bg-primary-500 hover:text-white hover:border-primary-500 transition-all duration-300 disabled:opacity-40 disabled:pointer-events-none shadow-xs cursor-pointer"
         >
           <svg class="w-5 h-5 fill-current" viewBox="0 0 24 24">
-            <path
-              d="M10 6L8.59 7.41 13.17 12l-4.58 4.59L10 18l6-6z"
-            />
+            <path d="M10 6L8.59 7.41 13.17 12l-4.58 4.59L10 18l6-6z" />
           </svg>
         </button>
       </div>
@@ -256,10 +252,14 @@ onUnmounted(() => {
             </div>
 
             <!-- Price & Actions Footer -->
-            <div class="pt-4 border-t border-gray-100 mt-auto flex flex-col gap-4">
+            <div
+              class="pt-4 border-t border-gray-100 mt-auto flex flex-col gap-4"
+            >
               <div class="flex items-baseline justify-between">
                 <div>
-                  <span class="text-[10px] text-gray-500 uppercase tracking-wider block font-medium">
+                  <span
+                    class="text-[10px] text-gray-500 uppercase tracking-wider block font-medium"
+                  >
                     Course Fee
                   </span>
                   <span class="text-lg md:text-xl font-bold text-gray-900">
@@ -269,9 +269,7 @@ onUnmounted(() => {
                     <template v-else-if="course.parentPrice">
                       {{ course.parentPrice }}
                     </template>
-                    <template v-else>
-                      Flexible Plans
-                    </template>
+                    <template v-else> Flexible Plans </template>
                   </span>
                 </div>
 
@@ -307,7 +305,7 @@ onUnmounted(() => {
                 <a
                   :href="
                     whatsappUrl(
-                      `Hi, I am interested in enrolling for the ${course.title} course at Takshashila SCS. Please share details.`,
+                      `Hi, I am interested in enrolling for the ${course.title} course at Takshasheela SCS. Please share details.`,
                     )
                   "
                   target="_blank"
