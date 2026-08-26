@@ -1,50 +1,52 @@
 ---
-import { Image } from "astro:assets";
-import contentData from "@/data/content.json";
-import Form from "@/components/hero/form.astro";
-import heroBg from "../../../public/Takshasheela/students-view-back.webp";
+import { Image } from 'astro:assets';
+import contentData from '@/data/content.json';
+import Form from '@/components/hero/form.astro';
+import heroBg from '../../../public/Takshasheela/students-view-back.webp';
 
 const { hero } = contentData;
 ---
 
-<section class="hero section relative">
-  <div class="hero__image__container">
-    <div class="z-10 bg-black opacity-[0.8] absolute inset-0"></div>
+<section class='hero section relative'>
+  <div class='hero__image__container'>
+    <div class='z-10 bg-black opacity-[0.8] absolute inset-0'></div>
     <Image
       src={heroBg}
-      alt="Best UPSC and APSC Coaching in Guwahati Campus and Students"
-      class="hero__image"
+      alt='Best UPSC and APSC Coaching in Guwahati Campus and Students'
+      class='hero__image'
       widths={[640, 1024, 1440, 1920, 2560]}
-      sizes="100vw"
-      loading="eager"
-      decoding="async"
-      fetchpriority="high"
+      sizes='100vw'
+      loading='eager'
+      decoding='async'
+      fetchpriority='high'
     />
   </div>
-  <div class="hero__content">
-    <div class="mb-2 flex-col flex items-center justify-center">
-      <h1 class="hero__title">Best UPSC and APSC Coaching in Guwahati</h1>
-      <p class="hero__description">
+  <div class='hero__content'>
+    <div class='mb-2 flex-col flex items-center justify-center'>
+      <h1 class='hero__title'>Best UPSC and APSC Coaching in Guwahati</h1>
+      <p class='hero__description'>
         {hero.description}
       </p>
     </div>
 
     <div
-      class="hero__actions flex flex-col sm:flex-row md:items-center justify-center gap-3 sm:gap-4 mt-2"
+      class='hero__actions flex flex-col sm:flex-row md:items-center justify-center gap-3 sm:gap-4 mt-2'
     >
       <a
-        href="/courses/"
-        class="inline-flex items-center justify-center px-4 py-3 lg:px-7 lg:py-3.5 rounded-full bg-primary-500 hover:bg-primary-600 text-white font-medium text-sm sm:text-base transition-all duration-300 hover:scale-[1.03]"
+        href='/courses/'
+        class='inline-flex items-center justify-center px-4 py-3 lg:px-7 lg:py-3.5 rounded-full bg-primary-500 hover:bg-primary-600 text-white font-medium text-sm sm:text-base transition-all duration-300 hover:scale-[1.03]'
       >
         <span>Join a Course</span>
       </a>
       <a
-        href="https://pub-4ee2c1b01a3c40788c1b264235b20a97.r2.dev/brand_site/pdfs/TSCS-Brochure-2026-new_compressed.pdf"
+        href='https://pub-4ee2c1b01a3c40788c1b264235b20a97.r2.dev/brand_site/pdfs/TSCS-Brochure-2026-new_compressed.pdf'
         download
-        class="inline-flex items-center justify-center px-4 py-3 lg:px-7 lg:py-3.5 rounded-full bg-white/10 hover:bg-white/20 text-white font-medium text-sm sm:text-base backdrop-blur-md transition-all duration-300 hover:scale-[1.03]"
+        class='inline-flex items-center justify-center px-4 py-3 lg:px-7 lg:py-3.5 rounded-full bg-white/10 hover:bg-white/20 text-white font-medium text-sm sm:text-base backdrop-blur-md transition-all duration-300 hover:scale-[1.03]'
       >
         <span>Download Brochure</span>
-        <iconify-icon icon="lucide:arrow-down" class="ml-2 text-lg"
+        <iconify-icon
+          icon='lucide:arrow-down'
+          class='ml-2 text-lg'
         ></iconify-icon>
       </a>
     </div>
@@ -56,10 +58,10 @@ const { hero } = contentData;
   @reference "@/styles/globals.css";
 
   .hero {
-    @apply flex items-center py-52  lg:min-h-[calc(100dvh-8ch)] justify-center;
+    @apply flex items-center pt-32 pb-40  lg:min-h-[calc(100dvh-8ch)] justify-center;
 
     .hero__content {
-      @apply z-20  flex flex-col pb-16 md:pb-32 items-center justify-center text-center;
+      @apply z-10  flex flex-col pb-16 md:pb-32 items-center justify-center text-center;
       .hero__badge {
         @apply mb-2 inline-flex max-w-fit shrink-0 flex-nowrap rounded-full bg-transparent items-center border border-gray-300  px-3 py-1 text-sm font-medium text-gray-300 md:text-base;
         .hero__badge-dot {

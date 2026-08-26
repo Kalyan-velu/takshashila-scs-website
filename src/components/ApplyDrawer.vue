@@ -11,7 +11,6 @@ const isVisible = ref(false);
 const isSubmitting = ref(false);
 const fieldErrors = ref<Record<string, string>>({});
 const formError = ref<string | null>(null);
-
 const isSubmitted = ref(false);
 
 const {
@@ -30,43 +29,35 @@ const isSubmitEnabled = computed(
     !isSubmitting.value,
 );
 
-function handleClose(e: KeyboardEvent) {
-  if (e.key === "Escape") {
+const openDrawer = async () => {
+  isVisible.value = true;
+  isSubmitted.value = false;
+  // The Turnstile container only exists in the DOM once the drawer is
+  // visible, so (re)mount after it renders rather than on component mount.
+  await nextTick();
+  mountTurnstile();
+};
+
+const closeDrawer = () => {
+  isVisible.value = false;
+};
+
+function handleKeydown(e: KeyboardEvent) {
+  if (e.key === "Escape" && isVisible.value) {
     e.preventDefault();
-    closePopup();
-    sessionStorage.setItem("leadPopupClosed", "true");
+    closeDrawer();
   }
 }
 
-const handleOpen = () => {
-  isVisible.value = true;
-  isSubmitted.value = false;
-};
-
-onMounted(async () => {
-  if (
-    sessionStorage.getItem("leadPopupClosed") === "true" ||
-    localStorage.getItem("leadPopupSubmitted") === "true"
-  ) {
-    // don't auto-open
-  } else {
-    isVisible.value = true;
-  }
-  window.addEventListener("keydown", handleClose);
-  window.addEventListener("open-lead-popup", handleOpen);
-  await nextTick();
-  mountTurnstile();
+onMounted(() => {
+  window.addEventListener("keydown", handleKeydown);
+  window.addEventListener("open-apply-drawer", openDrawer);
 });
 
 onBeforeUnmount(() => {
-  window.removeEventListener("keydown", handleClose);
-  window.removeEventListener("open-lead-popup", handleOpen);
+  window.removeEventListener("keydown", handleKeydown);
+  window.removeEventListener("open-apply-drawer", openDrawer);
 });
-
-const closePopup = () => {
-  isVisible.value = false;
-  sessionStorage.setItem("leadPopupClosed", "true");
-};
 
 const submitForm = async () => {
   if (!turnstileToken.value) return;
@@ -85,14 +76,12 @@ const submitForm = async () => {
       phone,
       email: form.value.email.trim(),
       course: form.value.course || undefined,
-      source: "lead-popup",
+      source: "apply-drawer",
       cfTurnstileResponse: turnstileToken.value,
     });
 
     if (result.success) {
       isSubmitted.value = true;
-      isVisible.value = false;
-      localStorage.setItem("leadPopupSubmitted", "true");
       return;
     }
 
@@ -118,27 +107,24 @@ const submitForm = async () => {
 </script>
 
 <template>
-  <div
-    v-if="isVisible"
-    class="fixed inset-0 z-50 flex items-center justify-center p-3 sm:p-4 overflow-y-auto"
-  >
+  <div v-if="isVisible" class="fixed inset-0 z-50 flex justify-end">
     <div
-      class="fixed inset-0 bg-black/60 backdrop-blur-sm"
-      @click="closePopup"
+      class="fixed inset-0 bg-black/60 backdrop-blur-sm animate-in fade-in duration-300"
+      @click="closeDrawer"
     ></div>
 
     <div
-      class="relative bg-white text-gray-900 rounded-2xl overflow-hidden max-w-4xl w-full max-h-[90vh] md:max-h-[85vh] flex flex-col md:flex-row shadow-2xl animate-in fade-in zoom-in-95 duration-300 my-auto overflow-y-auto md:overflow-hidden"
+      class="relative bg-white text-gray-900 w-full sm:max-w-md h-full shadow-2xl flex flex-col animate-in slide-in-from-right duration-300 overflow-y-auto"
     >
       <button
-        @click="closePopup"
-        class="absolute top-3 right-3 z-20 bg-black/50 hover:bg-black/70 text-white rounded-full p-2 transition-colors md:text-gray-900 md:bg-gray-100 md:hover:bg-gray-200"
+        @click="closeDrawer"
+        class="absolute top-4 right-4 z-10 bg-gray-100 hover:bg-gray-200 text-gray-900 rounded-full p-2 transition-colors"
         aria-label="Close dialog"
       >
         <svg
           xmlns="http://www.w3.org/2000/svg"
-          width="20"
-          height="20"
+          width="18"
+          height="18"
           viewBox="0 0 24 24"
           fill="none"
           class="stroke-current"
@@ -151,80 +137,32 @@ const submitForm = async () => {
         </svg>
       </button>
 
-      <!-- Banner Image Side -->
-      <div class="md:w-1/2 h-32 sm:h-44 md:h-auto shrink-0 relative bg-gray-100">
-        <img
-          src="/Takshasheela/students-view-back.jpg"
-          alt="Complimentary Demo"
-          loading="lazy"
-          class="absolute inset-0 w-full h-full object-cover"
-        />
-      </div>
-
       <!-- Success Feedback View -->
       <div
         v-if="isSubmitted"
-        class="md:w-1/2 p-4 sm:p-6 md:p-10 flex flex-col justify-center text-center space-y-4 sm:space-y-6 overflow-y-auto"
+        class="flex-1 p-6 sm:p-8 flex flex-col justify-center text-center space-y-5"
       >
         <div
-          class="w-14 h-14 sm:w-16 sm:h-16 rounded-full bg-emerald-500/10 border border-emerald-500/20 text-emerald-600 flex items-center justify-center mx-auto shadow-sm"
+          class="w-16 h-16 rounded-full bg-emerald-500/10 border border-emerald-500/20 text-emerald-600 flex items-center justify-center mx-auto shadow-sm"
         >
           <iconify-icon
             icon="lucide:check-circle-2"
-            class="text-3xl sm:text-4xl"
+            class="text-4xl"
           ></iconify-icon>
         </div>
 
-        <div class="space-y-1.5 sm:space-y-2">
-          <h3 class="text-xl sm:text-2xl font-medium text-gray-900 tracking-tight">
-            Query Submitted!
+        <div class="space-y-2">
+          <h3 class="text-2xl font-medium text-gray-900 tracking-tight">
+            Application Received!
           </h3>
-          <p class="text-gray-600 text-xs sm:text-sm leading-relaxed">
-            Thank you for submitting your query. Someone from our end will
-            contact you shortly.
+          <p class="text-gray-600 text-sm leading-relaxed">
+            Thank you for registering. Our admissions team will reach out to
+            you shortly with the batch details.
           </p>
-        </div>
-
-        <div class="pt-3 border-t border-gray-100 space-y-2.5">
-          <p
-            class="text-[11px] sm:text-xs font-semibold uppercase tracking-wider text-gray-600"
-          >
-            Discover More
-          </p>
-          <div class="flex flex-wrap items-center justify-center gap-1.5 sm:gap-2">
-            <a
-              href="/about"
-              @click="closePopup"
-              class="px-3 py-1.5 rounded-full bg-primary-500/10 text-primary-500 hover:bg-primary-500 hover:text-white transition-all text-xs font-medium"
-            >
-              Know More About Us
-            </a>
-            <a
-              href="/courses/upsc"
-              @click="closePopup"
-              class="px-3 py-1.5 rounded-full bg-gray-100 text-gray-700 hover:bg-primary-500 hover:text-white transition-all text-xs font-medium"
-            >
-              UPSC Courses
-            </a>
-            <a
-              href="/courses/apsc"
-              @click="closePopup"
-              class="px-3 py-1.5 rounded-full bg-gray-100 text-gray-700 hover:bg-primary-500 hover:text-white transition-all text-xs font-medium"
-            >
-              APSC Courses
-            </a>
-            <a
-              href="/courses"
-              @click="closePopup"
-              class="px-3 py-1.5 rounded-full bg-gray-100 text-gray-700 hover:bg-primary-500 hover:text-white transition-all text-xs font-medium"
-            >
-              All Courses
-            </a>
-          </div>
         </div>
 
         <button
-          @click="closePopup"
+          @click="closeDrawer"
           class="w-full mt-2 bg-gray-900 text-white font-medium py-2.5 rounded-lg hover:bg-gray-800 transition-colors text-sm"
         >
           Close
@@ -232,32 +170,32 @@ const submitForm = async () => {
       </div>
 
       <!-- Form View -->
-      <div v-else class="md:w-1/2 p-4 sm:p-6 md:p-10 flex flex-col justify-center overflow-y-auto">
+      <div v-else class="flex-1 p-6 sm:p-8 pt-16 flex flex-col">
         <h2
-          class="text-xl sm:text-2xl md:text-3xl font-light tracking-tight text-primary-500 mb-2 sm:mb-4 leading-tight"
+          class="text-2xl sm:text-3xl font-light tracking-tight text-primary-500 mb-2 leading-tight"
         >
-          Experience Our Class
-          <span class="block text-gray-900 text-lg sm:text-xl font-normal mt-0.5"
-            >with a Complimentary Demo!</span
+          Register for
+          <span class="block text-gray-900 text-xl sm:text-2xl font-normal mt-0.5"
+            >Upcoming Batch</span
           >
         </h2>
-        <p class="text-xs sm:text-sm text-gray-600 mb-4 sm:mb-6 leading-relaxed">
-          Register now and take the first step towards your civil services
-          dream.
+        <p class="text-sm text-gray-600 mb-6 leading-relaxed">
+          Fill in your details and our admissions team will help you complete
+          your enrollment.
         </p>
 
-        <form @submit.prevent="submitForm" class="space-y-3.5 sm:space-y-4">
+        <form @submit.prevent="submitForm" class="space-y-4">
           <div>
-            <label for="lead-name" class="block text-xs sm:text-sm font-medium mb-1"
+            <label for="apply-name" class="block text-sm font-medium mb-1"
               >Name</label
             >
             <input
-              id="lead-name"
+              id="apply-name"
               v-model="form.name"
               type="text"
               required
               :class="[
-                'w-full px-3.5 py-2 sm:py-2.5 text-xs sm:text-sm border rounded-lg bg-white text-gray-900 focus:outline-none focus:ring-2 focus:ring-primary-500/50 transition-all',
+                'w-full px-3.5 py-2.5 text-sm border rounded-lg bg-white text-gray-900 focus:outline-none focus:ring-2 focus:ring-primary-500/50 transition-all',
                 fieldErrors.name
                   ? 'border-destructive focus:border-destructive'
                   : 'border-gray-200 focus:border-primary-500',
@@ -269,16 +207,16 @@ const submitForm = async () => {
             </p>
           </div>
           <div>
-            <label for="lead-email" class="block text-xs sm:text-sm font-medium mb-1"
+            <label for="apply-email" class="block text-sm font-medium mb-1"
               >Email</label
             >
             <input
-              id="lead-email"
+              id="apply-email"
               v-model="form.email"
               type="email"
               required
               :class="[
-                'w-full px-3.5 py-2 sm:py-2.5 text-xs sm:text-sm border rounded-lg bg-white text-gray-900 focus:outline-none focus:ring-2 focus:ring-primary-500/50 transition-all',
+                'w-full px-3.5 py-2.5 text-sm border rounded-lg bg-white text-gray-900 focus:outline-none focus:ring-2 focus:ring-primary-500/50 transition-all',
                 fieldErrors.email
                   ? 'border-destructive focus:border-destructive'
                   : 'border-gray-200 focus:border-primary-500',
@@ -291,16 +229,16 @@ const submitForm = async () => {
           </div>
 
           <div>
-            <label for="lead-phone" class="block text-xs sm:text-sm font-medium mb-1"
+            <label for="apply-phone" class="block text-sm font-medium mb-1"
               >Phone Number</label
             >
             <input
-              id="lead-phone"
+              id="apply-phone"
               v-model="form.phone"
               type="tel"
               required
               :class="[
-                'w-full px-3.5 py-2 sm:py-2.5 text-xs sm:text-sm border rounded-lg bg-white text-gray-900 focus:outline-none focus:ring-2 focus:ring-primary-500/50 transition-all',
+                'w-full px-3.5 py-2.5 text-sm border rounded-lg bg-white text-gray-900 focus:outline-none focus:ring-2 focus:ring-primary-500/50 transition-all',
                 fieldErrors.phone
                   ? 'border-destructive focus:border-destructive'
                   : 'border-gray-200 focus:border-primary-500',
@@ -313,16 +251,16 @@ const submitForm = async () => {
           </div>
 
           <div>
-            <label for="lead-course" class="block text-xs sm:text-sm font-medium mb-1"
-              >Target Course</label
+            <label for="apply-course" class="block text-sm font-medium mb-1"
+              >Target Batch</label
             >
             <select
-              id="lead-course"
+              id="apply-course"
               v-model="form.course"
-              class="w-full px-3.5 py-2 sm:py-2.5 text-xs sm:text-sm border rounded-lg bg-white text-gray-900 focus:outline-none focus:ring-2 focus:ring-primary-500/50 border-gray-200 cursor-pointer"
+              class="w-full px-3.5 py-2.5 text-sm border rounded-lg bg-white text-gray-900 focus:outline-none focus:ring-2 focus:ring-primary-500/50 border-gray-200 cursor-pointer"
             >
               <option value="" disabled selected>
-                Select target course...
+                Select target batch...
               </option>
               <option value="APSC Foundation Batch">
                 APSC Foundation Batch
@@ -341,18 +279,18 @@ const submitForm = async () => {
           <!-- Turnstile widget -->
           <div ref="turnstileContainer" />
 
-          <p v-if="formError" class="text-xs sm:text-sm text-destructive">
+          <p v-if="formError" class="text-sm text-destructive">
             {{ formError }}
           </p>
 
           <button
             type="submit"
             :disabled="!isSubmitEnabled"
-            class="w-full bg-primary-500 disabled:bg-primary-500/90 text-white hover:opacity-90 font-medium py-2.5 sm:py-3 px-4 rounded-lg transition-all disabled:opacity-50 mt-3 text-xs sm:text-sm flex justify-center items-center cursor-pointer"
+            class="w-full bg-primary-500 disabled:bg-primary-500/90 text-white hover:opacity-90 font-medium py-3 px-4 rounded-lg transition-all disabled:opacity-50 mt-2 text-sm flex justify-center items-center cursor-pointer"
           >
             <span v-if="isSubmitting" class="flex items-center gap-2">
               <svg
-                class="animate-spin h-4 w-4 sm:h-5 sm:w-5"
+                class="animate-spin h-5 w-5"
                 xmlns="http://www.w3.org/2000/svg"
                 fill="none"
                 viewBox="0 0 24 24"
@@ -373,7 +311,7 @@ const submitForm = async () => {
               </svg>
               Submitting...
             </span>
-            <span v-else>Claim My Free Demo</span>
+            <span v-else>Apply Now</span>
           </button>
         </form>
       </div>

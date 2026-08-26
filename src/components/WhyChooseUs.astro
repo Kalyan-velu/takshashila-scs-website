@@ -42,11 +42,11 @@ const { id } = Astro.props;
         {
           reasons.map((item, i) => (
             <div
-              class="sticky w-full flex flex-col rounded-xl sm:flex-row items-start sm:items-center gap-6 md:gap-8 p-8 md:p-10 bg-white border border-gray-200 overflow-hidden transition-all duration-300"
-              style={`bottom: calc(15vh - ${i * 24}px); z-index: ${1 - i};`}
+              class="sticky w-full flex flex-col rounded-2xl sm:flex-row items-start sm:items-center gap-6 md:gap-8 p-8 md:p-10 bg-white border border-gray-200 hover:border-primary-500/30 hover:shadow-lg overflow-hidden transition-all duration-300"
+              style={`bottom: calc(15vh - ${i * 24}px); z-index: ${10 + i};`}
             >
               <div
-                class={`shrink-0 w-16 h-16 md:w-20 md:h-20 bg-white border border-gray-200 flex items-center justify-center relative z-10 text-primary-500`}
+                class="shrink-0 w-16 h-16 md:w-20 md:h-20 rounded-2xl bg-primary-500/10 border border-primary-500/20 flex items-center justify-center relative z-10 text-primary-500"
               >
                 <iconify-icon
                   icon={item.iconName}
@@ -63,7 +63,7 @@ const { id } = Astro.props;
                 </p>
               </div>
 
-              <div class="absolute top-6 right-8 text-5xl md:text-7xl font-black italic tracking-tighter text-gray-600/10 pointer-events-none select-none" aria-hidden="true">
+              <div class="absolute top-6 right-8 text-5xl md:text-7xl font-black italic tracking-tighter text-primary-500/10 pointer-events-none select-none" aria-hidden="true">
                 0{i + 1}
               </div>
             </div>

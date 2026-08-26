@@ -17,6 +17,7 @@ interface ImportMeta {
 }
 
 interface Window {
+  __headerCleanup: () => void;
   turnstile: {
     render: (
       container: HTMLElement,

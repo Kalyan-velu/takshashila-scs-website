@@ -1,53 +1,50 @@
 ---
-import TopBar from "./TopBar.astro";
-import DesktopNav from "./DesktopNav.astro";
-import HeaderActions from "./HeaderActions.astro";
-import MegaMenu from "./MegaMenu.astro";
-import SearchDropdown from "./SearchDropdown.astro";
-import MobileMenu from "./MobileMenu.astro";
-import { Image } from "astro:assets";
-import Logo from "@/assets/taksheelascs_logo.png";
-import LogoWhite from "@/assets/logo-full-white.png";
-
-const pathname = Astro.url.pathname;
-const isHome = pathname === "/" || pathname === "/index.html";
+import TopBar from './TopBar.astro';
+import DesktopNav from './DesktopNav.astro';
+import HeaderActions from './HeaderActions.astro';
+import MegaMenu from './MegaMenu.astro';
+import SearchDropdown from './SearchDropdown.astro';
+import MobileMenu from './MobileMenu.astro';
+import { Image } from 'astro:assets';
+import Logo from '@/assets/taksheelascs_logo.png';
+import LogoWhite from '@/assets/logo-full-white.png';
 ---
 
+<TopBar />
 <div
-  class={`inline-flex flex-col items-center z-50 js-header-container group w-full left-0 right-0 top-0 ${isHome ? 'fixed' : 'sticky is-scrolled'}`}
-  data-is-home={String(isHome)}
+  class={`sticky top-0 w-full inline-flex  isolate flex-col items-center z-40 js-header-container group`}
 >
-  <TopBar />
-  <div
-    class="w-full transition-transform transform duration-500 translate-y-0 js-header-wrapper"
-  >
+  <div class='w-full js-header-wrapper'>
     <header
-      class="flex flex-nowrap items-center justify-between relative z-30 transition-all duration-300 py-3.5 md:py-5 js-header bg-transparent group-[.is-scrolled]:bg-white/95 group-[.is-scrolled]:backdrop-blur-md group-[.is-scrolled]:dark:bg-black/95 max-h-24 group-[.is-scrolled]:border-gray-200 group-[.is-scrolled]:dark:border-black group-[.is-scrolled]:shadow-sm w-full"
+      class='flex flex-nowrap items-center justify-between relative z-30 transition-all duration-300 py-3.5 js-header bg-transparent group-[.is-scrolled]:bg-white/95 group-[.is-scrolled]:backdrop-blur-md group-[.is-scrolled]:dark:bg-black/95 max-h-24 group-[.is-scrolled]:border-gray-200 group-[.is-scrolled]:dark:border-black group-[.is-scrolled]:shadow-sm w-full'
     >
       <div
-        class="absolute top-0 left-0 w-full h-full lg:hidden js-logo-scroll-overlay pointer-events-none"
+        class='absolute top-0 left-0 w-full h-full lg:hidden js-logo-scroll-overlay pointer-events-none'
       >
       </div>
 
-      <div class="ml-4 relative z-10 lg:ml-8 lg:mr-8 shrink-0">
-        <a href="/" class="transition-opacity hover:opacity-90 block">
-          <div class="sr-only">Takshasheela Logo link to home page</div>
+      <div class='ml-4 relative z-10 lg:ml-8 lg:mr-8 shrink-0'>
+        <a
+          href='/'
+          class='transition-opacity hover:opacity-90 block'
+        >
+          <div class='sr-only'>Takshasheela Logo link to home page</div>
           <Image
             src={Logo}
-            alt="Takshasheela Logo"
-            fetchpriority="high"
+            alt='Takshasheela Logo'
+            fetchpriority='high'
             widths={[224, 448]}
-            sizes="(max-width: 768px) 176px, 224px"
-            class="h-auto transition-all hidden group-[.is-scrolled]:block bg-transparent duration-300 w-44 md:w-56 js-header-logo"
+            sizes='(max-width: 768px) 176px, 224px'
+            class='h-auto transition-all group-[.is-scrolled]:block group-[.is-scrolled]:dark:hidden bg-transparent duration-300 w-44 md:w-56 js-header-logo'
           />
-          <Image
+          <!-- <Image
             src={LogoWhite}
-            alt="Takshasheela Logo"
-            fetchpriority="high"
+            alt='Takshasheela Logo'
+            fetchpriority='high'
             widths={[224, 448]}
-            sizes="(max-width: 768px) 176px, 224px"
-            class="h-auto transition-all group-[.is-scrolled]:hidden bg-transparent duration-300 w-44 md:w-56 js-header-logo"
-          />
+            sizes='(max-width: 768px) 176px, 224px'
+            class='h-auto transition-all block group-[.is-scrolled]:hidden group-[.is-scrolled]:dark:block bg-transparent duration-300 w-44 md:w-56 js-header-logo'
+          /> -->
         </a>
       </div>
       <DesktopNav />
@@ -61,5 +58,5 @@ const isHome = pathname === "/" || pathname === "/index.html";
 </div>
 
 <script>
-  import "./header.ts";
+  import './header.ts';
 </script>

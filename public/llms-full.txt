@@ -67,7 +67,7 @@
 - **APSC Course**: [https://takshashilascs.com/courses/apsc/](https://takshashilascs.com/courses/apsc/)
 - **ADRE Course**: [https://takshashilascs.com/courses/adre/](https://takshashilascs.com/courses/adre/)
 - **All Courses**: [https://takshashilascs.com/courses/](https://takshashilascs.com/courses/)
-- **Team & Faculty**: [https://takshashilascs.com/team/](https://takshashilascs.com/team/)
+- **Team & Faculty**: [https://takshashilascs.com/faculty/](https://takshashilascs.com/faculty/)
 - **About Us**: [https://takshashilascs.com/about/](https://takshashilascs.com/about/)
 - **Contact Us**: [https://takshashilascs.com/contact/](https://takshashilascs.com/contact/)
 - **Privacy Policy**: [https://takshashilascs.com/privacy-policy/](https://takshashilascs.com/privacy-policy/)

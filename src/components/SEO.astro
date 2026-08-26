@@ -2,7 +2,7 @@
 interface Props {
   title?: string;
   description?: string;
-  keywords?: string;
+  keywords?: string | string[];
   image?: string;
   canonical?: string;
   siteName?: string;
@@ -20,11 +20,12 @@ const {
 } = Astro.props;
 
 const imageUrl = new URL(image, Astro.url).href;
+const keywordsContent = Array.isArray(keywords) ? keywords.join(", ") : keywords;
 ---
 
 <title>{title}</title>
 <meta name="description" content={description} />
-{keywords && <meta name="keywords" content={keywords} />}
+{keywordsContent && <meta name="keywords" content={keywordsContent} />}
 {canonical && <link rel="canonical" href={canonical} />}
 
 <!-- Open Graph / Facebook -->
@@ -34,9 +35,11 @@ const imageUrl = new URL(image, Astro.url).href;
 {canonical && <meta property="og:url" content={canonical} />}
 <meta property="og:image" content={imageUrl} />
 <meta property="og:site_name" content={siteName} />
+<meta property="og:locale" content="en_IN" />
 
 <!-- Twitter -->
 <meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:site" content={twitterHandle} />
 <meta name="twitter:creator" content={twitterHandle} />
 <meta name="twitter:title" content={title} />
 <meta name="twitter:description" content={description} />

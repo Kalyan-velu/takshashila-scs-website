@@ -170,7 +170,7 @@ const submitForm = async () => {
     class="bg-white text-gray-900 rounded-2xl border border-gray-200 overflow-hidden shadow-xl shadow-primary-500/5 mt-6"
   >
     <div v-if="isSubmitted" class="p-6 text-center space-y-6">
-      <div class="w-14 h-14 rounded-full bg-emerald-500/10 border border-emerald-500/20 text-emerald-600 flex items-center justify-center mx-auto shadow-sm">
+      <div class="w-14 h-14 rounded-full bg-success/10 border border-success/20 text-success flex items-center justify-center mx-auto shadow-sm">
         <iconify-icon icon="lucide:check-circle-2" class="text-3xl"></iconify-icon>
       </div>
       <div class="space-y-2">
@@ -201,7 +201,7 @@ const submitForm = async () => {
       <div v-if="courseItems.length > 1" class="mb-4">
         <select
           v-model="selectedCourseIndex"
-          class="w-full px-4 py-2.5 border border-gray-200 rounded-lg bg-white text-gray-900 text-sm focus:outline-none focus:ring-2 focus:ring-primary-500/50"
+          class="w-full px-4 py-2.5 border border-gray-200 rounded-xl bg-white text-gray-900 text-sm focus:outline-none focus:ring-2 focus:ring-primary-500/50"
         >
           <option
             v-for="(course, index) in courseItems"
@@ -227,7 +227,7 @@ const submitForm = async () => {
           displayOriginalPrice
         }}</span>
         <span
-          class="text-xs font-medium text-green-600 bg-green-50 dark:bg-green-900/20 dark:text-green-400 px-2 py-0.5 rounded-full"
+          class="text-xs font-medium text-success bg-success/10 dark:bg-success/20 dark:text-success px-2 py-0.5 rounded-full"
         >
           Save ₹{{ currentPrice.discount.toLocaleString("en-IN") }}
         </span>
@@ -266,7 +266,7 @@ const submitForm = async () => {
             type="text"
             required
             name="name"
-            class="w-full px-4 py-3 border border-gray-200 rounded-lg bg-white text-gray-900 focus:outline-none focus:ring-2 focus:ring-primary-500/50"
+            class="w-full px-4 py-3 border border-gray-200 rounded-xl bg-white text-gray-900 focus:outline-none focus:ring-2 focus:ring-primary-500/50"
             placeholder="Full Name"
           />
         </div>
@@ -276,7 +276,7 @@ const submitForm = async () => {
             type="tel"
             required
             name="phone"
-            class="w-full px-4 py-3 border border-gray-200 rounded-lg bg-white text-gray-900 focus:outline-none focus:ring-2 focus:ring-primary-500/50"
+            class="w-full px-4 py-3 border border-gray-200 rounded-xl bg-white text-gray-900 focus:outline-none focus:ring-2 focus:ring-primary-500/50"
             placeholder="Phone Number"
           />
         </div>
@@ -285,7 +285,7 @@ const submitForm = async () => {
             v-model="form.email"
             type="email"
             required
-            class="w-full px-4 py-3 border border-gray-200 rounded-lg bg-white text-gray-900 focus:outline-none focus:ring-2 focus:ring-primary-500/50"
+            class="w-full px-4 py-3 border border-gray-200 rounded-xl bg-white text-gray-900 focus:outline-none focus:ring-2 focus:ring-primary-500/50"
             placeholder="Enter email"
           />
         </div>
@@ -296,7 +296,7 @@ const submitForm = async () => {
         <button
           type="submit"
           :disabled="!isSubmitEnabled"
-          class="w-full bg-primary-500 disabled:opacity-50 text-white hover:opacity-90 font-medium py-3 px-4 rounded-lg transition-all shadow-md mt-2 flex justify-center items-center cursor-pointer"
+          class="w-full bg-primary-500 disabled:opacity-50 text-white hover:bg-primary-600 font-medium py-3 px-4 rounded-xl transition-all shadow-md mt-2 flex justify-center items-center cursor-pointer"
         >
           <span v-if="isSubmitting" class="flex gap-2">
             <svg
@@ -336,7 +336,7 @@ const submitForm = async () => {
 
       <a
         :href="PHONE_HREF"
-        class="w-full flex items-center justify-center gap-2 bg-white border border-gray-200 hover:bg-gray-100 text-gray-900 font-medium py-3 px-4 rounded-lg transition-all"
+        class="w-full flex items-center justify-center gap-2 bg-white border border-gray-200 hover:bg-gray-100 text-gray-900 font-medium py-3 px-4 rounded-xl transition-all"
       >
         <svg
           class="w-4 h-4 text-primary-500"

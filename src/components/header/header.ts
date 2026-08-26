@@ -1,9 +1,3 @@
-declare global {
-  interface Window {
-    __headerCleanup?: () => void;
-  }
-}
-
 // 0. HMR / page-transition cleanup — prevents duplicate listeners on re-runs
 if (window.__headerCleanup) window.__headerCleanup();
 
@@ -59,37 +53,22 @@ const searchIconClose = document.querySelector(
 let handleScroll: (() => void) | null = null;
 
 if (headerContainer && header && logos.length > 0) {
-  const isHome = headerContainer.dataset.isHome === "true";
   let lastScrollY = 0;
-  let isHidden = false;
 
   handleScroll = () => {
     const st = window.scrollY;
     const scrollingDown = st > lastScrollY && st > 300;
 
-    if (isHome) {
-      if (st > 20 && !headerContainer.classList.contains("is-scrolled")) {
-        headerContainer.classList.add("is-scrolled");
-      } else if (st <= 20 && headerContainer.classList.contains("is-scrolled")) {
-        headerContainer.classList.remove("is-scrolled");
-      }
+    if (st > 20 && !headerContainer.classList.contains("is-scrolled")) {
+      headerContainer.classList.add("is-scrolled");
+    } else if (st <= 20 && headerContainer.classList.contains("is-scrolled")) {
+      headerContainer.classList.remove("is-scrolled");
+    }
 
-      if (scrollingDown && !isHidden) {
-        isHidden = true;
-        headerContainer.classList.add("-translate-y-full");
-        document.dispatchEvent(new CustomEvent("header:close-search"));
-        document.dispatchEvent(new CustomEvent("header:close-mobile"));
-        closeMegaMenus();
-      } else if (!scrollingDown && isHidden) {
-        isHidden = false;
-        headerContainer.classList.remove("-translate-y-full");
-      }
-    } else {
-      if (scrollingDown) {
-        document.dispatchEvent(new CustomEvent("header:close-search"));
-        document.dispatchEvent(new CustomEvent("header:close-mobile"));
-        closeMegaMenus();
-      }
+    if (scrollingDown) {
+      document.dispatchEvent(new CustomEvent("header:close-search"));
+      document.dispatchEvent(new CustomEvent("header:close-mobile"));
+      closeMegaMenus();
     }
 
     lastScrollY = st <= 0 ? 0 : st;
@@ -113,7 +92,12 @@ let activeMenu: HTMLElement | null = null;
 function openMenu(el: HTMLElement) {
   if (activeMenu === el) return;
   closeMegaMenus();
-  el.classList.remove("opacity-0", "-translate-y-4", "pointer-events-none", "invisible");
+  el.classList.remove(
+    "opacity-0",
+    "-translate-y-4",
+    "pointer-events-none",
+    "invisible",
+  );
   el.classList.add("opacity-100", "translate-y-0", "pointer-events-auto");
   activeMenu = el;
 
@@ -135,7 +119,12 @@ function closeMegaMenus() {
       "translate-y-0",
       "pointer-events-auto",
     );
-    menu.classList.add("opacity-0", "-translate-y-4", "pointer-events-none", "invisible");
+    menu.classList.add(
+      "opacity-0",
+      "-translate-y-4",
+      "pointer-events-none",
+      "invisible",
+    );
   });
   chevronCourses?.classList.remove("rotate-180", "text-primary-500");
   chevronAbout?.classList.remove("rotate-180", "text-primary-500");
@@ -238,12 +227,6 @@ function openSearch() {
   searchIconOpen?.classList.add("hidden");
   searchIconClose?.classList.remove("hidden");
   searchIconClose?.classList.add("block");
-  searchToggle?.classList.remove(
-    "bg-slate-900",
-    "dark:bg-white",
-    "dark:text-slate-900",
-  );
-  searchToggle?.classList.add("bg-primary-500");
 
   document.dispatchEvent(new CustomEvent("header:search-open"));
 }
@@ -265,12 +248,6 @@ function closeSearch() {
   searchIconOpen?.classList.add("block");
   searchIconClose?.classList.remove("block");
   searchIconClose?.classList.add("hidden");
-  searchToggle?.classList.remove("bg-primary-500");
-  searchToggle?.classList.add(
-    "bg-slate-900",
-    "dark:bg-white",
-    "dark:text-slate-900",
-  );
 
   document.dispatchEvent(new CustomEvent("header:search-close"));
 }

@@ -311,7 +311,7 @@ onUnmounted(() => {
                   target="_blank"
                   rel="noopener noreferrer"
                   aria-label="Inquire via WhatsApp"
-                  class="col-span-1 inline-flex items-center justify-center rounded-xl bg-emerald-600 hover:bg-emerald-700 text-white transition-all duration-200 shadow-md shadow-emerald-600/20"
+                  class="col-span-1 inline-flex items-center justify-center rounded-xl bg-emerald-700 hover:bg-emerald-800 text-white transition-all duration-200 shadow-md shadow-emerald-700/20"
                 >
                   <svg class="w-4 h-4 fill-current" viewBox="0 0 448 512">
                     <path

@@ -10,7 +10,7 @@ import FaqSection from "@/components/FaqSection.astro";
 import LatestArticles from "@/components/LatestArticles.vue";
 import { getLatestPosts } from "@/lib/blogger";
 
-const latestPosts = await getLatestPosts(1, 6);
+// const latestPosts = await getLatestPosts(1, 6);
 
 const title = "Best UPSC and APSC Coaching in Guwahati";
 const description =
@@ -91,6 +91,6 @@ const keywords =
   <CoachingProse id="coaching-in-guwahati" />
   <WhyChooseUs id="about" />
   <AdreCTA />
-  <LatestArticles posts={latestPosts} />
+  <!--<LatestArticles posts={latestPosts} />-->
   <FaqSection />
 </Layout>
