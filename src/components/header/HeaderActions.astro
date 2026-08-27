@@ -1,5 +1,5 @@
 ---
-import { PHONE_HREF } from "@/config/CONSTANTS.ts";
+import { PHONE_HREF, PHONE_DISPLAY } from "@/config/CONSTANTS.ts";
 
 const iconActions = [
   // {
@@ -45,6 +45,15 @@ const actionIconBaseClass = "text-[17px]";
   }
 
   <div class="inline-flex lg:hidden space-x-2">
+    <a
+      href={PHONE_HREF}
+      class="inline-flex w-9 h-9 items-center justify-center rounded-full transition-colors bg-primary-500 text-white"
+      title={`Call us at ${PHONE_DISPLAY}`}
+      aria-label={`Call us at ${PHONE_DISPLAY}`}
+    >
+      <iconify-icon icon="lucide:phone" class="text-[15px]"></iconify-icon>
+    </a>
+
     <button
       class="inline-flex w-9 h-9 items-center justify-center rounded-full transition-colors cursor-pointer bg-gray-100 dark:bg-slate-900 text-gray-800 dark:text-white js-search-toggle"
       title="Search Site"

@@ -4,6 +4,7 @@ import ResultsSection from '../components/ResultsSection.astro';
 import Hero from '../components/hero/index.astro';
 import WhyChooseUs from '../components/WhyChooseUs.astro';
 import DemoClasses from '@/components/DemoClasses.astro';
+import FacultySection from '@/components/FacultySection.astro';
 import AdreCTA from '@/components/AdreCTA.astro';
 import CoachingProse from '@/components/CoachingProse.astro';
 import CoursesWrapper from '@/components/courses/CoursesWrapper.astro';
@@ -93,10 +94,11 @@ const keywords =
   </Fragment>
   <Hero />
   <ResultsSection />
+  <FacultySection id='faculty' />
+  <DemoClasses id='demo-classes' />
   <CoursesWrapper id='courses' />
   <CoachingProse id='coaching-in-guwahati' />
   <WhyChooseUs id='about' />
-  <DemoClasses id='demo-classes' />
   <AdreCTA />
   <LatestCurrentAffairs server:defer>
     <div slot='fallback' class='py-12 max-w-7xl w-full mx-auto lg:pb-32 bg-gray-100/30' />

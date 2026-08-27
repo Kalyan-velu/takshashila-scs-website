@@ -7,13 +7,9 @@ if (window.__headerCleanup) window.__headerCleanup();
 const headerContainer = document.querySelector(
   ".js-header-container",
 ) as HTMLElement;
-const header = document.querySelector(".js-header") as HTMLElement;
 const logoOverlay = document.querySelector(
   ".js-logo-scroll-overlay",
 ) as HTMLElement;
-const logos = document.querySelectorAll(
-  ".js-header-logo",
-) as NodeListOf<HTMLElement>;
 
 const coursesMenu = document.querySelector(
   ".js-mega-menu-courses",
@@ -48,21 +44,15 @@ const searchIconsClose = document.querySelectorAll(
 ) as NodeListOf<HTMLElement>;
 
 /* ==========================================================================
-   1. Scroll State Management
+   1. Scroll Direction — auto-closes menus on fast downward scroll
    ========================================================================== */
 let handleScroll: (() => void) | null = null;
 
-if (headerContainer && header && logos.length > 0) {
+if (headerContainer) {
   let lastScrollY = 0;
 
   handleScroll = () => {
     const st = window.scrollY;
-    
-    if (st > 20 && !headerContainer.classList.contains("is-scrolled")) {
-      headerContainer.classList.add("is-scrolled");
-    } else if (st <= 20 && headerContainer.classList.contains("is-scrolled")) {
-      headerContainer.classList.remove("is-scrolled");
-    }
 
     if (Math.abs(st - lastScrollY) > 10) {
       const scrollingDown = st > lastScrollY && st > 300;

@@ -7,7 +7,6 @@ import SearchDropdown from './SearchDropdown.astro';
 import MobileMenu from './MobileMenu.astro';
 import { Image } from 'astro:assets';
 import Logo from '@/assets/taksheelascs_logo.png';
-import LogoWhite from '@/assets/logo-full-white.png';
 ---
 
 <TopBar />
@@ -16,7 +15,7 @@ import LogoWhite from '@/assets/logo-full-white.png';
 >
   <div class='w-full js-header-wrapper'>
     <header
-      class='flex flex-nowrap items-center justify-between relative z-30 transition-all duration-300 py-3.5 js-header bg-transparent group-[.is-scrolled]:bg-white/95 group-[.is-scrolled]:backdrop-blur-md group-[.is-scrolled]:dark:bg-black/95 max-h-24 group-[.is-scrolled]:border-gray-200 group-[.is-scrolled]:dark:border-black group-[.is-scrolled]:shadow-sm w-full'
+      class='flex flex-nowrap items-center justify-between relative z-30 transition-all duration-300 py-3.5 js-header bg-white/95 backdrop-blur-md dark:bg-black/95 max-h-24 border-gray-200 dark:border-black shadow-sm w-full'
     >
       <div
         class='absolute top-0 left-0 w-full h-full lg:hidden js-logo-scroll-overlay pointer-events-none'
@@ -35,16 +34,8 @@ import LogoWhite from '@/assets/logo-full-white.png';
             fetchpriority='high'
             widths={[224, 448]}
             sizes='(max-width: 768px) 176px, 224px'
-            class='h-auto transition-all group-[.is-scrolled]:block group-[.is-scrolled]:dark:hidden bg-transparent duration-300 w-44 md:w-56 js-header-logo'
+            class='h-auto transition-all bg-transparent duration-300 w-44 md:w-56 js-header-logo'
           />
-          <!-- <Image
-            src={LogoWhite}
-            alt='Takshasheela Logo'
-            fetchpriority='high'
-            widths={[224, 448]}
-            sizes='(max-width: 768px) 176px, 224px'
-            class='h-auto transition-all block group-[.is-scrolled]:hidden group-[.is-scrolled]:dark:block bg-transparent duration-300 w-44 md:w-56 js-header-logo'
-          /> -->
         </a>
       </div>
       <DesktopNav />
