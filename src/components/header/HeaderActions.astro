@@ -44,9 +44,24 @@ const actionIconBaseClass = "text-[17px]";
     ))
   }
 
-  <div class="inline-flex lg:hidden">
+  <div class="inline-flex lg:hidden space-x-2">
     <button
-      class="inline-flex items-center justify-center w-9 h-9 rounded-full bg-white/20 group-[.is-scrolled]:bg-gray-100 group-[.is-scrolled]:dark:bg-slate-900 text-white group-[.is-scrolled]:text-gray-900/80 group-[.is-scrolled]:dark:text-white transition-colors cursor-pointer js-mobile-menu-toggle"
+      class="inline-flex w-9 h-9 items-center justify-center rounded-full transition-colors cursor-pointer bg-gray-100 dark:bg-slate-900 text-gray-800 dark:text-white js-search-toggle"
+      title="Search Site"
+    >
+      <span class="sr-only">Toggle search</span>
+      <iconify-icon
+        icon="lucide:search"
+        class="text-[17px] block js-search-icon-search"
+      ></iconify-icon>
+      <iconify-icon
+        icon="lucide:x"
+        class="text-[17px] hidden js-search-icon-close"
+      ></iconify-icon>
+    </button>
+    
+    <button
+      class="inline-flex items-center justify-center w-9 h-9 rounded-full bg-gray-100 dark:bg-slate-900 text-gray-800 dark:text-white transition-colors cursor-pointer js-mobile-menu-toggle"
     >
       <span class="sr-only">Toggle mobile menu</span>
       <span

@@ -1,5 +1,6 @@
 ---
 import { Image as ImageComponent } from "astro:assets";
+import YouTubeVideoGrid from "./YouTubeVideoGrid.astro";
 import abhigyanGogoi from "../assets/selected-candidates/Abhigyan Gogoi.png";
 import angshurajDas from "../assets/selected-candidates/Angshuraj Das.png";
 import bituponDas from "../assets/selected-candidates/Bitupon Das.png";
@@ -113,7 +114,23 @@ const toppers: Topper[] = [
   },
 ];
 
-const testimonialVideos: TestimonialVideo[] = [];
+const testimonialVideos: TestimonialVideo[] = [
+  {
+    id: "EHCGaJwiT3c",
+    title:
+      "APSC Mock Interview — Rank 32 Partha Jyoti Boruah | Inspector of Taxes | APSC CCE 2024",
+  },
+  {
+    id: "B8qfuWnd2lY",
+    title:
+      "APSC Mock Interview — Rank 14 Gunin Pegu | Assam Police Service | APSC CCE 2024",
+  },
+  {
+    id: "FIJ49tjut2g",
+    title:
+      "APSC Mock Interview — Rank 12 Angshuraj Das | Inspector of Taxes | APSC CCE 2024",
+  },
+];
 
 const hasAnyContent =
   stats.length > 0 || toppers.length > 0 || testimonialVideos.length > 0;
@@ -201,65 +218,8 @@ const hasAnyContent =
         )}
 
         <!-- Testimonials Videos Grid -->
-        {testimonialVideos.length > 0 && (
-          <div class="grid md:grid-cols-3 gap-6">
-            {testimonialVideos.map((v) => (
-              <button
-                type="button"
-                class="yt-facade group relative aspect-video rounded-2xl overflow-hidden border border-gray-200 shadow-xs hover:shadow-xl transition-all duration-300"
-                data-yt-id={v.id}
-                aria-label={`Play video: ${v.title}`}
-              >
-                <img
-                  src={`https://i.ytimg.com/vi/${v.id}/hqdefault.jpg`}
-                  alt={v.title}
-                  width="480"
-                  height="360"
-                  loading="lazy"
-                  decoding="async"
-                  class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
-                />
-                <span class="absolute inset-0 flex items-center justify-center bg-black/30 group-hover:bg-black/40 transition-colors">
-                  <span class="w-14 h-14 rounded-full bg-primary-500 text-white flex items-center justify-center shadow-lg group-hover:scale-110 transition-transform">
-                    <svg
-                      class="w-5 h-5 fill-current ml-0.5"
-                      viewBox="0 0 384 512"
-                      xmlns="http://www.w3.org/2000/svg"
-                    >
-                      <path d="M73 39c-14.8-9.1-33.4-9.4-48.5-.9S0 62.6 0 80V432c0 17.4 9.4 33.4 24.5 41.9s33.7 8.1 48.5-.9L361 297c14.3-8.7 23-24.2 23-41s-8.7-32.2-23-41L73 39z" />
-                    </svg>
-                  </span>
-                </span>
-              </button>
-            ))}
-          </div>
-        )}
+        <YouTubeVideoGrid videos={testimonialVideos} />
       </div>
     </section>
   )
 }
-
-<script>
-  function initYtFacades() {
-    document
-      .querySelectorAll<HTMLButtonElement>(".yt-facade")
-      .forEach((btn) => {
-        if (btn.dataset.bound === "1") return;
-        btn.dataset.bound = "1";
-        btn.addEventListener("click", () => {
-          const id = btn.dataset.ytId;
-          if (!id) return;
-          const iframe = document.createElement("iframe");
-          iframe.src = `https://www.youtube-nocookie.com/embed/${id}?autoplay=1&rel=0`;
-          iframe.allow =
-            "accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture";
-          iframe.allowFullscreen = true;
-          iframe.className = "absolute inset-0 w-full h-full rounded-2xl";
-          iframe.title = btn.getAttribute("aria-label") ?? "Testimonial video";
-          btn.replaceChildren(iframe);
-        });
-      });
-  }
-  initYtFacades();
-  document.addEventListener("astro:page-load", initYtFacades);
-</script>

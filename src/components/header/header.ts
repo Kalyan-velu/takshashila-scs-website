@@ -38,14 +38,14 @@ const chevronCourses = document.querySelector(
 ) as HTMLElement;
 const chevronAbout = document.querySelector(".js-chevron-about") as HTMLElement;
 
-// Search toggle button lives in HeaderActions
-const searchToggle = document.querySelector(".js-search-toggle") as HTMLElement;
-const searchIconOpen = document.querySelector(
+// Search toggle buttons live in HeaderActions or TopBar
+const searchToggles = document.querySelectorAll(".js-search-toggle") as NodeListOf<HTMLElement>;
+const searchIconsOpen = document.querySelectorAll(
   ".js-search-icon-search",
-) as HTMLElement;
-const searchIconClose = document.querySelector(
+) as NodeListOf<HTMLElement>;
+const searchIconsClose = document.querySelectorAll(
   ".js-search-icon-close",
-) as HTMLElement;
+) as NodeListOf<HTMLElement>;
 
 /* ==========================================================================
    1. Scroll State Management
@@ -57,21 +57,22 @@ if (headerContainer && header && logos.length > 0) {
 
   handleScroll = () => {
     const st = window.scrollY;
-    const scrollingDown = st > lastScrollY && st > 300;
-
+    
     if (st > 20 && !headerContainer.classList.contains("is-scrolled")) {
       headerContainer.classList.add("is-scrolled");
     } else if (st <= 20 && headerContainer.classList.contains("is-scrolled")) {
       headerContainer.classList.remove("is-scrolled");
     }
 
-    if (scrollingDown) {
-      document.dispatchEvent(new CustomEvent("header:close-search"));
-      document.dispatchEvent(new CustomEvent("header:close-mobile"));
-      closeMegaMenus();
+    if (Math.abs(st - lastScrollY) > 10) {
+      const scrollingDown = st > lastScrollY && st > 300;
+      if (scrollingDown) {
+        document.dispatchEvent(new CustomEvent("header:close-search"));
+        document.dispatchEvent(new CustomEvent("header:close-mobile"));
+        closeMegaMenus();
+      }
+      lastScrollY = st <= 0 ? 0 : st;
     }
-
-    lastScrollY = st <= 0 ? 0 : st;
   };
   window.addEventListener("scroll", handleScroll, { passive: true });
 
@@ -224,9 +225,11 @@ function openSearch() {
     "translate-y-0",
     "pointer-events-auto",
   );
-  searchIconOpen?.classList.add("hidden");
-  searchIconClose?.classList.remove("hidden");
-  searchIconClose?.classList.add("block");
+  searchIconsOpen.forEach((icon) => icon.classList.add("hidden"));
+  searchIconsClose.forEach((icon) => {
+    icon.classList.remove("hidden");
+    icon.classList.add("block");
+  });
 
   document.dispatchEvent(new CustomEvent("header:search-open"));
 }
@@ -244,17 +247,23 @@ function closeSearch() {
     "pointer-events-none",
     "invisible",
   );
-  searchIconOpen?.classList.remove("hidden");
-  searchIconOpen?.classList.add("block");
-  searchIconClose?.classList.remove("block");
-  searchIconClose?.classList.add("hidden");
+  searchIconsOpen.forEach((icon) => {
+    icon.classList.remove("hidden");
+    icon.classList.add("block");
+  });
+  searchIconsClose.forEach((icon) => {
+    icon.classList.remove("block");
+    icon.classList.add("hidden");
+  });
 
   document.dispatchEvent(new CustomEvent("header:search-close"));
 }
 
-searchToggle?.addEventListener("click", (e) => {
-  e.stopPropagation();
-  searchOpen ? closeSearch() : openSearch();
+searchToggles.forEach((toggle) => {
+  toggle.addEventListener("click", (e) => {
+    e.stopPropagation();
+    searchOpen ? closeSearch() : openSearch();
+  });
 });
 
 document.addEventListener("click", (e) => {
@@ -263,7 +272,10 @@ document.addEventListener("click", (e) => {
   if (!target) return;
 
   const insideSearch = searchPanel?.contains(target);
-  const insideToggle = searchToggle?.contains(target);
+  let insideToggle = false;
+  searchToggles.forEach((toggle) => {
+    if (toggle.contains(target)) insideToggle = true;
+  });
 
   if (!insideSearch && !insideToggle) {
     closeSearch();
@@ -272,11 +284,15 @@ document.addEventListener("click", (e) => {
 
 searchPanel?.addEventListener("focusout", (e: FocusEvent) => {
   const nextFocused = e.relatedTarget as HTMLElement | null;
-  if (
-    nextFocused &&
-    !searchPanel?.contains(nextFocused) &&
-    !searchToggle?.contains(nextFocused)
-  ) {
+  if (!nextFocused) return;
+  if (searchPanel?.contains(nextFocused)) return;
+  
+  let insideToggle = false;
+  searchToggles.forEach((toggle) => {
+    if (toggle.contains(nextFocused)) insideToggle = true;
+  });
+
+  if (!insideToggle) {
     closeSearch();
   }
 });
@@ -286,7 +302,7 @@ document.addEventListener("keydown", (e: KeyboardEvent) => {
   if (e.key === "Escape") {
     if (searchOpen) {
       closeSearch();
-      searchToggle?.focus();
+      if (searchToggles.length > 0) searchToggles[0].focus();
     } else if (activeMenu) {
       const activeTrigger =
         activeMenu === coursesMenu ? triggerCourses : triggerAbout;
