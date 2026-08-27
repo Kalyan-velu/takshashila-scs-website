@@ -1,0 +1,40 @@
+---
+import YouTubeVideoGrid from "./YouTubeVideoGrid.astro";
+
+interface Props {
+  id?: string;
+}
+
+const { id } = Astro.props;
+
+const demoVideos = [
+  {
+    id: "W_bQg-G5UWY",
+    title:
+      "Economy | MCQs Discussion with Nishant Sir | ADRE 3.0 | Takshashila School of Civil Services",
+  },
+  {
+    id: "K_3qJrXBWY8",
+    title:
+      "Indian Polity Essential for UPSC | Prabhakar Jha | Takshashila School of Civil Services",
+  },
+];
+---
+
+<section id={id} class="py-16 md:py-24">
+  <div class="px-4 md:px-6 max-w-7xl mx-auto">
+    <div class="flex flex-col items-center text-center max-w-3xl mx-auto mb-12">
+      <div class="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-primary-500/10 text-primary-500 text-xs font-semibold uppercase tracking-wider mb-4">
+        Sample Classes
+      </div>
+      <h2 class="text-3xl sm:text-4xl md:text-5xl font-light tracking-tight text-gray-900 leading-tight">
+        See Our <span class="text-primary-500 italic font-medium">Faculty</span> in Action
+      </h2>
+      <p class="mt-4 text-base md:text-lg text-gray-600 font-light leading-relaxed">
+        A preview of the teaching quality behind our UPSC, APSC, and ADRE programs.
+      </p>
+    </div>
+
+    <YouTubeVideoGrid videos={demoVideos} columns="md:grid-cols-2 max-w-3xl mx-auto" />
+  </div>
+</section>
