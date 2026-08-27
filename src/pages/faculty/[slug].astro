@@ -11,16 +11,35 @@ export function getStaticPaths() {
 }
 
 const { member } = Astro.props;
+
+const personSchema = {
+  "@context": "https://schema.org",
+  "@type": "Person",
+  name: member.name,
+  description: member.description,
+  image: new URL(member.image, SITE_URL).href,
+  jobTitle: member.expertise?.[0],
+  knowsAbout: member.expertise,
+  affiliation: {
+    "@type": "EducationalOrganization",
+    name: "Takshasheela School of Civil Services",
+    sameAs: SITE_URL,
+  },
+  url: `${SITE_URL}/faculty/${member.slug}/`,
+};
 ---
 
 <Layout
   title={`${member.name} | Takshasheela School of Civil Services`}
   description={member.description}
-  canonical={`${SITE_URL}/team/${member.slug}/`}
+  canonical={`${SITE_URL}/faculty/${member.slug}/`}
 >
+  <Fragment slot="head_data">
+    <script type="application/ld+json" set:html={JSON.stringify(personSchema)} />
+  </Fragment>
   <div class="container mx-auto px-4 lg:px-24 py-8 md:py-12">
     <a
-      href="/pages/faculty/"
+      href="/faculty/"
       class="inline-flex items-center gap-2 text-sm font-medium text-gray-600 hover:text-primary-500 transition-colors mb-8 group"
     >
       <svg

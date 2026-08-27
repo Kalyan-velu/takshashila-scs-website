@@ -10,7 +10,14 @@ export const PHONE_DISPLAY = `+91 ${phoneDigits.slice(0, 5)}-${phoneDigits.slice
 export const SITE_URL = "https://takshashilascs.com";
 // Bare domain (no www) — this is the host WordPress content itself links to.
 export const SITE_DOMAIN = "https://takshashilascs.com";
-export const CURRENT_AFFAIRS_URL = "https://currentaffairs.takshashilascs.com";
+export const CURRENT_AFFAIRS_URL = "http://localhost:3000";
+// See src/lib/currentAffairs.ts for the API client.
+export const CURRENT_AFFAIRS_API_BASE = `${CURRENT_AFFAIRS_URL}/api/v1`;
+// Individual posts on the external site live under /current_affairs/ (underscore) — the
+// /current-affairs (hyphen) path is the archive/listing page.
+export function currentAffairsPostUrl(titleUrl: string): string {
+  return `${CURRENT_AFFAIRS_URL}/current_affairs/${titleUrl}`;
+}
 // Blogger-hosted blog — see src/lib/blogger.ts for the feed client.
 export const BLOG_URL = "https://blogs.takshashilascs.com";
 

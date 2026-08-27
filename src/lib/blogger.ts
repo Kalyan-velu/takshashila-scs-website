@@ -28,6 +28,7 @@ export interface BlogPost {
   content: string;
   imageUrl: string | null;
   author: BlogAuthor;
+  keywords: string[];
   publishedAt: string;
   updatedAt: string;
   readingTimeMinutes: number;
@@ -53,6 +54,9 @@ interface BloggerEntry {
   published: { $t: string };
   updated: { $t: string };
   title: { $t: string };
+  category: {
+    term: string;
+  }[];
   content?: { $t: string };
   link: BloggerLink[];
   author?: BloggerAuthorEntry[];
@@ -198,12 +202,14 @@ function mapEntry(entry: BloggerEntry): BlogPost {
   }
 
   const plainText = cheerio.load(content).text().replace(/\s+/g, " ").trim();
-
+  const keywords =
+    entry.category?.map((value: { term: string }) => value.term) ?? [];
   return {
     id: entry.id.$t,
     slug,
     link: `/${slug}/`,
     bloggerLink: alternate,
+    keywords,
     title: decodeEntities(entry.title.$t),
     excerpt:
       plainText.length > 160 ? `${plainText.slice(0, 160).trim()}…` : plainText,
@@ -268,7 +274,9 @@ let allPostsPromise: Promise<BlogPost[]> | null = null;
 
 /** All posts, newest first. */
 export function getAllPosts(): Promise<BlogPost[]> {
-  allPostsPromise = fetchAllPosts();
+  if (!allPostsPromise) {
+    allPostsPromise = fetchAllPosts();
+  }
   return allPostsPromise;
 }
 

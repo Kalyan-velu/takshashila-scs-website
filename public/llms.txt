@@ -13,7 +13,7 @@
 
 - [Current Affairs Portal](https://currentaffairs.takshashilascs.com): Daily current affairs updates, news summaries, and free daily mock tests focused on UPSC and APSC exams.
 - [Monthly Magazines](https://takshashilascs.com/magazine/): Comprehensive current affairs compilations and strategic study magazines for civil services aspirants.
-- [Faculty & Team](https://takshashilascs.com/team/): Meet our experienced faculties and mentors with 5–20+ years of domain expertise.
+- [Faculty & Team](https://takshashilascs.com/faculty/): Meet our experienced faculties and mentors with 5–20+ years of domain expertise.
 - [About Us](https://takshashilascs.com/about/): Overview of our institute, core vision, smart classrooms, library, and national outlook.
 - [Contact Us](https://takshashilascs.com/contact/): Address, contact numbers, email, location map, and admission inquiry details.
 

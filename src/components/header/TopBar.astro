@@ -4,71 +4,97 @@ import {
   PHONE_DISPLAY,
   PHONE_HREF,
   socials,
-} from "@/config/CONSTANTS.ts";
-import AnnouncementTicker from "./AnnouncementTicker.astro";
+} from '@/config/CONSTANTS.ts';
 ---
 
 <div
-  class="flex items-stretch w-full border-b border-primary-500 dark:border-slate-900 bg-white/80 dark:bg-slate-950/80 backdrop-blur-md js-top-bar-wrapper overflow-hidden z-45 relative"
+  class='flex flex-wrap lg:flex-nowrap items-center justify-between w-full bg-primary-500 dark:bg-slate-950 text-white js-top-bar-wrapper z-45 relative px-4 lg:px-8 py-1.5 text-xs font-light'
 >
+  <!-- Left Side: Phone, Email, Socials -->
   <div
-    class="hidden lg:flex items-center relative z-10 bg-primary-500 dark:bg-slate-950 pl-6 pr-8 py-1.5 text-[11px] lg:text-xs font-light text-white dark:text-gray-300"
+    class='flex flex-wrap items-center gap-x-6 gap-y-2 w-full lg:w-auto justify-center lg:justify-start'
   >
-    <div class="flex items-center space-x-6 mr-6">
+    <div class='flex items-center space-x-6'>
       <a
         href={PHONE_HREF}
-        class="flex items-center gap-1.5 hover:text-primary-500 transition-colors whitespace-nowrap"
+        class='flex items-center gap-1.5 hover:text-gold-400 transition-colors whitespace-nowrap'
       >
-        <iconify-icon icon="lucide:phone" class="text-[13px]"></iconify-icon>
+        <iconify-icon
+          icon='lucide:phone'
+          class='text-[13px] text-gold-500'
+        ></iconify-icon>
         {PHONE_DISPLAY}
       </a>
       <a
         href={`mailto:${EMAIL}`}
-        class="flex items-center gap-1.5 hover:text-primary-500 transition-colors whitespace-nowrap"
+        class='flex items-center gap-1.5 hover:text-gold-400 transition-colors whitespace-nowrap'
       >
-        <iconify-icon icon="lucide:mail" class="text-[13px]"></iconify-icon>
+        <iconify-icon
+          icon='lucide:mail'
+          class='text-[13px] text-gold-500'
+        ></iconify-icon>
         {EMAIL}
       </a>
     </div>
-    <div class="flex items-center space-x-4 pr-2">
+    <div class='flex items-center space-x-4'>
       <a
         href={socials.FACEBOOK}
-        class="hover:text-primary-500 transition-colors"
-        target="_blank"
-        aria-label="Facebook"
+        class='hover:text-gold-400 transition-colors'
+        target='_blank'
+        aria-label='Facebook'
       >
-        <iconify-icon icon="lucide:facebook" class="text-[14px]"></iconify-icon>
+        <iconify-icon
+          icon='lucide:facebook'
+          class='text-[14px]'
+        ></iconify-icon>
       </a>
       <a
         href={socials.TWITTER}
-        class="hover:text-primary-500 transition-colors"
-        target="_blank"
-        aria-label="Twitter/X"
+        class='hover:text-gold-400 transition-colors'
+        target='_blank'
+        aria-label='Twitter/X'
       >
-        <iconify-icon icon="ri:twitter-x-fill" class="text-[14px]"
+        <iconify-icon
+          icon='ri:twitter-x-fill'
+          class='text-[14px]'
         ></iconify-icon>
       </a>
       <a
         href={socials.INSTAGRAM}
-        class="hover:text-primary-500 transition-colors"
-        target="_blank"
-        aria-label="Instagram"
+        class='hover:text-gold-400 transition-colors'
+        target='_blank'
+        aria-label='Instagram'
       >
-        <iconify-icon icon="lucide:instagram" class="text-[14px]"
+        <iconify-icon
+          icon='lucide:instagram'
+          class='text-[14px]'
         ></iconify-icon>
       </a>
     </div>
-
-    <!-- The Slant (/) Design -->
-    <div
-      class="absolute top-0 -right-4 h-full w-8 bg-primary-500 dark:bg-slate-950 origin-bottom transform skew-x-25 border-r border-primary dark:border-slate-800"
-      style="z-index: -1;"
-    >
-    </div>
   </div>
 
-  <!-- Right Side (Announcement) - Full width on Mobile, remaining on Desktop -->
-  <div class="flex-1 flex items-center relative z-0 overflow-hidden w-full">
-    <AnnouncementTicker />
+  <!-- Right Side: Sitemap, Search -->
+  <div
+    class='flex items-center space-x-4 mt-2 lg:mt-0 w-full lg:w-auto justify-center lg:justify-end'
+  >
+    <button
+      class='inline-flex w-7 h-7 md:w-8 md:h-8 items-center justify-center rounded-full transition-colors cursor-pointer bg-gold-500 text-primary-900 hover:bg-gold-400 js-search-toggle'
+      title='Search Site'
+    >
+      <span class='sr-only'>Toggle search</span>
+      <iconify-icon
+        icon='lucide:search'
+        class='text-[14px] block js-search-icon-search'
+      ></iconify-icon>
+      <iconify-icon
+        icon='lucide:x'
+        class='text-[14px] hidden js-search-icon-close'
+      ></iconify-icon>
+    </button>
+    <a
+      href='/sitemap/'
+      class='hover:text-gold-400 transition-colors font-medium'
+      >Sitemap</a
+    >
   </div>
 </div>

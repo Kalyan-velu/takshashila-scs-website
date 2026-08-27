@@ -96,7 +96,7 @@
           <button
             @click="handleAcceptAll"
             type="button"
-            class="rounded-xl bg-primary-600 px-4 py-2 text-xs font-medium text-white shadow-sm hover:bg-primary-700 transition"
+            class="rounded-xl bg-primary-500 px-4 py-2 text-xs font-medium text-white shadow-sm hover:bg-primary-600 transition cursor-pointer"
           >
             Accept All
           </button>
@@ -179,7 +179,7 @@
                 type="checkbox"
                 checked
                 disabled
-                class="mt-1 h-4 w-4 rounded border-gray-300 text-primary-600 opacity-60 cursor-not-allowed"
+                class="mt-1 h-4 w-4 rounded border-gray-300 text-primary-500 opacity-60 cursor-not-allowed"
               />
             </div>
 
@@ -206,7 +206,7 @@
                   class="sr-only peer"
                 />
                 <div
-                  class="w-9 h-5 bg-gray-200 peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-4 after:w-4 after:transition-all peer-checked:bg-primary-600"
+                  class="w-9 h-5 bg-gray-200 peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-4 after:w-4 after:transition-all peer-checked:bg-primary-500"
                 ></div>
               </label>
             </div>
@@ -231,7 +231,7 @@
                   class="sr-only peer"
                 />
                 <div
-                  class="w-9 h-5 bg-gray-200 peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-4 after:w-4 after:transition-all peer-checked:bg-primary-600"
+                  class="w-9 h-5 bg-gray-200 peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-4 after:w-4 after:transition-all peer-checked:bg-primary-500"
                 ></div>
               </label>
             </div>
@@ -244,14 +244,14 @@
             <button
               @click="handleSavePreferences"
               type="button"
-              class="rounded-xl border border-gray-300 bg-white px-4 py-2 text-xs font-medium text-gray-700 hover:bg-gray-50 transition"
+              class="rounded-xl border border-gray-300 bg-white px-4 py-2 text-xs font-medium text-gray-700 hover:bg-gray-50 transition cursor-pointer"
             >
               Save Preferences
             </button>
             <button
               @click="handleAcceptAll"
               type="button"
-              class="rounded-xl bg-primary-600 px-4 py-2 text-xs font-medium text-white shadow-sm hover:bg-primary-700 transition"
+              class="rounded-xl bg-primary-500 px-4 py-2 text-xs font-medium text-white shadow-sm hover:bg-primary-600 transition cursor-pointer"
             >
               Accept All
             </button>
