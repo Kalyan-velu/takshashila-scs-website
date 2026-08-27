@@ -10,6 +10,7 @@ interface ImportMetaEnv {
   readonly PUBLIC_CLOUDFLARE_SITE_KEY: string;
   readonly PUBLIC_CRM_URL: string;
   readonly PUBLIC_GTM_CONTAINER: string;
+  readonly CMS_KEY: string;
 }
 
 interface ImportMeta {

@@ -1,72 +1,73 @@
 ---
-import Layout from "../layouts/Layout.astro";
-import ResultsSection from "../components/ResultsSection.astro";
-import Hero from "../components/hero/index.astro";
-import WhyChooseUs from "../components/WhyChooseUs.astro";
-import AdreCTA from "@/components/AdreCTA.astro";
-import CoachingProse from "@/components/CoachingProse.astro";
-import CoursesWrapper from "@/components/courses/CoursesWrapper.astro";
-import FaqSection from "@/components/FaqSection.astro";
-import LatestArticles from "@/components/LatestArticles.vue";
-import { getLatestPosts } from "@/lib/blogger";
+import Layout from '../layouts/Layout.astro';
+import ResultsSection from '../components/ResultsSection.astro';
+import Hero from '../components/hero/index.astro';
+import WhyChooseUs from '../components/WhyChooseUs.astro';
+import AdreCTA from '@/components/AdreCTA.astro';
+import CoachingProse from '@/components/CoachingProse.astro';
+import CoursesWrapper from '@/components/courses/CoursesWrapper.astro';
+import FaqSection from '@/components/FaqSection.astro';
+import LatestArticles from '@/components/LatestArticles.vue';
+import LatestCurrentAffairs from '@/components/LatestCurrentAffairs.astro';
+import { getLatestPosts } from '@/lib/blogger';
 
-// const latestPosts = await getLatestPosts(1, 6);
+const latestPosts = await getLatestPosts(1, 3);
 
-const title = "Best UPSC and APSC Coaching in Guwahati";
+const title = 'Best UPSC and APSC Coaching in Guwahati';
 const description =
-  "Takshasheela is the best UPSC and APSC coaching in Guwahati, offering top Delhi faculty, online & offline classes, study material, and test series.";
+  'Takshasheela is the best UPSC and APSC coaching in Guwahati, offering top Delhi faculty, online & offline classes, study material, and test series.';
 
-const siteUrl = "https://takshashilascs.com";
+const siteUrl = 'https://takshashilascs.com';
 
 const itemListSchema = {
-  "@context": "https://schema.org",
-  "@type": "ItemList",
-  name: "Featured Coaching Programs",
+  '@context': 'https://schema.org',
+  '@type': 'ItemList',
+  name: 'Featured Coaching Programs',
   itemListElement: [
     {
-      "@type": "ListItem",
+      '@type': 'ListItem',
       position: 1,
       item: {
-        "@type": "Course",
-        name: "Comprehensive UPSC Package",
+        '@type': 'Course',
+        name: 'Comprehensive UPSC Package',
         description:
-          "Comprehensive guidance for IAS, IPS & Central Civil Services.",
+          'Comprehensive guidance for IAS, IPS & Central Civil Services.',
         url: `${siteUrl}/courses/upsc/`,
         provider: {
-          "@type": "EducationalOrganization",
-          name: "Takshasheela School of Civil Services",
+          '@type': 'EducationalOrganization',
+          name: 'Takshasheela School of Civil Services',
           sameAs: siteUrl,
         },
       },
     },
     {
-      "@type": "ListItem",
+      '@type': 'ListItem',
       position: 2,
       item: {
-        "@type": "Course",
-        name: "Comprehensive APSC CCE Package",
+        '@type': 'Course',
+        name: 'Comprehensive APSC CCE Package',
         description:
-          "Top-rated APSC CCE coaching online & offline with Assam GS Paper 5.",
+          'Top-rated APSC CCE coaching online & offline with Assam GS Paper 5.',
         url: `${siteUrl}/courses/apsc/`,
         provider: {
-          "@type": "EducationalOrganization",
-          name: "Takshasheela School of Civil Services",
+          '@type': 'EducationalOrganization',
+          name: 'Takshasheela School of Civil Services',
           sameAs: siteUrl,
         },
       },
     },
     {
-      "@type": "ListItem",
+      '@type': 'ListItem',
       position: 3,
       item: {
-        "@type": "Course",
-        name: "ADRE 2026 Online Course",
+        '@type': 'Course',
+        name: 'ADRE 2026 Online Course',
         description:
-          "Dedicated online course for Assam Direct Recruitment Exam Grade III and Grade IV posts.",
+          'Dedicated online course for Assam Direct Recruitment Exam Grade III and Grade IV posts.',
         url: `${siteUrl}/courses/adre/`,
         provider: {
-          "@type": "EducationalOrganization",
-          name: "Takshasheela School of Civil Services",
+          '@type': 'EducationalOrganization',
+          name: 'Takshasheela School of Civil Services',
           sameAs: siteUrl,
         },
       },
@@ -74,23 +75,30 @@ const itemListSchema = {
   ],
 };
 const keywords =
-  "adre coaching, upsc coaching, apsc coaching, coaching institute, best coaching, in guwahati, best coaching in guwahati";
+  'adre coaching, upsc coaching, apsc coaching, coaching institute, best coaching, in guwahati, best coaching in guwahati';
 ---
 
-<Layout title={title} keywords={keywords} description={description}>
-  <Fragment slot="head_data">
+<Layout
+  title={title}
+  keywords={keywords}
+  description={description}
+>
+  <Fragment slot='head_data'>
     <script
       is:inline
-      type="application/ld+json"
+      type='application/ld+json'
       set:html={JSON.stringify(itemListSchema)}
     />
   </Fragment>
   <Hero />
   <ResultsSection />
-  <CoursesWrapper id="courses" />
-  <CoachingProse id="coaching-in-guwahati" />
-  <WhyChooseUs id="about" />
+  <CoursesWrapper id='courses' />
+  <CoachingProse id='coaching-in-guwahati' />
+  <WhyChooseUs id='about' />
   <AdreCTA />
-  <!--<LatestArticles posts={latestPosts} />-->
+  <LatestCurrentAffairs server:defer>
+    <div slot='fallback' class='py-12 max-w-7xl w-full mx-auto lg:pb-32 bg-gray-100/30' />
+  </LatestCurrentAffairs>
+  <LatestArticles posts={latestPosts} />
   <FaqSection />
 </Layout>

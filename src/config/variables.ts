@@ -9,9 +9,11 @@ export default ((isServer: boolean | undefined = false) => {
       SUPABASE_KEY: import.meta.env.PUBLIC_SUPABASE_KEY || "",
       CLOUDFLARE_SITE_KEY: import.meta.env.PUBLIC_CLOUDFLARE_SITE_KEY || "",
       CLOUDFLARE_SECRET_KEY: "",
+      CMS_KEY: "",
     };
   }
   return {
+    CMS_KEY: import.meta.env.CMS_KEY || "",
     CRM_URL: import.meta.env.CRM_URL || "",
     SUPABASE_URL: import.meta.env.SUPABASE_URL || "",
     SUPABASE_KEY: import.meta.env.SUPABASE_SECRET_KEY || "",
