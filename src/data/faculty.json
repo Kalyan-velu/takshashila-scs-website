@@ -1,6 +1,42 @@
 {
   "faculty": [
     {
+      "name": "Nishant N. Kashyap",
+      "experience": "Over 3 years as a General Studies faculty and 5+ years in content creation",
+      "expertise": [
+        "History",
+        "Assam History and Assam related topics",
+        "Art and Culture",
+        "International Relations",
+        "Geography"
+      ],
+      "track_record": "Successfully appeared for the APSC interview",
+      "associations": [
+        "Ministry of External Affairs",
+        "PRS India"
+      ],
+      "description": "Combining scholarly excellence with a passion for mentoring, this educator consistently inspires and shapes future leaders in civil services.",
+      "image": "/Takshasheela/faculty/nishant-nirlav-kashyap.png"
+    },
+    {
+      "name": "Bhargab Hazarika",
+      "experience": "Over 3 years of teaching and mentoring experience",
+      "expertise": [
+        "Geography",
+        "Environment",
+        "Assam-specific contents",
+        "Internal Security"
+      ],
+      "track_record": "Formerly associated with many reputed institutions, bringing hands-on teaching experience across diverse civil services programs",
+      "associations": [
+        "Borthakur IAS Academy",
+        "Aarohan Civil Service Institute",
+        "Uncomplicated by Career Guide"
+      ],
+      "description": "A dedicated educator known for simplifying Geography, Environment, and Assam-specific content for aspirants preparing for competitive exams.",
+      "image": "/Takshasheela/faculty/bhargab-hazarika.png"
+    },
+    {
       "name": "Prabhakar Jha",
       "experience": "Over 10 years as a General Studies faculty and more than 6 years of content creation expertise",
       "expertise": [
@@ -23,7 +59,10 @@
     {
       "name": "Vaibhav Patil",
       "experience": "Over 8 years of teaching and mentoring experience in Geography and Environment",
-      "expertise": ["Geography", "Environment"],
+      "expertise": [
+        "Geography",
+        "Environment"
+      ],
       "track_record": "Successfully mentored thousands of students, guiding many to achieve their dreams of clearing the Civil Services Examination",
       "associations": [
         "Drishti IAS",
@@ -33,21 +72,6 @@
       ],
       "description": "A dedicated mentor with a passion for simplifying complex topics and inspiring aspirants to achieve excellence in competitive exams.",
       "image": "/Takshasheela/faculty/vaibhav-patil.png"
-    },
-    {
-      "name": "Nishant N. Kashyap",
-      "experience": "Over 3 years as a General Studies faculty and 5+ years in content creation",
-      "expertise": [
-        "History",
-        "Assam History and Assam related topics",
-        "Art and Culture",
-        "International Relations",
-        "Geography"
-      ],
-      "track_record": "Successfully appeared for the APSC interview",
-      "associations": ["Ministry of External Affairs", "PRS India"],
-      "description": "Combining scholarly excellence with a passion for mentoring, this educator consistently inspires and shapes future leaders in civil services.",
-      "image": "/Takshasheela/faculty/nishant-nirlav-kashyap.png"
     },
     {
       "name": "Hriday Kr Khakholary",
@@ -69,7 +93,11 @@
     {
       "name": "Sanjay Kumar",
       "experience": "Over 8 years of teaching and mentoring experience",
-      "expertise": ["GS Paper II", "GS Paper III", "Sociology Optional"],
+      "expertise": [
+        "GS Paper II",
+        "GS Paper III",
+        "Sociology Optional"
+      ],
       "track_record": "Post-Graduate from the Delhi School of Economics; appeared for UPSC CSE Mains 2017",
       "associations": [
         "Vision IAS",
@@ -81,27 +109,14 @@
       "image": "/Takshasheela/faculty/sanjay-kumar.png"
     },
     {
-      "name": "Bhargab Hazarika",
-      "experience": "Over 3 years of teaching and mentoring experience",
-      "expertise": [
-        "Geography",
-        "Environment",
-        "Assam-specific contents",
-        "Internal Security"
-      ],
-      "track_record": "Formerly associated with many reputed institutions, bringing hands-on teaching experience across diverse civil services programs",
-      "associations": [
-        "Borthakur IAS Academy",
-        "Aarohan Civil Service Institute",
-        "Uncomplicated by Career Guide"
-      ],
-      "description": "A dedicated educator known for simplifying Geography, Environment, and Assam-specific content for aspirants preparing for competitive exams.",
-      "image": "/Takshasheela/faculty/bhargab-hazarika.png"
-    },
-    {
       "name": "Sangeeta Das",
       "experience": "Extensive teaching experience across school and coaching institutes, including CSAT training and mentoring",
-      "expertise": ["CSAT", "Science and Technology", "Science", "Mathematics"],
+      "expertise": [
+        "CSAT",
+        "Science and Technology",
+        "Science",
+        "Mathematics"
+      ],
       "track_record": "Delivered CSAT training with interactive sessions and one-on-one mentoring; guided students for CUET and other exams",
       "associations": [
         "ALS IAS",
