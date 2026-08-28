@@ -6,195 +6,131 @@ import { Image } from "astro:assets";
 const title = "About Us | Takshasheela School of Civil Services";
 const description =
   "Learn more about Takshasheela School of Civil Services, the premier institution for UPSC and APSC preparation in Guwahati. Discover our mission, expert faculty, and state-of-the-art infrastructure.";
+
+const sections = [
+  {
+    title: "Who Are We?",
+    content:
+      "We are not just a coaching institute. We are immensely grateful to the people of Assam and the Northeast for considering Takshasheela School of Civil Services the premier coaching center for APSC and UPSC preparation. Built on trust, proven results, and an unwavering commitment to aspirants’ success, we provide the ultimate guidance, mentorship, and resources to help you achieve your civil service dreams.",
+    icon: "lucide:users-2",
+  },
+  {
+    title: "Result-Oriented Courses",
+    content:
+      "Our courses are strategically engineered to deliver maximum results with minimum confusion. Available in both online and offline modes, students can prepare effectively from anywhere. With the right guidance, every class becomes a focused, disciplined, and motivating experience. Our experienced faculty ensures students stay confident, well-prepared, and strictly on track to achieve their goals.",
+    icon: "lucide:target",
+  },
+  {
+    title: "Simple & Accessible Learning",
+    content:
+      "Learning at Takshasheela is seamless and accessible. We provide high-quality study materials designed to break down complex topics easily. Our online resources, live classes, and offline classroom programs allow students to stay updated with daily current affairs, monthly compilations, and key exam content anytime, anywhere.",
+    icon: "lucide:book-open",
+  },
+  {
+    title: "Student-Friendly Environment",
+    content:
+      "We believe a supportive environment is key to effective preparation. Our state-of-the-art infrastructure, advanced library, smart classrooms, and prime location near the Assam Secretariat ensure that students can focus entirely on their studies without distractions.",
+    icon: "lucide:building-2",
+  },
+  {
+    title: "Preparing For India’s Toughest Exams",
+    content:
+      "Becoming a civil servant requires discipline, perseverance, and a passion to serve the nation. At Takshasheela, we provide expert UPSC coaching while also rigorously preparing students for APSC and ADRE, allowing aspirants to pursue their civil service dreams with national-level coaching right here in Assam.",
+    icon: "lucide:award",
+  },
+  {
+    title: "Proven Track Record Of Success",
+    content:
+      "Our results speak volumes. Through dedicated mentorship, robust study plans, and rigorous test series, our students consistently perform at the highest levels in state and national exams. With the right guidance and relentless preparation, success in India’s toughest exams is well within your reach.",
+    icon: "lucide:trending-up",
+  },
+  {
+    title: "Expert Mentors & Faculty",
+    content:
+      "Our faculty comprises top-tier experts and mentors from Delhi and across India, boasting 5 to 20 years of rich teaching experience. Their unparalleled expertise and personalized mentorship make Takshasheela the best APSC and UPSC coaching in Guwahati, trusted implicitly by aspirants across the state.",
+    icon: "lucide:graduation-cap",
+  },
+  {
+    title: "Your Partner In Success",
+    content:
+      "Whether you prefer online coaching or classroom programs, Takshasheela School of Civil Services is here to guide every step of your journey. With proven strategies, quality resources, and personalized mentorship, we ensure every student is equipped to succeed. Choose Takshasheela—and turn your civil service dream into reality.",
+    icon: "lucide:handshake",
+  },
+];
 ---
 
 <Layout title={title} description={description}>
   <section class="relative pb-16 md:pb-24 overflow-hidden">
-    <div
-      class="bg-primary-500/5 py-12 flex items-center justify-center md:py-20 border-b border-gray-200"
-    >
-      <h1
-        class="text-4xl md:text-5xl lg:text-7xl font-light tracking-tight text-gray-900 max-w-4xl mb-6 leading-tight"
-      >
-        About <span class="text-primary-500 font-medium">Us</span>
-      </h1>
-    </div>
-    <div class="px-4 py-12 md:px-6 max-w-7xl mx-auto">
-      <div class="flex flex-col gap-16 md:gap-24">
-        <div class="grid lg:grid-cols-2 gap-12 lg:gap-20 items-center">
-          <div class="space-y-8">
-            <div
-              class="space-y-6 text-lg text-gray-600 font-light leading-relaxed"
-            >
-              <p>
-                Takshasheela School of Civil Services, a unit of <strong>Takshashila Educational Trust</strong> (formerly known as <strong>Takshashila School of Civil Services</strong>), is a premier institution
-                for the preparation of UPSC and APSC. It is a unique initiative
-                started in 2022 to provide a platform to the youth of Assam and
-                North-East to prepare for UPSC and APSC with the help and
-                guidance of talented mentors and faculties of various subjects
-                from all over India at Takshasheela the Best APSC coaching in
-                Guwahati.
-              </p>
-              <p>
-                Explore our <a
-                  href="/courses/"
-                  class="text-primary-500 hover:underline underline-offset-4"
-                  >comprehensive courses page</a
-                > to discover detailed programs, tailored resources, and expert guidance.
-                These are aimed at equipping aspirants with the knowledge and skills
-                required to excel in civil services examinations offered at the Takshasheela
-                School of Civil Services. This institution is recognized as providing
-                the best APSC coaching in Guwahati.
-              </p>
-              <p>
-                At the Takshasheela School of Civil Services, we take pride in
-                our innovative teaching methodologies and curriculum. These are
-                designed to build confidence and clarity in your preparation.
-                This makes us the top choice for APSC coaching in Guwahati.
-              </p>
-              <p>
-                For any inquiries, enrollment details, or personalized
-                assistance, visit our <a
-                  href="/contact/"
-                  class="text-primary-500 hover:underline underline-offset-4"
-                  >contact page</a
-                >. Our dedicated team is available to address your questions and
-                guide you through the admission process of Takshasheela School
-                of Civil Services. We also provide the support you need for a
-                successful learning journey. Takshasheela School is renowned for
-                the best coaching institute for APSC in Guwahati.
-              </p>
-            </div>
+    <div class="bg-primary-500/5 py-12 md:py-20 border-b border-gray-200">
+      <div class="px-4 md:px-6 max-w-7xl mx-auto flex flex-col md:flex-row items-center justify-between gap-8">
+        <div class="flex-1">
+          <div class="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-primary-500/10 text-primary-600 text-xs font-semibold tracking-wide uppercase mb-4">
+            <iconify-icon icon="lucide:info" class="text-sm"></iconify-icon>
+            Our Mission & Vision
           </div>
-
-          <div
-            class="relative w-full h-full min-h-100 lg:min-h-150 rounded-none overflow-hidden shadow-2xl"
-          >
+          <h1 class="text-4xl md:text-5xl lg:text-7xl font-light tracking-tight text-gray-900 leading-tight">
+            About <span class="text-primary-500 font-medium italic">Us</span>
+          </h1>
+          <p class="mt-4 text-lg text-gray-600 font-light max-w-xl leading-relaxed">
+            Takshasheela School of Civil Services is a premier institution
+            dedicated to educating, training, and guiding young aspirants for
+            Civil Services in India.
+          </p>
+        </div>
+        <div class="flex-1 w-full relative">
+          <div class="aspect-video w-full rounded-2xl overflow-hidden shadow-2xl relative group">
             <Image
               src="/Takshasheela/students.webp"
               alt="Takshasheela School of Civil Services Students"
-              class="absolute inset-0 w-full h-full object-cover hover:scale-105 transition-transform duration-700"
+              class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"
               width={800}
-              height={1000}
+              height={500}
             />
-            <div
-              class="absolute inset-0 bg-linear-to-t from-background/80 via-background/20 to-transparent pointer-events-none"
-            >
-            </div>
+            <div class="absolute inset-0 bg-primary-900/10 pointer-events-none mix-blend-multiply"></div>
           </div>
         </div>
+      </div>
+    </div>
 
-        <div class="space-y-12">
-          <div class="text-center space-y-4 max-w-2xl mx-auto">
-            <h2
-              class="text-3xl md:text-4xl font-light tracking-tight text-gray-900"
-            >
-              Our <span class="text-primary-500 italic">Core Features</span>
-            </h2>
-            <p class="text-gray-600 font-light leading-relaxed">
-              We provide the best infrastructure and guidance to help our
-              students excel in their civil services journey.
+    <div class="px-4 py-16 md:py-24 md:px-6 max-w-7xl mx-auto">
+      <div class="grid md:grid-cols-2 gap-x-12 gap-y-16 lg:gap-x-20">
+        {sections.map((section) => (
+          <div class="flex flex-col gap-4 group">
+            <div class="flex items-center gap-4 mb-2">
+              <div class="w-12 h-12 rounded-2xl bg-gray-50 border border-gray-100 flex items-center justify-center text-primary-500 group-hover:bg-primary-500/10 group-hover:border-primary-500/20 group-hover:scale-110 transition-all duration-300 shadow-sm shrink-0">
+                <iconify-icon icon={section.icon} class="text-2xl"></iconify-icon>
+              </div>
+              <h2 class="text-2xl md:text-3xl font-medium tracking-tight text-gray-900">
+                {section.title}
+              </h2>
+            </div>
+            <p class="text-base md:text-lg text-gray-600 font-light leading-relaxed pl-16">
+              {section.content}
             </p>
           </div>
+        ))}
+      </div>
 
-          <div class="flex flex-row flex-wrap">
-            <div class="p-8 basis-full sm:basis-1/2 md:basis-1/3">
-              <div
-                class="p-8 size-full rounded-none bg-white border border-gray-200 shadow-sm hover:border-primary-500/30 transition-all group hover:-translate-y-1"
-              >
-                <div
-                  class="w-14 h-14 rounded-2xl bg-primary-500/10 flex items-center justify-center text-primary-500 mb-6 group-hover:scale-110 transition-transform"
-                >
-                  <iconify-icon icon="lucide:users" class="text-3xl"></iconify-icon>
-                </div>
-                <h3 class="text-2xl font-medium text-gray-900 mb-4">
-                  Highly Qualified Faculty
-                </h3>
-                <p class="text-gray-600 font-light leading-relaxed">
-                  Expert faculties and mentors from Delhi and all over India,
-                  providing resources, guidance and online recorded classes,
-                  making Takshasheela the best online APSC coaching in Guwahati.
-                </p>
-              </div>
-            </div>
-            <div class="p-8 basis-full sm:basis-1/2 md:basis-1/3">
-              <div
-                class="p-8 size-full rounded-none bg-white border border-gray-200 shadow-sm hover:border-primary-500/30 transition-all group hover:-translate-y-1"
-              >
-                <div
-                  class="w-14 h-14 rounded-2xl bg-primary-500/10 flex items-center justify-center text-primary-500 mb-6 group-hover:scale-110 transition-transform"
-                >
-                  <iconify-icon icon="lucide:building-2" class="text-3xl"></iconify-icon>
-                </div>
-                <h3 class="text-2xl font-medium text-gray-900 mb-4">
-                  Infrastructure
-                </h3>
-                <p class="text-gray-600 font-light leading-relaxed">
-                  State-of-the-art infrastructure. Technology – enabled smart
-                  classrooms. This will facilitate better learning and improve
-                  outcomes.
-                </p>
-              </div>
-            </div>
-            <div class="p-8 basis-full sm:basis-1/2 md:basis-1/3">
-              <div
-                class="p-8 size-full rounded-none bg-white border border-gray-200 shadow-sm hover:border-primary-500/30 transition-all group hover:-translate-y-1"
-              >
-                <div
-                  class="w-14 h-14 rounded-2xl bg-primary-500/10 flex items-center justify-center text-primary-500 mb-6 group-hover:scale-110 transition-transform"
-                >
-                  <iconify-icon icon="lucide:map-pin" class="text-3xl"></iconify-icon>
-                </div>
-                <h3 class="text-2xl font-medium text-gray-900 mb-4">
-                  Accessibility
-                </h3>
-                <p class="text-gray-600 font-light leading-relaxed">
-                  The institute is located at a very prime location which is
-                  well connected for easy accessibility in the close proximity
-                  to the Assam Secretariat.
-                </p>
-              </div>
-            </div>
-            <div class="p-8 basis-full sm:basis-1/2 md:basis-1/3">
-              <div
-                class="p-8 size-full rounded-none bg-white border border-gray-200 shadow-sm hover:border-primary-500/30 transition-all group hover:-translate-y-1"
-              >
-                <div
-                  class="w-14 h-14 rounded-2xl bg-primary-500/10 flex items-center justify-center text-primary-500 mb-6 group-hover:scale-110 transition-transform"
-                >
-                  <iconify-icon icon="lucide:book-open" class="text-3xl"></iconify-icon>
-                </div>
-                <h3 class="text-2xl font-medium text-gray-900 mb-4">
-                  Up-to-Date Study Material
-                </h3>
-                <p class="text-gray-600 font-light leading-relaxed">
-                  We have a dedicate content development team to provide
-                  relevant and up-to-date study material at Takshasheela, the
-                  best IAS coaching institute in Guwahati.
-                </p>
-              </div>
-            </div>
-            <div class="p-8 basis-full sm:basis-1/2 md:basis-1/3">
-              <div
-                class="p-8 size-full rounded-none bg-white border border-gray-200 shadow-sm hover:border-primary-500/30 transition-all group hover:-translate-y-1 md:col-span-2 lg:col-span-1"
-              >
-                <div
-                  class="w-14 h-14 rounded-2xl bg-primary-500/10 flex items-center justify-center text-primary-500 mb-6 group-hover:scale-110 transition-transform"
-                >
-                  <iconify-icon icon="lucide:library" class="text-3xl"></iconify-icon>
-                </div>
-                <h3 class="text-2xl font-medium text-gray-900 mb-4">
-                  Advanced Library
-                </h3>
-                <p class="text-gray-600 font-light leading-relaxed">
-                  We are the best APSC coaching institute in Guwahati aims to
-                  bring out the latent talent of students by providing them a
-                  strong platform for preparation of the civil services
-                  examination.
-                </p>
-              </div>
-            </div>
-          </div>
+      <div class="mt-20 md:mt-32 p-8 md:p-12 rounded-3xl bg-linear-to-r from-primary-500/10 via-primary-500/5 to-transparent border border-primary-500/20 flex flex-col items-center text-center gap-6 max-w-4xl mx-auto">
+        <h3 class="text-2xl md:text-4xl font-light text-gray-900 tracking-tight leading-tight">
+          Ready to turn your <span class="text-primary-500 italic font-medium">civil service dream</span> into reality?
+        </h3>
+        <p class="text-gray-600 font-light text-lg">
+          Join the premier institute in Guwahati and start your preparation with the best mentors.
+        </p>
+        <div class="flex flex-col sm:flex-row gap-4 mt-4">
+          <a
+            href="/courses/"
+            class="inline-flex items-center justify-center px-8 py-4 rounded-full bg-primary-500 text-white font-medium text-base hover:bg-primary-600 transition-colors shadow-lg hover:shadow-xl hover:-translate-y-0.5"
+          >
+            Explore Courses
+          </a>
+          <a
+            href="/contact/"
+            class="inline-flex items-center justify-center px-8 py-4 rounded-full bg-white text-gray-900 border border-gray-200 font-medium text-base hover:bg-gray-50 transition-colors shadow-sm hover:shadow-md hover:-translate-y-0.5"
+          >
+            Contact Us
+          </a>
         </div>
       </div>
     </div>
