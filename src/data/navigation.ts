@@ -45,6 +45,6 @@ export const aboutItems = [
 export const aboutFeatured = {
   title: "Gallery",
   description: "Glimpses of life at Takshasheela School.",
-  url: "/#gallery",
+  url: "/gallery/",
   image: "/Takshasheela/building%20(1).jpg",
 };

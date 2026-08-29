@@ -56,7 +56,7 @@
   {
     "title": "Photo Gallery",
     "description": "Glimpses of classrooms and campus life",
-    "url": "/#gallery",
+    "url": "/gallery/",
     "category": "Pages"
   }
 ]

@@ -30,6 +30,13 @@ export interface CurrentAffairsMagazine {
   categories: CurrentAffairsCategory[];
 }
 
+export interface CurrentAffairsGalleryImage {
+  id: string;
+  title: string | null;
+  imageUrl: string;
+  categories: CurrentAffairsCategory[];
+}
+
 interface ApiEnvelope<T> {
   success: boolean;
   data: T;
@@ -51,6 +58,14 @@ async function apiGet<T>(
   }
 
   try {
+    console.log(
+      "Endpoint:",
+      endpoint,
+      "Params:",
+      params,
+      "API Key:",
+      apiKey.slice(0, 4) + "...",
+    );
     const url = new URL(`${CURRENT_AFFAIRS_API_BASE}/${endpoint}`);
     Object.entries(params).forEach(([k, v]) => url.searchParams.set(k, v));
 
@@ -58,7 +73,9 @@ async function apiGet<T>(
       headers: { "x-api-key": apiKey },
     });
     if (!res.ok) {
-      console.error(`Current Affairs API error [${res.status}] for ${endpoint}`);
+      console.error(
+        `Current Affairs API error [${res.status}] for ${endpoint}`,
+      );
       return [];
     }
 
@@ -81,4 +98,18 @@ export function getLatestCurrentAffairs(
 /** Magazine issues, most recent first. */
 export function getMagazines(limit = 50): Promise<CurrentAffairsMagazine[]> {
   return apiGet<CurrentAffairsMagazine>("magazines", { limit: String(limit) });
+}
+
+/** Categories tagged for the gallery section. */
+export function getGalleryCategories(): Promise<CurrentAffairsCategory[]> {
+  return apiGet<CurrentAffairsCategory>("categories", { type: "GALLERY" });
+}
+
+/** Gallery images, most recently uploaded first. `limit` is capped at 100 by the API. */
+export function getGalleryImages(
+  limit = 100,
+): Promise<CurrentAffairsGalleryImage[]> {
+  return apiGet<CurrentAffairsGalleryImage>("gallery", {
+    limit: String(limit),
+  });
 }

@@ -118,6 +118,17 @@ const linkClass = "text-gray-900 dark:text-white";
             class="relative w-full border-b border-gray-100 dark:border-slate-900/60 pb-3"
           >
             <a
+              href="/gallery/"
+              aria-current={isActive("/gallery/") ? "page" : undefined}
+              class={`js-mobile-link block w-full text-2xl font-bold tracking-tight ${isActive("/gallery/") ? activeLinkClass : linkClass}`}
+            >
+              Gallery
+            </a>
+          </li>
+          <li
+            class="relative w-full border-b border-gray-100 dark:border-slate-900/60 pb-3"
+          >
+            <a
               href="/contact/"
               aria-current={isActive("/contact/") ? "page" : undefined}
               class={`js-mobile-link block w-full text-2xl font-bold tracking-tight ${isActive("/contact/") ? activeLinkClass : linkClass}`}
@@ -243,7 +254,7 @@ const linkClass = "text-gray-900 dark:text-white";
             }
             <li class="border-b border-gray-100 dark:border-slate-900/60 pb-3">
               <a
-                href="/#gallery"
+                href="/gallery/"
                 class="js-mobile-link block text-xl font-bold tracking-tight text-gray-900 dark:text-white"
                 >Campus Gallery</a
               >
