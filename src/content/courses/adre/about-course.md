@@ -23,7 +23,7 @@ courses:
     popular: true
     categories:
       - "ADRE Courses"
-    image: "/Takshasheela/admission-square.jpeg"
+    image: "/Takshasheela/web-adre-banner.jpeg"
     duration: "3 to 6 months"
     highlights:
       - "Expert mentors from Delhi and across India"
@@ -51,21 +51,26 @@ Our comprehensive **ADRE (Assam Direct Recruitment Examination) 2026 Batch** is 
 ### Detailed ADRE Syllabus & Subject Coverage
 
 #### 1. General Knowledge & Assam Studies (GK & GS)
+
 - **Assam History & Heritage:** Ancient Pragjyotishpura, Kamarupa kingdoms, Ahom dynasty administration, freedom movement in Assam, and modern Assam history.
 - **Assam Geography & Environment:** National parks, wildlife sanctuaries, river networks, climate, soil, and mineral resources of Assam.
 - **National General Knowledge:** Indian Constitution basics, Indian History, Geography, General Science, Everyday Physics, Chemistry, and Biology.
 - **Current Affairs:** Assam state government schemes, sports achievements, awards, national events, and international news.
 
 #### 2. Logical Reasoning & Mental Ability
+
 - Verbal and non-verbal reasoning, series completion, coding-decoding, blood relations, direction sense test, Venn diagrams, syllogisms, and puzzle solving.
 
 #### 3. Mathematics & Quantitative Aptitude
+
 - Number system, LCM & HCF, simplification, percentage, profit & loss, simple and compound interest, ratio & proportion, average, time & work, speed, distance & time, mensuration (2D & 3D), and data interpretation.
 
 #### 4. English Language & Grammar
+
 - Reading comprehension passages, vocabulary, synonyms & antonyms, idioms & phrases, spot the error, fill in the blanks, sentence rearrangement, active & passive voice, and direct & indirect speech.
 
 #### 5. Computer Knowledge & Digital Awareness
+
 - Fundamentals of computer hardware, software, MS Office (Word, Excel, PowerPoint), operating systems, internet usage, cybersecurity basics, and government e-governance portals.
 
 ---
@@ -82,14 +87,17 @@ Our comprehensive **ADRE (Assam Direct Recruitment Examination) 2026 Batch** is 
 ### Frequently Asked Questions (ADRE Exam Preparation)
 
 #### What are Grade III (Grade 3) and Grade IV (Grade 4) posts under ADRE?
+
 Grade III posts include Junior Assistants, Computer Operators, Field Assistants, Tax Collectors, and Section Assistants. Grade IV posts include Peons, Chowkidars, Process Servers, and Workshop Attendants across various departments of the Government of Assam.
 
 #### What is the educational qualification needed for ADRE?
+
 - **Grade III (Graduate Level):** Bachelor's degree in any discipline from a recognized university.
 - **Grade III (HSSLC Level):** 10+2 / HSSLC passed from a recognized board.
 - **Grade IV:** HSLC (Class 10th) passed or equivalent.
 
 #### Are recordings available if I miss a live online class?
+
 Yes, high-definition recordings of all live classes are uploaded to your student portal within 2 hours of class completion and remain accessible until the final ADRE examination date.
 
 ---

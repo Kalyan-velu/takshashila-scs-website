@@ -29,7 +29,7 @@ courses:
     popular: false
     categories:
       - "UPSC Courses"
-    image: "/Takshasheela/admission-square.jpeg"
+    image: "/Takshasheela/web-banner.jpeg"
     duration: "12 months"
     highlights:
       - "Expert mentors from Delhi and across India"
@@ -53,13 +53,17 @@ Our **Combined Package for Prelims, Mains, and Interview Guidance** is a meticul
 ### Comprehensive 3-Stage UPSC CSE Guidance
 
 #### 1. Stage I: Civil Services Preliminary Examination (CSAT & GS)
+
 The Preliminary examination tests foundational knowledge, analytical speed, and conceptual clarity across General Studies Paper I and CSAT Paper II.
+
 - **General Studies (GS Paper I):** In-depth coverage of Indian Polity & Governance, History of India & Indian National Movement, Indian and World Geography, Economic & Social Development, General issues on Environmental Ecology & Biodiversity, and General Science.
 - **CSAT (GS Paper II):** Focused practice on Comprehension, Logical Reasoning, Analytical Ability, General Mental Ability, Basic Numeracy, and Data Interpretation to clear the qualifying threshold with confidence.
 - **Prelims Test Series:** Over 40+ full-length and sectional mock tests with negative marking analytics, rank tracking, and detailed explanatory notes.
 
 #### 2. Stage II: Civil Services Main Examination (Written Test)
+
 The Mains exam requires analytical depth, logical articulation, and time-bound answer writing capabilities. Our curriculum covers all 9 papers:
+
 - **General Studies I (GS 1):** Indian Heritage and Culture, History and Geography of the World and Society.
 - **General Studies II (GS 2):** Governance, Constitution, Polity, Social Justice and International Relations.
 - **General Studies III (GS 3):** Technology, Economic Development, Bio-diversity, Environment, Security and Disaster Management.
@@ -68,6 +72,7 @@ The Mains exam requires analytical depth, logical articulation, and time-bound a
 - **Daily & Weekly Mains Evaluation:** Individualized evaluation of student answers by experienced faculty members within 48 hours, highlighting structure, presentation, keywords, and model answers.
 
 #### 3. Stage III: Personality Test & Mock Interviews
+
 - **DAF (Detailed Application Form) Analysis:** Personalized session analyzing your background, educational qualification, optional subject choices, and hobbies.
 - **Mock Interview Panels:** Panel sessions with former civil servants, senior academicians, and domain experts simulating the actual UPSC interview atmosphere in New Delhi.
 
@@ -88,12 +93,15 @@ We provide a 360-degree learning ecosystem designed to eliminate guesswork from 
 ### Frequently Asked Questions (UPSC Preparation)
 
 #### What is the eligibility criteria for joining the UPSC Foundation Batch?
+
 Candidates must hold a graduate degree in any discipline from a recognized university, or be in their final year of graduation. The minimum age limit is 21 years as of August 1st of the exam year.
 
 #### Are online classes live or recorded?
+
 Our online classes are conducted live, allowing real-time interaction with faculties. High-definition recordings of every lecture are uploaded to the student portal within 2 hours for revision.
 
 #### Does the course fee include study material and test series?
+
 Yes, the complete UPSC package includes all printed study materials, class notes, prelims test series, mains answer evaluation, monthly magazines, and mock interview guidance.
 
 ---

@@ -118,6 +118,17 @@ const linkClass = "text-gray-900 dark:text-white";
             class="relative w-full border-b border-gray-100 dark:border-slate-900/60 pb-3"
           >
             <a
+              href="/quiz/"
+              aria-current={isActive("/quiz/") ? "page" : undefined}
+              class={`js-mobile-link block w-full text-2xl font-bold tracking-tight ${isActive("/quiz/") ? activeLinkClass : linkClass}`}
+            >
+              Quiz
+            </a>
+          </li>
+          <li
+            class="relative w-full border-b border-gray-100 dark:border-slate-900/60 pb-3"
+          >
+            <a
               href="/gallery/"
               aria-current={isActive("/gallery/") ? "page" : undefined}
               class={`js-mobile-link block w-full text-2xl font-bold tracking-tight ${isActive("/gallery/") ? activeLinkClass : linkClass}`}
