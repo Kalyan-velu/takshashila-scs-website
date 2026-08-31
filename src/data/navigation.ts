@@ -14,11 +14,6 @@ export const coursesItems = [
     description: "Specialized prep for Assam Civil Services",
     url: "/courses/apsc/",
   },
-  {
-    title: "Current Affairs",
-    description: "Daily updates and monthly analysis",
-    url: "https://currentaffairs.takshashilascs.com/",
-  },
 ];
 
 export const coursesFeatured = {
