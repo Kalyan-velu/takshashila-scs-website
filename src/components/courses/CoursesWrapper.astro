@@ -1,18 +1,18 @@
 ---
-import CoursesCarousel from "@/components/courses/CoursesCarousel.vue";
-import { CATEGORIES } from "@/data/category.ts";
-import { getCollection } from "astro:content";
-import { SITE_URL } from "@/config/CONSTANTS.ts";
+import CoursesCarousel from '@/components/courses/CoursesCarousel.vue';
+import { CATEGORIES } from '@/data/category.ts';
+import { getCollection } from 'astro:content';
+import { SITE_URL } from '@/config/CONSTANTS.ts';
 
 interface Props {
   id?: string;
 }
 
-const { id = "courses" } = Astro.props;
+const { id = 'courses' } = Astro.props;
 
-const allEntries = await getCollection("courses");
+const allEntries = await getCollection('courses');
 const aboutCourseEntries = allEntries.filter(
-  (e) => e.data.type === "about-course" && e.data.courses,
+  (e) => e.data.type === 'about-course' && e.data.courses,
 );
 const courses = aboutCourseEntries.flatMap((e) =>
   (e.data.courses ?? []).map((c) => ({
@@ -24,56 +24,56 @@ const courses = aboutCourseEntries.flatMap((e) =>
 );
 
 const courseSchema = {
-  "@context": "https://schema.org",
-  "@type": "ItemList",
+  '@context': 'https://schema.org',
+  '@type': 'ItemList',
   itemListElement: aboutCourseEntries.map((e, index) => {
     const firstItem = e.data.courses?.[0];
     const hasCourseInstance = [];
     if (firstItem?.prices?.online) {
       hasCourseInstance.push({
-        "@type": "CourseInstance",
-        courseMode: "online",
+        '@type': 'CourseInstance',
+        courseMode: 'online',
         offers: {
-          "@type": "Offer",
+          '@type': 'Offer',
           price: String(
             firstItem.prices.online.original - firstItem.prices.online.discount,
           ),
-          priceCurrency: "INR",
+          priceCurrency: 'INR',
         },
       });
     }
     if (firstItem?.prices?.offline) {
       hasCourseInstance.push({
-        "@type": "CourseInstance",
-        courseMode: "onsite",
+        '@type': 'CourseInstance',
+        courseMode: 'onsite',
         offers: {
-          "@type": "Offer",
+          '@type': 'Offer',
           price: String(
             firstItem.prices.offline.original -
               firstItem.prices.offline.discount,
           ),
-          priceCurrency: "INR",
+          priceCurrency: 'INR',
         },
       });
     }
     if (hasCourseInstance.length === 0 && firstItem?.modes) {
       firstItem.modes.forEach((mode) =>
         hasCourseInstance.push({
-          "@type": "CourseInstance",
-          courseMode: mode === "offline" ? "onsite" : "online",
+          '@type': 'CourseInstance',
+          courseMode: mode === 'offline' ? 'onsite' : 'online',
         }),
       );
     }
 
     return {
-      "@type": "ListItem",
+      '@type': 'ListItem',
       position: index + 1,
       item: {
-        "@type": "Course",
+        '@type': 'Course',
         name: e.data.title,
         description: e.data.seoDescription ?? e.data.description,
         url: `${SITE_URL}/courses/${e.data.courseSlug}/`,
-        provider: { "@id": `${SITE_URL}/#organization` },
+        provider: { '@id': `${SITE_URL}/#organization` },
         hasCourseInstance,
       },
     };
@@ -83,26 +83,25 @@ const courseSchema = {
 
 <section
   id={id}
-  class="py-16 md:py-24 bg-white relative z-10 border-t border-gray-100"
+  class='py-16 md:py-24 bg-white relative z-10 border-t border-gray-100'
 >
-  <div class="px-4 md:px-6 max-w-7xl mx-auto">
-    <!-- Section Header -->
-    <div class="flex flex-col items-center text-center max-w-3xl mx-auto mb-12">
+  <div class='px-4 md:px-6 max-w-7xl mx-auto'>
+    <div class='flex flex-col items-center text-center max-w-3xl mx-auto mb-12'>
       <div
-        class="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-primary-500/10 text-primary-500 text-xs font-semibold uppercase tracking-wider mb-4"
+        class='inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-primary-500/10 text-primary-500 text-xs font-semibold uppercase tracking-wider mb-4'
       >
-        <span class="w-2 h-2 rounded-full bg-primary-500 animate-pulse"></span>
+        <span class='w-2 h-2 rounded-full bg-primary-500 animate-pulse'></span>
         Explore Our Offerings
       </div>
       <h2
-        class="text-3xl sm:text-4xl md:text-5xl font-light tracking-tight text-gray-900 leading-tight"
+        class='text-3xl sm:text-4xl md:text-5xl font-light tracking-tight text-gray-900 leading-tight'
       >
-        Our Courses at <span class="text-primary-500 italic font-medium"
+        Our Courses at <span class='text-primary-500 italic font-medium'
           >Takshasheela SCS</span
         >
       </h2>
       <p
-        class="mt-4 text-base md:text-lg text-gray-600 font-light leading-relaxed"
+        class='mt-4 text-base md:text-lg text-gray-600 font-light leading-relaxed'
       >
         Comprehensive APSC CCE, UPSC CSE, and ADRE preparation modules
         engineered with top Delhi & Assam faculty, structured test series, and
@@ -110,13 +109,15 @@ const courseSchema = {
       </p>
     </div>
 
-    <!-- Courses Carousel Vue Island -->
     <CoursesCarousel
-      client:load="vue"
+      client:load
       courses={courses}
       categories={CATEGORIES}
     />
   </div>
 </section>
 
-<script type="application/ld+json" set:html={JSON.stringify(courseSchema)} />
+<script
+  type='application/ld+json'
+  set:html={JSON.stringify(courseSchema)}
+/>

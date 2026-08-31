@@ -1,6 +1,25 @@
 {
   "faculty": [
     {
+      "name": "Ghana Kanta Pegu",
+      "experience": "Over three decades of distinguished service in the Assam Civil Service (ACS, Retd.), beginning in 1992, spanning field administration, financial management, and public policy roles across the Government of Assam",
+      "expertise": [
+        "Public Administration",
+        "Governance & Policy",
+        "Administrative Ethics",
+        "Interview Guidance"
+      ],
+      "track_record": "Served as a Member of the Assam Public Service Commission (APSC); held key positions including Secretary, Additional Secretary, and Joint Secretary in the Finance Department, Additional Deputy Commissioner (Lakhimpur & Dhemaji), and Circle Officer, Border Magistrate, and Senior BDO across multiple districts; trained at the Assam Administrative Staff College and BIPARD, Patna in E-Governance, the Public Service Act, and Design of Training",
+      "associations": [
+        "Assam Public Service Commission (APSC)",
+        "Finance Department, Government of Assam",
+        "Assam Administrative Staff College",
+        "BIPARD, Patna"
+      ],
+      "description": "As Academic Head & Advisor, Shri Ghana Kanta Pegu brings three decades of real-world administrative wisdom to Takshasheela — mentoring aspirants on governance, ethics, and policy-making, and shaping the academy's training programmes with insights drawn from a distinguished career in the Assam Civil Service.",
+      "image": "/Takshasheela/faculty/ghana-kanta-pegu.jpg"
+    },
+    {
       "name": "Nishant N. Kashyap",
       "experience": "Over 3 years as a General Studies faculty and 5+ years in content creation",
       "expertise": [
@@ -126,6 +145,30 @@
       ],
       "description": "An experienced educator whose diverse teaching background in Science, Mathematics, and CSAT brings a well-rounded, student-focused approach to exam preparation.",
       "image": "/Takshasheela/faculty/sangeeta.jpeg"
+    },
+    {
+      "name": "Puja Kakati",
+      "experience": "10+ years of teaching and mentoring experience across English Literature and Civil Services preparation",
+      "expertise": [
+        "General Studies",
+        "Governance",
+        "Economy",
+        "Essay & Answer Writing",
+        "Interview Guidance"
+      ],
+      "track_record": "Appeared for the APSC CCE Viva three times (2018, 2023 & 2024) and participated as a Mock Viva Co-Panelist; extensive experience in student mentoring, personality development, communication skills, and Civil Services interview preparation",
+      "associations": [
+        "Dispur College",
+        "Gauhati Commerce College",
+        "Ambition Study Circle",
+        "XLU Academy",
+        "PrepCivils",
+        "Baishya Academy",
+        "IQCivils",
+        "CSAP IAS Academy"
+      ],
+      "description": "Runs her own coaching centre for Communication Skills, English Language Skills, and Mind Training for students and working professionals, bringing a well-rounded, interview-focused approach to Civil Services mentorship.",
+      "image": "/Takshasheela/faculty/puja-kakati.png"
     }
   ]
 }

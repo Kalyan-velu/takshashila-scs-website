@@ -37,6 +37,32 @@ export interface CurrentAffairsGalleryImage {
   categories: CurrentAffairsCategory[];
 }
 
+export interface CurrentAffairsQuizListItem {
+  id: string;
+  title: string;
+  date: string;
+  categories: CurrentAffairsCategory[];
+  published: boolean;
+  pdfUrl: string | null;
+  questionCount: number;
+}
+
+export interface CurrentAffairsQuizQuestion {
+  question: string;
+  options: string[];
+  correctOptionIndex: number;
+  explanation: string;
+}
+
+export interface CurrentAffairsQuiz {
+  id: string;
+  title: string;
+  date: string;
+  published: boolean;
+  categories: CurrentAffairsCategory[];
+  questions: CurrentAffairsQuizQuestion[];
+}
+
 interface ApiEnvelope<T> {
   success: boolean;
   data: T;
@@ -87,6 +113,35 @@ async function apiGet<T>(
   }
 }
 
+/** Same as {@link apiGet}, but for single-object endpoints (envelope `data` is not an array). */
+async function apiGetOne<T>(endpoint: string): Promise<T | null> {
+  const apiKey = variables.CMS_KEY;
+  if (!apiKey) {
+    console.error(`CMS_KEY is not set — skipping ${endpoint} fetch.`);
+    return null;
+  }
+
+  try {
+    const res = await fetch(`${CURRENT_AFFAIRS_API_BASE}/${endpoint}`, {
+      headers: { "x-api-key": apiKey },
+    });
+    if (!res.ok) {
+      if (res.status !== 404) {
+        console.error(
+          `Current Affairs API error [${res.status}] for ${endpoint}`,
+        );
+      }
+      return null;
+    }
+
+    const body = (await res.json()) as ApiEnvelope<T>;
+    return body.success ? body.data : null;
+  } catch (err) {
+    console.error(`Failed to fetch ${endpoint}:`, err);
+    return null;
+  }
+}
+
 export function getLatestCurrentAffairs(
   limit = 3,
 ): Promise<CurrentAffairsPost[]> {
@@ -112,4 +167,20 @@ export function getGalleryImages(
   return apiGet<CurrentAffairsGalleryImage>("gallery", {
     limit: String(limit),
   });
+}
+
+/** Published quiz sets, newest first. Question bodies aren't included — only a count. */
+export function getQuizzes(limit = 20): Promise<CurrentAffairsQuizListItem[]> {
+  return apiGet<CurrentAffairsQuizListItem>("quizzes", {
+    limit: String(limit),
+  });
+}
+
+/**
+ * One quiz set with its full question list, including the answer key
+ * (`correctOptionIndex` / `explanation`) — used to render instant grading.
+ * Returns `null` if the id doesn't exist or isn't published.
+ */
+export function getQuizById(id: string): Promise<CurrentAffairsQuiz | null> {
+  return apiGetOne<CurrentAffairsQuiz>(`quizzes/${encodeURIComponent(id)}`);
 }
