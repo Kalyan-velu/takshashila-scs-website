@@ -56,6 +56,30 @@
       "image": "/Takshasheela/faculty/bhargab-hazarika.png"
     },
     {
+      "name": "Puja Kakati",
+      "experience": "10+ years of teaching and mentoring experience across English Literature and Civil Services preparation",
+      "expertise": [
+        "General Studies",
+        "Governance",
+        "Economy",
+        "Essay & Answer Writing",
+        "Interview Guidance"
+      ],
+      "track_record": "Appeared for the APSC CCE Viva three times (2018, 2023 & 2024) and participated as a Mock Viva Co-Panelist; extensive experience in student mentoring, personality development, communication skills, and Civil Services interview preparation",
+      "associations": [
+        "CSAP IAS Academy",
+        "Dispur College",
+        "Gauhati Commerce College",
+        "Ambition Study Circle",
+        "XLU Academy",
+        "PrepCivils",
+        "Baishya Academy",
+        "IQCivils"
+      ],
+      "description": "Runs her own coaching centre for Communication Skills, English Language Skills, and Mind Training for students and working professionals, bringing a well-rounded, interview-focused approach to Civil Services mentorship.",
+      "image": "/Takshasheela/faculty/puja-kakati.png"
+    },
+    {
       "name": "Prabhakar Jha",
       "experience": "Over 10 years as a General Studies faculty and more than 6 years of content creation expertise",
       "expertise": [
@@ -145,30 +169,6 @@
       ],
       "description": "An experienced educator whose diverse teaching background in Science, Mathematics, and CSAT brings a well-rounded, student-focused approach to exam preparation.",
       "image": "/Takshasheela/faculty/sangeeta.jpeg"
-    },
-    {
-      "name": "Puja Kakati",
-      "experience": "10+ years of teaching and mentoring experience across English Literature and Civil Services preparation",
-      "expertise": [
-        "General Studies",
-        "Governance",
-        "Economy",
-        "Essay & Answer Writing",
-        "Interview Guidance"
-      ],
-      "track_record": "Appeared for the APSC CCE Viva three times (2018, 2023 & 2024) and participated as a Mock Viva Co-Panelist; extensive experience in student mentoring, personality development, communication skills, and Civil Services interview preparation",
-      "associations": [
-        "Dispur College",
-        "Gauhati Commerce College",
-        "Ambition Study Circle",
-        "XLU Academy",
-        "PrepCivils",
-        "Baishya Academy",
-        "IQCivils",
-        "CSAP IAS Academy"
-      ],
-      "description": "Runs her own coaching centre for Communication Skills, English Language Skills, and Mind Training for students and working professionals, bringing a well-rounded, interview-focused approach to Civil Services mentorship.",
-      "image": "/Takshasheela/faculty/puja-kakati.png"
     }
   ]
 }
