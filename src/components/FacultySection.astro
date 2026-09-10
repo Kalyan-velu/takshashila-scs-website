@@ -7,7 +7,7 @@ interface Props {
 
 const { id = "faculty" } = Astro.props;
 
-const facultyList = getFacultyList();
+const facultyList = await getFacultyList();
 ---
 
 <section id={id} class="py-16 md:py-24 bg-white relative z-10 border-t border-gray-100">

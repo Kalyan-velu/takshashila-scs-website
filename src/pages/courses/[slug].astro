@@ -76,13 +76,25 @@ const courseSchema = {
       }
     }
   ],
-  "offers": courseItems.map((c) => ({
-    "@type": "Offer",
-    "name": c.title,
-    "category": "Paid",
-    "price": c.prices?.online?.discount || c.prices?.offline?.discount || 0,
-    "priceCurrency": "INR"
-  }))
+  "offers": courseItems.length
+    ? courseItems.map((c) => ({
+        "@type": "Offer",
+        "name": c.title,
+        "category": "Paid",
+        "price": c.prices?.online?.discount || c.prices?.offline?.discount || 0,
+        "priceCurrency": "INR",
+        "url": canonicalUrl
+      }))
+    : [
+        {
+          "@type": "Offer",
+          "name": data.title,
+          "category": "Paid",
+          "price": Number(data.price) || 0,
+          "priceCurrency": "INR",
+          "url": canonicalUrl
+        }
+      ]
 };
 ---
 

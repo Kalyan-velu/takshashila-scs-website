@@ -199,28 +199,28 @@ const submitForm = async () => {
             class="flex flex-wrap items-center justify-center gap-1.5 sm:gap-2"
           >
             <a
-              href="/about"
+              href="/about/"
               @click="closePopup"
               class="px-3 py-1.5 rounded-full bg-primary-500/10 text-primary-500 hover:bg-primary-500 hover:text-white transition-all text-xs font-medium"
             >
               Know More About Us
             </a>
             <a
-              href="/courses/upsc"
+              href="/courses/upsc/"
               @click="closePopup"
               class="px-3 py-1.5 rounded-full bg-gray-100 text-gray-700 hover:bg-primary-500 hover:text-white transition-all text-xs font-medium"
             >
               UPSC Courses
             </a>
             <a
-              href="/courses/apsc"
+              href="/courses/apsc/"
               @click="closePopup"
               class="px-3 py-1.5 rounded-full bg-gray-100 text-gray-700 hover:bg-primary-500 hover:text-white transition-all text-xs font-medium"
             >
               APSC Courses
             </a>
             <a
-              href="/courses"
+              href="/courses/"
               @click="closePopup"
               class="px-3 py-1.5 rounded-full bg-gray-100 text-gray-700 hover:bg-primary-500 hover:text-white transition-all text-xs font-medium"
             >

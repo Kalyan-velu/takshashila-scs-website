@@ -29,21 +29,77 @@ const itemListSchema = {
   "@context": "https://schema.org",
   "@type": "ItemList",
   "name": "Civil Services Coaching Programs",
-  "itemListElement": aboutCourseEntries.map((e, index) => ({
-    "@type": "ListItem",
-    "position": index + 1,
-    "item": {
-      "@type": "Course",
-      "name": e.data.title,
-      "description": e.data.description,
-      "url": `${siteUrl}/courses/${e.data.courseSlug}/`,
-      "provider": {
-        "@type": "EducationalOrganization",
-        "name": "Takshasheela School of Civil Services",
-        "sameAs": siteUrl
+  "itemListElement": aboutCourseEntries.map((e, index) => {
+    const courseItems = e.data.courses ?? [];
+    const availableModes = new Set(courseItems.flatMap((c) => c.modes));
+
+    const hasCourseInstance = [
+      availableModes.has("offline")
+        ? {
+            "@type": "CourseInstance",
+            "courseMode": "Offline",
+            "location": {
+              "@type": "Place",
+              "name": "Guwahati Center",
+              "address": {
+                "@type": "PostalAddress",
+                "addressLocality": "Guwahati",
+                "addressRegion": "Assam",
+                "addressCountry": "IN"
+              }
+            }
+          }
+        : null,
+      availableModes.has("online") || availableModes.size === 0
+        ? {
+            "@type": "CourseInstance",
+            "courseMode": "Online",
+            "instructor": {
+              "@type": "Person",
+              "name": "Experienced Faculties from Delhi and Assam"
+            }
+          }
+        : null,
+    ].filter(Boolean);
+
+    const offers = courseItems.length
+      ? courseItems.map((c) => ({
+          "@type": "Offer",
+          "name": c.title,
+          "category": "Paid",
+          "price": c.prices?.online?.discount ?? c.prices?.offline?.discount ?? 0,
+          "priceCurrency": "INR",
+          "url": `${siteUrl}/courses/${e.data.courseSlug}/`,
+        }))
+      : [
+          {
+            "@type": "Offer",
+            "name": e.data.title,
+            "category": "Paid",
+            "price": Number(e.data.price) || 0,
+            "priceCurrency": "INR",
+            "url": `${siteUrl}/courses/${e.data.courseSlug}/`,
+          },
+        ];
+
+    return {
+      "@type": "ListItem",
+      "position": index + 1,
+      "item": {
+        "@type": "Course",
+        "name": e.data.title,
+        "description": e.data.description,
+        "url": `${siteUrl}/courses/${e.data.courseSlug}/`,
+        "provider": {
+          "@type": "EducationalOrganization",
+          "name": "Takshasheela School of Civil Services",
+          "sameAs": siteUrl
+        },
+        "hasCourseInstance": hasCourseInstance,
+        "offers": offers
       }
-    }
-  }))
+    };
+  })
 };
 ---
 
