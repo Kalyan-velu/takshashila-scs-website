@@ -12,7 +12,7 @@ const faqs = [
   },
   {
     q: 'What are Grade III (Grade 3) and Grade IV (Grade 4) ADRE batches?',
-    a: 'Our dedicated ADRE 2026 batch is a specialized 100% online coaching course covering the complete syllabus for Grade III (Graduate & HSSLC level) and Grade IV state government posts starting from ₹999.',
+    a: 'Our dedicated ADRE 2026 batch is a specialized 100% online coaching course covering the complete syllabus for Grade III (Graduate & HSSLC level) and Grade IV state government posts starting from ₹1999.',
   },
   {
     q: 'Where is Takshasheela School of Civil Services located in Guwahati?',
@@ -20,7 +20,22 @@ const faqs = [
   },
   {
     q: 'Does Takshasheela provide study materials, monthly magazines, and mock tests?',
-    a: 'Yes. All enrolled students receive updated printed/digital study materials, dedicated Assam Tribune current affairs analysis, our monthly current affairs magazine, and regular prelims/mains mock tests with faculty answer evaluations.',
+    a: `<div class="space-y-3 pt-0 text-sm text-slate-700 leading-relaxed">
+  <p>
+    Yes. Depending on your enrolled program, students receive:
+  </p>
+  <ul class="space-y-1.5 list-disc pl-5 marker:text-slate-400">
+    <li>
+      <span class="font-semibold text-slate-900">Study Materials:</span> Comprehensive printed and digital study modules.
+    </li>
+    <li>
+      <span class="font-semibold text-slate-900">Current Affairs:</span> Monthly magazine alongside dedicated <span class="italic">Assam Tribune</span> analysis.
+    </li>
+    <li>
+      <span class="font-semibold text-slate-900">Mock Tests:</span> Regular Prelims and Mains test series with detailed evaluations and feedback.
+    </li>
+  </ul>
+</div>`,
   },
 ];
 
@@ -80,9 +95,10 @@ const faqSchema = {
                 />
               </div>
             </summary>
-            <p class='mt-3 text-sm md:text-base font-light text-gray-600 leading-relaxed border-t border-gray-100/80 pt-3'>
-              {f.a}
-            </p>
+            <div
+              set:html={f.a}
+              class='mt-3 text-sm md:text-base font-light text-gray-600 leading-relaxed border-t border-gray-100/80 pt-3'
+            />
           </details>
         ))
       }

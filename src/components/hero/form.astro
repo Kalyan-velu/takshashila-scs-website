@@ -1,50 +1,58 @@
 ---
-import { PHONE_HREF, PHONE_DISPLAY, whatsappUrl } from "@/config/CONSTANTS.ts";
+import { PHONE_HREF, PHONE_DISPLAY, whatsappUrl } from '@/config/CONSTANTS.ts';
 
 const whatsappMessage =
-  "I am on your website and I want to know more about the APSC course";
+  'I am on your website and I want to know more about the APSC course';
 const whatsappHref = whatsappUrl(whatsappMessage);
 ---
 
-<section class="lead-form-section">
-  <div data-lead-form-card class="lead-form-card">
-    <div class="lead-form-header">
+<section class='lead-form-section'>
+  <div
+    data-lead-form-card
+    class='lead-form-card'
+  >
+    <div class='lead-form-header'>
       <div
-        class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-primary-500/10 text-primary-500 text-xs font-semibold uppercase tracking-wider mb-3"
+        class='inline-flex items-center gap-2 px-3 py-1 rounded-full bg-primary-500/10 text-primary-500 text-xs font-semibold uppercase tracking-wider mb-3'
       >
-        <span class="w-2 h-2 rounded-full bg-primary-500 animate-pulse"></span>
+        <span class='w-2 h-2 rounded-full bg-primary-500 animate-pulse'></span>
         Admissions Open 2026
       </div>
-      <h2 class="lead-form-title">
+      <h2 class='lead-form-title'>
         APSC Foundation Course Admission Going On — Join Us
       </h2>
-      <p class="lead-form-subtitle">
+      <p class='lead-form-subtitle'>
         Get expert mentorship from Delhi & Assam faculty, structured Prelims &
         Mains answer writing, test series, and interview guidance.
       </p>
 
       <!-- Integrated Action CTA Buttons -->
-      <div class="flex flex-wrap items-center gap-2.5 mt-5">
+      <div class='flex flex-wrap items-center gap-2.5 mt-5'>
         <a
           href={PHONE_HREF}
-          class="inline-flex items-center gap-2 px-4 py-2.5 rounded-full bg-primary-500 hover:bg-primary-600 text-white font-medium text-xs transition-all shadow-xs hover:shadow-md"
+          class='inline-flex items-center gap-2 px-4 py-2.5 rounded-full bg-primary-500 hover:bg-primary-600 text-white font-medium text-xs transition-all shadow-xs hover:shadow-md'
         >
-          <iconify-icon icon="lucide:phone-call" class="text-sm"></iconify-icon>
+          <iconify-icon
+            icon='lucide:phone-call'
+            class='text-sm'
+          ></iconify-icon>
           <span>Call Us ({PHONE_DISPLAY})</span>
         </a>
 
         <a
           href={whatsappHref}
-          target="_blank"
-          rel="noopener noreferrer"
-          class="inline-flex items-center gap-2 px-4 py-2.5 rounded-full bg-emerald-700 hover:bg-emerald-800 text-white font-medium text-xs transition-all shadow-xs hover:shadow-md"
+          target='_blank'
+          rel='noopener noreferrer'
+          class='inline-flex items-center gap-2 px-4 py-2.5 rounded-full bg-emerald-700 hover:bg-emerald-800 text-white font-medium text-xs transition-all shadow-xs hover:shadow-md'
         >
-          <iconify-icon icon="ri:whatsapp-fill" class="text-base"
+          <iconify-icon
+            icon='ri:whatsapp-fill'
+            class='text-base'
           ></iconify-icon>
           <span>WhatsApp Us</span>
         </a>
 
-        <button
+        <!-- <button
           type="button"
           disabled
           title="Enrollment is currently managed via phone or WhatsApp"
@@ -53,128 +61,161 @@ const whatsappHref = whatsappUrl(whatsappMessage);
           <iconify-icon icon="lucide:lock" class="text-xs text-gray-400"
           ></iconify-icon>
           <span>Enroll (Disabled)</span>
-        </button>
+        </button> -->
       </div>
     </div>
 
-    <form data-lead-form class="lead-form-element">
-      <div class="lead-form__field">
-        <label for="phone" class="sr-only"> Phone Number </label>
-        <div class="lead-form__icon-wrapper">
-          <iconify-icon icon="lucide:phone" class="lead-form__icon"
+    <form
+      data-lead-form
+      class='lead-form-element'
+    >
+      <div class='lead-form__field'>
+        <label
+          for='phone'
+          class='sr-only'
+        >
+          Phone Number
+        </label>
+        <div class='lead-form__icon-wrapper'>
+          <iconify-icon
+            icon='lucide:phone'
+            class='lead-form__icon'
           ></iconify-icon>
         </div>
         <input
-          type="tel"
-          id="phone"
-          name="phone"
-          placeholder="Enter your phone number..."
-          class="lead-form__input lead-form__input--lg"
+          type='tel'
+          id='phone'
+          name='phone'
+          placeholder='Enter your phone number...'
+          class='lead-form__input lead-form__input--lg'
           required
-          data-field-input="phone"
-          aria-describedby="phone-error"
-          aria-invalid="false"
+          data-field-input='phone'
+          aria-describedby='phone-error'
+          aria-invalid='false'
         />
         <p
-          id="phone-error"
-          data-field-error="phone"
-          class="mt-1 hidden text-xs text-destructive"
+          id='phone-error'
+          data-field-error='phone'
+          class='mt-1 hidden text-xs text-destructive'
         ></p>
       </div>
 
       <div
         data-expanded-fields
-        class="lead-form__expanded-fields lead-form__expanded-fields--collapsed"
+        class='lead-form__expanded-fields lead-form__expanded-fields--collapsed'
       >
-        <div class="lead-form__field">
-          <label for="name" class="sr-only"> Full Name </label>
-          <div class="lead-form__icon-wrapper">
-            <iconify-icon icon="lucide:user" class="lead-form__icon"
+        <div class='lead-form__field'>
+          <label
+            for='name'
+            class='sr-only'
+          >
+            Full Name
+          </label>
+          <div class='lead-form__icon-wrapper'>
+            <iconify-icon
+              icon='lucide:user'
+              class='lead-form__icon'
             ></iconify-icon>
           </div>
           <input
-            type="text"
-            id="name"
-            name="name"
-            placeholder="Your Full Name"
-            class="lead-form__input"
+            type='text'
+            id='name'
+            name='name'
+            placeholder='Your Full Name'
+            class='lead-form__input'
             data-expanded-required
-            data-field-input="name"
-            aria-describedby="name-error"
-            aria-invalid="false"
+            data-field-input='name'
+            aria-describedby='name-error'
+            aria-invalid='false'
           />
           <p
-            id="name-error"
-            data-field-error="name"
-            class="mt-1 hidden text-xs text-destructive"
+            id='name-error'
+            data-field-error='name'
+            class='mt-1 hidden text-xs text-destructive'
           ></p>
         </div>
 
-        <div class="lead-form__field">
-          <label for="course" class="sr-only"> Select Course </label>
-          <div class="lead-form__icon-wrapper">
-            <iconify-icon icon="lucide:book-open" class="lead-form__icon"
+        <div class='lead-form__field'>
+          <label
+            for='course'
+            class='sr-only'
+          >
+            Select Course
+          </label>
+          <div class='lead-form__icon-wrapper'>
+            <iconify-icon
+              icon='lucide:book-open'
+              class='lead-form__icon'
             ></iconify-icon>
           </div>
           <select
-            id="course"
-            name="course"
-            class="lead-form__select"
+            id='course'
+            name='course'
+            class='lead-form__select'
             data-expanded-required
-            data-field-input="course"
-            aria-describedby="course-error"
-            aria-invalid="false"
+            data-field-input='course'
+            aria-describedby='course-error'
+            aria-invalid='false'
           >
-            <option value="" disabled selected>
+            <option
+              value=''
+              disabled
+              selected
+            >
               Select your target course...
             </option>
-            <option value="apsc">APSC Foundation Batch</option>
-            <option value="upsc">UPSC Foundation Batch</option>
-            <option value="adre">ADRE Online Batch</option>
+            <option value='apsc'>APSC Foundation Batch</option>
+            <option value='upsc'>UPSC Foundation Batch</option>
+            <option value='adre'>ADRE Online Batch</option>
           </select>
 
-          <div class="lead-form__chevron-container">
+          <div class='lead-form__chevron-container'>
             <svg
-              class="lead-form__chevron-icon"
-              xmlns="http://www.w3.org/2000/svg"
-              viewBox="0 0 20 20"
+              class='lead-form__chevron-icon'
+              xmlns='http://www.w3.org/2000/svg'
+              viewBox='0 0 20 20'
             >
               <path
-                d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z"
+                d='M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z'
               ></path>
             </svg>
           </div>
           <p
-            id="course-error"
-            data-field-error="course"
-            class="mt-1 hidden text-xs text-destructive"
+            id='course-error'
+            data-field-error='course'
+            class='mt-1 hidden text-xs text-destructive'
           ></p>
         </div>
 
         <!-- Cloudflare Turnstile Captcha -->
-        <div id="hero-turnstile" class="my-1"></div>
+        <div
+          id='hero-turnstile'
+          class='my-1'
+        ></div>
         <p
-          id="form-error"
+          id='form-error'
           data-form-error
-          class="hidden text-sm text-destructive"
-          aria-live="polite"
+          class='hidden text-sm text-destructive'
+          aria-live='polite'
         ></p>
 
         <button
-          type="submit"
-          class="lead-form__submit-button"
+          type='submit'
+          class='lead-form__submit-button'
           data-submit-button
         >
           <span>Start My Journey</span>
-          <iconify-icon icon="lucide:arrow-right" class="lead-form__arrow-icon"
+          <iconify-icon
+            icon='lucide:arrow-right'
+            class='lead-form__arrow-icon'
           ></iconify-icon>
         </button>
       </div>
 
       <button
-        type="button"
+        type='button'
         data-continue-button
-        class="lead-form__continue-button"
+        class='lead-form__continue-button'
       >
         Continue
       </button>
@@ -182,50 +223,52 @@ const whatsappHref = whatsappUrl(whatsappMessage);
 
     <!-- Success Feedback View -->
     <div
-      id="hero-lead-success"
-      class="hidden w-full text-center py-6 px-4 space-y-6"
+      id='hero-lead-success'
+      class='hidden w-full text-center py-6 px-4 space-y-6'
     >
       <div
-        class="w-14 h-14 rounded-full bg-emerald-500/10 border border-emerald-500/20 text-emerald-600 flex items-center justify-center mx-auto shadow-sm"
+        class='w-14 h-14 rounded-full bg-emerald-500/10 border border-emerald-500/20 text-emerald-600 flex items-center justify-center mx-auto shadow-sm'
       >
-        <iconify-icon icon="lucide:check-circle-2" class="text-3xl"
+        <iconify-icon
+          icon='lucide:check-circle-2'
+          class='text-3xl'
         ></iconify-icon>
       </div>
-      <div class="space-y-2">
-        <h3 class="text-2xl font-medium text-gray-900 tracking-tight">
+      <div class='space-y-2'>
+        <h3 class='text-2xl font-medium text-gray-900 tracking-tight'>
           Query Submitted!
         </h3>
         <p
-          class="text-gray-600 font-light text-base max-w-lg mx-auto leading-relaxed"
+          class='text-gray-600 font-light text-base max-w-lg mx-auto leading-relaxed'
         >
           Thank you for submitting your query. Someone from our end will contact
           you shortly.
         </p>
       </div>
       <div
-        class="pt-4 border-t border-gray-100 flex flex-wrap items-center justify-center gap-3"
+        class='pt-4 border-t border-gray-100 flex flex-wrap items-center justify-center gap-3'
       >
         <a
-          href="/about"
-          class="px-4 py-2 rounded-full bg-primary-500/10 text-primary-500 hover:bg-primary-500 hover:text-white transition-all text-xs font-medium"
+          href='/about'
+          class='px-4 py-2 rounded-full bg-primary-500/10 text-primary-500 hover:bg-primary-500 hover:text-white transition-all text-xs font-medium'
         >
           Know More About Us
         </a>
         <a
-          href="/courses/upsc"
-          class="px-4 py-2 rounded-full bg-gray-100 text-gray-700 hover:bg-primary-500 hover:text-white transition-all text-xs font-medium"
+          href='/courses/upsc'
+          class='px-4 py-2 rounded-full bg-gray-100 text-gray-700 hover:bg-primary-500 hover:text-white transition-all text-xs font-medium'
         >
           UPSC Courses
         </a>
         <a
-          href="/courses/apsc"
-          class="px-4 py-2 rounded-full bg-gray-100 text-gray-700 hover:bg-primary-500 hover:text-white transition-all text-xs font-medium"
+          href='/courses/apsc'
+          class='px-4 py-2 rounded-full bg-gray-100 text-gray-700 hover:bg-primary-500 hover:text-white transition-all text-xs font-medium'
         >
           APSC Courses
         </a>
         <a
-          href="/courses"
-          class="px-4 py-2 rounded-full bg-gray-100 text-gray-700 hover:bg-primary-500 hover:text-white transition-all text-xs font-medium"
+          href='/courses'
+          class='px-4 py-2 rounded-full bg-gray-100 text-gray-700 hover:bg-primary-500 hover:text-white transition-all text-xs font-medium'
         >
           All Courses
         </a>
@@ -235,16 +278,16 @@ const whatsappHref = whatsappUrl(whatsappMessage);
 </section>
 
 <script>
-  import { buildHeroLeadPayload } from "@/lib/heroLeadForm";
-  import { submitLead } from "@/lib/submitLead";
-  import variables from "@/config/variables";
+  import { buildHeroLeadPayload } from '@/lib/heroLeadForm';
+  import { submitLead } from '@/lib/submitLead';
+  import variables from '@/config/variables';
 
   let turnstileToken: string | null = null;
   let turnstileWidgetId: string | null = null;
   const siteKey = variables.CLOUDFLARE_SITE_KEY;
 
   const renderTurnstile = () => {
-    const container = document.getElementById("hero-turnstile");
+    const container = document.getElementById('hero-turnstile');
     if (!container || !window.turnstile) return;
 
     turnstileWidgetId = window.turnstile.render(container, {
@@ -252,10 +295,10 @@ const whatsappHref = whatsappUrl(whatsappMessage);
       callback: (token: string) => {
         turnstileToken = token;
       },
-      "expired-callback": () => {
+      'expired-callback': () => {
         turnstileToken = null;
       },
-      "error-callback": () => {
+      'error-callback': () => {
         turnstileToken = null;
       },
     });
@@ -268,11 +311,11 @@ const whatsappHref = whatsappUrl(whatsappMessage);
     }
     const existing = document.querySelector('script[src*="turnstile"]');
     if (existing) {
-      existing.addEventListener("load", renderTurnstile);
+      existing.addEventListener('load', renderTurnstile);
       return;
     }
-    const script = document.createElement("script");
-    script.src = "https://challenges.cloudflare.com/turnstile/v0/api.js";
+    const script = document.createElement('script');
+    script.src = 'https://challenges.cloudflare.com/turnstile/v0/api.js';
     script.async = true;
     script.defer = true;
     script.onload = renderTurnstile;
@@ -280,20 +323,20 @@ const whatsappHref = whatsappUrl(whatsappMessage);
   };
 
   const form = document.querySelector(
-    "[data-lead-form]",
+    '[data-lead-form]',
   ) as HTMLFormElement | null;
-  const formHeader = document.querySelector(".lead-form-header");
-  const heroSuccess = document.querySelector("#hero-lead-success");
+  const formHeader = document.querySelector('.lead-form-header');
+  const heroSuccess = document.querySelector('#hero-lead-success');
   const phoneInput = document.querySelector(
-    "#phone",
+    '#phone',
   ) as HTMLInputElement | null;
-  const expandedFields = document.querySelector("[data-expanded-fields]");
-  const continueButton = document.querySelector("[data-continue-button]");
-  const requiredFields = document.querySelectorAll("[data-expanded-required]");
+  const expandedFields = document.querySelector('[data-expanded-fields]');
+  const continueButton = document.querySelector('[data-continue-button]');
+  const requiredFields = document.querySelectorAll('[data-expanded-required]');
   const submitButton = document.querySelector(
-    "[data-submit-button]",
+    '[data-submit-button]',
   ) as HTMLButtonElement | null;
-  const formError = document.querySelector("[data-form-error]");
+  const formError = document.querySelector('[data-form-error]');
   const fieldInputs = {
     name: document.querySelector('[data-field-input="name"]'),
     phone: document.querySelector('[data-field-input="phone"]'),
@@ -312,42 +355,39 @@ const whatsappHref = whatsappUrl(whatsappMessage);
 
     if (message) {
       formError.textContent = message;
-      formError.classList.remove("hidden");
+      formError.classList.remove('hidden');
       return;
     }
 
-    formError.textContent = "";
-    formError.classList.add("hidden");
+    formError.textContent = '';
+    formError.classList.add('hidden');
   };
 
-  const setFieldError = (
-    field: keyof typeof fieldInputs,
-    message?: string,
-  ) => {
+  const setFieldError = (field: keyof typeof fieldInputs, message?: string) => {
     const input = fieldInputs[field];
     const error = fieldErrors[field];
     if (!input || !error) return;
 
-    input.setAttribute("aria-invalid", message ? "true" : "false");
-    input.classList.toggle("border-destructive", !!message);
-    input.classList.toggle("focus:ring-destructive/50", !!message);
-    input.classList.toggle("focus:border-destructive", !!message);
+    input.setAttribute('aria-invalid', message ? 'true' : 'false');
+    input.classList.toggle('border-destructive', !!message);
+    input.classList.toggle('focus:ring-destructive/50', !!message);
+    input.classList.toggle('focus:border-destructive', !!message);
 
     if (message) {
       error.textContent = message;
-      error.classList.remove("hidden");
+      error.classList.remove('hidden');
       return;
     }
 
-    error.textContent = "";
-    error.classList.add("hidden");
+    error.textContent = '';
+    error.classList.add('hidden');
   };
 
   const clearValidationState = () => {
     setFormError();
-    setFieldError("name");
-    setFieldError("phone");
-    setFieldError("course");
+    setFieldError('name');
+    setFieldError('phone');
+    setFieldError('course');
   };
 
   const resetTurnstileWidget = () => {
@@ -360,12 +400,12 @@ const whatsappHref = whatsappUrl(whatsappMessage);
   const expandForm = () => {
     if (!expandedFields || !continueButton) return;
 
-    expandedFields.classList.remove("lead-form__expanded-fields--collapsed");
-    expandedFields.classList.add("lead-form__expanded-fields--expanded");
-    continueButton.setAttribute("hidden", "");
+    expandedFields.classList.remove('lead-form__expanded-fields--collapsed');
+    expandedFields.classList.add('lead-form__expanded-fields--expanded');
+    continueButton.setAttribute('hidden', '');
 
     requiredFields.forEach((field) => {
-      field.setAttribute("required", "");
+      field.setAttribute('required', '');
     });
 
     if (!isTurnstileMounted) {
@@ -374,50 +414,50 @@ const whatsappHref = whatsappUrl(whatsappMessage);
     }
   };
 
-  phoneInput?.addEventListener("input", () => {
-    setFieldError("phone");
+  phoneInput?.addEventListener('input', () => {
+    setFieldError('phone');
     if (phoneInput.value.trim().length > 0) {
       expandForm();
     }
   });
 
-  fieldInputs.name?.addEventListener("input", () => setFieldError("name"));
-  fieldInputs.phone?.addEventListener("input", () => setFieldError("phone"));
-  fieldInputs.course?.addEventListener("change", () => setFieldError("course"));
+  fieldInputs.name?.addEventListener('input', () => setFieldError('name'));
+  fieldInputs.phone?.addEventListener('input', () => setFieldError('phone'));
+  fieldInputs.course?.addEventListener('change', () => setFieldError('course'));
 
-  continueButton?.addEventListener("click", expandForm);
+  continueButton?.addEventListener('click', expandForm);
 
-  form?.addEventListener("submit", async (event) => {
+  form?.addEventListener('submit', async (event) => {
     event.preventDefault();
 
     clearValidationState();
 
-    const submitText = submitButton?.querySelector("span");
+    const submitText = submitButton?.querySelector('span');
     const turnstileResponse = turnstileToken;
     turnstileToken = null;
 
     if (!turnstileResponse) {
-      setFormError("Please complete the captcha before submitting.");
+      setFormError('Please complete the captcha before submitting.');
       return;
     }
 
     if (submitButton && submitText) {
       submitButton.disabled = true;
-      submitText.textContent = "Submitting...";
+      submitText.textContent = 'Submitting...';
     }
 
     const formData = new FormData(form);
     const validation = buildHeroLeadPayload({
-      name: (formData.get("name") as string) || "",
-      phone: (formData.get("phone") as string) || "",
-      course: (formData.get("course") as string) || "",
+      name: (formData.get('name') as string) || '',
+      phone: (formData.get('phone') as string) || '',
+      course: (formData.get('course') as string) || '',
       cfTurnstileResponse: turnstileResponse,
     });
 
     try {
       if (!validation.success) {
         Object.entries(validation.fieldErrors).forEach(([field, messages]) => {
-          if (field === "name" || field === "phone" || field === "course") {
+          if (field === 'name' || field === 'phone' || field === 'course') {
             setFieldError(field, messages?.[0]);
           }
         });
@@ -428,15 +468,15 @@ const whatsappHref = whatsappUrl(whatsappMessage);
       const result = await submitLead(validation.payload);
 
       if (!result.success) {
-        if (result.code === "VALIDATION_ERROR") {
+        if (result.code === 'VALIDATION_ERROR') {
           Object.entries(result.fieldErrors).forEach(([field, messages]) => {
-            if (field === "name" || field === "phone" || field === "course") {
+            if (field === 'name' || field === 'phone' || field === 'course') {
               setFieldError(field, messages?.[0]);
             }
           });
 
           if (result.fieldErrors.cfTurnstileResponse?.length) {
-            setFormError("Please complete the captcha again.");
+            setFormError('Please complete the captcha again.');
           } else {
             setFormError(result.message);
           }
@@ -446,17 +486,17 @@ const whatsappHref = whatsappUrl(whatsappMessage);
         return;
       }
 
-      if (form) form.classList.add("hidden");
-      if (formHeader) formHeader.classList.add("hidden");
-      if (heroSuccess) heroSuccess.classList.remove("hidden");
+      if (form) form.classList.add('hidden');
+      if (formHeader) formHeader.classList.add('hidden');
+      if (heroSuccess) heroSuccess.classList.remove('hidden');
     } catch (err) {
-      console.error("Hero lead submission error:", err);
-      setFormError("Could not submit the form. Please try again.");
+      console.error('Hero lead submission error:', err);
+      setFormError('Could not submit the form. Please try again.');
     } finally {
       resetTurnstileWidget();
       if (submitButton && submitText) {
         submitButton.disabled = false;
-        submitText.textContent = "Start My Journey";
+        submitText.textContent = 'Start My Journey';
       }
     }
   });

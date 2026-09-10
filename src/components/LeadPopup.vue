@@ -1,8 +1,8 @@
 <script setup lang="ts">
-import { computed, nextTick, onBeforeUnmount, onMounted, ref } from "vue";
 import variables from "@/config/variables.ts";
-import { useTurnstile } from "@/lib/useTurnstile";
 import { submitLead } from "@/lib/submitLead";
+import { useTurnstile } from "@/lib/useTurnstile";
+import { computed, nextTick, onBeforeUnmount, onMounted, ref } from "vue";
 
 const cloudflare_site_key = variables.CLOUDFLARE_SITE_KEY;
 
@@ -128,7 +128,7 @@ const submitForm = async () => {
     ></div>
 
     <div
-      class="relative bg-white text-gray-900 rounded-2xl overflow-hidden max-w-4xl w-full max-h-[90vh] md:max-h-[85vh] flex flex-col md:flex-row shadow-2xl animate-in fade-in zoom-in-95 duration-300 my-auto overflow-y-auto md:overflow-hidden"
+      class="relative bg-white text-gray-900 rounded-2xl overflow-auto max-w-4xl w-full max-h-[90vh] md:max-h-[85vh] flex flex-col md:flex-row shadow-2xl animate-in fade-in zoom-in-95 duration-300 my-auto overflow-y-auto md:overflow-hidden"
     >
       <button
         @click="closePopup"
@@ -152,7 +152,9 @@ const submitForm = async () => {
       </button>
 
       <!-- Banner Image Side -->
-      <div class="md:w-1/2 h-32 sm:h-44 md:h-auto shrink-0 relative bg-gray-100">
+      <div
+        class="md:w-1/2 h-32 sm:h-44 md:h-auto shrink-0 relative bg-gray-100"
+      >
         <img
           src="/Takshasheela/students-view-back.jpg"
           alt="Complimentary Demo"
@@ -176,7 +178,9 @@ const submitForm = async () => {
         </div>
 
         <div class="space-y-1.5 sm:space-y-2">
-          <h3 class="text-xl sm:text-2xl font-medium text-gray-900 tracking-tight">
+          <h3
+            class="text-xl sm:text-2xl font-medium text-gray-900 tracking-tight"
+          >
             Query Submitted!
           </h3>
           <p class="text-gray-600 text-xs sm:text-sm leading-relaxed">
@@ -191,7 +195,9 @@ const submitForm = async () => {
           >
             Discover More
           </p>
-          <div class="flex flex-wrap items-center justify-center gap-1.5 sm:gap-2">
+          <div
+            class="flex flex-wrap items-center justify-center gap-1.5 sm:gap-2"
+          >
             <a
               href="/about"
               @click="closePopup"
@@ -232,23 +238,31 @@ const submitForm = async () => {
       </div>
 
       <!-- Form View -->
-      <div v-else class="md:w-1/2 p-4 sm:p-6 md:p-10 flex flex-col justify-center overflow-y-auto">
+      <div
+        v-else
+        class="md:w-1/2 p-4 sm:p-6 md:p-10 flex flex-col justify-center overflow-y-auto"
+      >
         <h2
           class="text-xl sm:text-2xl md:text-3xl font-light tracking-tight text-primary-500 mb-2 sm:mb-4 leading-tight"
         >
           Experience Our Class
-          <span class="block text-gray-900 text-lg sm:text-xl font-normal mt-0.5"
+          <span
+            class="block text-gray-900 text-lg sm:text-xl font-normal mt-0.5"
             >with a Complimentary Demo!</span
           >
         </h2>
-        <p class="text-xs sm:text-sm text-gray-600 mb-4 sm:mb-6 leading-relaxed">
+        <p
+          class="text-xs sm:text-sm text-gray-600 mb-4 sm:mb-6 leading-relaxed"
+        >
           Register now and take the first step towards your civil services
           dream.
         </p>
 
         <form @submit.prevent="submitForm" class="space-y-3.5 sm:space-y-4">
           <div>
-            <label for="lead-name" class="block text-xs sm:text-sm font-medium mb-1"
+            <label
+              for="lead-name"
+              class="block text-xs sm:text-sm font-medium mb-1"
               >Name</label
             >
             <input
@@ -269,7 +283,9 @@ const submitForm = async () => {
             </p>
           </div>
           <div>
-            <label for="lead-email" class="block text-xs sm:text-sm font-medium mb-1"
+            <label
+              for="lead-email"
+              class="block text-xs sm:text-sm font-medium mb-1"
               >Email</label
             >
             <input
@@ -291,7 +307,9 @@ const submitForm = async () => {
           </div>
 
           <div>
-            <label for="lead-phone" class="block text-xs sm:text-sm font-medium mb-1"
+            <label
+              for="lead-phone"
+              class="block text-xs sm:text-sm font-medium mb-1"
               >Phone Number</label
             >
             <input
@@ -313,7 +331,9 @@ const submitForm = async () => {
           </div>
 
           <div>
-            <label for="lead-course" class="block text-xs sm:text-sm font-medium mb-1"
+            <label
+              for="lead-course"
+              class="block text-xs sm:text-sm font-medium mb-1"
               >Target Course</label
             >
             <select
