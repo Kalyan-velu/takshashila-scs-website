@@ -1,76 +1,86 @@
 ---
-import { PHONE_DISPLAY } from "@/config/CONSTANTS.ts";
+import { PHONE_DISPLAY } from '@/config/CONSTANTS.ts';
 
 const faqs = [
   {
-    q: "Which is the best UPSC and APSC coaching in Guwahati?",
-    a: "Takshasheela School of Civil Services is recognized as the best UPSC and APSC coaching in Guwahati. We offer comprehensive guidance for UPSC CSE, APSC CCE, and ADRE with experienced faculty from Delhi and Assam, Assam GS Paper 5 modules, and both online and offline learning options.",
+    q: 'Does Takshasheela offer online APSC and UPSC coaching?',
+    a: 'Yes! All our APSC CCE, UPSC CSE, and ADRE programs are available in high-definition live interactive online classes with 24/7 access to recorded lectures, digital study material, online mock test series, and 1-on-1 online mentorship.',
   },
   {
-    q: "Does Takshasheela offer online APSC and UPSC coaching?",
-    a: "Yes! All our APSC CCE, UPSC CSE, and ADRE programs are available in high-definition live interactive online classes with 24/7 access to recorded lectures, digital study material, online mock test series, and 1-on-1 online mentorship.",
-  },
-  {
-    q: "What is the fee structure and installment options for APSC & UPSC courses?",
+    q: 'What is the fee structure and installment options for APSC & UPSC courses?',
     a: `Our foundation programs offer affordable pricing with flexible installment plans. APSC online foundation starts from ₹22,000 (offline ₹42,500 after discount), while UPSC online foundation starts from ₹25,000 (offline ₹62,500 after discount). Call ${PHONE_DISPLAY} for detailed fee charts and scholarship options.`,
   },
   {
-    q: "What are Grade III (Grade 3) and Grade IV (Grade 4) ADRE batches?",
-    a: "Our dedicated ADRE 2026 batch is a specialized 100% online coaching course covering the complete syllabus for Grade III (Graduate & HSSLC level) and Grade IV state government posts starting from ₹999.",
+    q: 'What are Grade III (Grade 3) and Grade IV (Grade 4) ADRE batches?',
+    a: 'Our dedicated ADRE 2026 batch is a specialized 100% online coaching course covering the complete syllabus for Grade III (Graduate & HSSLC level) and Grade IV state government posts starting from ₹999.',
   },
   {
-    q: "Where is Takshasheela School of Civil Services located in Guwahati?",
-    a: "We are located on the 6th Floor, Unique Avenue Building, near Super Market, GS Road, Bormotoria, Guwahati, Assam 781006. Our center is easily accessible and located in close proximity to the Assam Secretariat.",
+    q: 'Where is Takshasheela School of Civil Services located in Guwahati?',
+    a: 'We are located on the House no. 65, RG Baruah Rd, AIDC, Ambikagirinagar, Guwahati, Assam 781024 Landmark - Daman medicos. Our center is easily accessible and located in close proximity to the Assam Secretariat.',
   },
   {
-    q: "Does Takshasheela provide study materials, monthly magazines, and mock tests?",
-    a: "Yes. All enrolled students receive updated printed and digital study materials, dedicated Assam Tribune current affairs analysis, our monthly current affairs magazine, and regular prelims/mains mock tests with faculty answer evaluations.",
+    q: 'Does Takshasheela provide study materials, monthly magazines, and mock tests?',
+    a: 'Yes. All enrolled students receive updated printed and digital study materials, dedicated Assam Tribune current affairs analysis, our monthly current affairs magazine, and regular prelims/mains mock tests with faculty answer evaluations.',
   },
 ];
 
 const faqSchema = {
-  "@context": "https://schema.org",
-  "@type": "FAQPage",
+  '@context': 'https://schema.org',
+  '@type': 'FAQPage',
   mainEntity: faqs.map((f) => ({
-    "@type": "Question",
+    '@type': 'Question',
     name: f.q,
-    acceptedAnswer: { "@type": "Answer", text: f.a },
+    acceptedAnswer: { '@type': 'Answer', text: f.a },
   })),
 };
 ---
 
-<section id="faq" class="py-16 md:py-24 bg-white border-t border-gray-100 relative z-10">
-  <div class="px-4 md:px-6 max-w-4xl mx-auto flex flex-col gap-10 md:gap-14">
+<section
+  id='faq'
+  class='py-16 md:py-24 bg-white border-t border-gray-100 relative z-10'
+>
+  <div class='px-4 md:px-6 max-w-4xl mx-auto flex flex-col gap-10 md:gap-14'>
     <!-- Section Header -->
-    <div class="flex flex-col items-center text-center gap-3">
+    <div class='flex flex-col items-center text-center gap-3'>
       <div
-        class="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-primary-500/10 text-primary-500 text-xs font-semibold tracking-wide uppercase"
+        class='inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-primary-500/10 text-primary-500 text-xs font-semibold tracking-wide uppercase'
       >
-        <iconify-icon icon="lucide:help-circle" class="text-sm"></iconify-icon>
+        <iconify-icon
+          icon='lucide:help-circle'
+          class='text-sm'
+        ></iconify-icon>
         FAQ & Guidance
       </div>
       <h2
-        class="text-3xl md:text-5xl font-light tracking-tight text-gray-900 leading-tight"
+        class='text-3xl md:text-5xl font-light tracking-tight text-gray-900 leading-tight'
       >
-        Frequently Asked <span class="text-primary-500 font-medium italic">Questions</span>
+        Frequently Asked <span class='text-primary-500 font-medium italic'
+          >Questions</span
+        >
       </h2>
-      <p class="text-base md:text-lg text-gray-600 font-light max-w-xl leading-relaxed">
-        Everything you need to know about our UPSC, APSC, and ADRE coaching programs, online batches, and admission guidance.
+      <p
+        class='text-base md:text-lg text-gray-600 font-light max-w-xl leading-relaxed'
+      >
+        Everything you need to know about our UPSC, APSC, and ADRE coaching
+        programs, online batches, and admission guidance.
       </p>
     </div>
 
     <!-- Minimalist Accordion List -->
-    <div class="flex flex-col gap-3.5">
+    <div class='flex flex-col gap-3.5'>
       {
         faqs.map((f) => (
-          <details class="group rounded-2xl border border-gray-200/80 bg-gray-50/50 hover:bg-white hover:border-gray-300 transition-all duration-200 px-6 py-4.5 shadow-xs">
-            <summary class="cursor-pointer list-none flex items-center justify-between gap-4 text-base md:text-lg font-medium text-gray-900 group-hover:text-primary-500 transition-colors">
-              <span class="leading-snug">{f.q}</span>
-              <div class="w-8 h-8 rounded-full bg-white border border-gray-200 flex items-center justify-center text-gray-500 group-hover:text-primary-500 group-hover:border-primary-500/30 shrink-0 transition-transform duration-300 group-open:rotate-180">
-                <iconify-icon icon="lucide:chevron-down" class="text-lg"></iconify-icon>
+          <details class='group rounded-2xl border border-gray-200/80 bg-gray-50/50 hover:bg-white hover:border-gray-300 transition-all duration-200 px-6 py-4.5 shadow-xs'>
+            <summary class='cursor-pointer list-none flex items-center justify-between gap-4 text-base md:text-lg font-medium text-gray-900 group-hover:text-primary-500 transition-colors'>
+              <span class='leading-snug'>{f.q}</span>
+              <div class='w-8 h-8 rounded-full bg-white border border-gray-200 flex items-center justify-center text-gray-500 group-hover:text-primary-500 group-hover:border-primary-500/30 shrink-0 transition-transform duration-300 group-open:rotate-180'>
+                <iconify-icon
+                  icon='lucide:chevron-down'
+                  class='text-lg'
+                />
               </div>
             </summary>
-            <p class="mt-3 text-sm md:text-base font-light text-gray-600 leading-relaxed border-t border-gray-100/80 pt-3">
+            <p class='mt-3 text-sm md:text-base font-light text-gray-600 leading-relaxed border-t border-gray-100/80 pt-3'>
               {f.a}
             </p>
           </details>
@@ -80,4 +90,7 @@ const faqSchema = {
   </div>
 </section>
 
-<script type="application/ld+json" set:html={JSON.stringify(faqSchema)} />
+<script
+  type='application/ld+json'
+  set:html={JSON.stringify(faqSchema)}
+/>
