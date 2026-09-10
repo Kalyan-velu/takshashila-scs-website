@@ -63,7 +63,10 @@
   "footer": {
     "description": "Takshasheela School of Civil Services is a dedicated institute to educate, train and guide young aspirants for Civil Services in India. It is equipped with quality faculties and facilities in Assam with a national outlook and standards.",
     "addresses": [
-      "House no. 65, RG Baruah Rd, AIDC, Ambikagirinagar, Guwahati, Assam 781024 Landmark - Daman medicos"
+      {
+        "address": "House no. 65, RG Baruah Rd, AIDC, Ambikagirinagar, Guwahati, Assam 781024 Landmark - Daman medicos",
+        "gmap-link": "https://maps.app.goo.gl/hx4c5FAAM1uiMpMX8"
+      }
     ]
   }
 }

@@ -308,8 +308,11 @@ const whatsappHref = whatsappUrl(whatsappMessage);
                 class='block text-xs text-gray-400 font-medium uppercase tracking-wider'
                 >Address</span
               >
-              <span class='text-gray-400 text-sm leading-relaxed block'
-                >{footer.addresses[0]}</span
+              <a
+                href={footer.addresses[0]['gmap-link']}
+                target="_blank"
+                class='text-gray-400 text-sm leading-relaxed block'
+                >{footer.addresses[0].address}</a
               >
             </div>
           </li>

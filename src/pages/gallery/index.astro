@@ -23,9 +23,9 @@ import GalleryGrid from "@/components/GalleryGrid.astro";
 
   <GalleryGrid server:defer>
     <div slot="fallback" class="px-4 py-16 md:px-6 max-w-7xl mx-auto w-full">
-      <div class="flex flex-wrap gap-2 mb-10">
+      <div class="flex flex-nowrap md:flex-wrap gap-2 mb-10 overflow-x-hidden">
         {Array.from({ length: 4 }).map(() => (
-          <div class="h-9 w-20 rounded-full bg-gray-100/50 animate-pulse" />
+          <div class="h-9 w-20 shrink-0 rounded-full bg-gray-100/50 animate-pulse" />
         ))}
       </div>
       <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">

@@ -3,6 +3,7 @@ import TopBar from './TopBar.astro';
 import DesktopNav from './DesktopNav.astro';
 import HeaderActions from './HeaderActions.astro';
 import MegaMenu from './MegaMenu.astro';
+import StudyMaterialsMenu from './StudyMaterialsMenu.astro';
 import SearchDropdown from './SearchDropdown.astro';
 import MobileMenu from './MobileMenu.astro';
 import { Image } from 'astro:assets';
@@ -32,9 +33,9 @@ import Logo from '@/assets/taksheelascs_logo.png';
             src={Logo}
             alt='Takshasheela Logo'
             fetchpriority='high'
-            widths={[448, 896]}
+            widths={[224, 448]}
             sizes='(max-width: 48rem) 11rem, 14rem'
-            class='h-auto transition-all bg-transparent duration-300 w-44 md:w-96 js-header-logo'
+            class='h-auto transition-all bg-transparent duration-300 w-44 sm:w-40 md:w-66 js-header-logo'
           />
         </a>
       </div>
@@ -44,6 +45,7 @@ import Logo from '@/assets/taksheelascs_logo.png';
     <SearchDropdown />
     <MegaMenu menuId={7} />
     <MegaMenu menuId={5} />
+    <StudyMaterialsMenu />
     <MobileMenu />
   </div>
 </div>

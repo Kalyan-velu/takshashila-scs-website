@@ -38,14 +38,14 @@ Astro.response.headers.set(
     ) : (
       <>
         <div
-          class="gallery-tabs flex flex-wrap gap-2 mb-10"
+          class="gallery-tabs flex flex-nowrap md:flex-wrap gap-2 mb-10 overflow-x-auto md:overflow-visible scroll-smooth hide-scrollbar"
           role="tablist"
           aria-label="Filter gallery by category"
         >
           {tabs.map((tab, i) => (
             <button
               type="button"
-              class="gallery-tab-btn rounded-full border border-gray-200 px-4 py-2 text-sm font-medium text-gray-700 transition-colors hover:border-primary-500 hover:text-primary-500 aria-selected:bg-primary-500 aria-selected:text-white aria-selected:border-primary-500"
+              class="gallery-tab-btn shrink-0 rounded-full border border-gray-200 px-4 py-2 text-sm font-medium text-gray-700 transition-colors hover:border-primary-500 hover:text-primary-500 aria-selected:bg-primary-500 aria-selected:text-white aria-selected:border-primary-500"
               data-filter={tab.id}
               role="tab"
               aria-selected={i === 0 ? "true" : "false"}
@@ -173,3 +173,14 @@ Astro.response.headers.set(
     });
   }
 </script>
+
+<style>
+  .hide-scrollbar::-webkit-scrollbar {
+    display: none;
+  }
+
+  .hide-scrollbar {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+</style>

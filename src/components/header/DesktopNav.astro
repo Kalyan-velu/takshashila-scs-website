@@ -1,5 +1,5 @@
 ---
-import { CURRENT_AFFAIRS_URL } from '@/config/CONSTANTS.ts';
+import type { Fragment } from 'react';
 
 const currentPath = Astro.url.pathname;
 
@@ -10,6 +10,7 @@ function isActive(href: string): boolean {
 
 const isCoursesActive = currentPath.startsWith('/courses');
 const isAboutActive = isActive('/about/');
+const isStudyMaterialsActive = isActive('/magazine/') || isActive('/quiz/');
 
 const dropdownNavItems = [
   {
@@ -26,6 +27,13 @@ const dropdownNavItems = [
     controlsId: 'mega-menu-about',
     active: isAboutActive,
   },
+  {
+    label: 'Free Study Materials',
+    triggerClass: 'js-menu-trigger-study-materials',
+    chevronClass: 'js-chevron-study-materials',
+    controlsId: 'mega-menu-study-materials',
+    active: isStudyMaterialsActive,
+  },
 ];
 
 const directNavItems = [
@@ -36,19 +44,6 @@ const directNavItems = [
   {
     label: 'Blogs',
     href: '/blogs/',
-  },
-  {
-    label: 'Current Affairs',
-    href: CURRENT_AFFAIRS_URL,
-    target: '_blank',
-  },
-  {
-    label: 'Magazine',
-    href: '/magazine/',
-  },
-  {
-    label: 'Quiz',
-    href: '/quiz/',
   },
   {
     label: 'Gallery',
@@ -69,7 +64,9 @@ const activeClass = 'nav-link-active text-primary-500 dark:text-primary-400';
 ---
 
 <nav class='hidden lg:inline-flex items-center h-full'>
-  <ul class='flex items-center space-x-6 md:space-x-8 h-full'>
+  <ul
+    class='flex items-center flex-wrap justify-center space-x-4 md:space-x-8 h-full'
+  >
     {
       dropdownNavItems.map((item) => (
         <li class={`relative flex items-center h-full py-4`}>
@@ -95,7 +92,6 @@ const activeClass = 'nav-link-active text-primary-500 dark:text-primary-400';
         <li class='relative flex items-center h-full py-4 js-menu-trigger-direct'>
           <a
             href={item.href}
-            target={item.target}
             aria-current={isActive(item.href) ? 'page' : undefined}
             class={`${navLinkClass} ${isActive(item.href) ? activeClass : ''}`}
           >
