@@ -182,10 +182,10 @@ const submitForm = async () => {
       <div class="pt-4 border-t border-gray-100 space-y-3">
         <p class="text-xs font-semibold uppercase tracking-wider text-gray-600">Discover More</p>
         <div class="flex flex-col gap-2">
-          <a href="/about" class="w-full py-2.5 px-4 rounded-xl bg-primary-500/10 text-primary-500 hover:bg-primary-500 hover:text-white transition-colors text-xs font-medium text-center">
+          <a href="/about/" class="w-full py-2.5 px-4 rounded-xl bg-primary-500/10 text-primary-500 hover:bg-primary-500 hover:text-white transition-colors text-xs font-medium text-center">
             Know More About Us
           </a>
-          <a href="/courses" class="w-full py-2.5 px-4 rounded-xl bg-gray-100 text-gray-700 hover:bg-primary-500 hover:text-white transition-colors text-xs font-medium text-center">
+          <a href="/courses/" class="w-full py-2.5 px-4 rounded-xl bg-gray-100 text-gray-700 hover:bg-primary-500 hover:text-white transition-colors text-xs font-medium text-center">
             Explore All Courses
           </a>
         </div>

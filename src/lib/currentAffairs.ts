@@ -33,6 +33,8 @@ export interface CurrentAffairsMagazine {
 export interface CurrentAffairsGalleryImage {
   id: string;
   title: string | null;
+  altTitle: string | null;
+  description: string | null;
   imageUrl: string;
   categories: CurrentAffairsCategory[];
 }
@@ -63,9 +65,35 @@ export interface CurrentAffairsQuiz {
   questions: CurrentAffairsQuizQuestion[];
 }
 
+export interface CurrentAffairsFacultyMember {
+  name: string;
+  experience: string;
+  expertise: string[];
+  track_record: string;
+  associations: string[];
+  description: string;
+  image: string;
+}
+
 interface ApiEnvelope<T> {
   success: boolean;
   data: T;
+  error?: string;
+}
+
+export interface ApiPagination {
+  totalItems: number;
+  totalPages: number;
+  currentPage: number;
+  itemsPerPage: number;
+  hasNextPage: boolean;
+  hasPrevPage: boolean;
+}
+
+interface ApiListEnvelope<T> {
+  success: boolean;
+  data: T[];
+  pagination?: ApiPagination;
   error?: string;
 }
 
@@ -110,6 +138,41 @@ async function apiGet<T>(
   } catch (err) {
     console.error(`Failed to fetch ${endpoint}:`, err);
     return [];
+  }
+}
+
+/** Same as {@link apiGet}, but also returns the list endpoint's `pagination` envelope. */
+async function apiGetPaged<T>(
+  endpoint: string,
+  params: Record<string, string>,
+): Promise<{ data: T[]; pagination: ApiPagination | null }> {
+  const apiKey = variables.CMS_KEY;
+  if (!apiKey) {
+    console.error(`CMS_KEY is not set — skipping ${endpoint} fetch.`);
+    return { data: [], pagination: null };
+  }
+
+  try {
+    const url = new URL(`${CURRENT_AFFAIRS_API_BASE}/${endpoint}`);
+    Object.entries(params).forEach(([k, v]) => url.searchParams.set(k, v));
+
+    const res = await fetch(url.toString(), {
+      headers: { "x-api-key": apiKey },
+    });
+    if (!res.ok) {
+      console.error(
+        `Current Affairs API error [${res.status}] for ${endpoint}`,
+      );
+      return { data: [], pagination: null };
+    }
+
+    const body = (await res.json()) as ApiListEnvelope<T>;
+    return body.success
+      ? { data: body.data, pagination: body.pagination ?? null }
+      : { data: [], pagination: null };
+  } catch (err) {
+    console.error(`Failed to fetch ${endpoint}:`, err);
+    return { data: [], pagination: null };
   }
 }
 
@@ -167,6 +230,57 @@ export function getGalleryImages(
   return apiGet<CurrentAffairsGalleryImage>("gallery", {
     limit: String(limit),
   });
+}
+
+/**
+ * One page of gallery images, most recently uploaded first — for "View more"
+ * style pagination instead of fetching the whole gallery up front.
+ */
+export function getGalleryImagesPage(
+  page = 1,
+  limit = 6,
+  categoryId?: string,
+): Promise<{ images: CurrentAffairsGalleryImage[]; pagination: ApiPagination | null }> {
+  const params: Record<string, string> = {
+    page: String(page),
+    limit: String(limit),
+  };
+  if (categoryId) params.category = categoryId;
+
+  return apiGetPaged<CurrentAffairsGalleryImage>("gallery", params).then(
+    ({ data, pagination }) => ({ images: data, pagination }),
+  );
+}
+
+/**
+ * Faculty profiles, in admin-configured display order. Unlike every other
+ * endpoint here, `/faculty` returns `{ faculty: [...] }` directly — no
+ * `success`/`data`/`pagination` envelope, and no pagination at all.
+ */
+export async function getFacultyProfiles(): Promise<
+  CurrentAffairsFacultyMember[]
+> {
+  const apiKey = variables.CMS_KEY;
+  if (!apiKey) {
+    console.error("CMS_KEY is not set — skipping faculty fetch.");
+    return [];
+  }
+
+  try {
+    const res = await fetch(`${CURRENT_AFFAIRS_API_BASE}/faculty`, {
+      headers: { "x-api-key": apiKey },
+    });
+    if (!res.ok) {
+      console.error(`Current Affairs API error [${res.status}] for faculty`);
+      return [];
+    }
+
+    const body = (await res.json()) as { faculty: CurrentAffairsFacultyMember[] };
+    return body.faculty ?? [];
+  } catch (err) {
+    console.error("Failed to fetch faculty:", err);
+    return [];
+  }
 }
 
 /** Published quiz sets, newest first. Question bodies aren't included — only a count. */

@@ -9,11 +9,8 @@ import AdreCTA from '@/components/AdreCTA.astro';
 import CoachingProse from '@/components/CoachingProse.astro';
 import CoursesWrapper from '@/components/courses/CoursesWrapper.astro';
 import FaqSection from '@/components/FaqSection.astro';
-import LatestArticles from '@/components/LatestArticles.vue';
+import LatestArticlesSection from '@/components/LatestArticlesSection.astro';
 import LatestCurrentAffairs from '@/components/LatestCurrentAffairs.astro';
-import { getLatestPosts } from '@/lib/blogger';
-
-const latestPosts = await getLatestPosts(1, 3);
 
 const title = 'Best UPSC & APSC Coaching in Guwahati, Assam';
 const description =
@@ -103,6 +100,8 @@ const keywords =
   <LatestCurrentAffairs server:defer>
     <div slot='fallback' class='py-12 max-w-7xl w-full mx-auto lg:pb-32 bg-gray-100/30' />
   </LatestCurrentAffairs>
-  <LatestArticles posts={latestPosts} />
+  <LatestArticlesSection server:defer>
+    <div slot='fallback' class='py-12 max-w-7xl w-full mx-auto lg:pb-32 bg-gray-100/30' />
+  </LatestArticlesSection>
   <FaqSection />
 </Layout>

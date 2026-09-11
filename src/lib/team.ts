@@ -1,4 +1,4 @@
-import teamData from "@/data/faculty.json";
+import { getFacultyProfiles } from "@/lib/currentAffairs.ts";
 
 export interface FacultyMember {
   slug: string;
@@ -18,21 +18,30 @@ function slugify(name: string): string {
     .replace(/^-+|-+$/g, "");
 }
 
-const faculty: FacultyMember[] = teamData.faculty.map((member) => ({
-  slug: slugify(member.name),
-  name: member.name,
-  experience: member.experience,
-  expertise: member.expertise,
-  trackRecord: member.track_record,
-  associations: member.associations,
-  description: member.description,
-  image: member.image,
-}));
+let facultyPromise: Promise<FacultyMember[]> | null = null;
 
-export function getFacultyList(): FacultyMember[] {
-  return faculty;
+/** Faculty list, fetched from the Current Affairs API at build time. */
+export function getFacultyList(): Promise<FacultyMember[]> {
+  if (!facultyPromise) {
+    facultyPromise = getFacultyProfiles().then((members) =>
+      members.map((member) => ({
+        slug: slugify(member.name),
+        name: member.name,
+        experience: member.experience,
+        expertise: member.expertise,
+        trackRecord: member.track_record,
+        associations: member.associations,
+        description: member.description,
+        image: member.image,
+      })),
+    );
+  }
+  return facultyPromise;
 }
 
-export function getFacultyBySlug(slug: string): FacultyMember | null {
+export async function getFacultyBySlug(
+  slug: string,
+): Promise<FacultyMember | null> {
+  const faculty = await getFacultyList();
   return faculty.find((member) => member.slug === slug) ?? null;
 }

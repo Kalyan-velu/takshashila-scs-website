@@ -15,6 +15,9 @@ const coursesMenu = document.querySelector(
   ".js-mega-menu-courses",
 ) as HTMLElement;
 const aboutMenu = document.querySelector(".js-mega-menu-about") as HTMLElement;
+const studyMaterialsMenu = document.querySelector(
+  ".js-mega-menu-study-materials",
+) as HTMLElement;
 const searchPanel = document.querySelector(
   ".js-search-dropdown",
 ) as HTMLElement;
@@ -25,6 +28,9 @@ const triggerCourses = document.querySelector(
 const triggerAbout = document.querySelector(
   ".js-menu-trigger-about",
 ) as HTMLElement;
+const triggerStudyMaterials = document.querySelector(
+  ".js-menu-trigger-study-materials",
+) as HTMLElement;
 const triggerDirects = document.querySelectorAll(
   ".js-menu-trigger-direct",
 ) as NodeListOf<HTMLElement>;
@@ -33,6 +39,9 @@ const chevronCourses = document.querySelector(
   ".js-chevron-courses",
 ) as HTMLElement;
 const chevronAbout = document.querySelector(".js-chevron-about") as HTMLElement;
+const chevronStudyMaterials = document.querySelector(
+  ".js-chevron-study-materials",
+) as HTMLElement;
 
 // Search toggle buttons live in HeaderActions or TopBar
 const searchToggles = document.querySelectorAll(".js-search-toggle") as NodeListOf<HTMLElement>;
@@ -100,10 +109,14 @@ function openMenu(el: HTMLElement) {
     chevronAbout?.classList.add("rotate-180", "text-primary-500");
     triggerAbout?.setAttribute("aria-expanded", "true");
   }
+  if (el === studyMaterialsMenu) {
+    chevronStudyMaterials?.classList.add("rotate-180", "text-primary-500");
+    triggerStudyMaterials?.setAttribute("aria-expanded", "true");
+  }
 }
 
 function closeMegaMenus() {
-  [coursesMenu, aboutMenu].forEach((menu) => {
+  [coursesMenu, aboutMenu, studyMaterialsMenu].forEach((menu) => {
     if (!menu) return;
     menu.classList.remove(
       "opacity-100",
@@ -119,8 +132,10 @@ function closeMegaMenus() {
   });
   chevronCourses?.classList.remove("rotate-180", "text-primary-500");
   chevronAbout?.classList.remove("rotate-180", "text-primary-500");
+  chevronStudyMaterials?.classList.remove("rotate-180", "text-primary-500");
   triggerCourses?.setAttribute("aria-expanded", "false");
   triggerAbout?.setAttribute("aria-expanded", "false");
+  triggerStudyMaterials?.setAttribute("aria-expanded", "false");
   activeMenu = null;
 }
 
@@ -132,6 +147,10 @@ triggerCourses?.addEventListener(
 triggerAbout?.addEventListener(
   "mouseenter",
   () => aboutMenu && openMenu(aboutMenu),
+);
+triggerStudyMaterials?.addEventListener(
+  "mouseenter",
+  () => studyMaterialsMenu && openMenu(studyMaterialsMenu),
 );
 
 headerContainer?.addEventListener("mouseleave", closeMegaMenus);
@@ -154,6 +173,10 @@ triggerAbout?.addEventListener("focus", () => {
   aboutMenu && openMenu(aboutMenu);
 });
 
+triggerStudyMaterials?.addEventListener("focus", () => {
+  studyMaterialsMenu && openMenu(studyMaterialsMenu);
+});
+
 // Click toggle for buttons
 triggerCourses?.addEventListener("click", (e) => {
   e.preventDefault();
@@ -165,11 +188,21 @@ triggerAbout?.addEventListener("click", (e) => {
   activeMenu === aboutMenu ? closeMegaMenus() : openMenu(aboutMenu);
 });
 
+triggerStudyMaterials?.addEventListener("click", (e) => {
+  e.preventDefault();
+  activeMenu === studyMaterialsMenu
+    ? closeMegaMenus()
+    : openMenu(studyMaterialsMenu);
+});
+
 // Focusout listener to close mega menus when tabbing outside the menu container & trigger
-[
+const focusOutMenuPairs = [
   { trigger: triggerCourses, menu: coursesMenu },
   { trigger: triggerAbout, menu: aboutMenu },
-].forEach(({ trigger, menu }) => {
+  { trigger: triggerStudyMaterials, menu: studyMaterialsMenu },
+];
+
+focusOutMenuPairs.forEach(({ trigger, menu }) => {
   const handleFocusOut = (e: FocusEvent) => {
     const nextFocused = e.relatedTarget as HTMLElement | null;
     if (!nextFocused) {
@@ -183,9 +216,11 @@ triggerAbout?.addEventListener("click", (e) => {
     const insideTrigger = trigger?.contains(nextFocused);
     const insideMenu = menu?.contains(nextFocused);
     if (!insideTrigger && !insideMenu) {
-      // If tabbing to the other trigger, openMenu will take care of closing
-      if (nextFocused === triggerCourses && menu === aboutMenu) return;
-      if (nextFocused === triggerAbout && menu === coursesMenu) return;
+      // If tabbing to another trigger, openMenu will take care of closing
+      const isOtherTrigger = focusOutMenuPairs.some(
+        (pair) => pair.trigger === nextFocused && pair.menu !== menu,
+      );
+      if (isOtherTrigger) return;
       closeMegaMenus();
     }
   };
@@ -294,8 +329,9 @@ document.addEventListener("keydown", (e: KeyboardEvent) => {
       closeSearch();
       if (searchToggles.length > 0) searchToggles[0].focus();
     } else if (activeMenu) {
-      const activeTrigger =
-        activeMenu === coursesMenu ? triggerCourses : triggerAbout;
+      const activeTrigger = focusOutMenuPairs.find(
+        (pair) => pair.menu === activeMenu,
+      )?.trigger;
       closeMegaMenus();
       activeTrigger?.focus();
     }

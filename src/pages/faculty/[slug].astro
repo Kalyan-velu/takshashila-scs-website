@@ -3,8 +3,9 @@ import Layout from "@/layouts/Layout.astro";
 import { getFacultyList } from "@/lib/team";
 import { SITE_URL } from "@/config/CONSTANTS.ts";
 
-export function getStaticPaths() {
-  return getFacultyList().map((member) => ({
+export async function getStaticPaths() {
+  const facultyList = await getFacultyList();
+  return facultyList.map((member) => ({
     params: { slug: member.slug },
     props: { member },
   }));

@@ -3,6 +3,7 @@ import TopBar from './TopBar.astro';
 import DesktopNav from './DesktopNav.astro';
 import HeaderActions from './HeaderActions.astro';
 import MegaMenu from './MegaMenu.astro';
+import StudyMaterialsMenu from './StudyMaterialsMenu.astro';
 import SearchDropdown from './SearchDropdown.astro';
 import MobileMenu from './MobileMenu.astro';
 import { Image } from 'astro:assets';
@@ -15,14 +16,14 @@ import Logo from '@/assets/taksheelascs_logo.png';
 >
   <div class='w-full js-header-wrapper'>
     <header
-      class='flex flex-nowrap items-center justify-between relative z-30 transition-all duration-300 py-1.5 js-header bg-white/95 backdrop-blur-md dark:bg-black/95 border-gray-200 dark:border-black shadow-sm w-full'
+      class='flex flex-nowrap items-center justify-between relative z-30 transition-all duration-300 py-1.5 js-header bg-white/95 backdrop-blur-md dark:bg-black/95 border-gray-200 dark:border-black shadow-sm w-full md:px-4'
     >
       <div
         class='absolute top-0 left-0 w-full h-full lg:hidden js-logo-scroll-overlay pointer-events-none'
       >
       </div>
 
-      <div class='ml-4 relative z-10 lg:ml-8 lg:mr-8 shrink-0'>
+      <div class='mx-4 relative z-10 shrink-0'>
         <a
           href='/'
           class='transition-opacity rounded-xl hover:opacity-90 block'
@@ -32,9 +33,9 @@ import Logo from '@/assets/taksheelascs_logo.png';
             src={Logo}
             alt='Takshasheela Logo'
             fetchpriority='high'
-            widths={[448, 896]}
-            sizes='(max-width: 768px) 176px, 224px'
-            class='h-auto transition-all bg-transparent duration-300 w-44 md:w-96 js-header-logo'
+            widths={[224, 448]}
+            sizes='(max-width: 48rem) 11rem, 14rem'
+            class='h-auto transition-all bg-transparent duration-300 w-44 sm:w-40 md:w-66 js-header-logo'
           />
         </a>
       </div>
@@ -44,6 +45,7 @@ import Logo from '@/assets/taksheelascs_logo.png';
     <SearchDropdown />
     <MegaMenu menuId={7} />
     <MegaMenu menuId={5} />
+    <StudyMaterialsMenu />
     <MobileMenu />
   </div>
 </div>

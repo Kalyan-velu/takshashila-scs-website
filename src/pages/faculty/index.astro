@@ -2,7 +2,7 @@
 import Layout from "@/layouts/Layout.astro";
 import { getFacultyList } from "@/lib/team";
 
-const facultyList = getFacultyList();
+const facultyList = await getFacultyList();
 
 const seoTitle = "Our Team | Takshasheela School of Civil Services";
 const seoDescription =

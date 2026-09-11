@@ -7,8 +7,8 @@ const posts = await getAllPosts();
 ---
 
 <Layout
-  title='Blog | Takshashila School of Civil Services'
-  description='Insights, strategies, and updates from Takshashila School of Civil Services to help you crack the UPSC and APSC exams.'
+  title='Blog | Takshasheela School of Civil Services'
+  description='Insights, strategies, and updates from Takshasheela School of Civil Services to help you crack the UPSC and APSC exams.'
 >
   <div
     class='bg-primary-500/5 py-14 md:py-16 flex flex-col items-center justify-center text-center px-4 border-b border-gray-200'
@@ -18,8 +18,11 @@ const posts = await getAllPosts();
     >
       Our <span class='text-primary-500 font-medium'>Blogs</span>
     </h1>
-    <p class='text-gray-600 font-light text-base md:text-lg max-w-2xl leading-relaxed'>
-      Insights, updates, and articles from Takshashila to fuel your UPSC, APSC, and civil services preparation.
+    <p
+      class='text-gray-600 font-light text-base md:text-lg max-w-2xl leading-relaxed'
+    >
+      Insights, updates, and articles from Takshashila to fuel your UPSC, APSC,
+      and civil services preparation.
     </p>
   </div>
 
@@ -33,9 +36,11 @@ const posts = await getAllPosts();
           </p>
         </div>
       ) : (
-        <BlogDirectory client:load posts={posts} />
+        <BlogDirectory
+          client:load
+          posts={posts}
+        />
       )
     }
   </div>
 </Layout>
-

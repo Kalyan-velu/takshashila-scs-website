@@ -38,14 +38,14 @@ Astro.response.headers.set(
     ) : (
       <>
         <div
-          class="gallery-tabs flex flex-wrap gap-2 mb-10"
+          class="gallery-tabs flex flex-nowrap md:flex-wrap gap-2 mb-10 overflow-x-auto md:overflow-visible scroll-smooth hide-scrollbar"
           role="tablist"
           aria-label="Filter gallery by category"
         >
           {tabs.map((tab, i) => (
             <button
               type="button"
-              class="gallery-tab-btn rounded-full border border-gray-200 px-4 py-2 text-sm font-medium text-gray-700 transition-colors hover:border-primary-500 hover:text-primary-500 aria-selected:bg-primary-500 aria-selected:text-white aria-selected:border-primary-500"
+              class="gallery-tab-btn shrink-0 rounded-full border border-gray-200 px-4 py-2 text-sm font-medium text-gray-700 transition-colors hover:border-primary-500 hover:text-primary-500 aria-selected:bg-primary-500 aria-selected:text-white aria-selected:border-primary-500"
               data-filter={tab.id}
               role="tab"
               aria-selected={i === 0 ? "true" : "false"}
@@ -60,6 +60,14 @@ Astro.response.headers.set(
             const categoryIds = image.categories.length
               ? image.categories.map((c) => c.id)
               : [UNCATEGORIZED_ID];
+            const categoryNames = image.categories.length
+              ? image.categories.map((c) => c.name).join(", ")
+              : "Uncategorized";
+            const caption = image.title || categoryNames;
+            const alt =
+              image.altTitle ||
+              image.title ||
+              "Takshasheela School of Civil Services gallery photo";
             return (
               <button
                 type="button"
@@ -67,21 +75,22 @@ Astro.response.headers.set(
                 data-categories={categoryIds.join(",")}
                 data-full={image.imageUrl}
                 data-title={image.title ?? ""}
+                data-description={image.description ?? ""}
+                data-category-names={categoryNames}
+                data-alt={alt}
               >
                 <img
                   src={image.imageUrl}
-                  alt={image.title ?? "Takshasheela School of Civil Services gallery photo"}
+                  alt={alt}
                   loading="lazy"
                   decoding="async"
                   class="h-full w-full object-cover transition-transform duration-500 group-hover:scale-110"
                 />
-                {image.title && (
-                  <div class="absolute inset-0 bg-linear-to-t from-black/70 via-black/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col justify-end p-4">
-                    <span class="text-white font-medium tracking-tight text-sm text-left">
-                      {image.title}
-                    </span>
-                  </div>
-                )}
+                <div class="absolute inset-0 bg-linear-to-t from-black/70 via-black/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col justify-end p-4">
+                  <span class="text-white font-medium tracking-tight text-sm text-left line-clamp-2">
+                    {caption}
+                  </span>
+                </div>
               </button>
             );
           })}
@@ -99,14 +108,38 @@ Astro.response.headers.set(
         >
           <button
             type="button"
-            class="gallery-lightbox-close absolute top-4 right-4 text-white text-3xl leading-none w-10 h-10 flex items-center justify-center rounded-full hover:bg-white/10"
+            class="gallery-lightbox-close absolute top-4 right-4 text-white text-3xl leading-none w-10 h-10 flex items-center justify-center rounded-full hover:bg-white/10 z-10"
             aria-label="Close"
           >
             &times;
           </button>
-          <figure class="max-w-5xl max-h-full flex flex-col items-center gap-3">
-            <img class="gallery-lightbox-img max-h-[80vh] max-w-full object-contain rounded-lg" src="" alt="" />
-            <figcaption class="gallery-lightbox-caption text-white/80 text-sm text-center" />
+
+          <span class="gallery-lightbox-counter absolute top-4 left-4 text-white/70 text-sm font-medium tracking-wide" />
+
+          <button
+            type="button"
+            class="gallery-lightbox-prev absolute left-1 md:left-4 top-1/2 -translate-y-1/2 text-white w-11 h-11 md:w-12 md:h-12 flex items-center justify-center rounded-full bg-white/5 hover:bg-white/15 transition-colors z-10"
+            aria-label="Previous photo"
+          >
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-6 h-6"><path d="M15 18l-6-6 6-6" /></svg>
+          </button>
+
+          <button
+            type="button"
+            class="gallery-lightbox-next absolute right-1 md:right-4 top-1/2 -translate-y-1/2 text-white w-11 h-11 md:w-12 md:h-12 flex items-center justify-center rounded-full bg-white/5 hover:bg-white/15 transition-colors z-10"
+            aria-label="Next photo"
+          >
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-6 h-6"><path d="M9 18l6-6-6-6" /></svg>
+          </button>
+
+          <figure class="max-w-5xl w-full max-h-full flex flex-col items-center gap-4">
+            <div class="flex items-center justify-center w-full" style="max-height: 78vh;">
+              <img class="gallery-lightbox-img max-h-[78vh] max-w-full object-contain rounded-lg" src="" alt="" />
+            </div>
+            <figcaption class="gallery-lightbox-caption text-center max-w-2xl px-4">
+              <p class="gallery-lightbox-title text-white font-medium text-base leading-snug" />
+              <p class="gallery-lightbox-description text-white/70 text-sm mt-1 leading-relaxed" />
+            </figcaption>
           </figure>
         </div>
       </>
@@ -118,7 +151,7 @@ Astro.response.headers.set(
   const root = document.querySelector<HTMLElement>(".gallery-grid");
   if (root) {
     const tabButtons = root.querySelectorAll<HTMLButtonElement>(".gallery-tab-btn");
-    const items = root.querySelectorAll<HTMLButtonElement>(".gallery-item");
+    const items = Array.from(root.querySelectorAll<HTMLButtonElement>(".gallery-item"));
     const emptyState = root.querySelector<HTMLElement>(".gallery-empty");
 
     function applyFilter(filter: string) {
@@ -142,17 +175,74 @@ Astro.response.headers.set(
 
     const lightbox = root.querySelector<HTMLElement>(".gallery-lightbox");
     const lightboxImg = root.querySelector<HTMLImageElement>(".gallery-lightbox-img");
-    const lightboxCaption = root.querySelector<HTMLElement>(".gallery-lightbox-caption");
+    const lightboxTitle = root.querySelector<HTMLElement>(".gallery-lightbox-title");
+    const lightboxDescription = root.querySelector<HTMLElement>(".gallery-lightbox-description");
+    const lightboxCounter = root.querySelector<HTMLElement>(".gallery-lightbox-counter");
     const lightboxClose = root.querySelector<HTMLButtonElement>(".gallery-lightbox-close");
+    const lightboxPrev = root.querySelector<HTMLButtonElement>(".gallery-lightbox-prev");
+    const lightboxNext = root.querySelector<HTMLButtonElement>(".gallery-lightbox-next");
+
+    let currentIndex = -1;
+
+    function visibleItems() {
+      return items.filter((item) => !item.classList.contains("hidden"));
+    }
+
+    function renderItem(item: HTMLButtonElement) {
+      if (!lightboxImg) return;
+      lightboxImg.src = item.dataset.full ?? "";
+      lightboxImg.alt = item.dataset.alt || "Gallery photo";
+
+      const title = item.dataset.title?.trim();
+      const description = item.dataset.description?.trim();
+      const categoryNames = item.dataset.categoryNames?.trim();
+
+      if (lightboxTitle) {
+        lightboxTitle.textContent = title || (!description ? categoryNames || "" : "");
+        lightboxTitle.classList.toggle("hidden", !lightboxTitle.textContent);
+      }
+      if (lightboxDescription) {
+        lightboxDescription.textContent = description || "";
+        lightboxDescription.classList.toggle("hidden", !description);
+      }
+    }
+
+    function updateCounter() {
+      if (!lightboxCounter) return;
+      const list = visibleItems();
+      const showNav = list.length > 1;
+      lightboxPrev?.classList.toggle("hidden", !showNav);
+      lightboxNext?.classList.toggle("hidden", !showNav);
+      lightboxCounter.textContent = showNav ? `${currentIndex + 1} / ${list.length}` : "";
+    }
 
     function openLightbox(item: HTMLButtonElement) {
-      if (!lightbox || !lightboxImg) return;
-      lightboxImg.src = item.dataset.full ?? "";
-      lightboxImg.alt = item.dataset.title || "Gallery photo";
-      if (lightboxCaption) lightboxCaption.textContent = item.dataset.title ?? "";
+      if (!lightbox) return;
+      const list = visibleItems();
+      currentIndex = list.indexOf(item);
+      renderItem(item);
+      updateCounter();
       lightbox.classList.remove("hidden");
       lightbox.classList.add("flex");
       document.body.style.overflow = "hidden";
+    }
+
+    function showByIndex(index: number) {
+      const list = visibleItems();
+      if (list.length === 0) return;
+      currentIndex = (index + list.length) % list.length;
+      renderItem(list[currentIndex]);
+      updateCounter();
+    }
+
+    function showNext() {
+      if (currentIndex < 0) return;
+      showByIndex(currentIndex + 1);
+    }
+
+    function showPrev() {
+      if (currentIndex < 0) return;
+      showByIndex(currentIndex - 1);
     }
 
     function closeLightbox() {
@@ -160,16 +250,33 @@ Astro.response.headers.set(
       lightbox.classList.add("hidden");
       lightbox.classList.remove("flex");
       lightboxImg.src = "";
+      currentIndex = -1;
       document.body.style.overflow = "";
     }
 
     items.forEach((item) => item.addEventListener("click", () => openLightbox(item)));
     lightboxClose?.addEventListener("click", closeLightbox);
+    lightboxPrev?.addEventListener("click", showPrev);
+    lightboxNext?.addEventListener("click", showNext);
     lightbox?.addEventListener("click", (e) => {
       if (e.target === lightbox) closeLightbox();
     });
     document.addEventListener("keydown", (e) => {
+      if (lightbox?.classList.contains("hidden")) return;
       if (e.key === "Escape") closeLightbox();
+      if (e.key === "ArrowRight") showNext();
+      if (e.key === "ArrowLeft") showPrev();
     });
   }
 </script>
+
+<style>
+  .hide-scrollbar::-webkit-scrollbar {
+    display: none;
+  }
+
+  .hide-scrollbar {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+</style>
