@@ -1,38 +1,114 @@
 ---
-import { PHONE_DISPLAY } from '@/config/CONSTANTS.ts';
+import {
+  CURRENT_AFFAIRS_URL,
+  PHONE_DISPLAY,
+  PHONE_HREF,
+  socials,
+} from '@/config/CONSTANTS.ts';
 
 const faqs = [
   {
-    q: 'Does Takshasheela offer online APSC and UPSC coaching?',
-    a: 'Yes! All our APSC CCE, UPSC CSE, and ADRE programs are available in high-definition live interactive online classes with 24/7 access to recorded lectures, digital study material, online mock test series, and 1-on-1 online mentorship.',
+    q: 'Does Takshasheela offer online coaching for UPSC, APSC, SSC CGL, RRB NTPC, CUET, ADRE and other state-level exams?',
+    a: `<div class="space-y-3 pt-0 text-slate-700 leading-relaxed">
+  <p>
+    Yes! We coach students for a wide range of competitive exams, including:
+  </p>
+  <ul class="space-y-1.5 list-disc pl-5 marker:text-slate-400">
+    <li>
+      <span class="font-semibold text-slate-900">Civil Services:</span> <a href="/courses/upsc/" class="text-primary-500 font-medium underline underline-offset-2 hover:text-primary-600">UPSC CSE</a> and <a href="/courses/apsc/" class="text-primary-500 font-medium underline underline-offset-2 hover:text-primary-600">APSC CCE</a>
+    </li>
+    <li>
+      <span class="font-semibold text-slate-900">Banking & Railways:</span> SSC CGL and RRB NTPC
+    </li>
+    <li>
+      <span class="font-semibold text-slate-900">University Entrance:</span> CUET
+    </li>
+    <li>
+      <span class="font-semibold text-slate-900">State-Level:</span> <a href="/courses/adre/" class="text-primary-500 font-medium underline underline-offset-2 hover:text-primary-600">ADRE</a> and <a href="/courses/" class="text-primary-500 font-medium underline underline-offset-2 hover:text-primary-600">other state government exams</a>
+    </li>
+  </ul>
+  <p>
+    Every program is delivered through high-definition live interactive online classes with 24/7 access to recorded lectures, digital study material, exam-specific mock test series, and 1-on-1 online mentorship.
+  </p>
+</div>`,
   },
   {
     q: 'What is the fee structure and installment options for APSC & UPSC courses?',
-    a: `Our foundation programs offer affordable pricing with flexible installment plans. APSC online foundation starts from ₹22,000 (offline ₹42,500 after discount), while UPSC online foundation starts from ₹25,000 (offline ₹62,500 after discount). Call ${PHONE_DISPLAY} for detailed fee charts and scholarship options.`,
+    a: `<div class="space-y-3 pt-0 text-slate-700 leading-relaxed">
+  <p>
+    Our foundation programs offer affordable pricing with flexible installment plans:
+  </p>
+  <ul class="space-y-1.5 list-disc pl-5 marker:text-slate-400">
+    <li>
+      <span class="font-semibold text-slate-900"><a href="/courses/apsc/" class="text-primary-500 underline underline-offset-2 hover:text-primary-600">APSC Foundation</a>:</span> Online from ₹22,000 (offline ₹42,500 after discount)
+    </li>
+    <li>
+      <span class="font-semibold text-slate-900"><a href="/courses/upsc/" class="text-primary-500 underline underline-offset-2 hover:text-primary-600">UPSC Foundation</a>:</span> Online from ₹25,000 (offline ₹62,500 after discount)
+    </li>
+  </ul>
+  <p>
+    Call <a href="${PHONE_HREF}" class="text-primary-500 font-medium underline underline-offset-2 hover:text-primary-600">${PHONE_DISPLAY}</a> for detailed fee charts and scholarship options.
+  </p>
+</div>`,
   },
   {
     q: 'What are Grade III (Grade 3) and Grade IV (Grade 4) ADRE batches?',
-    a: 'Our dedicated ADRE 2026 batch is a specialized 100% online coaching course covering the complete syllabus for Grade III (Graduate & HSSLC level) and Grade IV state government posts starting from ₹1999.',
+    a: `<div class="space-y-3 pt-0 text-slate-700 leading-relaxed">
+  <p>
+    Our dedicated <a href="/courses/adre/" class="text-primary-500 font-medium underline underline-offset-2 hover:text-primary-600">ADRE 2026 batch</a> is a specialized 100% online coaching course starting from ₹1999, covering the complete syllabus for:
+  </p>
+  <ul class="space-y-1.5 list-disc pl-5 marker:text-slate-400">
+    <li>
+      <span class="font-semibold text-slate-900">Grade III:</span> Graduate & HSSLC level state government posts
+    </li>
+    <li>
+      <span class="font-semibold text-slate-900">Grade IV:</span> State government posts
+    </li>
+  </ul>
+</div>`,
   },
   {
     q: 'Where is Takshasheela School of Civil Services located in Guwahati?',
-    a: 'We are located on the House no. 65, RG Baruah Rd, AIDC, Ambikagirinagar, Guwahati, Assam 781024 Landmark - Daman medicos. Our center is easily accessible and located in close proximity to the Assam Secretariat.',
+    a: `<div class="space-y-3 pt-0 text-slate-700 leading-relaxed">
+  <p>
+    We are located at House no. 65, RG Baruah Rd, AIDC, Ambikagirinagar, Guwahati, Assam 781024 <span class="font-semibold text-slate-900">(Landmark: Daman Medicos)</span>, in close proximity to the Assam Secretariat.
+  </p>
+  <p>
+    <a href="https://www.google.com/maps/search/?api=1&query=Takshasheela+School+of+Civil+Services+RG+Baruah+Rd+AIDC+Ambikagirinagar+Guwahati" target="_blank" rel="noopener noreferrer" class="text-primary-500 font-medium underline underline-offset-2 hover:text-primary-600">Get directions on Google Maps</a>
+  </p>
+</div>`,
   },
   {
     q: 'Does Takshasheela provide study materials, monthly magazines, and mock tests?',
-    a: `<div class="space-y-3 pt-0  text-slate-700 leading-relaxed">
+    a: `<div class="space-y-3 pt-0 text-slate-700 leading-relaxed">
   <p>
     Yes. Depending on your enrolled program, students receive:
   </p>
   <ul class="space-y-1.5 list-disc pl-5 marker:text-slate-400">
     <li>
-      <span class="font-semibold text-slate-900">Study Materials:</span> Comprehensive printed and digital study modules.
+      <span class="font-semibold text-slate-900">Study Materials:</span> Comprehensive printed and digital study modules tailored to your syllabus.
     </li>
     <li>
-      <span class="font-semibold text-slate-900">Current Affairs:</span> Monthly magazine alongside dedicated <span class="italic">Assam Tribune</span> analysis.
+      <span class="font-semibold text-slate-900">Current Affairs:</span> Monthly magazines alongside dedicated daily newspaper analysis.
     </li>
     <li>
-      <span class="font-semibold text-slate-900">Mock Tests:</span> Regular Prelims and Mains test series with detailed evaluations and feedback.
+      <span class="font-semibold text-slate-900">Mock Tests:</span> Regular, exam-specific test series (both sectional and full-length) with detailed evaluations and feedback.
+    </li>
+  </ul>
+</div>`,
+  },
+  {
+    q: 'How can I keep up with current affairs, and how does Takshasheela SCS help students prepare for it?',
+    a: `<div class="space-y-3 pt-0 text-slate-700 leading-relaxed">
+  <p>
+    Staying current with daily news and events is one of the toughest parts of exam preparation. Takshasheela SCS addresses this challenge by offering:
+  </p>
+  <ul class="space-y-1.5 list-disc pl-5 marker:text-slate-400">
+    <li>
+      <span class="font-semibold text-slate-900">Daily Current Affairs & Quizzes:</span> Available through our app and <a href="${CURRENT_AFFAIRS_URL}" target="_blank" rel="noopener noreferrer" class="text-primary-500 font-medium underline underline-offset-2 hover:text-primary-600">website</a>, along with integrated discussions tailored to your exam.
+    </li>
+    <li>
+      <span class="font-semibold text-slate-900">Daily Newspaper Analysis:</span> Aspirants also benefit from our faculty's daily newspaper analysis on <a href="${socials.YOUTUBE}" target="_blank" rel="noopener noreferrer" class="text-primary-500 font-medium underline underline-offset-2 hover:text-primary-600">YouTube</a>.
     </li>
   </ul>
 </div>`,
