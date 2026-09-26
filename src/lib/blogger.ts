@@ -135,7 +135,7 @@ function extractFirstImage(html: string): { url: string | null; html: string } {
   const figure = img.closest("figure");
   (figure.length > 0 ? figure : img).remove();
 
-  return { url, html: $("body").html() ?? html };
+  return { url, html: $.html() };
 }
 
 function estimateReadingMinutes(plainText: string): number {
@@ -200,7 +200,6 @@ function mapEntry(entry: BloggerEntry): BlogPost {
     imageUrl = extracted.url;
     content = extracted.html;
   }
-
   const plainText = cheerio.load(content).text().replace(/\s+/g, " ").trim();
   const keywords =
     entry.category?.map((value: { term: string }) => value.term) ?? [];
@@ -242,7 +241,7 @@ async function fetchFeed(
 
 async function fetchAllPosts(): Promise<BlogPost[]> {
   const posts: BlogPost[] = [];
-  const pageSize = 150;
+  const pageSize = 3;
   let startIndex = 1;
   let total = Infinity;
 
@@ -256,7 +255,6 @@ async function fetchAllPosts(): Promise<BlogPost[]> {
       data.feed.openSearch$totalResults?.$t ?? posts.length + entries.length,
     );
     if (entries.length === 0) break;
-
     posts.push(...entries.map(mapEntry));
     startIndex += pageSize;
   }
